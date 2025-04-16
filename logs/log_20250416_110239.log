@@ -1,0 +1,44 @@
+2025-04-16 11:02:39,461 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250416_110239.log
+2025-04-16 11:02:39,703 [INFO] __main__ - 正在启动程序...
+2025-04-16 11:02:39,703 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-16 11:02:39,703 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-16 11:02:39,703 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-16 11:02:39,723 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-16 11:02:41,028 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-16 11:02:41,044 [INFO] __main__ - 语言选择结果: zh
+2025-04-16 11:02:41,064 [INFO] __main__ - 正在配置主窗口...
+2025-04-16 11:02:41,189 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-16 11:02:41,190 [INFO] core.logic_builder - 已加载 6 条规则
+2025-04-16 11:02:41,227 [INFO] __main__ - MainWindow实例创建完成
+2025-04-16 11:02:41,507 [INFO] __main__ - 开始mainloop()...
+2025-04-16 11:04:05,311 [INFO] utils.theme_manager_tk - 已切换主题: dark
+2025-04-16 11:04:05,311 [INFO] gui.theme_dialog_tk - 已切换到主题: dark
+2025-04-16 11:04:05,312 [INFO] utils.theme_manager_tk - 已切换主题: dark
+2025-04-16 11:04:05,312 [INFO] utils.theme_manager_tk - 应用主题: cyborg
+2025-04-16 11:04:05,324 [ERROR] utils.theme_manager_tk - 应用主题失败: Duplicate element TRadiobutton.indicator
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\utils\theme_manager_tk.py", line 99, in apply_theme
+    style.theme_use(theme_name)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 592, in theme_use
+    self._create_ttk_styles_on_theme_change()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 692, in _create_ttk_styles_on_theme_change
+    method(builder, color)
+    ~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 3584, in create_radiobutton_style
+    self.style.element_create(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        f"{ttkstyle}.indicator",
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+        sticky=tk.W,
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Python\Lib\tkinter\ttk.py", line 445, in element_create
+    self.tk.call(self._name, "element", "create", elementname, etype,
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        *specs, *opts)
+        ^^^^^^^^^^^^^^
+_tkinter.TclError: Duplicate element TRadiobutton.indicator

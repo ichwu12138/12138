@@ -1,0 +1,62 @@
+{
+    "app_name": "ZK Logic Builder",
+    "version": "1.0.0",
+    "language": "zh",
+    "supported_languages": [
+        "zh",
+        "en",
+        "de"
+    ],
+    "theme": {
+        "current_theme": "light",
+        "light": {
+            "name": "亮色主题",
+            "background": "#ffffff",
+            "foreground": "#000000",
+            "accent": "#007bff",
+            "error": "#dc3545",
+            "warning": "#ffc107",
+            "success": "#28a745",
+            "info": "#17a2b8"
+        },
+        "dark": {
+            "name": "暗色主题",
+            "background": "#343a40",
+            "foreground": "#f8f9fa",
+            "accent": "#007bff",
+            "error": "#dc3545",
+            "warning": "#ffc107",
+            "success": "#28a745",
+            "info": "#17a2b8"
+        }
+    },
+    "ui": {
+        "main_window": {
+            "width": 1024,
+            "height": 768,
+            "title": "ZK配置器"
+        },
+        "font": {
+            "family": "Microsoft YaHei",
+            "size": 8
+        },
+        "toolbar": {
+            "icon_size": 24,
+            "style": "both"
+        },
+        "tree_view": {
+            "row_height": 24,
+            "show_lines": true
+        }
+    },
+    "log_level": "debug",
+    "logging": {
+        "console_enabled": true,
+        "file_enabled": true,
+        "detailed_format": false
+    },
+    "last_updated": "2025-04-09",
+    "last_config_path": "C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm",
+    "last_logic_path": "C:/Users/mengy/Desktop/1.json",
+    "last_logic_exported": false
+}

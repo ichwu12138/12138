@@ -1,0 +1,230 @@
+2025-04-16 11:11:41,032 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250416_111141.log
+2025-04-16 11:11:41,259 [INFO] __main__ - 正在启动程序...
+2025-04-16 11:11:41,259 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-16 11:11:41,259 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-16 11:11:41,259 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-16 11:11:41,280 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-16 11:11:42,971 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-16 11:11:42,994 [INFO] __main__ - 语言选择结果: zh
+2025-04-16 11:11:43,016 [INFO] __main__ - 正在配置主窗口...
+2025-04-16 11:11:43,115 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-16 11:11:43,116 [INFO] core.logic_builder - 已加载 6 条规则
+2025-04-16 11:11:43,183 [INFO] __main__ - MainWindow实例创建完成
+2025-04-16 11:11:43,449 [INFO] __main__ - 开始mainloop()...
+2025-04-16 11:11:46,698 [INFO] gui.theme_dialog_tk - 已切换到主题: dark
+2025-04-16 11:11:46,709 [ERROR] utils.theme_manager_tk - 应用主题失败: Duplicate element TRadiobutton.indicator
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\utils\theme_manager_tk.py", line 130, in apply_theme
+    style = ttk.Style(theme=theme_data["theme"])
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 474, in __init__
+    Style.instance.theme_use(theme)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 592, in theme_use
+    self._create_ttk_styles_on_theme_change()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 692, in _create_ttk_styles_on_theme_change
+    method(builder, color)
+    ~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 3584, in create_radiobutton_style
+    self.style.element_create(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        f"{ttkstyle}.indicator",
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+        sticky=tk.W,
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Python\Lib\tkinter\ttk.py", line 445, in element_create
+    self.tk.call(self._name, "element", "create", elementname, etype,
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        *specs, *opts)
+        ^^^^^^^^^^^^^^
+_tkinter.TclError: Duplicate element TRadiobutton.indicator
+2025-04-16 11:11:46,712 [CRITICAL] __main__ - 未捕获的异常: Duplicate element TRadiobutton.indicator
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\theme_dialog_tk.py", line 247, in _on_ok
+    self.callback(selected_theme)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 385, in _on_theme_changed
+    theme_manager.apply_theme(self.root)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\utils\theme_manager_tk.py", line 130, in apply_theme
+    style = ttk.Style(theme=theme_data["theme"])
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 474, in __init__
+    Style.instance.theme_use(theme)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 592, in theme_use
+    self._create_ttk_styles_on_theme_change()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 692, in _create_ttk_styles_on_theme_change
+    method(builder, color)
+    ~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 3584, in create_radiobutton_style
+    self.style.element_create(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        f"{ttkstyle}.indicator",
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+        sticky=tk.W,
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Python\Lib\tkinter\ttk.py", line 445, in element_create
+    self.tk.call(self._name, "element", "create", elementname, etype,
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        *specs, *opts)
+        ^^^^^^^^^^^^^^
+_tkinter.TclError: Duplicate element TRadiobutton.indicator
+2025-04-16 11:11:46,715 [CRITICAL] __main__ - 详细错误栈:
+['Traceback (most recent call last):\n', '  File "D:\\Python\\Lib\\tkinter\\__init__.py", line 2068, in __call__\n    return self.func(*args)\n           ~~~~~~~~~^^^^^^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\theme_dialog_tk.py", line 247, in _on_ok\n    self.callback(selected_theme)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\main_window_tk.py", line 385, in _on_theme_changed\n    theme_manager.apply_theme(self.root)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\utils\\theme_manager_tk.py", line 130, in apply_theme\n    style = ttk.Style(theme=theme_data["theme"])\n', '  File "D:\\Python\\Lib\\site-packages\\ttkbootstrap\\style.py", line 474, in __init__\n    Style.instance.theme_use(theme)\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^\n', '  File "D:\\Python\\Lib\\site-packages\\ttkbootstrap\\style.py", line 592, in theme_use\n    self._create_ttk_styles_on_theme_change()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n', '  File "D:\\Python\\Lib\\site-packages\\ttkbootstrap\\style.py", line 692, in _create_ttk_styles_on_theme_change\n    method(builder, color)\n    ~~~~~~^^^^^^^^^^^^^^^^\n', '  File "D:\\Python\\Lib\\site-packages\\ttkbootstrap\\style.py", line 3584, in create_radiobutton_style\n    self.style.element_create(\n    ~~~~~~~~~~~~~~~~~~~~~~~~~^\n        f"{ttkstyle}.indicator",\n        ^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<7 lines>...\n        sticky=tk.W,\n        ^^^^^^^^^^^^\n    )\n    ^\n', '  File "D:\\Python\\Lib\\tkinter\\ttk.py", line 445, in element_create\n    self.tk.call(self._name, "element", "create", elementname, etype,\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        *specs, *opts)\n        ^^^^^^^^^^^^^^\n', '_tkinter.TclError: Duplicate element TRadiobutton.indicator\n']
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\theme_dialog_tk.py", line 247, in _on_ok
+    self.callback(selected_theme)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 385, in _on_theme_changed
+    theme_manager.apply_theme(self.root)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\utils\theme_manager_tk.py", line 130, in apply_theme
+    style = ttk.Style(theme=theme_data["theme"])
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 474, in __init__
+    Style.instance.theme_use(theme)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 592, in theme_use
+    self._create_ttk_styles_on_theme_change()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 692, in _create_ttk_styles_on_theme_change
+    method(builder, color)
+    ~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 3584, in create_radiobutton_style
+    self.style.element_create(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        f"{ttkstyle}.indicator",
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+        sticky=tk.W,
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Python\Lib\tkinter\ttk.py", line 445, in element_create
+    self.tk.call(self._name, "element", "create", elementname, etype,
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        *specs, *opts)
+        ^^^^^^^^^^^^^^
+_tkinter.TclError: Duplicate element TRadiobutton.indicator
+2025-04-16 11:13:48,900 [INFO] gui.theme_dialog_tk - 已切换到主题: dark
+2025-04-16 11:13:48,906 [ERROR] utils.theme_manager_tk - 应用主题失败: Duplicate element TRadiobutton.indicator
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\utils\theme_manager_tk.py", line 130, in apply_theme
+    try:
+    
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 474, in __init__
+    Style.instance.theme_use(theme)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 586, in theme_use
+    self._create_ttk_styles_on_theme_change()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 692, in _create_ttk_styles_on_theme_change
+    method(builder, color)
+    ~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 3584, in create_radiobutton_style
+    self.style.element_create(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        f"{ttkstyle}.indicator",
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+        sticky=tk.W,
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Python\Lib\tkinter\ttk.py", line 445, in element_create
+    self.tk.call(self._name, "element", "create", elementname, etype,
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        *specs, *opts)
+        ^^^^^^^^^^^^^^
+_tkinter.TclError: Duplicate element TRadiobutton.indicator
+2025-04-16 11:13:48,909 [CRITICAL] __main__ - 未捕获的异常: Duplicate element TRadiobutton.indicator
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\theme_dialog_tk.py", line 247, in _on_ok
+    self.callback(selected_theme)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 385, in _on_theme_changed
+    theme_manager.apply_theme(self.root)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\utils\theme_manager_tk.py", line 130, in apply_theme
+    try:
+    
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 474, in __init__
+    Style.instance.theme_use(theme)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 586, in theme_use
+    self._create_ttk_styles_on_theme_change()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 692, in _create_ttk_styles_on_theme_change
+    method(builder, color)
+    ~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 3584, in create_radiobutton_style
+    self.style.element_create(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        f"{ttkstyle}.indicator",
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+        sticky=tk.W,
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Python\Lib\tkinter\ttk.py", line 445, in element_create
+    self.tk.call(self._name, "element", "create", elementname, etype,
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        *specs, *opts)
+        ^^^^^^^^^^^^^^
+_tkinter.TclError: Duplicate element TRadiobutton.indicator
+2025-04-16 11:13:48,912 [CRITICAL] __main__ - 详细错误栈:
+['Traceback (most recent call last):\n', '  File "D:\\Python\\Lib\\tkinter\\__init__.py", line 2068, in __call__\n    return self.func(*args)\n           ~~~~~~~~~^^^^^^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\theme_dialog_tk.py", line 247, in _on_ok\n    self.callback(selected_theme)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\main_window_tk.py", line 385, in _on_theme_changed\n    theme_manager.apply_theme(self.root)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\utils\\theme_manager_tk.py", line 130, in apply_theme\n    try:\n    \n', '  File "D:\\Python\\Lib\\site-packages\\ttkbootstrap\\style.py", line 474, in __init__\n    Style.instance.theme_use(theme)\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^\n', '  File "D:\\Python\\Lib\\site-packages\\ttkbootstrap\\style.py", line 586, in theme_use\n    self._create_ttk_styles_on_theme_change()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n', '  File "D:\\Python\\Lib\\site-packages\\ttkbootstrap\\style.py", line 692, in _create_ttk_styles_on_theme_change\n    method(builder, color)\n    ~~~~~~^^^^^^^^^^^^^^^^\n', '  File "D:\\Python\\Lib\\site-packages\\ttkbootstrap\\style.py", line 3584, in create_radiobutton_style\n    self.style.element_create(\n    ~~~~~~~~~~~~~~~~~~~~~~~~~^\n        f"{ttkstyle}.indicator",\n        ^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<7 lines>...\n        sticky=tk.W,\n        ^^^^^^^^^^^^\n    )\n    ^\n', '  File "D:\\Python\\Lib\\tkinter\\ttk.py", line 445, in element_create\n    self.tk.call(self._name, "element", "create", elementname, etype,\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        *specs, *opts)\n        ^^^^^^^^^^^^^^\n', '_tkinter.TclError: Duplicate element TRadiobutton.indicator\n']
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\theme_dialog_tk.py", line 247, in _on_ok
+    self.callback(selected_theme)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 385, in _on_theme_changed
+    theme_manager.apply_theme(self.root)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\utils\theme_manager_tk.py", line 130, in apply_theme
+    try:
+    
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 474, in __init__
+    Style.instance.theme_use(theme)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 586, in theme_use
+    self._create_ttk_styles_on_theme_change()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 692, in _create_ttk_styles_on_theme_change
+    method(builder, color)
+    ~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\site-packages\ttkbootstrap\style.py", line 3584, in create_radiobutton_style
+    self.style.element_create(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        f"{ttkstyle}.indicator",
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+        sticky=tk.W,
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Python\Lib\tkinter\ttk.py", line 445, in element_create
+    self.tk.call(self._name, "element", "create", elementname, etype,
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        *specs, *opts)
+        ^^^^^^^^^^^^^^
+_tkinter.TclError: Duplicate element TRadiobutton.indicator
