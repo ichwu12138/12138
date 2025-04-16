@@ -11,7 +11,6 @@ from tkinter import filedialog, messagebox
 
 from utils.config_manager import config_manager
 from utils.language_manager import language_manager
-from utils.theme_manager_tk import theme_manager
 from utils.logger import Logger
 from core.logic_builder import LogicBuilder
 from core.config_processor import ConfigProcessor
@@ -20,7 +19,6 @@ from gui.logic_panel import LogicPanel
 from gui.config_panel import ConfigPanel
 from gui.bom_panel import BomPanel
 from gui.language_dialog_tk import LanguageDialog
-from gui.theme_dialog_tk import ThemeDialog
 from gui.logic_library_window import LogicLibraryWindow
 
 class MainWindow:
@@ -281,8 +279,6 @@ class MainWindow:
         self.view_menu.add_separator()
         self.view_menu.add_command(label=language_manager.get_text("language"), 
                                  command=self._show_language_dialog)
-        self.view_menu.add_command(label=language_manager.get_text("theme"), 
-                                 command=self._show_theme_dialog)
         
         # 帮助菜单
         self.help_menu = tk.Menu(self.menubar, tearoff=0)
@@ -350,7 +346,6 @@ class MainWindow:
         # 视图菜单
         self.view_menu.entryconfig(0, label=language_manager.get_text("logic_library"))
         self.view_menu.entryconfig(2, label=language_manager.get_text("language"))
-        self.view_menu.entryconfig(3, label=language_manager.get_text("theme"))
         
         # 帮助菜单
         self.help_menu.entryconfig(0, label=language_manager.get_text("view_log"))
@@ -374,16 +369,6 @@ class MainWindow:
             language_manager.set_language(selected_lang)
             self.refresh_texts()
 
-    def _show_theme_dialog(self):
-        """显示主题选择对话框"""
-        dialog = ThemeDialog(self.root, callback=self._on_theme_changed)
-        dialog.show()
-        
-    def _on_theme_changed(self, theme_id):
-        """主题变更回调"""
-        theme_manager.switch_theme(theme_id)
-        theme_manager.apply_theme(self.root)
-        
     def _show_log_viewer(self):
         """显示日志查看器"""
         log_file = Logger.get_current_log_file()

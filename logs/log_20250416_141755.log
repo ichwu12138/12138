@@ -1,0 +1,9 @@
+2025-04-16 14:17:55,325 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250416_141755.log
+2025-04-16 14:17:55,326 [DEBUG] utils.theme_manager_tk - 从配置文件加载主题: light
+2025-04-16 14:17:55,591 [INFO] __main__ - 正在启动程序...
+2025-04-16 14:17:55,591 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-16 14:17:55,591 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-16 14:17:55,591 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-16 14:17:55,616 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-16 14:17:57,426 [INFO] __main__ - 语言选择结果: None
+2025-04-16 14:17:57,426 [INFO] __main__ - 用户取消了语言选择，程序退出

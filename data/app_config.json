@@ -8,7 +8,7 @@
         "de"
     ],
     "theme": {
-        "current_theme": "light",
+        "current_theme": "dark",
         "light": {
             "name": "亮色主题",
             "background": "#ffffff",

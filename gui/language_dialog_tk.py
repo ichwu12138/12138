@@ -49,12 +49,12 @@ class LanguageDialog:
         
         # 设置对话框属性
         self.window.title("语言选择 / Language Selection / Sprachauswahl")
-        self.window.minsize(600, 600)
+        self.window.minsize(400, 400)  # 调整最小尺寸
         self.window.resizable(False, False)  # 禁止调整大小
         
         # 设置窗口大小
-        window_width = 600
-        window_height = 600
+        window_width = 400  # 调整窗口宽度
+        window_height = 400  # 调整窗口高度
         
         # 获取所有屏幕的信息
         if self.parent:
@@ -146,27 +146,29 @@ class LanguageDialog:
     def _create_widgets(self):
         """创建界面组件"""
         # 创建主布局框架
-        main_frame = ttk.Frame(self.window, padding=40)  # 增加内边距
+        main_frame = ttk.Frame(self.window, padding=30)  # 调整内边距
         main_frame.pack(fill=BOTH, expand=YES)
         
         # 创建标题标签 - 分三行显示三种语言
         title_label = ttk.Label(
             main_frame, 
             text="请选择语言\nSelect Language\nSprache wählen",  # 三行显示
-            font=("Microsoft YaHei", 20, "bold"),  # 增大字体并加粗
+            font=("Microsoft YaHei", 16, "bold"),  # 设置字体大小为16
             justify="center",  # 居中对齐
-            wraplength=520  # 设置文本换行宽度
+            wraplength=360  # 调整文本换行宽度
         )
-        title_label.pack(pady=(0, 30))  # 增加上下间距
+        title_label.pack(pady=(0, 20))  # 调整上下间距
         
         # 获取支持的语言列表
         supported_languages = config_manager.get_app_config("supported_languages", ["zh", "en", "de"])
         
-        # 创建语言按钮 - 定义大字体粗体按钮样式
+        # 创建语言按钮 - 定义统一字体大小的按钮样式
         button_style = ttk.Style()
-        button_style.configure("Large.TButton", font=("Microsoft YaHei", 16, "bold"))
+        button_style.configure("Language.TButton", 
+                             font=("Microsoft YaHei", 16, "bold"),  # 设置字体大小为16
+                             padding=(10, 5))  # 调整按钮内边距
         
-        # 按钮容器，使用较小的间距
+        # 按钮容器
         button_frame = ttk.Frame(main_frame)
         button_frame.pack(fill=X, expand=YES, pady=5)
         
@@ -177,11 +179,11 @@ class LanguageDialog:
                     button_frame,
                     text=LANGUAGES[lang_code]["name"],
                     command=lambda code=lang_code: self._on_language_selected(code),
-                    width=30,  # 增加按钮宽度
-                    style="Large.TButton"  # 使用自定义大字体样式
+                    width=20,  # 调整按钮宽度
+                    style="Language.TButton"  # 使用自定义样式
                 )
-                # 配置更大的按钮，使用较小的间距
-                lang_button.pack(pady=5, ipady=10)  # 减小按钮间距，增加内部高度
+                # 配置按钮布局
+                lang_button.pack(pady=10, ipady=5)  # 调整按钮间距和内部高度
         
     def _on_language_selected(self, lang_code):
         """语言选择事件处理"""
