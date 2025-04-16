@@ -9,6 +9,7 @@ import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from utils.logger import Logger
 from utils.config_manager import config_manager
+from utils.language_manager import language_manager
 
 logger = Logger.get_logger(__name__)
 
@@ -25,7 +26,7 @@ class SimpleThemeDialog(tk.Toplevel):
         super().__init__(parent)
         
         # 设置对话框属性
-        self.title("选择主题")
+        self.title(language_manager.get_text("theme_dialog_title"))
         self.minsize(400, 400)  # 调整最小尺寸
         self.resizable(False, False)
         
@@ -64,7 +65,7 @@ class SimpleThemeDialog(tk.Toplevel):
         # 标题
         title_label = ttk.Label(
             main_frame,
-            text="请选择主题",
+            text=language_manager.get_text("theme_dialog_header"),
             font=("Microsoft YaHei", 16, "bold"),  # 设置字体大小为16
             justify="center"  # 居中对齐
         )
@@ -99,7 +100,7 @@ class SimpleThemeDialog(tk.Toplevel):
         # 浅色主题按钮
         light_btn = ttk.Button(
             button_frame,
-            text="浅色主题",
+            text=language_manager.get_text("light_theme"),
             style="Theme.TButton",
             width=20,  # 调整按钮宽度
             command=lambda: self._on_select("light")
@@ -109,7 +110,7 @@ class SimpleThemeDialog(tk.Toplevel):
         # 深色主题按钮
         dark_btn = ttk.Button(
             button_frame,
-            text="深色主题",
+            text=language_manager.get_text("dark_theme"),
             style="Theme.TButton",
             width=20,  # 调整按钮宽度
             command=lambda: self._on_select("dark")

@@ -258,6 +258,30 @@ class ConfigPanel(ttk.Frame):
             
     def refresh_texts(self):
         """刷新所有文本"""
-        # 更新按钮文本
-        self.import_btn.configure(text=language_manager.get_text("import_config"))
-        self.refresh_btn.configure(text=language_manager.get_text("refresh")) 
+        # 刷新标题
+        for child in self.winfo_children():
+            if isinstance(child, ttk.Label) and "Title.TLabel" in str(child.cget("style")):
+                child.configure(text=language_manager.get_text("config_panel_title"))
+                break
+        
+        # 遍历所有 LabelFrame
+        for frame in self.winfo_children():
+            if isinstance(frame, ttk.LabelFrame):
+                current_text = str(frame.cget("text")).lower()
+                
+                # 更新工具栏框架
+                if "tools" in current_text:
+                    frame.configure(text=language_manager.get_text("tools"))
+                    # 更新按钮文本
+                    toolbar = frame.winfo_children()[0]  # 获取工具栏Frame
+                    for btn in toolbar.winfo_children():
+                        if isinstance(btn, ttk.Button):
+                            current_btn_text = str(btn.cget("text")).lower()
+                            if "import" in current_btn_text:
+                                btn.configure(text=language_manager.get_text("import_config"))
+                            elif "refresh" in current_btn_text:
+                                btn.configure(text=language_manager.get_text("refresh"))
+                                
+                # 更新配置树框架
+                elif "config_tree" in current_text:
+                    frame.configure(text=language_manager.get_text("config_tree")) 

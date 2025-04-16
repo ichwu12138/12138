@@ -227,5 +227,84 @@ class LogicPanel(ttk.Frame):
         
     def refresh_texts(self):
         """刷新所有文本"""
-        # TODO: 实现文本刷新逻辑
-        pass 
+        # 刷新标题
+        for child in self.winfo_children():
+            if isinstance(child, ttk.Label) and "Title.TLabel" in str(child.cget("style")):
+                child.configure(text=language_manager.get_text("logic_panel_title"))
+                break
+        
+        # 遍历所有 LabelFrame
+        for frame in self.winfo_children():
+            if isinstance(frame, ttk.LabelFrame):
+                current_text = str(frame.cget("text")).lower()
+                
+                # 更新工具栏框架
+                if "tools" in current_text:
+                    frame.configure(text=language_manager.get_text("tools"))
+                    # 更新按钮文本
+                    toolbar = frame.winfo_children()[0]  # 获取工具栏Frame
+                    for btn in toolbar.winfo_children():
+                        if isinstance(btn, ttk.Button):
+                            current_btn_text = str(btn.cget("text")).lower()
+                            if "import" in current_btn_text:
+                                btn.configure(text=language_manager.get_text("import_logic"))
+                            elif "refresh" in current_btn_text:
+                                btn.configure(text=language_manager.get_text("refresh"))
+                                
+                # 更新逻辑状态框架
+                elif "logic_status" in current_text:
+                    frame.configure(text=language_manager.get_text("logic_status"))
+                    # 更新单选按钮文本
+                    for child in frame.winfo_children():
+                        if isinstance(child, ttk.Radiobutton):
+                            current_value = str(child.cget("value")).lower()
+                            if "all" in current_value:
+                                child.configure(text=language_manager.get_text("all"))
+                            elif "pass" in current_value:
+                                child.configure(text=language_manager.get_text("pass"))
+                            elif "fail" in current_value:
+                                child.configure(text=language_manager.get_text("fail"))
+                                
+                # 更新逻辑树框架
+                elif "logic_tree" in current_text:
+                    frame.configure(text=language_manager.get_text("logic_tree"))
+                    
+                # 更新逻辑操作符框架
+                if "logic_operators" in current_text:
+                    frame.configure(text=language_manager.get_text("logic_operators"))
+                    
+                # 更新括号框架
+                elif "brackets" in current_text:
+                    frame.configure(text=language_manager.get_text("brackets"))
+                    
+                # 更新规则状态框架
+                elif "rule_status" in current_text:
+                    frame.configure(text=language_manager.get_text("rule_status"))
+                    # 更新单选按钮文本
+                    for widget in frame.winfo_children():
+                        if isinstance(widget, ttk.Radiobutton):
+                            value = str(widget.cget("value"))
+                            if value == "enabled":
+                                widget.configure(text=language_manager.get_text("enabled"))
+                            elif value == "testing":
+                                widget.configure(text=language_manager.get_text("testing"))
+                            elif value == "disabled":
+                                widget.configure(text=language_manager.get_text("disabled"))
+                                
+                # 更新表达式框架
+                elif "expression" in current_text:
+                    frame.configure(text=language_manager.get_text("expression"))
+                    # 更新按钮文本
+                    for btn_frame in frame.winfo_children():
+                        if isinstance(btn_frame, ttk.Frame):
+                            for btn in btn_frame.winfo_children():
+                                if isinstance(btn, ttk.Button):
+                                    current_btn_text = str(btn.cget("text")).lower()
+                                    if "clear" in current_btn_text:
+                                        btn.configure(text=language_manager.get_text("clear"))
+                                    elif "save" in current_btn_text:
+                                        btn.configure(text=language_manager.get_text("save"))
+                                        
+                # 更新已保存规则框架
+                elif "saved_rules" in current_text:
+                    frame.configure(text=language_manager.get_text("saved_rules")) 

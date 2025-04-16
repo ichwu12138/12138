@@ -367,7 +367,34 @@ class MainWindow:
         selected_lang = dialog.show()
         if selected_lang:
             language_manager.set_language(selected_lang)
-            self.refresh_texts()
+            # 刷新所有面板的文本
+            self.refresh_all_panels()
+            
+    def refresh_all_panels(self):
+        """刷新所有面板的文本"""
+        # 刷新窗口标题
+        self.root.title(language_manager.get_text("app_title"))
+        
+        # 刷新主标题
+        for child in self.main_frame.winfo_children():
+            if isinstance(child, ttk.Label):
+                child.configure(text=language_manager.get_text("panels_title"))
+                break
+        
+        # 刷新各个面板
+        if hasattr(self, 'config_panel'):
+            self.config_panel.refresh_texts()
+        if hasattr(self, 'logic_panel'):
+            self.logic_panel.refresh_texts()
+        if hasattr(self, 'bom_panel'):
+            self.bom_panel.refresh_texts()
+            
+        # 刷新菜单文本
+        self._refresh_menu_texts()
+        
+        # 刷新状态栏
+        if hasattr(self, 'status_label'):
+            self.status_label.configure(text=language_manager.get_text("ready"))
 
     def _show_log_viewer(self):
         """显示日志查看器"""

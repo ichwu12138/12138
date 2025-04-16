@@ -345,7 +345,29 @@ class LanguageManager(Observable):
                 "zh": "打开日志文件失败",
                 "en": "Failed to open log file",
                 "de": "Fehler beim Öffnen der Log-Datei"
-            }
+            },
+            
+            # 主题对话框
+            "theme_dialog_title": {
+                "zh": "选择主题",
+                "en": "Select Theme",
+                "de": "Thema auswählen"
+            },
+            "theme_dialog_header": {
+                "zh": "请选择主题",
+                "en": "Please select a theme",
+                "de": "Bitte wählen Sie ein Thema"
+            },
+            "light_theme": {
+                "zh": "浅色主题",
+                "en": "Light Theme",
+                "de": "Helles Thema"
+            },
+            "dark_theme": {
+                "zh": "深色主题",
+                "en": "Dark Theme",
+                "de": "Dunkles Thema"
+            },
         }
     
     def set_language(self, lang_code: str) -> None:
