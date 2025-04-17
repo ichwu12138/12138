@@ -12,7 +12,7 @@ from typing import Dict, List, Any, Optional, Tuple, Set
 import uuid
 
 from models.logic_rule import LogicRule, RuleType, RuleStatus
-from core.excel_processor import ExcelProcessor
+from core.config_processor import ConfigProcessor
 from utils.config_manager import config_manager, DATA_DIR
 from utils.observer import Observable
 from utils.logger import Logger
@@ -26,7 +26,7 @@ BACKUP_DIR = os.path.join(DATA_DIR, "backups")
 class LogicBuilder(Observable):
     """逻辑规则构建器"""
     
-    def __init__(self, excel_processor):
+    def __init__(self, config_processor: ConfigProcessor):
         """初始化逻辑规则构建器"""
         super().__init__()
         
@@ -34,7 +34,7 @@ class LogicBuilder(Observable):
         self.logger = Logger.get_logger(__name__)
         
         # 保存Excel处理器
-        self.excel_processor = excel_processor
+        self.config_processor = config_processor
         
         # 初始化规则字典
         self.rules: Dict[str, LogicRule] = {}
@@ -318,7 +318,7 @@ class LogicBuilder(Observable):
         
         # 替换表达式
         for f_code in f_codes:
-            feature = self.excel_processor.get_feature(f_code)
+            feature = self.config_processor.get_feature(f_code)
             if feature:
                 k_codes = feature.get_k_codes()
                 if k_codes:
@@ -337,7 +337,7 @@ class LogicBuilder(Observable):
         Returns:
             Tuple[bool, str]: (是否有效, 错误消息)
         """
-        return ExpressionValidator.validate_dynamic_expression(expr, self.excel_processor)
+        return ExpressionValidator.validate_dynamic_expression(expr, self.config_processor)
     
     def _validate_static_expression(self, expr: str, is_relation_right_side: bool = False) -> Tuple[bool, str]:
         """验证静态表达式
@@ -349,7 +349,7 @@ class LogicBuilder(Observable):
         Returns:
             Tuple[bool, str]: (是否有效, 错误消息)
         """
-        return ExpressionValidator.validate_static_expression(expr, self.excel_processor, is_relation_right_side)
+        return ExpressionValidator.validate_static_expression(expr, self.config_processor, is_relation_right_side)
     
     def _validate_code_expression(self, expr: str) -> Tuple[bool, str]:
         """验证代码表达式

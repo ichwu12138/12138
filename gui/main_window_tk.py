@@ -44,6 +44,9 @@ class MainWindow:
         # 创建逻辑构建器
         self.logic_builder = LogicBuilder(self.config_processor)
         
+        # 注册语言变化的回调函数
+        language_manager.add_callback(self.refresh_all_texts)
+        
         # 配置全局样式
         self._configure_global_styles()
         
@@ -52,9 +55,6 @@ class MainWindow:
         
         # 创建菜单
         self._create_menu()
-        
-        # 创建状态栏
-        self._create_statusbar()
         
         # 绑定事件
         self._bind_events()
@@ -288,18 +288,6 @@ class MainWindow:
         self.help_menu.add_command(label=language_manager.get_text("about"), 
                                  command=self._show_about)
     
-    def _create_statusbar(self):
-        """创建状态栏"""
-        self.statusbar = ttk.Frame(self.root, style="Main.TFrame")
-        self.statusbar.pack(side=BOTTOM, fill=X)
-        
-        self.status_label = ttk.Label(
-            self.statusbar,
-            text=language_manager.get_text("ready"),
-            style="Status.TLabel"
-        )
-        self.status_label.pack(side=LEFT)
-        
     def _bind_events(self):
         """绑定事件"""
         # 窗口关闭事件
@@ -311,6 +299,8 @@ class MainWindow:
             language_manager.get_text("confirm_exit"),
             language_manager.get_text("confirm_exit_message")
         ):
+            # 移除语言变化的回调函数
+            language_manager.remove_callback(self.refresh_all_texts)
             self.root.destroy()
             
     def _import_config(self):
@@ -323,18 +313,115 @@ class MainWindow:
         if hasattr(self, 'bom_panel'):
             self.bom_panel._import_bom()
             
-    def refresh_texts(self):
+    def _show_logic_library(self):
+        """显示逻辑关系库窗口"""
+        window = LogicLibraryWindow(self.root, self.logic_builder)
+        window.wait_window()  # 等待窗口关闭
+    
+    def _show_language_dialog(self):
+        """显示语言选择对话框"""
+        dialog = LanguageDialog(self.root)
+        selected_lang = dialog.show()
+        if selected_lang and selected_lang != language_manager.get_current_language():
+            # 设置新的语言
+            language_manager.set_language(selected_lang)
+            # 强制更新所有面板
+            self.refresh_all_texts()
+            # 强制更新显示
+            self.root.update_idletasks()
+            
+    def _update_widget_texts(self, widget):
+        """递归更新所有组件的文本
+        
+        Args:
+            widget: 要更新的组件
+        """
+        try:
+            # 更新 Label 文本
+            if isinstance(widget, ttk.Label):
+                if "Title.TLabel" in str(widget.cget("style")):
+                    if widget.winfo_parent() == str(self.main_frame):
+                        widget.configure(text=language_manager.get_text("panels_title"))
+                    else:
+                        # 根据父组件类型设置标题
+                        parent = widget.winfo_parent()
+                        if "configpanel" in parent.lower():
+                            widget.configure(text=language_manager.get_text("config_panel_title"))
+                        elif "logicpanel" in parent.lower():
+                            widget.configure(text=language_manager.get_text("logic_panel_title"))
+                        elif "bompanel" in parent.lower():
+                            widget.configure(text=language_manager.get_text("bom_panel_title"))
+            
+            # 更新 Button 文本
+            elif isinstance(widget, ttk.Button):
+                current_text = str(widget.cget("text")).lower()
+                if "import" in current_text:
+                    if "config" in current_text:
+                        widget.configure(text=language_manager.get_text("import_config"))
+                    elif "bom" in current_text:
+                        widget.configure(text=language_manager.get_text("import_bom"))
+                elif "refresh" in current_text:
+                    widget.configure(text=language_manager.get_text("refresh"))
+                elif "clear" in current_text:
+                    widget.configure(text=language_manager.get_text("clear"))
+                elif "save" in current_text:
+                    widget.configure(text=language_manager.get_text("save"))
+            
+            # 更新 LabelFrame 文本
+            elif isinstance(widget, ttk.LabelFrame):
+                current_text = str(widget.cget("text")).lower()
+                if "tools" in current_text:
+                    widget.configure(text=language_manager.get_text("tools"))
+                elif "config" in current_text and "tree" in current_text:
+                    widget.configure(text=language_manager.get_text("config_tree"))
+                elif "bom" in current_text and "tree" in current_text:
+                    widget.configure(text=language_manager.get_text("bom_tree"))
+                elif "logic" in current_text and "operators" in current_text:
+                    widget.configure(text=language_manager.get_text("logic_operators"))
+                elif "brackets" in current_text:
+                    widget.configure(text=language_manager.get_text("brackets"))
+                elif "rule" in current_text and "status" in current_text:
+                    widget.configure(text=language_manager.get_text("rule_status"))
+                elif "expression" in current_text:
+                    widget.configure(text=language_manager.get_text("expression"))
+                elif "saved" in current_text and "rules" in current_text:
+                    widget.configure(text=language_manager.get_text("saved_rules"))
+            
+            # 更新 Radiobutton 文本
+            elif isinstance(widget, ttk.Radiobutton):
+                value = str(widget.cget("value"))
+                if value == "enabled":
+                    widget.configure(text=language_manager.get_text("enabled"))
+                elif value == "testing":
+                    widget.configure(text=language_manager.get_text("testing"))
+                elif value == "disabled":
+                    widget.configure(text=language_manager.get_text("disabled"))
+            
+            # 递归处理子组件
+            for child in widget.winfo_children():
+                self._update_widget_texts(child)
+                
+        except Exception as e:
+            self.logger.error(f"更新组件文本时出错: {str(e)}", exc_info=True)
+            
+    def refresh_all_texts(self):
         """刷新所有文本"""
-        # 刷新配置面板文本
-        if hasattr(self, 'config_panel'):
-            self.config_panel.refresh_texts()
-            
-        # 刷新逻辑面板文本
-        if hasattr(self, 'logic_panel'):
-            self.logic_panel.refresh_texts()
-            
+        # 刷新窗口标题
+        self.root.title(language_manager.get_text("app_title"))
+        
         # 刷新菜单文本
         self._refresh_menu_texts()
+        
+        # 刷新各个面板的文本
+        if hasattr(self, 'config_panel'):
+            self.config_panel.refresh_texts()
+        if hasattr(self, 'logic_panel'):
+            self.logic_panel.refresh_texts()
+        if hasattr(self, 'bom_panel'):
+            self.bom_panel.refresh_texts()
+            
+        # 强制更新显示
+        self.root.update_idletasks()
         
     def _refresh_menu_texts(self):
         """刷新菜单文本"""
@@ -356,46 +443,6 @@ class MainWindow:
         self.menubar.entryconfig(1, label=language_manager.get_text("menu_view"))
         self.menubar.entryconfig(2, label=language_manager.get_text("menu_help"))
         
-    def _show_logic_library(self):
-        """显示逻辑关系库窗口"""
-        window = LogicLibraryWindow(self.root, self.logic_builder)
-        window.wait_window()  # 等待窗口关闭
-    
-    def _show_language_dialog(self):
-        """显示语言选择对话框"""
-        dialog = LanguageDialog(self.root)
-        selected_lang = dialog.show()
-        if selected_lang:
-            language_manager.set_language(selected_lang)
-            # 刷新所有面板的文本
-            self.refresh_all_panels()
-            
-    def refresh_all_panels(self):
-        """刷新所有面板的文本"""
-        # 刷新窗口标题
-        self.root.title(language_manager.get_text("app_title"))
-        
-        # 刷新主标题
-        for child in self.main_frame.winfo_children():
-            if isinstance(child, ttk.Label):
-                child.configure(text=language_manager.get_text("panels_title"))
-                break
-        
-        # 刷新各个面板
-        if hasattr(self, 'config_panel'):
-            self.config_panel.refresh_texts()
-        if hasattr(self, 'logic_panel'):
-            self.logic_panel.refresh_texts()
-        if hasattr(self, 'bom_panel'):
-            self.bom_panel.refresh_texts()
-            
-        # 刷新菜单文本
-        self._refresh_menu_texts()
-        
-        # 刷新状态栏
-        if hasattr(self, 'status_label'):
-            self.status_label.configure(text=language_manager.get_text("ready"))
-
     def _show_log_viewer(self):
         """显示日志查看器"""
         log_file = Logger.get_current_log_file()

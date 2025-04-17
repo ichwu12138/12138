@@ -2,15 +2,16 @@ from typing import Dict, Any
 from utils.observer import Observable
 from utils.config_manager import config_manager
 
-class LanguageManager(Observable):
+class LanguageManager:
     """语言管理器类"""
     
     def __init__(self):
         """初始化语言管理器"""
-        super().__init__()
-        
         # 默认语言
         self.current_language = "zh"
+        
+        # 添加一个回调函数列表
+        self._callbacks = []
         
         # 加载翻译
         self._load_translations()
@@ -131,9 +132,9 @@ class LanguageManager(Observable):
             
             # 工具栏
             "tools": {
-                "zh": "工具",
-                "en": "Tools",
-                "de": "Werkzeuge"
+                "zh": "工具栏",
+                "en": "Toolbar",
+                "de": "Werkzeugleiste"
             },
             "refresh": {
                 "zh": "刷新",
@@ -368,18 +369,58 @@ class LanguageManager(Observable):
                 "en": "Dark Theme",
                 "de": "Dunkles Thema"
             },
+            
+            # 按钮和操作
+            "refresh_tree": {
+                "zh": "刷新树状图",
+                "en": "Refresh Tree",
+                "de": "Baum aktualisieren"
+            },
+            "clear_expression": {
+                "zh": "清除表达式",
+                "en": "Clear Expression",
+                "de": "Ausdruck löschen"
+            },
+            "save_rule": {
+                "zh": "保存规则",
+                "en": "Save Rule",
+                "de": "Regel speichern"
+            },
         }
     
+    def add_callback(self, callback):
+        """添加语言变化时的回调函数
+        
+        Args:
+            callback: 回调函数
+        """
+        if callback not in self._callbacks:
+            self._callbacks.append(callback)
+            
+    def remove_callback(self, callback):
+        """移除回调函数
+        
+        Args:
+            callback: 要移除的回调函数
+        """
+        if callback in self._callbacks:
+            self._callbacks.remove(callback)
+            
     def set_language(self, lang_code: str) -> None:
         """设置当前语言
         
         Args:
             lang_code: 语言代码
         """
-        if lang_code in ["zh", "en", "de"]:
+        if lang_code in ["zh", "en", "de"] and lang_code != self.current_language:
             self.current_language = lang_code
             config_manager.set_app_config("language", lang_code)
-            self.notify_observers(lang_code)
+            # 调用所有回调函数
+            for callback in self._callbacks:
+                try:
+                    callback()
+                except Exception as e:
+                    print(f"回调函数执行出错: {str(e)}")
     
     def get_text(self, key: str) -> str:
         """获取指定键的翻译文本

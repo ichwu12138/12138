@@ -31,117 +31,151 @@ class LogicPanel(ttk.Frame):
         # 获取日志记录器
         self.logger = Logger.get_logger(__name__)
         
+        # 注册语言变化的回调函数
+        language_manager.add_callback(self.refresh_texts)
+        
+        # 创建自定义样式
+        self._create_custom_styles()
+        
         # 创建界面
         self._create_widgets()
+        
+    def destroy(self):
+        """销毁面板时移除回调函数"""
+        language_manager.remove_callback(self.refresh_texts)
+        super().destroy()
+        
+    def _create_custom_styles(self):
+        """创建自定义样式"""
+        style = ttk.Style()
+        
+        # 获取框架标题的字体大小
+        frame_title_size = style.lookup("Main.TLabelframe.Label", "font")
+        if isinstance(frame_title_size, str):
+            # 如果是字符串格式，解析字体大小
+            import re
+            size_match = re.search(r'\d+', frame_title_size)
+            if size_match:
+                frame_title_size = int(size_match.group())
+            else:
+                frame_title_size = 18  # 默认大小
+        elif isinstance(frame_title_size, tuple):
+            # 如果是元组格式，直接获取大小
+            frame_title_size = frame_title_size[1]
+        else:
+            frame_title_size = 18  # 默认大小
+        
+        # 配置单选按钮样式，使用与框架标题相同的字体大小
+        style.configure(
+            "Status.TRadiobutton",
+            font=("Microsoft YaHei", frame_title_size)
+        )
         
     def _create_widgets(self):
         """创建界面组件"""
         # 创建标题标签
-        title_label = ttk.Label(
+        self.title_label = ttk.Label(
             self,
             text=language_manager.get_text("logic_panel_title"),
             style="Title.TLabel"
         )
-        title_label.pack(fill=X, pady=(0, 10))
+        self.title_label.pack(fill=X, pady=(0, 10))
         
         # 创建主框架
         main_frame = ttk.Frame(self)
         main_frame.pack(fill=BOTH, expand=YES, padx=5, pady=5)
         
         # 创建逻辑操作符框架
-        self._create_logic_operators_frame(main_frame)
-        
-        # 创建括号框架
-        self._create_bracket_frame(main_frame)
-        
-        # 创建规则状态框架
-        self._create_rule_status_frame(main_frame)
-        
-        # 创建表达式编辑区域
-        self._create_expression_frame(main_frame)
-        
-        # 创建已保存规则区域
-        self._create_saved_rules_frame(main_frame)
-        
-    def _create_logic_operators_frame(self, parent):
-        """创建逻辑操作符框架"""
-        frame = ttk.LabelFrame(
-            parent,
+        self.operators_frame = ttk.LabelFrame(
+            main_frame,
             text=language_manager.get_text("logic_operators"),
             style="Main.TLabelframe"
         )
-        frame.pack(fill=X, pady=(0, 5))
+        self.operators_frame.pack(fill=X, pady=(0, 5))
         
         operators = ["AND", "OR", "NOT", "XOR"]
         for op in operators:
             btn = ttk.Button(
-                frame,
+                self.operators_frame,
                 text=op,
                 command=lambda x=op: self._add_operator(x),
                 style="Main.TButton",
                 width=10
             )
             btn.pack(side=LEFT, padx=5, pady=2)
-            
-    def _create_bracket_frame(self, parent):
-        """创建括号框架"""
-        frame = ttk.LabelFrame(
-            parent,
+        
+        # 创建括号框架
+        self.brackets_frame = ttk.LabelFrame(
+            main_frame,
             text=language_manager.get_text("brackets"),
             style="Main.TLabelframe"
         )
-        frame.pack(fill=X, pady=(0, 5))
+        self.brackets_frame.pack(fill=X, pady=(0, 5))
         
         brackets = ["(", ")"]
         for bracket in brackets:
             btn = ttk.Button(
-                frame,
+                self.brackets_frame,
                 text=bracket,
                 command=lambda x=bracket: self._add_bracket(x),
                 style="Main.TButton",
                 width=10
             )
             btn.pack(side=LEFT, padx=5, pady=2)
-            
-    def _create_rule_status_frame(self, parent):
-        """创建规则状态框架"""
-        frame = ttk.LabelFrame(
-            parent,
+        
+        # 创建规则状态框架
+        self.status_frame = ttk.LabelFrame(
+            main_frame,
             text=language_manager.get_text("rule_status"),
             style="Main.TLabelframe"
         )
-        frame.pack(fill=X, pady=(0, 5))
+        self.status_frame.pack(fill=X, pady=(0, 5))
         
         # 创建状态单选按钮
         self.status_var = tk.StringVar(value="enabled")
-        statuses = [
-            ("enabled", language_manager.get_text("enabled")),
-            ("testing", language_manager.get_text("testing")),
-            ("disabled", language_manager.get_text("disabled"))
-        ]
+        self.status_buttons = {}
         
-        for value, text in statuses:
-            rb = ttk.Radiobutton(
-                frame,
-                text=text,
-                value=value,
-                variable=self.status_var,
-                style="Main.TRadiobutton"
-            )
-            rb.pack(side=LEFT, padx=5, pady=2)
-            
-    def _create_expression_frame(self, parent):
-        """创建表达式编辑区域"""
-        frame = ttk.LabelFrame(
-            parent,
+        # 创建启用按钮
+        self.enabled_rb = ttk.Radiobutton(
+            self.status_frame,
+            text=language_manager.get_text("enabled"),
+            value="enabled",
+            variable=self.status_var,
+            style="Status.TRadiobutton"  # 使用自定义样式
+        )
+        self.enabled_rb.pack(side=LEFT, padx=5, pady=2)
+        
+        # 创建测试按钮
+        self.testing_rb = ttk.Radiobutton(
+            self.status_frame,
+            text=language_manager.get_text("testing"),
+            value="testing",
+            variable=self.status_var,
+            style="Status.TRadiobutton"  # 使用自定义样式
+        )
+        self.testing_rb.pack(side=LEFT, padx=5, pady=2)
+        
+        # 创建禁用按钮
+        self.disabled_rb = ttk.Radiobutton(
+            self.status_frame,
+            text=language_manager.get_text("disabled"),
+            value="disabled",
+            variable=self.status_var,
+            style="Status.TRadiobutton"  # 使用自定义样式
+        )
+        self.disabled_rb.pack(side=LEFT, padx=5, pady=2)
+        
+        # 创建表达式框架
+        self.expr_frame = ttk.LabelFrame(
+            main_frame,
             text=language_manager.get_text("expression"),
             style="Main.TLabelframe"
         )
-        frame.pack(fill=BOTH, expand=YES, pady=(0, 5))
+        self.expr_frame.pack(fill=BOTH, expand=YES, pady=(0, 5))
         
         # 创建表达式文本框
         self.expr_text = tk.Text(
-            frame,
+            self.expr_frame,
             height=5,
             wrap=tk.WORD,
             font=("Microsoft YaHei", 16)
@@ -149,7 +183,7 @@ class LogicPanel(ttk.Frame):
         self.expr_text.pack(fill=BOTH, expand=YES, padx=5, pady=5)
         
         # 创建按钮框架
-        btn_frame = ttk.Frame(frame)
+        btn_frame = ttk.Frame(self.expr_frame)
         btn_frame.pack(fill=X, padx=5, pady=(0, 5))
         
         # 清除按钮
@@ -172,18 +206,22 @@ class LogicPanel(ttk.Frame):
         )
         self.save_btn.pack(side=RIGHT, padx=5)
         
-    def _create_saved_rules_frame(self, parent):
-        """创建已保存规则区域"""
-        frame = ttk.LabelFrame(
-            parent,
+        # 创建已保存规则框架
+        self.saved_rules_frame = ttk.LabelFrame(
+            main_frame,
             text=language_manager.get_text("saved_rules"),
             style="Main.TLabelframe"
         )
-        frame.pack(fill=BOTH, expand=YES)
+        self.saved_rules_frame.pack(fill=BOTH, expand=YES)
         
         # 创建树状视图
+        self._create_tree(self.saved_rules_frame)
+        
+    def _create_tree(self, parent):
+        """创建树状视图"""
+        # 创建树状视图
         self.rules_tree = ttk.Treeview(
-            frame,
+            parent,
             selectmode="browse",
             style="Main.Treeview",
             columns=("status",),
@@ -193,7 +231,7 @@ class LogicPanel(ttk.Frame):
         
         # 添加滚动条
         vsb = ttk.Scrollbar(
-            frame,
+            parent,
             orient="vertical",
             command=self.rules_tree.yview
         )
@@ -227,84 +265,24 @@ class LogicPanel(ttk.Frame):
         
     def refresh_texts(self):
         """刷新所有文本"""
-        # 刷新标题
-        for child in self.winfo_children():
-            if isinstance(child, ttk.Label) and "Title.TLabel" in str(child.cget("style")):
-                child.configure(text=language_manager.get_text("logic_panel_title"))
-                break
+        # 更新标题
+        self.title_label.configure(text=language_manager.get_text("logic_panel_title"))
         
-        # 遍历所有 LabelFrame
-        for frame in self.winfo_children():
-            if isinstance(frame, ttk.LabelFrame):
-                current_text = str(frame.cget("text")).lower()
-                
-                # 更新工具栏框架
-                if "tools" in current_text:
-                    frame.configure(text=language_manager.get_text("tools"))
-                    # 更新按钮文本
-                    toolbar = frame.winfo_children()[0]  # 获取工具栏Frame
-                    for btn in toolbar.winfo_children():
-                        if isinstance(btn, ttk.Button):
-                            current_btn_text = str(btn.cget("text")).lower()
-                            if "import" in current_btn_text:
-                                btn.configure(text=language_manager.get_text("import_logic"))
-                            elif "refresh" in current_btn_text:
-                                btn.configure(text=language_manager.get_text("refresh"))
-                                
-                # 更新逻辑状态框架
-                elif "logic_status" in current_text:
-                    frame.configure(text=language_manager.get_text("logic_status"))
-                    # 更新单选按钮文本
-                    for child in frame.winfo_children():
-                        if isinstance(child, ttk.Radiobutton):
-                            current_value = str(child.cget("value")).lower()
-                            if "all" in current_value:
-                                child.configure(text=language_manager.get_text("all"))
-                            elif "pass" in current_value:
-                                child.configure(text=language_manager.get_text("pass"))
-                            elif "fail" in current_value:
-                                child.configure(text=language_manager.get_text("fail"))
-                                
-                # 更新逻辑树框架
-                elif "logic_tree" in current_text:
-                    frame.configure(text=language_manager.get_text("logic_tree"))
-                    
-                # 更新逻辑操作符框架
-                if "logic_operators" in current_text:
-                    frame.configure(text=language_manager.get_text("logic_operators"))
-                    
-                # 更新括号框架
-                elif "brackets" in current_text:
-                    frame.configure(text=language_manager.get_text("brackets"))
-                    
-                # 更新规则状态框架
-                elif "rule_status" in current_text:
-                    frame.configure(text=language_manager.get_text("rule_status"))
-                    # 更新单选按钮文本
-                    for widget in frame.winfo_children():
-                        if isinstance(widget, ttk.Radiobutton):
-                            value = str(widget.cget("value"))
-                            if value == "enabled":
-                                widget.configure(text=language_manager.get_text("enabled"))
-                            elif value == "testing":
-                                widget.configure(text=language_manager.get_text("testing"))
-                            elif value == "disabled":
-                                widget.configure(text=language_manager.get_text("disabled"))
-                                
-                # 更新表达式框架
-                elif "expression" in current_text:
-                    frame.configure(text=language_manager.get_text("expression"))
-                    # 更新按钮文本
-                    for btn_frame in frame.winfo_children():
-                        if isinstance(btn_frame, ttk.Frame):
-                            for btn in btn_frame.winfo_children():
-                                if isinstance(btn, ttk.Button):
-                                    current_btn_text = str(btn.cget("text")).lower()
-                                    if "clear" in current_btn_text:
-                                        btn.configure(text=language_manager.get_text("clear"))
-                                    elif "save" in current_btn_text:
-                                        btn.configure(text=language_manager.get_text("save"))
-                                        
-                # 更新已保存规则框架
-                elif "saved_rules" in current_text:
-                    frame.configure(text=language_manager.get_text("saved_rules")) 
+        # 更新框架标题
+        self.operators_frame.configure(text=language_manager.get_text("logic_operators"))
+        self.brackets_frame.configure(text=language_manager.get_text("brackets"))
+        self.status_frame.configure(text=language_manager.get_text("rule_status"))
+        self.expr_frame.configure(text=language_manager.get_text("expression"))
+        self.saved_rules_frame.configure(text=language_manager.get_text("saved_rules"))
+        
+        # 更新单选按钮文本
+        self.enabled_rb.configure(text=language_manager.get_text("enabled"))
+        self.testing_rb.configure(text=language_manager.get_text("testing"))
+        self.disabled_rb.configure(text=language_manager.get_text("disabled"))
+        
+        # 更新按钮文本
+        self.clear_btn.configure(text=language_manager.get_text("clear"))
+        self.save_btn.configure(text=language_manager.get_text("save"))
+        
+        # 强制更新显示
+        self.update_idletasks() 

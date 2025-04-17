@@ -31,40 +31,48 @@ class BomPanel(ttk.Frame):
         # 获取日志记录器
         self.logger = Logger.get_logger(__name__)
         
+        # 注册语言变化的回调函数
+        language_manager.add_callback(self.refresh_texts)
+        
         # 创建界面
         self._create_widgets()
+        
+    def destroy(self):
+        """销毁面板时移除回调函数"""
+        language_manager.remove_callback(self.refresh_texts)
+        super().destroy()
         
     def _create_widgets(self):
         """创建界面组件"""
         # 创建标题标签
-        title_label = ttk.Label(
+        self.title_label = ttk.Label(
             self,
             text=language_manager.get_text("bom_panel_title"),
             style="Title.TLabel"
         )
-        title_label.pack(fill=X, pady=(0, 10))
+        self.title_label.pack(fill=X, pady=(0, 10))
         
         # 创建工具栏框架
-        toolbar_frame = ttk.LabelFrame(
+        self.toolbar_frame = ttk.LabelFrame(
             self,
             text=language_manager.get_text("tools"),
             style="Main.TLabelframe"
         )
-        toolbar_frame.pack(fill=X, pady=(0, 10), padx=5)
+        self.toolbar_frame.pack(fill=X, pady=(0, 10), padx=5)
         
         # 创建工具栏
-        self._create_toolbar(toolbar_frame)
+        self._create_toolbar(self.toolbar_frame)
         
         # 创建树状视图框架
-        tree_frame = ttk.LabelFrame(
+        self.tree_frame = ttk.LabelFrame(
             self,
             text=language_manager.get_text("bom_tree"),
             style="Main.TLabelframe"
         )
-        tree_frame.pack(fill=BOTH, expand=YES, padx=5)
+        self.tree_frame.pack(fill=BOTH, expand=YES, padx=5)
         
         # 创建树状视图
-        self._create_tree(tree_frame)
+        self._create_tree(self.tree_frame)
         
     def _create_toolbar(self, parent):
         """创建工具栏"""
@@ -249,30 +257,16 @@ class BomPanel(ttk.Frame):
             
     def refresh_texts(self):
         """刷新所有文本"""
-        # 刷新标题
-        for child in self.winfo_children():
-            if isinstance(child, ttk.Label) and "Title.TLabel" in str(child.cget("style")):
-                child.configure(text=language_manager.get_text("bom_panel_title"))
-                break
+        # 更新标题
+        self.title_label.configure(text=language_manager.get_text("bom_panel_title"))
         
-        # 遍历所有 LabelFrame
-        for frame in self.winfo_children():
-            if isinstance(frame, ttk.LabelFrame):
-                current_text = str(frame.cget("text")).lower()
-                
-                # 更新工具栏框架
-                if "tools" in current_text:
-                    frame.configure(text=language_manager.get_text("tools"))
-                    # 更新按钮文本
-                    toolbar = frame.winfo_children()[0]  # 获取工具栏Frame
-                    for btn in toolbar.winfo_children():
-                        if isinstance(btn, ttk.Button):
-                            current_btn_text = str(btn.cget("text")).lower()
-                            if "import" in current_btn_text:
-                                btn.configure(text=language_manager.get_text("import_bom"))
-                            elif "refresh" in current_btn_text:
-                                btn.configure(text=language_manager.get_text("refresh"))
-                                
-                # 更新BOM树框架
-                elif "bom_tree" in current_text:
-                    frame.configure(text=language_manager.get_text("bom_tree")) 
+        # 更新工具栏标题和按钮
+        self.toolbar_frame.configure(text=language_manager.get_text("tools"))
+        self.import_btn.configure(text=language_manager.get_text("import_bom"))
+        self.refresh_btn.configure(text=language_manager.get_text("refresh"))
+        
+        # 更新树状视图框架标题
+        self.tree_frame.configure(text=language_manager.get_text("bom_tree"))
+        
+        # 强制更新显示
+        self.update_idletasks() 
