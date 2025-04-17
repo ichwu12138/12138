@@ -43,7 +43,7 @@ class BomProcessor:
             df = pd.read_excel(file_path, sheet_name="MAX-gruppe")
             
             # 检查必需的列是否存在
-            required_columns = ["层级", "Baugruppe", "Beschreibung", "Langtext / long text"]
+            required_columns = ["层级", "占位符", "Baugruppe", "Beschreibung", "Langtext / long text"]
             missing_columns = [col for col in required_columns if col not in df.columns]
             if missing_columns:
                 raise ValueError(f"缺少必需的列: {', '.join(missing_columns)}")
@@ -81,6 +81,7 @@ class BomProcessor:
                         continue  # 跳过无效的层级值
                         
                     item_id = str(row["Baugruppe"]).strip()
+                    placeholder = str(row["占位符"]).strip() if not pd.isna(row["占位符"]) else ""
                     description = str(row["Beschreibung"]).strip()
                     long_text = str(row["Langtext / long text"]).strip() if not pd.isna(row["Langtext / long text"]) else ""
                     
@@ -92,6 +93,7 @@ class BomProcessor:
                     item_data = {
                         "name": description,
                         "level": level,
+                        "placeholder": placeholder,
                         "long_text": long_text,
                         "sub_items": {}
                     }

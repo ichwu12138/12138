@@ -187,14 +187,19 @@ class BomPanel(ttk.Frame):
         # 获取层级
         level = item_data.get("level", 1)
         
-        # 创建主节点文本 - 显示层级、编号和描述
-        main_text = f"[{level}] {item_id}"
-        if item_data.get("name"):
+        # 创建主节点文本 - 显示层级、占位符和编号
+        main_text = f"[{level}]"
+        if item_data.get("placeholder"):  # 如果有占位符，添加到层级后面
+            main_text += f" {item_data['placeholder']}"
+            
+        main_text += f" {item_id}"  # 添加Baugruppe码
+        
+        if item_data.get("name"):  # 添加描述
             main_text += f" - {item_data['name']}"
             
-        # 如果有长文本，添加到下一行（使用换行符）
+        # 如果有长文本，添加到下一行（用圆括号包起来）
         if item_data.get("long_text"):
-            main_text += f"\n{item_data['long_text']}"
+            main_text += f"\n({item_data['long_text']})"
             
         # 一级用level_1标签，其他级别用other_level标签
         level_tag = "level_1" if level == 1 else "other_level"
@@ -285,15 +290,28 @@ class BomPanel(ttk.Frame):
             text = self.tree.item(item, "text")
             self.logger.debug(f"BomPanel: 选中项文本: {text}")
             
-            # 提取Baugruppe码（在方括号和空格之间的内容）
+            # 提取占位符和Baugruppe码
             import re
-            match = re.search(r'\[(.*?)\]\s+(\S+)', text)
+            # 匹配模式：[层级] 占位符 Baugruppe码
+            match = re.search(r'\[.*?\]\s+(\S+)\s+(\S+)', text)
             if match:
-                baugruppe = match.group(2)  # 获取第二个捕获组（Baugruppe码）
-                self.logger.info(f"BomPanel: 提取到Baugruppe码: {baugruppe}")
-                self.insert_code(baugruppe)
+                placeholder = match.group(1)  # 获取占位符
+                baugruppe = match.group(2)    # 获取Baugruppe码
+                self.logger.info(f"BomPanel: 提取到占位符: {placeholder}, Baugruppe码: {baugruppe}")
+                
+                # 组合成"占位符-Baugruppe码"格式
+                code = f"{placeholder}-{baugruppe}"
+                self.logger.info(f"BomPanel: 生成的代码: {code}")
+                self.insert_code(code)
             else:
-                self.logger.warning(f"BomPanel: 未能从文本中提取Baugruppe码: {text}")
+                # 尝试直接匹配Baugruppe码（可能没有占位符的情况）
+                match = re.search(r'\[.*?\]\s+(\S+)', text)
+                if match:
+                    baugruppe = match.group(1)
+                    self.logger.info(f"BomPanel: 提取到Baugruppe码: {baugruppe}")
+                    self.insert_code(baugruppe)
+                else:
+                    self.logger.warning(f"BomPanel: 未能从文本中提取代码: {text}")
                 
         except Exception as e:
             self.logger.error(f"BomPanel: 双击处理出错: {str(e)}", exc_info=True)

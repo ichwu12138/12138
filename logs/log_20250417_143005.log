@@ -1,0 +1,78 @@
+2025-04-17 14:30:05,903 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250417_143005.log
+2025-04-17 14:30:06,150 [INFO] __main__ - 正在启动程序...
+2025-04-17 14:30:06,150 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-17 14:30:06,151 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-17 14:30:06,151 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-17 14:30:06,172 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-17 14:30:07,681 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-17 14:30:07,695 [INFO] __main__ - 语言选择结果: zh
+2025-04-17 14:30:07,696 [INFO] __main__ - 正在创建主题选择对话框...
+2025-04-17 14:30:07,696 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-04-17 14:30:07,701 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-04-17 14:30:08,535 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-04-17 14:30:08,557 [INFO] __main__ - 主题选择结果: light
+2025-04-17 14:30:08,570 [INFO] __main__ - 正在配置主窗口...
+2025-04-17 14:30:08,747 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-17 14:30:08,749 [INFO] core.logic_builder - 已加载 6 条规则
+2025-04-17 14:30:08,813 [INFO] __main__ - MainWindow实例创建完成
+2025-04-17 14:30:09,108 [INFO] __main__ - 开始mainloop()...
+2025-04-17 14:30:12,925 [INFO] core.config_processor - 找到工作表: ['TD', '0.模板&Vorlage', '1.Fahrgestell', '2.Fahrzeug allgemein', '3.Beschriftung&Kennzeichnung', '4. Anbauten&Fahrgestellarbeiten', '5. Fahrer_Mannschaftsraum', '6.Koffer', '7.Lichtmast', '8.Pumpenanlage', '9.Seilwinde&Generator', '10.Halterungen']
+2025-04-17 14:30:12,926 [DEBUG] core.config_processor - 跳过工作表: TD
+2025-04-17 14:30:12,926 [DEBUG] core.config_processor - 跳过工作表: 0.模板&Vorlage
+2025-04-17 14:30:12,926 [INFO] core.config_processor - 处理工作表: 1.Fahrgestell -> 模块: 1.Fahrgestell
+2025-04-17 14:30:12,942 [INFO] core.config_processor - 处理工作表: 2.Fahrzeug allgemein -> 模块: 2.Fahrzeug allgemein
+2025-04-17 14:30:12,960 [INFO] core.config_processor - 处理工作表: 3.Beschriftung&Kennzeichnung -> 模块: 3.Beschriftung&Kennzeichnung
+2025-04-17 14:30:12,977 [INFO] core.config_processor - 处理工作表: 4. Anbauten&Fahrgestellarbeiten -> 模块: 4.Anbauten&Fahrgestellarbeiten
+2025-04-17 14:30:12,992 [INFO] core.config_processor - 处理工作表: 5. Fahrer_Mannschaftsraum -> 模块: 5.Fahrer_Mannschaftsraum
+2025-04-17 14:30:13,012 [INFO] core.config_processor - 处理工作表: 6.Koffer -> 模块: 6.Koffer
+2025-04-17 14:30:13,027 [INFO] core.config_processor - 处理工作表: 7.Lichtmast -> 模块: 7.Lichtmast
+2025-04-17 14:30:13,042 [INFO] core.config_processor - 处理工作表: 8.Pumpenanlage -> 模块: 8.Pumpenanlage
+2025-04-17 14:30:13,060 [INFO] core.config_processor - 处理工作表: 9.Seilwinde&Generator -> 模块: 9.Seilwinde&Generator
+2025-04-17 14:30:13,075 [INFO] core.config_processor - 处理工作表: 10.Halterungen -> 模块: 10.Halterungen
+2025-04-17 14:30:17,057 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-17 14:30:17,062 [INFO] core.bom_processor - 找到工作表: ['MAX-gruppe', 'K码表', '配置', 'Sheet1']
+2025-04-17 14:30:17,073 [INFO] core.bom_processor - BOM文件导入成功
+2025-04-17 14:33:14,886 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I024
+2025-04-17 14:33:14,888 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K02_01_01 MLF
+2025-04-17 14:33:14,888 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K02_01_01
+2025-04-17 14:33:14,889 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K02_01_01
+2025-04-17 14:33:14,889 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-17 14:33:14,890 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-17 14:33:14,890 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-17 14:33:14,890 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K02_01_01
+2025-04-17 14:33:14,890 [DEBUG] gui.logic_panel - LogicPanel: 当前光标位置: 1.0
+2025-04-17 14:33:14,890 [DEBUG] gui.logic_panel - LogicPanel: 当前行内容: 
+2025-04-17 14:33:14,890 [INFO] gui.logic_panel - LogicPanel: 成功插入代码: K02_01_01
+2025-04-17 14:33:14,890 [DEBUG] gui.logic_panel - LogicPanel: 文本框获得焦点
+2025-04-17 14:33:14,890 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K02_01_01
+2025-04-17 14:33:22,592 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I002
+2025-04-17 14:33:22,593 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [2] 10019231 - Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+Z-Cab NG Alpas 3 RAL 3000
+Z-Cab NG Alpas 3 RAL 3000
+2025-04-17 14:33:22,594 [INFO] gui.bom_panel - BomPanel: 提取到Baugruppe码: 10019231
+2025-04-17 14:33:22,595 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-17 14:33:22,596 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-17 14:33:22,596 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-17 14:33:22,597 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: 10019231
+2025-04-17 14:33:22,598 [DEBUG] gui.logic_panel - LogicPanel: 当前光标位置: 1.10
+2025-04-17 14:33:22,598 [DEBUG] gui.logic_panel - LogicPanel: 当前行内容: K02_01_01(
+2025-04-17 14:33:22,599 [DEBUG] gui.logic_panel - LogicPanel: 添加前导空格
+2025-04-17 14:33:22,600 [INFO] gui.logic_panel - LogicPanel: 成功插入代码: 10019231
+2025-04-17 14:33:22,600 [DEBUG] gui.logic_panel - LogicPanel: 文本框获得焦点
+2025-04-17 14:33:22,601 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: 10019231
+2025-04-17 14:39:16,975 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I001
+2025-04-17 14:39:16,976 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [1] 0000000010017913NK - Modulkabine S301000 / S302000
+Modulkabine S301000 / S302000
+2025-04-17 14:39:16,976 [INFO] gui.bom_panel - BomPanel: 提取到Baugruppe码: 0000000010017913NK
+2025-04-17 14:39:16,977 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-17 14:39:16,977 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-17 14:39:16,978 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-17 14:39:16,978 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: 0000000010017913NK
+2025-04-17 14:39:16,978 [DEBUG] gui.logic_panel - LogicPanel: 当前光标位置: 1.12
+2025-04-17 14:39:16,979 [DEBUG] gui.logic_panel - LogicPanel: 当前行内容: K02_01_01( 10019231
+2025-04-17 14:39:16,979 [DEBUG] gui.logic_panel - LogicPanel: 添加前导空格
+2025-04-17 14:39:16,979 [INFO] gui.logic_panel - LogicPanel: 成功插入代码: 0000000010017913NK
+2025-04-17 14:39:16,980 [DEBUG] gui.logic_panel - LogicPanel: 添加后导空格
+2025-04-17 14:39:16,980 [DEBUG] gui.logic_panel - LogicPanel: 文本框获得焦点
+2025-04-17 14:39:16,980 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: 0000000010017913NK
