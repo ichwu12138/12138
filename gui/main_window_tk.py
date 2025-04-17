@@ -32,6 +32,9 @@ class MainWindow:
         """
         self.root = root
         
+        # 保存参数
+        self.root.main_window = self  # 在根窗口中保存MainWindow实例的引用
+        
         # 获取日志记录器
         self.logger = Logger.get_logger(__name__)
         
@@ -461,3 +464,11 @@ class MainWindow:
         """显示关于对话框"""
         # TODO: 实现关于对话框显示
         pass
+
+    def get_logic_panel(self):
+        """获取逻辑面板实例
+        
+        Returns:
+            LogicPanel: 逻辑面板实例
+        """
+        return self.logic_panel if hasattr(self, 'logic_panel') else None

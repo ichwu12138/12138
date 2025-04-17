@@ -139,6 +139,7 @@ class BomPanel(ttk.Frame):
         
         # 绑定事件
         self.tree.bind("<Double-1>", self._on_double_click)
+        self.tree.bind("<Button-1>", self._on_single_click)
         self.tree.bind("<Button-3>", self._on_right_click)
         
     def _refresh_tree(self):
@@ -261,17 +262,42 @@ class BomPanel(ttk.Frame):
             from utils.message_utils_tk import show_error
             show_error("bom_import_error", error=str(e))
             
+    def _on_single_click(self, event):
+        """单击事件处理"""
+        # 获取点击位置的项
+        item = self.tree.identify_row(event.y)
+        if item:
+            # 如果项是关闭的，则打开它
+            if not self.tree.item(item, "open"):
+                self.tree.item(item, open=True)
+            # 如果项是打开的，则关闭它
+            else:
+                self.tree.item(item, open=False)
+
     def _on_double_click(self, event):
         """双击事件处理"""
-        # 获取选中的项
-        item = self.tree.selection()[0]
-        
-        # 获取项的文本
-        text = self.tree.item(item, "text")
-        
-        # 复制项目文本
-        self._copy_item(text)
+        try:
+            # 获取选中的项
+            item = self.tree.selection()[0]
+            self.logger.debug(f"BomPanel: 双击选中项 ID: {item}")
             
+            # 获取项的文本
+            text = self.tree.item(item, "text")
+            self.logger.debug(f"BomPanel: 选中项文本: {text}")
+            
+            # 提取Baugruppe码（在方括号和空格之间的内容）
+            import re
+            match = re.search(r'\[(.*?)\]\s+(\S+)', text)
+            if match:
+                baugruppe = match.group(2)  # 获取第二个捕获组（Baugruppe码）
+                self.logger.info(f"BomPanel: 提取到Baugruppe码: {baugruppe}")
+                self.insert_code(baugruppe)
+            else:
+                self.logger.warning(f"BomPanel: 未能从文本中提取Baugruppe码: {text}")
+                
+        except Exception as e:
+            self.logger.error(f"BomPanel: 双击处理出错: {str(e)}", exc_info=True)
+
     def _copy_item(self, text: str):
         """复制项目文本到剪贴板
         
@@ -397,3 +423,33 @@ class BomPanel(ttk.Frame):
         
         # 强制更新显示
         self.update_idletasks() 
+
+    def insert_code(self, code: str):
+        """插入代码到逻辑编辑区
+        
+        Args:
+            code: 要插入的代码
+        """
+        try:
+            # 获取主窗口
+            root = self.winfo_toplevel()
+            self.logger.debug("BomPanel: 获取根窗口成功")
+            
+            # 获取MainWindow实例
+            if hasattr(root, 'main_window'):
+                main_window = root.main_window
+                self.logger.debug("BomPanel: 获取MainWindow实例成功")
+                
+                # 获取逻辑面板
+                logic_panel = main_window.get_logic_panel()
+                if logic_panel:
+                    self.logger.debug("BomPanel: 找到逻辑面板")
+                    logic_panel.insert_code(code)
+                    self.logger.info(f"BomPanel: 成功发送代码到逻辑面板: {code}")
+                else:
+                    self.logger.warning("BomPanel: 未找到逻辑面板")
+            else:
+                self.logger.warning("BomPanel: 未找到MainWindow实例")
+                
+        except Exception as e:
+            self.logger.error(f"BomPanel: 插入代码时出错: {str(e)}", exc_info=True) 

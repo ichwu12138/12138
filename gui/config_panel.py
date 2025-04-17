@@ -135,6 +135,7 @@ class ConfigPanel(ttk.Frame):
         
         # 绑定事件
         self.tree.bind("<Double-1>", self._on_double_click)
+        self.tree.bind("<Button-1>", self._on_single_click)
         self.tree.bind("<Button-3>", self._on_right_click)
         
     def _refresh_tree(self):
@@ -174,10 +175,10 @@ class ConfigPanel(ttk.Frame):
                             tags=("k_code",)
                         )
             
-            # 配置标签样式
+            # 配置标签样式 - 全部使用黑色
             self.tree.tag_configure("module", font=("Microsoft YaHei", 18, "bold"))
-            self.tree.tag_configure("f_code", foreground="blue")
-            self.tree.tag_configure("k_code", foreground="green")
+            self.tree.tag_configure("f_code", font=("Microsoft YaHei", 16))
+            self.tree.tag_configure("k_code", font=("Microsoft YaHei", 16))
                         
         except Exception as e:
             from utils.message_utils_tk import show_error
@@ -236,33 +237,72 @@ class ConfigPanel(ttk.Frame):
             from utils.message_utils_tk import show_error
             show_error("excel_import_error", error=str(e))
             
+    def _on_single_click(self, event):
+        """单击事件处理"""
+        # 获取点击位置的项
+        item = self.tree.identify_row(event.y)
+        if item:
+            # 如果项是关闭的，则打开它
+            if not self.tree.item(item, "open"):
+                self.tree.item(item, open=True)
+            # 如果项是打开的，则关闭它
+            else:
+                self.tree.item(item, open=False)
+            
     def _on_double_click(self, event):
         """双击事件处理"""
-        # 获取选中的项
-        item = self.tree.selection()[0]
-        
-        # 获取项的文本
-        text = self.tree.item(item, "text")
-        
-        # 提取F码或K码
-        code = text.split()[0]
-        
-        # 如果是F码或K码，发送到逻辑编辑区
-        if code.startswith("F") or code.startswith("K"):
-            self.insert_code(code)
+        try:
+            # 获取选中的项
+            item = self.tree.selection()[0]
+            self.logger.debug(f"ConfigPanel: 双击选中项 ID: {item}")
             
+            # 获取项的文本
+            text = self.tree.item(item, "text")
+            self.logger.debug(f"ConfigPanel: 选中项文本: {text}")
+            
+            # 提取K码
+            code = text.split()[0]
+            self.logger.debug(f"ConfigPanel: 提取的代码: {code}")
+            
+            # 如果是K码，发送到逻辑编辑区
+            if code.startswith("K"):
+                self.logger.info(f"ConfigPanel: 准备插入K码: {code}")
+                self.insert_code(code)
+            else:
+                self.logger.debug(f"ConfigPanel: 忽略非K码: {code}")
+                
+        except Exception as e:
+            self.logger.error(f"ConfigPanel: 双击处理出错: {str(e)}", exc_info=True)
+
     def insert_code(self, code: str):
         """插入代码到逻辑编辑区
         
         Args:
             code: 要插入的代码
         """
-        # 获取主窗口
-        main_window = self.winfo_toplevel()
-        
-        # 获取逻辑面板
-        if hasattr(main_window, 'logic_panel'):
-            main_window.logic_panel.insert_code(code)
+        try:
+            # 获取主窗口
+            root = self.winfo_toplevel()
+            self.logger.debug("ConfigPanel: 获取根窗口成功")
+            
+            # 获取MainWindow实例
+            if hasattr(root, 'main_window'):
+                main_window = root.main_window
+                self.logger.debug("ConfigPanel: 获取MainWindow实例成功")
+                
+                # 获取逻辑面板
+                logic_panel = main_window.get_logic_panel()
+                if logic_panel:
+                    self.logger.debug("ConfigPanel: 找到逻辑面板")
+                    logic_panel.insert_code(code)
+                    self.logger.info(f"ConfigPanel: 成功发送代码到逻辑面板: {code}")
+                else:
+                    self.logger.warning("ConfigPanel: 未找到逻辑面板")
+            else:
+                self.logger.warning("ConfigPanel: 未找到MainWindow实例")
+                
+        except Exception as e:
+            self.logger.error(f"ConfigPanel: 插入代码时出错: {str(e)}", exc_info=True)
             
     def refresh_texts(self):
         """刷新所有文本"""

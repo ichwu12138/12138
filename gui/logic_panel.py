@@ -261,7 +261,38 @@ class LogicPanel(ttk.Frame):
         Args:
             code: 要插入的代码
         """
-        self.expr_text.insert(tk.INSERT, code)
+        try:
+            self.logger.debug(f"LogicPanel: 开始插入代码: {code}")
+            
+            # 获取当前光标位置
+            current_pos = self.expr_text.index(tk.INSERT)
+            self.logger.debug(f"LogicPanel: 当前光标位置: {current_pos}")
+            
+            # 获取当前行的内容
+            current_line = self.expr_text.get(f"{current_pos.split('.')[0]}.0", f"{current_pos.split('.')[0]}.end")
+            self.logger.debug(f"LogicPanel: 当前行内容: {current_line}")
+            
+            # 确定是否需要添加前导空格
+            if current_line and not current_line.endswith(" "):
+                self.logger.debug("LogicPanel: 添加前导空格")
+                self.expr_text.insert(tk.INSERT, " ")
+                
+            # 插入代码
+            self.expr_text.insert(tk.INSERT, code)
+            self.logger.info(f"LogicPanel: 成功插入代码: {code}")
+            
+            # 确定是否需要添加后导空格
+            next_char = self.expr_text.get(tk.INSERT)
+            if next_char and not next_char.isspace():
+                self.logger.debug("LogicPanel: 添加后导空格")
+                self.expr_text.insert(tk.INSERT, " ")
+            
+            # 让文本框获得焦点
+            self.expr_text.focus_set()
+            self.logger.debug("LogicPanel: 文本框获得焦点")
+            
+        except Exception as e:
+            self.logger.error(f"LogicPanel: 插入代码时出错: {str(e)}", exc_info=True)
         
     def refresh_texts(self):
         """刷新所有文本"""
