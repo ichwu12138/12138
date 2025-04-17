@@ -31,91 +31,151 @@ class BomProcessor:
             # 清空现有数据
             self.clear()
             
-            # TODO: 根据具体的BOM文件格式实现导入逻辑
-            # 这里是示例代码，需要根据实际的BOM文件格式进行修改
+            # 读取Excel文件
             xl = pd.ExcelFile(file_path)
             self.logger.info(f"找到工作表: {xl.sheet_names}")
             
-            # 处理每个工作表
-            for sheet_name in xl.sheet_names:
-                try:
-                    self.logger.info(f"处理工作表: {sheet_name}")
-                    df = pd.read_excel(file_path, sheet_name=sheet_name)
-                    self._process_sheet(sheet_name, df)
-                    
-                except Exception as e:
-                    self.logger.error(f"处理工作表 {sheet_name} 时出错: {str(e)}", exc_info=True)
-                    continue
-                    
+            # 检查是否存在 MAX-gruppe 工作表
+            if "MAX-gruppe" not in xl.sheet_names:
+                raise ValueError("未找到 MAX-gruppe 工作表")
+            
+            # 读取 MAX-gruppe 工作表
+            df = pd.read_excel(file_path, sheet_name="MAX-gruppe")
+            
+            # 检查必需的列是否存在
+            required_columns = ["层级", "Baugruppe", "Beschreibung", "Langtext / long text"]
+            missing_columns = [col for col in required_columns if col not in df.columns]
+            if missing_columns:
+                raise ValueError(f"缺少必需的列: {', '.join(missing_columns)}")
+            
+            # 处理数据
+            self._process_max_gruppe(df)
+            
+            self.logger.info("BOM文件导入成功")
+            
         except Exception as e:
             self.logger.error(f"导入BOM文件失败: {str(e)}", exc_info=True)
             raise ImportError(f"导入BOM文件失败: {str(e)}")
-            
-    def _process_sheet(self, sheet_name: str, df: pd.DataFrame) -> None:
-        """处理单个工作表
+    
+    def _process_max_gruppe(self, df: pd.DataFrame) -> None:
+        """处理 MAX-gruppe 工作表数据
         
         Args:
-            sheet_name: 工作表名称
-            df: 数据帧
+            df: MAX-gruppe 工作表的数据帧
         """
         try:
-            # TODO: 根据具体的BOM文件格式实现处理逻辑
-            # 这里是示例代码，需要根据实际的BOM文件格式进行修改
+            # 按行处理数据
+            current_level_items = {}  # 记录每个层级的当前项
+            current_parent = None     # 当前父项
+            last_level = 1           # 上一个处理的层级
             
-            # 检查必需的列是否存在
-            required_columns = [
-                "项目ID",
-                "项目名称",
-                "子项ID",
-                "子项名称"
-            ]
+            # 先过滤掉层级为空的行
+            df = df.dropna(subset=["层级"])
             
-            # 确保所有必需的列都存在
-            missing_columns = [col for col in required_columns if col not in df.columns]
-            if missing_columns:
-                self.logger.warning(f"缺少列: {', '.join(missing_columns)}")
-                return
-                
-            # 处理每一行数据
             for _, row in df.iterrows():
                 try:
-                    item_id = str(row["项目ID"]).strip()
-                    item_name = str(row["项目名称"]).strip()
-                    sub_id = str(row["子项ID"]).strip()
-                    sub_name = str(row["子项名称"]).strip()
+                    # 获取行数据，将层级转换为整数
+                    try:
+                        level = int(float(row["层级"]))  # 处理可能的浮点数格式
+                    except (ValueError, TypeError):
+                        continue  # 跳过无效的层级值
+                        
+                    item_id = str(row["Baugruppe"]).strip()
+                    description = str(row["Beschreibung"]).strip()
+                    long_text = str(row["Langtext / long text"]).strip() if not pd.isna(row["Langtext / long text"]) else ""
                     
                     # 跳过空行
-                    if pd.isna(item_id) or pd.isna(item_name):
+                    if pd.isna(item_id):
                         continue
-                        
-                    # 创建或获取主项数据
-                    if item_id not in self.bom_data:
-                        self.bom_data[item_id] = {
-                            "name": item_name,
-                            "sub_items": {}
-                        }
-                        
-                    # 添加子项数据
-                    if not pd.isna(sub_id):
-                        if sub_id not in self.bom_data[item_id]["sub_items"]:
-                            self.bom_data[item_id]["sub_items"][sub_id] = {
-                                "name": sub_name,
-                                "attributes": {}
-                            }
-                            
-                        # 处理其他属性列
-                        for col in df.columns:
-                            if col not in required_columns and not pd.isna(row[col]):
-                                self.bom_data[item_id]["sub_items"][sub_id]["attributes"][col] = str(row[col])
-                                
+                    
+                    # 创建节点数据
+                    item_data = {
+                        "name": description,
+                        "level": level,
+                        "long_text": long_text,
+                        "sub_items": {}
+                    }
+                    
+                    # 处理层级关系
+                    if level == 1:
+                        # 一级节点直接添加到根
+                        self.bom_data[item_id] = item_data
+                        current_level_items = {1: item_id}  # 重置层级记录
+                        current_parent = item_id
+                        last_level = 1
+                    else:
+                        # 找到正确的父节点
+                        if level > last_level:
+                            # 层级增加，使用上一个处理的项作为父节点
+                            if current_parent:
+                                parent_data = self._find_item_by_id(current_parent)
+                                if parent_data:
+                                    parent_data["sub_items"][item_id] = item_data
+                        else:
+                            # 层级相同或减小，使用对应上级层级的项作为父节点
+                            parent_level = level - 1
+                            parent_id = current_level_items.get(parent_level)
+                            if parent_id:
+                                parent_data = self._find_item_by_id(parent_id)
+                                if parent_data:
+                                    parent_data["sub_items"][item_id] = item_data
+                    
+                    # 更新当前层级的项
+                    current_level_items[level] = item_id
+                    current_parent = item_id
+                    last_level = level
+                    
                 except Exception as e:
                     self.logger.error(f"处理行数据时出错: {str(e)}", exc_info=True)
                     continue
                     
         except Exception as e:
-            self.logger.error(f"处理工作表错误: {str(e)}", exc_info=True)
+            self.logger.error(f"处理 MAX-gruppe 工作表错误: {str(e)}", exc_info=True)
             raise
+    
+    def _find_item_by_id(self, item_id: str) -> Optional[Dict[str, Any]]:
+        """根据ID查找项目数据
+        
+        Args:
+            item_id: 项目ID
             
+        Returns:
+            Optional[Dict[str, Any]]: 项目数据，如果不存在则返回None
+        """
+        # 先在一级节点中查找
+        if item_id in self.bom_data:
+            return self.bom_data[item_id]
+        
+        # 递归查找子节点
+        for main_item in self.bom_data.values():
+            result = self._find_item_in_subitems(item_id, main_item["sub_items"])
+            if result:
+                return result
+        
+        return None
+    
+    def _find_item_in_subitems(self, item_id: str, sub_items: Dict[str, Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+        """在子项中递归查找项目数据
+        
+        Args:
+            item_id: 项目ID
+            sub_items: 子项字典
+            
+        Returns:
+            Optional[Dict[str, Any]]: 项目数据，如果不存在则返回None
+        """
+        # 直接在当前层级查找
+        if item_id in sub_items:
+            return sub_items[item_id]
+        
+        # 递归查找下一层级
+        for sub_item in sub_items.values():
+            result = self._find_item_in_subitems(item_id, sub_item["sub_items"])
+            if result:
+                return result
+        
+        return None
+    
     def get_bom_data(self) -> Dict[str, Dict[str, Any]]:
         """获取BOM数据
         
@@ -123,7 +183,7 @@ class BomProcessor:
             Dict[str, Dict[str, Any]]: BOM数据字典
         """
         return self.bom_data
-        
+    
     def get_item_data(self, item_id: str) -> Optional[Dict[str, Any]]:
         """获取指定项目的数据
         
@@ -133,8 +193,8 @@ class BomProcessor:
         Returns:
             Optional[Dict[str, Any]]: 项目数据，如果不存在则返回None
         """
-        return self.bom_data.get(item_id)
-        
+        return self._find_item_by_id(item_id)
+    
     def get_sub_items(self, item_id: str) -> Dict[str, Dict[str, Any]]:
         """获取指定项目的所有子项
         
@@ -144,9 +204,9 @@ class BomProcessor:
         Returns:
             Dict[str, Dict[str, Any]]: 子项字典，如果项目不存在则返回空字典
         """
-        item_data = self.bom_data.get(item_id)
+        item_data = self._find_item_by_id(item_id)
         return item_data.get("sub_items", {}) if item_data else {}
-        
+    
     def get_item_name(self, item_id: str) -> str:
         """获取项目名称
         
@@ -156,9 +216,9 @@ class BomProcessor:
         Returns:
             str: 项目名称，如果不存在则返回项目ID
         """
-        item_data = self.bom_data.get(item_id)
+        item_data = self._find_item_by_id(item_id)
         return item_data.get("name", item_id) if item_data else item_id
-        
+    
     def get_sub_item_name(self, item_id: str, sub_id: str) -> str:
         """获取子项名称
         

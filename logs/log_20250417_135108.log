@@ -1,0 +1,6 @@
+2025-04-17 13:51:08,305 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250417_135108.log
+2025-04-17 13:51:08,553 [INFO] __main__ - 正在启动程序...
+2025-04-17 13:51:08,553 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-17 13:51:08,553 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-17 13:51:08,553 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-17 13:51:08,574 [INFO] __main__ - 正在创建语言选择对话框...
