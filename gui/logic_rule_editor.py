@@ -1,7 +1,7 @@
 """
-编辑规则对话框模块 (Tkinter + ttkbootstrap版本)
+逻辑规则编辑器对话框模块
 
-该模块提供了编辑逻辑规则的对话框界面。
+该模块提供了编辑逻辑规则的对话框界面，支持新的逻辑关系格式。
 """
 import tkinter as tk
 from tkinter import messagebox
@@ -10,12 +10,20 @@ from ttkbootstrap.constants import *
 
 from models.logic_rule import RuleStatus, RuleType
 from utils.language_manager import language_manager
+from utils.logger import Logger
+from utils.validator import ExpressionValidator
 
-class EditRuleDialog(tk.Toplevel):
-    """编辑规则对话框"""
+class LogicRuleEditor(tk.Toplevel):
+    """逻辑规则编辑器对话框"""
     
     def __init__(self, parent, rule, logic_builder=None):
-        """初始化编辑规则对话框"""
+        """初始化逻辑规则编辑器对话框
+        
+        Args:
+            parent: 父窗口
+            rule: 要编辑的规则对象
+            logic_builder: 逻辑构建器实例
+        """
         super().__init__(parent)
         
         # 保存参数
@@ -24,13 +32,16 @@ class EditRuleDialog(tk.Toplevel):
         self.result = None
         self.modified = False
         
+        # 获取日志记录器
+        self.logger = Logger.get_logger(__name__)
+        
         # 设置对话框属性
         self.title(language_manager.get_text("edit_rule"))
-        self.minsize(800, 600)  # 增加最小窗口大小
+        self.minsize(800, 600)
         
         # 居中显示
         self.geometry("+%d+%d" % (
-            parent.winfo_screenwidth() // 2 - 400,  # 调整窗口位置
+            parent.winfo_screenwidth() // 2 - 400,
             parent.winfo_screenheight() // 2 - 300
         ))
         
@@ -43,12 +54,16 @@ class EditRuleDialog(tk.Toplevel):
         # 使对话框模态
         self.transient(parent)
         self.grab_set()
-    
+        
     def _create_custom_styles(self):
         """创建自定义样式"""
         style = ttk.Style()
         
         # 创建大字体标签框架样式
+        style.configure(
+            "Large.TLabelframe",
+            font=("Microsoft YaHei", 18)
+        )
         style.configure(
             "Large.TLabelframe.Label",
             font=("Microsoft YaHei", 18)
@@ -71,19 +86,19 @@ class EditRuleDialog(tk.Toplevel):
             "Large.success.TButton",
             font=("Microsoft YaHei", 18)
         )
-    
+        
     def _create_widgets(self):
         """创建对话框组件"""
         # 创建主布局框架
         main_frame = ttk.Frame(self, padding=10)
         main_frame.pack(fill=BOTH, expand=YES)
         
-        # 条件表达式
+        # 选择项表达式
         condition_frame = ttk.LabelFrame(
             main_frame, 
-            text=language_manager.get_text("condition"),
+            text=language_manager.get_text("edit_rule_condition"),
             padding=5,
-            style="Large.TLabelframe"  # 使用大字体样式
+            style="Large.TLabelframe"
         )
         condition_frame.pack(fill=BOTH, expand=YES, pady=5)
         
@@ -91,7 +106,7 @@ class EditRuleDialog(tk.Toplevel):
             condition_frame,
             height=6,
             wrap=tk.WORD,
-            font=("Microsoft YaHei", 18)  # 设置文本框字体
+            font=("Microsoft YaHei", 18)
         )
         self.condition_text.insert(tk.END, self.rule.condition)
         self.condition_text.pack(fill=BOTH, expand=YES)
@@ -105,12 +120,12 @@ class EditRuleDialog(tk.Toplevel):
         condition_scrollbar.pack(side=RIGHT, fill=Y)
         self.condition_text.config(yscrollcommand=condition_scrollbar.set)
         
-        # 影响表达式
+        # 影响项表达式
         effect_frame = ttk.LabelFrame(
             main_frame, 
-            text=language_manager.get_text("effect"),
+            text=language_manager.get_text("edit_rule_effect"),
             padding=5,
-            style="Large.TLabelframe"  # 使用大字体样式
+            style="Large.TLabelframe"
         )
         effect_frame.pack(fill=BOTH, expand=YES, pady=5)
         
@@ -118,12 +133,16 @@ class EditRuleDialog(tk.Toplevel):
             effect_frame,
             height=6,
             wrap=tk.WORD,
-            font=("Microsoft YaHei", 18)  # 设置文本框字体
+            font=("Microsoft YaHei", 18)
         )
+        
+        # 根据规则类型显示不同的内容
         if self.rule.rule_type == RuleType.DYNAMIC:
             self.effect_text.insert(tk.END, self.rule.action)
         else:
-            self.effect_text.insert(tk.END, self.rule.effect_expr)
+            # 对于静态规则，显示完整的影响表达式
+            self.effect_text.insert(tk.END, self.rule.action)
+            
         self.effect_text.pack(fill=BOTH, expand=YES)
         
         # 滚动条
@@ -138,9 +157,9 @@ class EditRuleDialog(tk.Toplevel):
         # 状态选择
         status_frame = ttk.LabelFrame(
             main_frame, 
-            text=language_manager.get_text("status"),
+            text=language_manager.get_text("edit_rule_status"),
             padding=5,
-            style="Large.TLabelframe"  # 使用大字体样式
+            style="Large.TLabelframe"
         )
         status_frame.pack(fill=X, pady=5)
         
@@ -158,26 +177,10 @@ class EditRuleDialog(tk.Toplevel):
                 text=language_manager.get_text(status.value),
                 variable=self.status_var,
                 value=status.value,
-                style="Large.TRadiobutton"  # 使用大字体样式
+                style="Large.TRadiobutton"
             )
             self.status_buttons[status.value] = radio
             radio.pack(side=LEFT, padx=10)
-        
-        # 标签
-        tags_frame = ttk.LabelFrame(
-            main_frame, 
-            text=language_manager.get_text("tags"),
-            padding=5,
-            style="Large.TLabelframe"  # 使用大字体样式
-        )
-        tags_frame.pack(fill=X, pady=5)
-        
-        self.tags_entry = ttk.Entry(
-            tags_frame,
-            font=("Microsoft YaHei", 18)  # 设置输入框字体
-        )
-        self.tags_entry.insert(0, ", ".join(self.rule.tags) if self.rule.tags else "")
-        self.tags_entry.pack(fill=X, padx=5, pady=5)
         
         # 按钮区
         btn_frame = ttk.Frame(main_frame)
@@ -188,7 +191,7 @@ class EditRuleDialog(tk.Toplevel):
             text=language_manager.get_text("cancel"),
             command=self.destroy,
             width=15,
-            style="Large.TButton"  # 使用大字体样式
+            style="Large.TButton"
         )
         self.cancel_btn.pack(side=RIGHT, padx=5)
         
@@ -197,10 +200,10 @@ class EditRuleDialog(tk.Toplevel):
             text=language_manager.get_text("confirm"),
             command=self._on_confirm,
             width=15,
-            style="Large.success.TButton"  # 使用大字体成功按钮样式
+            style="Large.success.TButton"
         )
         self.confirm_btn.pack(side=RIGHT, padx=5)
-    
+        
     def _on_confirm(self):
         """确认按钮点击事件"""
         try:
@@ -216,62 +219,36 @@ class EditRuleDialog(tk.Toplevel):
                     status = s
                     break
             
-            # 解析标签
-            tags = [t.strip() for t in self.tags_entry.get().split(",") if t.strip()]
-            
             # 验证输入
             if not condition:
                 raise ValueError(language_manager.get_text("condition_required"))
             if not effect:
                 raise ValueError(language_manager.get_text("effect_required"))
             
+            # 验证表达式
+            # 验证条件表达式
+            valid, message = ExpressionValidator.validate_static_expression(condition)
+            if not valid:
+                raise ValueError(f"{language_manager.get_text('condition_error')}: {message}")
+            
+            # 验证影响表达式
+            valid, message = ExpressionValidator.validate_static_expression(
+                effect,
+                is_relation_right_side=True
+            )
+            if not valid:
+                raise ValueError(f"{language_manager.get_text('effect_error')}: {message}")
+            
             # 更新规则
             self.rule.condition = condition
-            if self.rule.rule_type == RuleType.DYNAMIC:
-                self.rule.action = effect
-            else:
-                # 处理静态规则的影响表达式
-                has_relation_operator = False
-                if ":" in effect or "→" in effect:
-                    has_relation_operator = True
-                    parts = effect.split(":", 1) if ":" in effect else effect.split("→", 1)
-                    if len(parts) == 2:
-                        self.rule.relation = ":" if ":" in effect else "→"
-                        self.rule.action = parts[1].strip()
-                else:
-                    self.rule.action = effect
-                    # 如果没有关系操作符，但规则原来有关系，保留原来的关系
-                    if self.rule.relation in [":", "→"]:
-                        has_relation_operator = True
-                
-                # 如果是通过logic_builder更新，处理带有关系操作符的情况
-                if self.logic_builder:
-                    if has_relation_operator:
-                        # 使用logic_builder验证完整表达式
-                        full_expr = f"{condition} {self.rule.relation} {self.rule.action}"
-                        valid, message = self.logic_builder._validate_static_expression(full_expr)
-                        if not valid:
-                            raise ValueError(f"{language_manager.get_text('expression_error')}: {message}")
-                        
-                        # 单独验证右侧表达式
-                        valid, message = self.logic_builder._validate_static_expression(self.rule.action, is_relation_right_side=True)
-                        if not valid:
-                            raise ValueError(f"{language_manager.get_text('expression_error')}(右侧): {message}")
-                    else:
-                        # 对于没有关系操作符的静态表达式，验证整个字符串而不是验证为列表
-                        valid, message = self.logic_builder._validate_static_expression(condition)
-                        if not valid:
-                            raise ValueError(f"{language_manager.get_text('expression_error')}: {message}")
-            
+            self.rule.action = effect
             self.rule.status = status
-            self.rule.tags = tags
             
             # 保存结果
             self.result = {
                 "condition": condition,
                 "effect": effect,
-                "status": status,
-                "tags": tags
+                "status": status
             }
             
             # 标记为已修改
@@ -281,6 +258,7 @@ class EditRuleDialog(tk.Toplevel):
             self.destroy()
             
         except Exception as e:
+            self.logger.error(f"保存规则时出错: {str(e)}", exc_info=True)
             messagebox.showerror(
                 language_manager.get_text("error"),
                 str(e)

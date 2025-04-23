@@ -8,12 +8,14 @@ from tkinter import ttk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from tkinter import filedialog, messagebox
-from typing import List, Tuple
+from typing import List, Tuple, Set
 
 from utils.language_manager import language_manager
 from utils.logger import Logger
 from core.logic_builder import LogicBuilder
 from utils.validator import ExpressionValidator
+from models.logic_rule import RuleStatus, RuleType, LogicRule
+from gui.logic_rule_editor import LogicRuleEditor
 
 class LogicPanel(ttk.Frame):
     """逻辑编辑面板类"""
@@ -43,6 +45,10 @@ class LogicPanel(ttk.Frame):
         
         # 创建错误文本变量
         self.error_text = tk.StringVar()
+        
+        # 初始化规则计数器和已使用的ID集合
+        self.rule_counter = 1
+        self.used_rule_ids: Set[int] = set()
         
         # 注册语言变化的回调函数
         language_manager.add_callback(self.refresh_texts)
@@ -276,7 +282,7 @@ class LogicPanel(ttk.Frame):
         )
         self.saved_rules_frame.pack(fill=BOTH, expand=YES)
         
-        # 创建树状视图
+        # 创建树形视图
         self._create_tree(self.saved_rules_frame)
         
         # 禁用文本框的鼠标点击
@@ -288,25 +294,230 @@ class LogicPanel(ttk.Frame):
         self.expr_text.bind("<Key>", lambda e: "break")
         
     def _create_tree(self, parent):
-        """创建树状视图"""
-        # 创建树状视图
-        self.rules_tree = ttk.Treeview(
-            parent,
-            selectmode="browse",
-            style="Main.Treeview",
-            columns=("status",),
-            show="tree headings"
-        )
-        self.rules_tree.pack(side=LEFT, fill=BOTH, expand=YES)
+        """创建规则树形视图"""
+        # 创建树形视图框架
+        tree_frame = ttk.Frame(parent)
+        tree_frame.pack(fill=BOTH, expand=YES, padx=5, pady=5)
         
-        # 添加滚动条
-        vsb = ttk.Scrollbar(
-            parent,
-            orient="vertical",
-            command=self.rules_tree.yview
+        # 创建树形视图
+        self.tree = ttk.Treeview(
+            tree_frame,
+            columns=("rule_id", "condition", "effect", "status"),
+            show="headings",
+            selectmode="browse",
+            style="Large.Treeview"
         )
-        vsb.pack(side=RIGHT, fill=Y)
-        self.rules_tree.configure(yscrollcommand=vsb.set)
+        
+        # 设置列标题
+        self.tree.heading("rule_id", text=language_manager.get_text("rule_id"), anchor=CENTER)
+        self.tree.heading("condition", text=language_manager.get_text("condition"), anchor=CENTER)
+        self.tree.heading("effect", text=language_manager.get_text("effect"), anchor=CENTER)
+        self.tree.heading("status", text=language_manager.get_text("status"), anchor=CENTER)
+        
+        # 设置列宽度和对齐方式
+        self.tree.column("rule_id", width=100, anchor=CENTER)
+        self.tree.column("condition", width=300, anchor=CENTER)
+        self.tree.column("effect", width=300, anchor=CENTER)
+        self.tree.column("status", width=100, anchor=CENTER)
+        
+        # 配置大字体样式
+        style = ttk.Style()
+        style.configure(
+            "Large.Treeview",
+            font=("Microsoft YaHei", 18),
+            rowheight=36  # 调整行高以适应更大的字体
+        )
+        style.configure(
+            "Large.Treeview.Heading",
+            font=("Microsoft YaHei", 18, "bold"),
+            rowheight=36
+        )
+        
+        # 创建右键菜单
+        self.rule_menu = tk.Menu(self, tearoff=0, font=("Microsoft YaHei", 18))
+        self.rule_menu.add_command(
+            label=language_manager.get_text("edit"),
+            command=lambda: self._edit_rule(None)
+        )
+        
+        # 添加状态子菜单
+        self.status_menu = tk.Menu(self.rule_menu, tearoff=0, font=("Microsoft YaHei", 18))
+        self._update_status_menu()  # 创建状态菜单项
+        
+        self.rule_menu.add_cascade(
+            label=language_manager.get_text("status"),
+            menu=self.status_menu
+        )
+        
+        # 添加删除选项
+        self.rule_menu.add_separator()
+        self.rule_menu.add_command(
+            label=language_manager.get_text("delete"),
+            command=self._delete_rule
+        )
+        
+        # 创建滚动条
+        scrollbar = ttk.Scrollbar(tree_frame, orient=VERTICAL, command=self.tree.yview)
+        self.tree.configure(yscrollcommand=scrollbar.set)
+        
+        # 打包组件
+        self.tree.pack(side=LEFT, fill=BOTH, expand=YES)
+        scrollbar.pack(side=RIGHT, fill=Y)
+        
+        # 绑定右键菜单
+        self.tree.bind("<Button-3>", self._show_rule_menu)
+        
+        # 绑定双击事件
+        self.tree.bind("<Double-1>", self._edit_rule)
+
+    def _update_status_menu(self):
+        """更新状态菜单项"""
+        # 清空现有菜单项
+        self.status_menu.delete(0, tk.END)
+        
+        # 重新添加菜单项
+        for status in RuleStatus:
+            self.status_menu.add_command(
+                label=language_manager.get_text(status.value),
+                command=lambda s=status: self._change_rule_status(s)
+            )
+
+    def _change_rule_status(self, new_status: RuleStatus):
+        """更改规则状态"""
+        # 获取选中的项目
+        selection = self.tree.selection()
+        if not selection:
+            return
+            
+        item = selection[0]
+        values = self.tree.item(item)["values"]
+        if not values:
+            return
+            
+        # 更新规则状态
+        rule_id = values[0]
+        condition = values[1]
+        effect = values[2]
+        
+        # 更新树形视图显示
+        self.tree.item(
+            item,
+            values=(
+                rule_id,
+                condition,
+                effect,
+                language_manager.get_text(new_status.value)
+            )
+        )
+        
+        # 更新逻辑构建器中的规则
+        rule = self.logic_builder.get_rule_by_id(rule_id)
+        if rule:
+            rule.status = new_status
+            self.logic_builder._save_rules()  # 保存更改
+
+    def _edit_rule(self, event):
+        """编辑规则"""
+        # 获取选中的项目
+        selection = self.tree.selection()
+        if not selection:
+            return
+            
+        item = selection[0]
+        values = self.tree.item(item)["values"]
+        if not values:
+            return
+            
+        # 解析当前值
+        rule_id = values[0]
+        condition = values[1]
+        effect = values[2]
+        status_text = values[3]
+        
+        # 从effect中提取实际的表达式（去掉箭头前缀）
+        if effect.startswith("→ "):
+            effect = effect[2:].strip()
+        
+        # 获取当前状态枚举值
+        current_status = None
+        for status in RuleStatus:
+            if language_manager.get_text(status.value) == status_text:
+                current_status = status
+                break
+        
+        # 创建规则对象
+        rule = LogicRule(
+            rule_id=rule_id,
+            rule_type=RuleType.STATIC,
+            condition=condition,
+            action=effect,
+            relation="→",
+            status=current_status or RuleStatus.ENABLED
+        )
+        
+        # 创建编辑对话框
+        dialog = LogicRuleEditor(self, rule, self.logic_builder)
+        result = dialog.show()
+        
+        if result:
+            # 更新树形视图中的显示
+            effect_text = f"→ {result['effect']}"
+            self.tree.item(
+                item,
+                values=(
+                    rule_id,
+                    result["condition"],
+                    effect_text,
+                    language_manager.get_text(result["status"].value)
+                )
+            )
+            
+            # 更新逻辑构建器中的规则
+            rule = self.logic_builder.get_rule_by_id(rule_id)
+            if rule:
+                rule.condition = result["condition"]
+                rule.action = result["effect"]
+                rule.status = result["status"]
+                self.logic_builder._save_rules()  # 保存更改
+
+    def _show_rule_menu(self, event):
+        """显示规则右键菜单"""
+        # 获取点击位置的项目
+        item = self.tree.identify_row(event.y)
+        if item:
+            # 选中被点击的项目
+            self.tree.selection_set(item)
+            # 显示菜单
+            self.rule_menu.post(event.x_root, event.y_root)
+            
+    def _delete_rule(self):
+        """删除规则"""
+        # 获取选中的项目
+        selection = self.tree.selection()
+        if not selection:
+            return
+            
+        item = selection[0]
+        
+        # 确认删除
+        if not messagebox.askyesno(
+            language_manager.get_text("confirm"),
+            language_manager.get_text("confirm_delete_rule")
+        ):
+            return
+            
+        # 获取规则ID编号
+        values = self.tree.item(item)["values"]
+        if values:
+            rule_id_str = values[0]  # 格式为"BLxx"
+            try:
+                rule_number = int(rule_id_str[2:])  # 提取数字部分
+                self.used_rule_ids.remove(rule_number)  # 从已使用集合中移除
+            except (ValueError, IndexError):
+                self.logger.error(f"无法解析规则ID: {rule_id_str}")
+        
+        # 从树形视图中删除
+        self.tree.delete(item)
         
     def _log_input(self, input_type: str, content: str):
         """记录输入历史
@@ -418,8 +629,67 @@ class LogicPanel(ttk.Frame):
         
     def _save_rule(self):
         """保存规则"""
-        # TODO: 实现规则保存逻辑
-        pass
+        try:
+            # 获取当前表达式
+            expr = self.expr_text.get("1.0", "end-1c").strip()
+            if not expr:
+                messagebox.showerror(
+                    language_manager.get_text("error"),
+                    language_manager.get_text("error_empty_expression")
+                )
+                return
+                
+            # 验证表达式
+            if "→" not in expr:
+                messagebox.showerror(
+                    language_manager.get_text("error"),
+                    language_manager.get_text("error_missing_implication")
+                )
+                return
+                
+            # 分割表达式
+            parts = expr.split("→")
+            if len(parts) != 2:
+                messagebox.showerror(
+                    language_manager.get_text("error"),
+                    language_manager.get_text("error_invalid_expression_format")
+                )
+                return
+                
+            condition = parts[0].strip()
+            effect = parts[1].strip()
+            
+            # 获取下一个可用的规则ID
+            rule_number = self._get_next_rule_id()
+            rule_id = f"BL{rule_number:02d}"
+            self.used_rule_ids.add(rule_number)
+            
+            # 获取当前状态
+            status = self.status_var.get()
+            status_text = language_manager.get_text(status)
+            
+            # 添加到树状视图
+            self.tree.insert(
+                "",
+                "end",
+                values=(rule_id, condition, f"→ {effect}", status_text)
+            )
+            
+            # 清空表达式
+            self.expr_text.delete("1.0", "end")
+            
+            # 显示成功消息
+            messagebox.showinfo(
+                language_manager.get_text("success"),
+                language_manager.get_text("rule_saved_successfully")
+            )
+            
+        except Exception as e:
+            self.logger.error(f"保存规则时出错: {str(e)}", exc_info=True)
+            messagebox.showerror(
+                language_manager.get_text("error"),
+                language_manager.get_text("error_saving_rule")
+            )
         
     def _update_expression_state(self, text: str = None):
         """更新表达式状态
@@ -455,9 +725,23 @@ class LogicPanel(ttk.Frame):
             if not current_tokens:
                 if next_token not in ["(", "NOT"] and not self.validator.is_k_code(next_token):
                     return False, "error_invalid_first_input"
+                if next_token == "→":  # 不能以蕴含符号开始
+                    return False, "error_implication_at_start"
                 return True, ""
                 
             last_token = current_tokens[-1]
+            
+            # 检查蕴含符号的使用
+            if next_token == "→":
+                # 检查是否已经存在蕴含符号
+                if "→" in current_tokens:
+                    return False, "error_multiple_implications"
+                # 检查前面的token是否合法
+                if last_token in ["AND", "OR", "NOT", "(", "→"]:
+                    return False, "error_invalid_before_implication"
+                # 检查前面是否只有K码
+                if any(self.validator.is_bom_code(token) for token in current_tokens):
+                    return False, "error_bom_before_implication"
             
             # 检查NOT的使用
             if next_token == "NOT":
@@ -529,11 +813,6 @@ class LogicPanel(ttk.Frame):
                     return False, "error_k_after_implication"
                 if last_token not in ["(", "AND", "OR", "NOT"]:
                     return False, "error_invalid_before_k"
-                
-            # 检查蕴含符号规则
-            if next_token == "→":
-                if last_token in ["AND", "OR", "NOT", "(", "→"]:
-                    return False, "error_invalid_before_implication"
                 
             return True, ""
             
@@ -619,5 +898,32 @@ class LogicPanel(ttk.Frame):
         # 更新按钮文本
         self.save_btn.configure(text=language_manager.get_text("save_rule"))
         
-        # 强制更新显示
-        self.update_idletasks() 
+        # 更新右键菜单文本
+        self.rule_menu.entryconfigure(0, label=language_manager.get_text("edit"))
+        self.rule_menu.entryconfigure(1, label=language_manager.get_text("status"))
+        self.rule_menu.entryconfigure(3, label=language_manager.get_text("delete"))
+        
+        # 更新状态子菜单
+        self._update_status_menu()
+        
+        # 更新所有规则的状态显示
+        for item in self.tree.get_children():
+            values = list(self.tree.item(item)["values"])
+            if values and len(values) > 3:
+                # 查找对应的状态并更新显示文本
+                for status in RuleStatus:
+                    if status.value == values[3]:
+                        values[3] = language_manager.get_text(status.value)
+                        self.tree.item(item, values=values)
+                        break
+        
+        # 调用父类的刷新方法
+        super().refresh_texts()
+        
+    def _get_next_rule_id(self) -> int:
+        """获取下一个可用的规则ID编号"""
+        # 从1开始查找第一个未使用的ID
+        rule_id = 1
+        while rule_id in self.used_rule_ids:
+            rule_id += 1
+        return rule_id 

@@ -275,3 +275,130 @@ class ExpressionValidator:
             return False, "invalid_token_after_bom_code"
             
         return False, "invalid_expression_state"
+    
+    @staticmethod
+    def validate_static_expression(expr: str, config_processor=None, is_relation_right_side: bool = False) -> Tuple[bool, str]:
+        """验证静态表达式
+        
+        Args:
+            expr: 要验证的表达式
+            config_processor: 配置处理器实例
+            is_relation_right_side: 是否是关系操作符右侧的表达式
+            
+        Returns:
+            Tuple[bool, str]: (是否有效, 错误消息)
+        """
+        if not expr:
+            return False, "表达式不能为空"
+            
+        # 分割表达式为token
+        tokens = expr.split()
+        
+        # 检查括号匹配
+        if tokens.count("(") != tokens.count(")"):
+            return False, "括号不匹配"
+            
+        # 检查操作符
+        operators = ["AND", "OR", "NOT"]
+        last_token = None
+        
+        for token in tokens:
+            # 检查是否是有效的K码或BOM码
+            if token not in operators and token not in ["(", ")"]:
+                if is_relation_right_side:
+                    # 在关系操作符右侧，允许BOM码
+                    if not (token.startswith("K") or token.startswith("PL-") or token.startswith("F")):
+                        return False, f"无效的代码: {token}"
+                else:
+                    # 在关系操作符左侧，只允许K码
+                    if not token.startswith("K"):
+                        return False, f"只能使用K码: {token}"
+                        
+                # 如果有配置处理器，验证代码是否存在
+                if config_processor:
+                    if token.startswith("K"):
+                        if not config_processor.is_valid_k_code(token):
+                            return False, f"未知的K码: {token}"
+                    elif token.startswith("F"):
+                        if not config_processor.is_valid_f_code(token):
+                            return False, f"未知的F码: {token}"
+            
+            # 检查操作符序列
+            if token in operators:
+                if last_token in operators:
+                    return False, "操作符不能连续使用"
+                if token == "NOT" and last_token == ")":
+                    return False, "NOT不能跟在右括号后面"
+            
+            last_token = token
+            
+        # 检查表达式是否以操作符结尾
+        if last_token in operators:
+            return False, "表达式不能以操作符结尾"
+            
+        return True, ""
+        
+    @staticmethod
+    def validate_dynamic_expression(expr: str, config_processor=None) -> Tuple[bool, str]:
+        """验证动态表达式
+        
+        Args:
+            expr: 要验证的表达式
+            config_processor: 配置处理器实例
+            
+        Returns:
+            Tuple[bool, str]: (是否有效, 错误消息)
+        """
+        if not expr:
+            return False, "表达式不能为空"
+            
+        # 分割表达式为token
+        tokens = expr.split()
+        
+        # 检查第一个token是否是有效的动态命令
+        valid_commands = ["before", "after", "info"]
+        if not tokens or tokens[0].lower() not in valid_commands:
+            return False, "必须以有效的命令开始 (before/after/info)"
+            
+        # 根据命令类型进行不同的验证
+        command = tokens[0].lower()
+        
+        if command == "info":
+            # info命令需要引号文本
+            text = " ".join(tokens[1:])
+            if not (text.startswith('"') and text.endswith('"')):
+                return False, "info命令需要引号包裹的文本"
+        else:
+            # before/after命令需要choose关键字
+            if len(tokens) < 2 or tokens[1].lower() != "choose":
+                return False, f"{command}命令必须跟choose"
+                
+        return True, ""
+        
+    @staticmethod
+    def validate_list_content(content: str, allow_bom: bool = False) -> Tuple[bool, str]:
+        """验证列表内容
+        
+        Args:
+            content: 要验证的内容
+            allow_bom: 是否允许BOM码
+            
+        Returns:
+            Tuple[bool, str]: (是否有效, 错误消息)
+        """
+        if not content:
+            return False, "内容不能为空"
+            
+        # 分割内容为token
+        tokens = content.split()
+        
+        for token in tokens:
+            # 检查是否是有效的代码
+            if allow_bom:
+                if not (token.startswith("K") or token.startswith("PL-") or token.startswith("F")):
+                    return False, f"无效的代码: {token}"
+            else:
+                if not token.startswith("K"):
+                    return False, f"只能使用K码: {token}"
+                    
+        return True, ""

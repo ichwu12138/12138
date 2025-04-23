@@ -61,8 +61,8 @@ class LanguageManager:
             "rules": "规则",
             "rule_id": "规则ID",
             "rule_type": "规则类型",
-            "condition": "条件",
-            "action": "动作",
+            "condition": "选择项表达式",
+            "effect": "影响项表达式",
             "status": "状态",
             "light_theme": "浅色主题",
             "dark_theme": "深色主题",
@@ -155,7 +155,17 @@ class LanguageManager:
             "error_invalid_before_right_parenthesis": "右括号前面必须是K码、BOM码或右括号",
             "error_invalid_before_operator": "操作符前面必须是K码、BOM码或右括号",
             "error_invalid_before_implication": "蕴含符号(→)前面必须是K码或右括号",
-            "error_invalid_before_not": "NOT前面不能是变量或右括号"
+            "error_invalid_before_not": "NOT前面不能是变量或右括号",
+            "error_implication_at_start": "表达式不能以蕴含符号(→)开始",
+            "error_empty_expression": "表达式不能为空",
+            "error_missing_implication": "表达式必须包含蕴含符号(→)",
+            "error_invalid_expression_format": "表达式格式无效",
+            "error_saving_rule": "保存规则时出错",
+            "rule_saved_successfully": "规则保存成功",
+            "edit_rule": "编辑逻辑规则",
+            "edit_rule_condition": "选择项表达式",
+            "edit_rule_effect": "影响项表达式",
+            "edit_rule_status": "规则状态"
         })
         
         # 英文翻译
@@ -199,8 +209,8 @@ class LanguageManager:
             "rules": "Rules",
             "rule_id": "Rule ID",
             "rule_type": "Rule Type",
-            "condition": "Condition",
-            "action": "Action",
+            "condition": "Selection Expression",
+            "effect": "Impact Expression",
             "status": "Status",
             "light_theme": "Light Theme",
             "dark_theme": "Dark Theme",
@@ -293,7 +303,17 @@ class LanguageManager:
             "error_invalid_before_right_parenthesis": "Right parenthesis must be preceded by K code, BOM code, or right parenthesis",
             "error_invalid_before_operator": "Operator must be preceded by K code, BOM code, or right parenthesis",
             "error_invalid_before_implication": "Implication operator (→) must be preceded by K code or right parenthesis",
-            "error_invalid_before_not": "NOT cannot be preceded by a variable or right parenthesis"
+            "error_invalid_before_not": "NOT cannot be preceded by a variable or right parenthesis",
+            "error_implication_at_start": "Expression cannot start with implication operator (→)",
+            "error_empty_expression": "Expression cannot be empty",
+            "error_missing_implication": "Expression must contain implication operator (→)",
+            "error_invalid_expression_format": "Invalid expression format",
+            "error_saving_rule": "Error saving rule",
+            "rule_saved_successfully": "Rule saved successfully",
+            "edit_rule": "Edit Logic Rule",
+            "edit_rule_condition": "Selection Expression",
+            "edit_rule_effect": "Impact Expression",
+            "edit_rule_status": "Rule Status"
         })
         
         # 德文翻译
@@ -337,8 +357,8 @@ class LanguageManager:
             "rules": "Regeln",
             "rule_id": "Regel-ID",
             "rule_type": "Regel-Typ",
-            "condition": "Bedingung",
-            "action": "Aktion",
+            "condition": "Auswahlausdruck",
+            "effect": "Wirkungsausdruck",
             "status": "Status",
             "light_theme": "Helles Thema",
             "dark_theme": "Dunkles Thema",
@@ -431,7 +451,17 @@ class LanguageManager:
             "error_invalid_before_right_parenthesis": "Vor einer rechten Klammer muss ein K-Code, BOM-Code oder eine rechte Klammer stehen",
             "error_invalid_before_operator": "Vor einem Operator muss ein K-Code, BOM-Code oder eine rechte Klammer stehen",
             "error_invalid_before_implication": "Vor dem Implikationsoperator (→) muss ein K-Code oder eine rechte Klammer stehen",
-            "error_invalid_before_not": "Vor NOT darf keine Variable oder rechte Klammer stehen"
+            "error_invalid_before_not": "Vor NOT darf keine Variable oder rechte Klammer stehen",
+            "error_implication_at_start": "Der Ausdruck darf nicht mit dem Implikationsoperator (→) beginnen",
+            "error_empty_expression": "Ausdruck darf nicht leer sein",
+            "error_missing_implication": "Ausdruck muss Implikationsoperator (→) enthalten",
+            "error_invalid_expression_format": "Ungültiges Ausdrucksformat",
+            "error_saving_rule": "Fehler beim Speichern der Regel",
+            "rule_saved_successfully": "Regel erfolgreich gespeichert",
+            "edit_rule": "Logikregel bearbeiten",
+            "edit_rule_condition": "Auswahlausdruck",
+            "edit_rule_effect": "Wirkungsausdruck",
+            "edit_rule_status": "Regelstatus"
         })
         
     def add_callback(self, callback):
