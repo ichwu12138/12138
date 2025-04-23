@@ -1,79 +1,55 @@
 {
   "rules": [
     {
-      "logic_id": "LD01",
-      "tags": "底盘，上装",
-      "tech_doc_path": "c:\\Users\\mengy\\Desktop\\ZK_LogicBuilder\\tech_docs\\rule_LD01\\1.docx",
+      "logic_id": "BL01",
+      "tags": "",
+      "tech_doc_path": "",
       "comment": {
         "text": "",
         "images": {}
       },
-      "selection_expression": "if K07_03_03 AND F99 == K07_03_03",
-      "logic_relation": "",
-      "impact_expression": "display [ K07_03_05, K07_03_03, K07_02_04, K07_02_03 ]"
-    },
-    {
-      "logic_id": "LS01",
-      "tags": "底盘",
-      "tech_doc_path": "c:\\Users\\mengy\\Desktop\\ZK_LogicBuilder\\tech_docs\\rule_LS01\\2.docx",
-      "comment": {
-        "text": "",
-        "images": {}
-      },
-      "selection_expression": "K05_04_03 AND K05_04_05",
+      "selection_expression": "K03_02_01",
       "logic_relation": "→",
-      "impact_expression": "K05_04_02 AND K05_05_03"
+      "impact_expression": "PL-GrundKabine-10019234"
     },
     {
-      "logic_id": "LD02",
-      "tags": "上装",
-      "tech_doc_path": "c:\\Users\\mengy\\Desktop\\ZK_LogicBuilder\\tech_docs\\rule_LD02\\2.docx",
-      "comment": {
-        "text": "",
-        "images": {}
-      },
-      "selection_expression": "if K04_03_03 AND K04_03_03",
-      "logic_relation": "",
-      "impact_expression": "disable [ K04_03_04, K04_03_02, K04_03_01 ]"
-    },
-    {
-      "logic_id": "LD03",
+      "logic_id": "BL02",
       "tags": "",
       "tech_doc_path": "",
       "comment": {
         "text": "",
         "images": {}
       },
-      "selection_expression": "if K05_04_03 AND K05_04_01",
-      "logic_relation": "",
-      "impact_expression": "display [ K05_04_02 ]"
-    },
-    {
-      "logic_id": "LD04",
-      "tags": "",
-      "tech_doc_path": "",
-      "comment": {
-        "text": "",
-        "images": {}
-      },
-      "selection_expression": "if K04_04_02 AND K04_04_03",
-      "logic_relation": "",
-      "impact_expression": "display [ K04_05_01, K04_04_02 ]"
-    },
-    {
-      "logic_id": "LS02",
-      "tags": "",
-      "tech_doc_path": "",
-      "comment": {
-        "text": "",
-        "images": {}
-      },
-      "selection_expression": "K08_03_02",
+      "selection_expression": "K03_03_02  AND K03_03_03",
       "logic_relation": "→",
-      "impact_expression": "K08_03_01"
+      "impact_expression": "PL-GrundKabine-10019235  AND PL-GrundKabine-10019239"
+    },
+    {
+      "logic_id": "LS03",
+      "tags": "",
+      "tech_doc_path": "",
+      "comment": {
+        "text": "",
+        "images": {}
+      },
+      "selection_expression": "K04_02_02",
+      "logic_relation": "→",
+      "impact_expression": "PL-GrundKabine-10019235"
+    },
+    {
+      "logic_id": "LS04",
+      "tags": "",
+      "tech_doc_path": "",
+      "comment": {
+        "text": "",
+        "images": {}
+      },
+      "selection_expression": "K03_02_01",
+      "logic_relation": "→",
+      "impact_expression": "PL-GrundKabine-10019235"
     }
   ],
-  "saved_at": "2025-04-15T22:42:02.111928",
+  "saved_at": "2025-04-23T14:10:51.408065",
   "exported": false,
-  "timestamp": "20250415_224202"
+  "timestamp": "20250423_141051"
 }

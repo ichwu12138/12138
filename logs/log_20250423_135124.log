@@ -1,0 +1,189 @@
+2025-04-23 13:51:24,736 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250423_135124.log
+2025-04-23 13:51:24,980 [INFO] __main__ - 正在启动程序...
+2025-04-23 13:51:24,980 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-23 13:51:24,980 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-23 13:51:24,980 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-23 13:51:25,001 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-23 13:51:26,381 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-23 13:51:26,399 [INFO] __main__ - 语言选择结果: zh
+2025-04-23 13:51:26,400 [INFO] __main__ - 正在创建主题选择对话框...
+2025-04-23 13:51:26,400 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-04-23 13:51:26,404 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-04-23 13:51:27,244 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-04-23 13:51:27,261 [INFO] __main__ - 主题选择结果: light
+2025-04-23 13:51:27,272 [INFO] __main__ - 正在配置主窗口...
+2025-04-23 13:51:27,397 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-23 13:51:27,398 [INFO] core.logic_builder - 已加载 6 条规则
+2025-04-23 13:51:27,451 [INFO] __main__ - MainWindow实例创建完成
+2025-04-23 13:51:27,735 [INFO] __main__ - 开始mainloop()...
+2025-04-23 13:51:29,669 [INFO] core.config_processor - 找到工作表: ['TD', '0.模板&Vorlage', '1.Fahrgestell', '2.Fahrzeug allgemein', '3.Beschriftung&Kennzeichnung', '4. Anbauten&Fahrgestellarbeiten', '5. Fahrer_Mannschaftsraum', '6.Koffer', '7.Lichtmast', '8.Pumpenanlage', '9.Seilwinde&Generator', '10.Halterungen']
+2025-04-23 13:51:29,669 [DEBUG] core.config_processor - 跳过工作表: TD
+2025-04-23 13:51:29,669 [DEBUG] core.config_processor - 跳过工作表: 0.模板&Vorlage
+2025-04-23 13:51:29,669 [INFO] core.config_processor - 处理工作表: 1.Fahrgestell -> 模块: 1.Fahrgestell
+2025-04-23 13:51:29,686 [INFO] core.config_processor - 处理工作表: 2.Fahrzeug allgemein -> 模块: 2.Fahrzeug allgemein
+2025-04-23 13:51:29,703 [INFO] core.config_processor - 处理工作表: 3.Beschriftung&Kennzeichnung -> 模块: 3.Beschriftung&Kennzeichnung
+2025-04-23 13:51:29,719 [INFO] core.config_processor - 处理工作表: 4. Anbauten&Fahrgestellarbeiten -> 模块: 4.Anbauten&Fahrgestellarbeiten
+2025-04-23 13:51:29,735 [INFO] core.config_processor - 处理工作表: 5. Fahrer_Mannschaftsraum -> 模块: 5.Fahrer_Mannschaftsraum
+2025-04-23 13:51:29,758 [INFO] core.config_processor - 处理工作表: 6.Koffer -> 模块: 6.Koffer
+2025-04-23 13:51:29,772 [INFO] core.config_processor - 处理工作表: 7.Lichtmast -> 模块: 7.Lichtmast
+2025-04-23 13:51:29,789 [INFO] core.config_processor - 处理工作表: 8.Pumpenanlage -> 模块: 8.Pumpenanlage
+2025-04-23 13:51:29,804 [INFO] core.config_processor - 处理工作表: 9.Seilwinde&Generator -> 模块: 9.Seilwinde&Generator
+2025-04-23 13:51:29,819 [INFO] core.config_processor - 处理工作表: 10.Halterungen -> 模块: 10.Halterungen
+2025-04-23 13:51:29,835 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-23 13:51:29,837 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-23 13:51:29,838 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-23 13:51:31,158 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-23 13:51:31,163 [INFO] core.bom_processor - 找到工作表: ['MAX-gruppe', 'K码表', '配置', 'Sheet1']
+2025-04-23 13:51:31,176 [INFO] core.bom_processor - BOM文件导入成功
+2025-04-23 13:51:31,176 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-23 13:51:31,178 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-23 13:51:31,179 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-23 13:51:32,625 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I079
+2025-04-23 13:51:32,626 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: F23 Lackierung Kotflügel HA
+2025-04-23 13:51:32,626 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: F23
+2025-04-23 13:51:32,627 [DEBUG] gui.config_panel - ConfigPanel: 忽略非K码: F23
+2025-04-23 13:51:33,711 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I07B
+2025-04-23 13:51:33,712 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K03_03_02 RAL 3020 verkehrsrot
+2025-04-23 13:51:33,712 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K03_03_02
+2025-04-23 13:51:33,712 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K03_03_02
+2025-04-23 13:51:33,712 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-23 13:51:33,712 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-23 13:51:33,712 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-23 13:51:33,713 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K03_03_02
+2025-04-23 13:51:33,713 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K03_03_02, 当前表达式: K03_03_02 
+2025-04-23 13:51:33,713 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K03_03_02
+2025-04-23 13:51:34,664 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K03_03_02  → 
+2025-04-23 13:51:36,176 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I004
+2025-04-23 13:51:36,177 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [2] PL-GrundKabine 10019233 - Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+(Z-Cab NG Alpas 3 RAL 9010
+Z-Cab NG Alpas 3 RAL 9010)
+2025-04-23 13:51:36,178 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-GrundKabine, Baugruppe: 10019233
+2025-04-23 13:51:36,179 [INFO] gui.bom_panel - BomPanel: 准备插入BOM码: PL-GrundKabine-10019233
+2025-04-23 13:51:36,179 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-23 13:51:36,180 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-23 13:51:36,181 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-23 13:51:36,181 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-GrundKabine-10019233
+2025-04-23 13:51:36,182 [DEBUG] gui.logic_panel - 验证BOM码: PL-GrundKabine-10019233
+2025-04-23 13:51:36,183 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-GrundKabine-10019233, 当前表达式: K03_03_02  → PL-GrundKabine-10019233 
+2025-04-23 13:51:36,184 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-GrundKabine-10019233
+2025-04-23 13:51:39,623 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I083
+2025-04-23 13:51:39,625 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K03_05_02 Beigestellte Klebewappen anbringen
+2025-04-23 13:51:39,626 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K03_05_02
+2025-04-23 13:51:39,626 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K03_05_02
+2025-04-23 13:51:39,627 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-23 13:51:39,628 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-23 13:51:39,629 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-23 13:51:39,630 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K03_05_02
+2025-04-23 13:51:39,631 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K03_05_02, 当前表达式: K03_05_02 
+2025-04-23 13:51:39,632 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K03_05_02
+2025-04-23 13:51:40,775 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K03_05_02  → 
+2025-04-23 13:51:42,997 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I00A
+2025-04-23 13:51:42,998 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [2] PL-GrundKabine 10019239 - Modulkabine Standard MB
+Modul cabin standard MB
+(Z-Cab NG Alpas 3 RAL 3000
+Z-Cab NG Alpas 3 RAL 3000)
+2025-04-23 13:51:42,999 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-GrundKabine, Baugruppe: 10019239
+2025-04-23 13:51:43,000 [INFO] gui.bom_panel - BomPanel: 准备插入BOM码: PL-GrundKabine-10019239
+2025-04-23 13:51:43,001 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-23 13:51:43,002 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-23 13:51:43,003 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-23 13:51:43,003 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-GrundKabine-10019239
+2025-04-23 13:51:43,004 [DEBUG] gui.logic_panel - 验证BOM码: PL-GrundKabine-10019239
+2025-04-23 13:51:43,005 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-GrundKabine-10019239, 当前表达式: K03_05_02  → PL-GrundKabine-10019239 
+2025-04-23 13:51:43,006 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-GrundKabine-10019239
+2025-04-23 13:52:07,646 [CRITICAL] __main__ - 未捕获的异常: 'LogicBuilder' object has no attribute 'remove_rule_observer'
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_library_window.py", line 72, in destroy
+    self.logic_builder.remove_rule_observer(self._on_rule_change)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'LogicBuilder' object has no attribute 'remove_rule_observer'. Did you mean: 'remove_observer'?
+2025-04-23 13:52:07,650 [CRITICAL] __main__ - 详细错误栈:
+['Traceback (most recent call last):\n', '  File "D:\\Python\\Lib\\tkinter\\__init__.py", line 2068, in __call__\n    return self.func(*args)\n           ~~~~~~~~~^^^^^^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\logic_library_window.py", line 72, in destroy\n    self.logic_builder.remove_rule_observer(self._on_rule_change)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', "AttributeError: 'LogicBuilder' object has no attribute 'remove_rule_observer'. Did you mean: 'remove_observer'?\n"]
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_library_window.py", line 72, in destroy
+    self.logic_builder.remove_rule_observer(self._on_rule_change)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'LogicBuilder' object has no attribute 'remove_rule_observer'. Did you mean: 'remove_observer'?
+2025-04-23 13:52:10,690 [CRITICAL] __main__ - 未捕获的异常: 'LogicBuilder' object has no attribute 'remove_rule_observer'
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_library_window.py", line 72, in destroy
+    self.logic_builder.remove_rule_observer(self._on_rule_change)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'LogicBuilder' object has no attribute 'remove_rule_observer'. Did you mean: 'remove_observer'?
+2025-04-23 13:52:10,694 [CRITICAL] __main__ - 详细错误栈:
+['Traceback (most recent call last):\n', '  File "D:\\Python\\Lib\\tkinter\\__init__.py", line 2068, in __call__\n    return self.func(*args)\n           ~~~~~~~~~^^^^^^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\logic_library_window.py", line 72, in destroy\n    self.logic_builder.remove_rule_observer(self._on_rule_change)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', "AttributeError: 'LogicBuilder' object has no attribute 'remove_rule_observer'. Did you mean: 'remove_observer'?\n"]
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_library_window.py", line 72, in destroy
+    self.logic_builder.remove_rule_observer(self._on_rule_change)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'LogicBuilder' object has no attribute 'remove_rule_observer'. Did you mean: 'remove_observer'?
+2025-04-23 13:52:11,449 [CRITICAL] __main__ - 未捕获的异常: 'LogicBuilder' object has no attribute 'remove_rule_observer'
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_library_window.py", line 72, in destroy
+    self.logic_builder.remove_rule_observer(self._on_rule_change)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'LogicBuilder' object has no attribute 'remove_rule_observer'. Did you mean: 'remove_observer'?
+2025-04-23 13:52:11,452 [CRITICAL] __main__ - 详细错误栈:
+['Traceback (most recent call last):\n', '  File "D:\\Python\\Lib\\tkinter\\__init__.py", line 2068, in __call__\n    return self.func(*args)\n           ~~~~~~~~~^^^^^^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\logic_library_window.py", line 72, in destroy\n    self.logic_builder.remove_rule_observer(self._on_rule_change)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', "AttributeError: 'LogicBuilder' object has no attribute 'remove_rule_observer'. Did you mean: 'remove_observer'?\n"]
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_library_window.py", line 72, in destroy
+    self.logic_builder.remove_rule_observer(self._on_rule_change)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'LogicBuilder' object has no attribute 'remove_rule_observer'. Did you mean: 'remove_observer'?
+2025-04-23 13:52:13,525 [CRITICAL] __main__ - 未捕获的异常: 'LogicBuilder' object has no attribute 'remove_rule_observer'
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_library_window.py", line 72, in destroy
+    self.logic_builder.remove_rule_observer(self._on_rule_change)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'LogicBuilder' object has no attribute 'remove_rule_observer'. Did you mean: 'remove_observer'?
+2025-04-23 13:52:13,529 [CRITICAL] __main__ - 详细错误栈:
+['Traceback (most recent call last):\n', '  File "D:\\Python\\Lib\\tkinter\\__init__.py", line 2068, in __call__\n    return self.func(*args)\n           ~~~~~~~~~^^^^^^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\logic_library_window.py", line 72, in destroy\n    self.logic_builder.remove_rule_observer(self._on_rule_change)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', "AttributeError: 'LogicBuilder' object has no attribute 'remove_rule_observer'. Did you mean: 'remove_observer'?\n"]
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_library_window.py", line 72, in destroy
+    self.logic_builder.remove_rule_observer(self._on_rule_change)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'LogicBuilder' object has no attribute 'remove_rule_observer'. Did you mean: 'remove_observer'?
+2025-04-23 13:52:30,827 [CRITICAL] __main__ - 未捕获的异常: 'LogicBuilder' object has no attribute 'remove_rule_observer'
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_library_window.py", line 72, in destroy
+    self.logic_builder.remove_rule_observer(self._on_rule_change)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'LogicBuilder' object has no attribute 'remove_rule_observer'. Did you mean: 'remove_observer'?
+2025-04-23 13:52:30,829 [CRITICAL] __main__ - 详细错误栈:
+['Traceback (most recent call last):\n', '  File "D:\\Python\\Lib\\tkinter\\__init__.py", line 2068, in __call__\n    return self.func(*args)\n           ~~~~~~~~~^^^^^^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\logic_library_window.py", line 72, in destroy\n    self.logic_builder.remove_rule_observer(self._on_rule_change)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', "AttributeError: 'LogicBuilder' object has no attribute 'remove_rule_observer'. Did you mean: 'remove_observer'?\n"]
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_library_window.py", line 72, in destroy
+    self.logic_builder.remove_rule_observer(self._on_rule_change)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'LogicBuilder' object has no attribute 'remove_rule_observer'. Did you mean: 'remove_observer'?

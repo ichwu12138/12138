@@ -1,0 +1,165 @@
+2025-04-23 13:47:53,849 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250423_134753.log
+2025-04-23 13:47:54,074 [INFO] __main__ - 正在启动程序...
+2025-04-23 13:47:54,075 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-23 13:47:54,075 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-23 13:47:54,075 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-23 13:47:54,095 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-23 13:47:56,345 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-23 13:47:56,365 [INFO] __main__ - 语言选择结果: zh
+2025-04-23 13:47:56,366 [INFO] __main__ - 正在创建主题选择对话框...
+2025-04-23 13:47:56,366 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-04-23 13:47:56,377 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-04-23 13:47:57,557 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-04-23 13:47:57,582 [INFO] __main__ - 主题选择结果: light
+2025-04-23 13:47:57,595 [INFO] __main__ - 正在配置主窗口...
+2025-04-23 13:47:57,754 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-23 13:47:57,755 [INFO] core.logic_builder - 已加载 6 条规则
+2025-04-23 13:47:57,836 [INFO] __main__ - MainWindow实例创建完成
+2025-04-23 13:47:58,151 [INFO] __main__ - 开始mainloop()...
+2025-04-23 13:47:59,865 [INFO] core.config_processor - 找到工作表: ['TD', '0.模板&Vorlage', '1.Fahrgestell', '2.Fahrzeug allgemein', '3.Beschriftung&Kennzeichnung', '4. Anbauten&Fahrgestellarbeiten', '5. Fahrer_Mannschaftsraum', '6.Koffer', '7.Lichtmast', '8.Pumpenanlage', '9.Seilwinde&Generator', '10.Halterungen']
+2025-04-23 13:47:59,866 [DEBUG] core.config_processor - 跳过工作表: TD
+2025-04-23 13:47:59,866 [DEBUG] core.config_processor - 跳过工作表: 0.模板&Vorlage
+2025-04-23 13:47:59,866 [INFO] core.config_processor - 处理工作表: 1.Fahrgestell -> 模块: 1.Fahrgestell
+2025-04-23 13:47:59,883 [INFO] core.config_processor - 处理工作表: 2.Fahrzeug allgemein -> 模块: 2.Fahrzeug allgemein
+2025-04-23 13:47:59,900 [INFO] core.config_processor - 处理工作表: 3.Beschriftung&Kennzeichnung -> 模块: 3.Beschriftung&Kennzeichnung
+2025-04-23 13:47:59,916 [INFO] core.config_processor - 处理工作表: 4. Anbauten&Fahrgestellarbeiten -> 模块: 4.Anbauten&Fahrgestellarbeiten
+2025-04-23 13:47:59,931 [INFO] core.config_processor - 处理工作表: 5. Fahrer_Mannschaftsraum -> 模块: 5.Fahrer_Mannschaftsraum
+2025-04-23 13:47:59,952 [INFO] core.config_processor - 处理工作表: 6.Koffer -> 模块: 6.Koffer
+2025-04-23 13:47:59,968 [INFO] core.config_processor - 处理工作表: 7.Lichtmast -> 模块: 7.Lichtmast
+2025-04-23 13:47:59,983 [INFO] core.config_processor - 处理工作表: 8.Pumpenanlage -> 模块: 8.Pumpenanlage
+2025-04-23 13:47:59,998 [INFO] core.config_processor - 处理工作表: 9.Seilwinde&Generator -> 模块: 9.Seilwinde&Generator
+2025-04-23 13:48:00,013 [INFO] core.config_processor - 处理工作表: 10.Halterungen -> 模块: 10.Halterungen
+2025-04-23 13:48:00,029 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-23 13:48:00,032 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-23 13:48:00,032 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-23 13:48:01,416 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-23 13:48:01,421 [INFO] core.bom_processor - 找到工作表: ['MAX-gruppe', 'K码表', '配置', 'Sheet1']
+2025-04-23 13:48:01,432 [INFO] core.bom_processor - BOM文件导入成功
+2025-04-23 13:48:01,432 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-23 13:48:01,434 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-23 13:48:01,434 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-23 13:48:04,262 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I0BA
+2025-04-23 13:48:04,263 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K04_02_02 600 l
+2025-04-23 13:48:04,264 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K04_02_02
+2025-04-23 13:48:04,264 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K04_02_02
+2025-04-23 13:48:04,265 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-23 13:48:04,266 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-23 13:48:04,267 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-23 13:48:04,267 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K04_02_02
+2025-04-23 13:48:04,268 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K04_02_02, 当前表达式: K04_02_02 
+2025-04-23 13:48:04,269 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K04_02_02
+2025-04-23 13:48:06,219 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K04_02_02  → 
+2025-04-23 13:48:07,218 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I005
+2025-04-23 13:48:07,219 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [2] PL-GrundKabine 10019234 - Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+(Z-Cab NG Alpas 3 RAL XXXX
+Z-Cab NG Alpas 3 RAL XXXX)
+2025-04-23 13:48:07,220 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-GrundKabine, Baugruppe: 10019234
+2025-04-23 13:48:07,221 [INFO] gui.bom_panel - BomPanel: 准备插入BOM码: PL-GrundKabine-10019234
+2025-04-23 13:48:07,221 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-23 13:48:07,222 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-23 13:48:07,222 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-23 13:48:07,223 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-GrundKabine-10019234
+2025-04-23 13:48:07,223 [DEBUG] gui.logic_panel - 验证BOM码: PL-GrundKabine-10019234
+2025-04-23 13:48:07,224 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-GrundKabine-10019234, 当前表达式: K04_02_02  → PL-GrundKabine-10019234 
+2025-04-23 13:48:07,224 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-GrundKabine-10019234
+2025-04-23 13:48:11,482 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I0BD
+2025-04-23 13:48:11,483 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K04_02_05 1200 l
+2025-04-23 13:48:11,483 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K04_02_05
+2025-04-23 13:48:11,484 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K04_02_05
+2025-04-23 13:48:11,484 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-23 13:48:11,485 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-23 13:48:11,486 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-23 13:48:11,486 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K04_02_05
+2025-04-23 13:48:11,487 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K04_02_05, 当前表达式: K04_02_05 
+2025-04-23 13:48:11,487 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K04_02_05
+2025-04-23 13:48:12,548 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: AND, 当前表达式: K04_02_05  AND 
+2025-04-23 13:48:13,114 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I0BC
+2025-04-23 13:48:13,115 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K04_02_04 1000 l
+2025-04-23 13:48:13,116 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K04_02_04
+2025-04-23 13:48:13,117 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K04_02_04
+2025-04-23 13:48:13,118 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-23 13:48:13,119 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-23 13:48:13,119 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-23 13:48:13,120 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K04_02_04
+2025-04-23 13:48:13,121 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K04_02_04, 当前表达式: K04_02_05  AND K04_02_04 
+2025-04-23 13:48:13,121 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K04_02_04
+2025-04-23 13:48:13,985 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K04_02_05  AND K04_02_04  → 
+2025-04-23 13:48:14,684 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I00B
+2025-04-23 13:48:14,685 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [2] PL-GrundKabine 10019240 - Modulkabine Standard MB
+Modul cabin standard MB
+(Z-Cab NG Alpas 3 RAL 3020
+Z-Cab NG Alpas 3 RAL 3020)
+2025-04-23 13:48:14,685 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-GrundKabine, Baugruppe: 10019240
+2025-04-23 13:48:14,686 [INFO] gui.bom_panel - BomPanel: 准备插入BOM码: PL-GrundKabine-10019240
+2025-04-23 13:48:14,686 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-23 13:48:14,686 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-23 13:48:14,686 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-23 13:48:14,687 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-GrundKabine-10019240
+2025-04-23 13:48:14,687 [DEBUG] gui.logic_panel - 验证BOM码: PL-GrundKabine-10019240
+2025-04-23 13:48:14,687 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-GrundKabine-10019240, 当前表达式: K04_02_05  AND K04_02_04  → PL-GrundKabine-10019240 
+2025-04-23 13:48:14,688 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-GrundKabine-10019240
+2025-04-23 13:49:47,783 [INFO] gui.language_dialog_tk - 已选择语言: de
+2025-04-23 13:49:47,828 [CRITICAL] __main__ - 未捕获的异常: 'super' object has no attribute 'refresh_texts'
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 342, in _show_language_dialog
+    self.refresh_all_texts()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 432, in refresh_all_texts
+    self.logic_panel.refresh_texts()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_panel.py", line 921, in refresh_texts
+    super().refresh_texts()
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'super' object has no attribute 'refresh_texts'
+2025-04-23 13:49:47,832 [CRITICAL] __main__ - 详细错误栈:
+['Traceback (most recent call last):\n', '  File "D:\\Python\\Lib\\tkinter\\__init__.py", line 2068, in __call__\n    return self.func(*args)\n           ~~~~~~~~~^^^^^^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\main_window_tk.py", line 342, in _show_language_dialog\n    self.refresh_all_texts()\n    ~~~~~~~~~~~~~~~~~~~~~~^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\main_window_tk.py", line 432, in refresh_all_texts\n    self.logic_panel.refresh_texts()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\logic_panel.py", line 921, in refresh_texts\n    super().refresh_texts()\n    ^^^^^^^^^^^^^^^^^^^^^\n', "AttributeError: 'super' object has no attribute 'refresh_texts'\n"]
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 342, in _show_language_dialog
+    self.refresh_all_texts()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 432, in refresh_all_texts
+    self.logic_panel.refresh_texts()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_panel.py", line 921, in refresh_texts
+    super().refresh_texts()
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'super' object has no attribute 'refresh_texts'
+2025-04-23 13:49:57,199 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-23 13:49:57,245 [CRITICAL] __main__ - 未捕获的异常: 'super' object has no attribute 'refresh_texts'
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 342, in _show_language_dialog
+    self.refresh_all_texts()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 432, in refresh_all_texts
+    self.logic_panel.refresh_texts()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_panel.py", line 921, in refresh_texts
+    super().refresh_texts()
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'super' object has no attribute 'refresh_texts'
+2025-04-23 13:49:57,247 [CRITICAL] __main__ - 详细错误栈:
+['Traceback (most recent call last):\n', '  File "D:\\Python\\Lib\\tkinter\\__init__.py", line 2068, in __call__\n    return self.func(*args)\n           ~~~~~~~~~^^^^^^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\main_window_tk.py", line 342, in _show_language_dialog\n    self.refresh_all_texts()\n    ~~~~~~~~~~~~~~~~~~~~~~^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\main_window_tk.py", line 432, in refresh_all_texts\n    self.logic_panel.refresh_texts()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\logic_panel.py", line 921, in refresh_texts\n    super().refresh_texts()\n    ^^^^^^^^^^^^^^^^^^^^^\n', "AttributeError: 'super' object has no attribute 'refresh_texts'\n"]
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 342, in _show_language_dialog
+    self.refresh_all_texts()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 432, in refresh_all_texts
+    self.logic_panel.refresh_texts()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_panel.py", line 921, in refresh_texts
+    super().refresh_texts()
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'super' object has no attribute 'refresh_texts'

@@ -226,15 +226,20 @@ class LogicRuleEditor(tk.Toplevel):
                 raise ValueError(language_manager.get_text("effect_required"))
             
             # 验证表达式
-            # 验证条件表达式
-            valid, message = ExpressionValidator.validate_static_expression(condition)
+            # 验证选择项表达式
+            valid, message = ExpressionValidator.validate_logic_expression(
+                condition,
+                self.logic_builder.config_processor if self.logic_builder else None,
+                is_effect_side=False
+            )
             if not valid:
                 raise ValueError(f"{language_manager.get_text('condition_error')}: {message}")
             
-            # 验证影响表达式
-            valid, message = ExpressionValidator.validate_static_expression(
+            # 验证影响项表达式
+            valid, message = ExpressionValidator.validate_logic_expression(
                 effect,
-                is_relation_right_side=True
+                self.logic_builder.config_processor if self.logic_builder else None,
+                is_effect_side=True
             )
             if not valid:
                 raise ValueError(f"{language_manager.get_text('effect_error')}: {message}")

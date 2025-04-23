@@ -63,3 +63,28 @@ Z-Cab NG Alpas 3 RAL XXXX)
 2025-04-23 13:36:34,961 [DEBUG] gui.logic_panel - 验证BOM码: PL-GrundKabine-10019234
 2025-04-23 13:36:34,962 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-GrundKabine-10019234, 当前表达式: K04_02_03  → PL-GrundKabine-10019234 
 2025-04-23 13:36:34,963 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-GrundKabine-10019234
+2025-04-23 13:39:19,315 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I0BE
+2025-04-23 13:39:19,316 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K04_02_06 2000 l
+2025-04-23 13:39:19,317 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K04_02_06
+2025-04-23 13:39:19,317 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K04_02_06
+2025-04-23 13:39:19,317 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-23 13:39:19,317 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-23 13:39:19,318 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-23 13:39:19,318 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K04_02_06
+2025-04-23 13:39:19,319 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K04_02_06, 当前表达式: K04_02_06 
+2025-04-23 13:39:19,319 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K04_02_06
+2025-04-23 13:39:20,405 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K04_02_06  → 
+2025-04-23 13:39:21,366 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I00B
+2025-04-23 13:39:21,367 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [2] PL-GrundKabine 10019240 - Modulkabine Standard MB
+Modul cabin standard MB
+(Z-Cab NG Alpas 3 RAL 3020
+Z-Cab NG Alpas 3 RAL 3020)
+2025-04-23 13:39:21,368 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-GrundKabine, Baugruppe: 10019240
+2025-04-23 13:39:21,369 [INFO] gui.bom_panel - BomPanel: 准备插入BOM码: PL-GrundKabine-10019240
+2025-04-23 13:39:21,370 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-23 13:39:21,370 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-23 13:39:21,371 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-23 13:39:21,372 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-GrundKabine-10019240
+2025-04-23 13:39:21,373 [DEBUG] gui.logic_panel - 验证BOM码: PL-GrundKabine-10019240
+2025-04-23 13:39:21,374 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-GrundKabine-10019240, 当前表达式: K04_02_06  → PL-GrundKabine-10019240 
+2025-04-23 13:39:21,374 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-GrundKabine-10019240

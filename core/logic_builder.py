@@ -560,7 +560,7 @@ class LogicBuilder(Observable):
                 'rules': [rule.to_dict() for rule in self.rules.values()],
                 'saved_at': datetime.now().isoformat(),
                 'exported': self.rules_exported,
-                'timestamp': timestamp  # 在数据中添加时间戳
+                'timestamp': timestamp
             }
             
             # 保存新的规则数据
@@ -569,7 +569,7 @@ class LogicBuilder(Observable):
                 f.flush()
                 os.fsync(f.fileno())  # 确保数据写入磁盘
                 
-            self.logger.info("规则数据保存成功")
+            self.logger.info(f"规则数据已保存到文件: {RULES_DATA_FILE}")
             
             # 通知观察者
             self.notify_observers()
@@ -649,13 +649,30 @@ class LogicBuilder(Observable):
             self._rule_deleted_observers.append(observer)
     
     def add_rule_observer(self, observer):
-        """添加规则观察者"""
-        self._rule_observers.append(observer)
-    
+        """添加规则观察者
+        
+        Args:
+            observer: 观察者回调函数，接收 change_type, rule_id, rule 参数
+        """
+        if observer not in self._rule_observers:
+            self._rule_observers.append(observer)
+            
+    def remove_rule_observer(self, observer):
+        """移除规则观察者
+        
+        Args:
+            observer: 要移除的观察者回调函数
+        """
+        if observer in self._rule_observers:
+            self._rule_observers.remove(observer)
+            
     def notify_rule_change(self, change_type, rule_id=None, rule=None):
         """通知所有观察者规则变更"""
         for observer in self._rule_observers:
-            observer(change_type, rule_id, rule)
+            try:
+                observer(change_type, rule_id, rule)
+            except Exception as e:
+                self.logger.error(f"通知规则观察者时出错: {str(e)}", exc_info=True)
     
     def save_to_temp_file(self, file_path=None) -> str:
         """将规则保存到临时文件

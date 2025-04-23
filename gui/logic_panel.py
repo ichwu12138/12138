@@ -310,9 +310,9 @@ class LogicPanel(ttk.Frame):
         
         # 设置列标题
         self.tree.heading("rule_id", text=language_manager.get_text("rule_id"), anchor=CENTER)
-        self.tree.heading("condition", text=language_manager.get_text("condition"), anchor=CENTER)
-        self.tree.heading("effect", text=language_manager.get_text("effect"), anchor=CENTER)
-        self.tree.heading("status", text=language_manager.get_text("status"), anchor=CENTER)
+        self.tree.heading("condition", text=language_manager.get_text("edit_rule_condition"), anchor=CENTER)
+        self.tree.heading("effect", text=language_manager.get_text("edit_rule_effect"), anchor=CENTER)
+        self.tree.heading("status", text=language_manager.get_text("edit_rule_status"), anchor=CENTER)
         
         # 设置列宽度和对齐方式
         self.tree.column("rule_id", width=100, anchor=CENTER)
@@ -668,12 +668,32 @@ class LogicPanel(ttk.Frame):
             status = self.status_var.get()
             status_text = language_manager.get_text(status)
             
+            # 创建新规则
+            rule = LogicRule(
+                rule_id=rule_id,
+                rule_type=RuleType.STATIC,
+                condition=condition,
+                action=effect,
+                relation="→",
+                status=RuleStatus(status)
+            )
+            
+            # 添加到逻辑构建器
+            self.logic_builder.add_rule(rule)
+            
             # 添加到树状视图
             self.tree.insert(
                 "",
                 "end",
+                iid=rule_id,
                 values=(rule_id, condition, f"→ {effect}", status_text)
             )
+            
+            # 保存到临时文件
+            self.logic_builder.save_to_temp_file()
+            
+            # 记录日志
+            self.logger.info(f"已保存新的BOM逻辑关系规则: ID={rule_id}, 选择项={condition}, 影响项={effect}, 状态={status}")
             
             # 清空表达式
             self.expr_text.delete("1.0", "end")
