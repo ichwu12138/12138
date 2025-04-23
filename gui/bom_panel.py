@@ -9,6 +9,7 @@ import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from tkinter import filedialog, messagebox
 import os
+import re
 
 from utils.language_manager import language_manager
 from utils.logger import Logger
@@ -330,28 +331,27 @@ class BomPanel(ttk.Frame):
             text = self.tree.item(item, "text")
             self.logger.debug(f"BomPanel: 选中项文本: {text}")
             
-            # 提取占位符和Baugruppe码
-            import re
-            # 匹配模式：[层级] 占位符 Baugruppe码
-            match = re.search(r'\[.*?\]\s+(\S+)\s+(\S+)', text)
+            # 提取Baugruppe码 - 格式为 "[层级] 占位符 Baugruppe - 描述"
+            match = re.match(r'\[\d+\]\s+(?:(\S+)\s+)?(\S+)', text)
             if match:
-                placeholder = match.group(1)  # 获取占位符
-                baugruppe = match.group(2)    # 获取Baugruppe码
-                self.logger.info(f"BomPanel: 提取到占位符: {placeholder}, Baugruppe码: {baugruppe}")
+                placeholder = match.group(1) if match.group(1) else ""
+                baugruppe = match.group(2)
+                self.logger.debug(f"BomPanel: 提取到占位符: {placeholder}, Baugruppe: {baugruppe}")
                 
-                # 组合成"占位符-Baugruppe码"格式
-                code = f"{placeholder}-{baugruppe}"
-                self.logger.info(f"BomPanel: 生成的代码: {code}")
-                self.insert_code(code)
-            else:
-                # 尝试直接匹配Baugruppe码（可能没有占位符的情况）
-                match = re.search(r'\[.*?\]\s+(\S+)', text)
-                if match:
-                    baugruppe = match.group(1)
-                    self.logger.info(f"BomPanel: 提取到Baugruppe码: {baugruppe}")
-                    self.insert_code(baugruppe)
+                # 获取对应的数据
+                item_data = self.bom_processor.get_item_data(baugruppe)
+                if item_data:
+                    # 使用保存的BOM码
+                    bom_code = item_data.get("bom_code")
+                    if bom_code:
+                        self.logger.info(f"BomPanel: 准备插入BOM码: {bom_code}")
+                        self.insert_code(bom_code)
+                    else:
+                        self.logger.warning(f"BomPanel: 未找到BOM码: {text}")
                 else:
-                    self.logger.warning(f"BomPanel: 未能从文本中提取代码: {text}")
+                    self.logger.warning(f"BomPanel: 未找到项目数据: {text}")
+            else:
+                self.logger.warning(f"BomPanel: 无法解析文本: {text}")
                 
         except Exception as e:
             self.logger.error(f"BomPanel: 双击处理出错: {str(e)}", exc_info=True)

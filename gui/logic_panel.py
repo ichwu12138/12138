@@ -459,6 +459,26 @@ class LogicPanel(ttk.Frame):
                 
             last_token = current_tokens[-1]
             
+            # 检查NOT的使用
+            if next_token == "NOT":
+                # 检查NOT前面的token
+                if self.validator.is_k_code(last_token) or self.validator.is_bom_code(last_token) or last_token == ")":
+                    return False, "error_invalid_before_not"
+                # 计算连续的NOT数量
+                not_count = 1
+                for i in range(len(current_tokens) - 1, -1, -1):
+                    if current_tokens[i] == "NOT":
+                        not_count += 1
+                    else:
+                        break
+                if not_count > 1:
+                    return False, "error_consecutive_not"
+                    
+            # 检查变量后面的token
+            if self.validator.is_k_code(last_token) or self.validator.is_bom_code(last_token):
+                if next_token not in ["AND", "OR", "→", ")"]:
+                    return False, "error_invalid_after_variable"
+                    
             # 检查BOM码的插入位置
             if self.validator.is_bom_code(next_token):
                 self.logger.debug(f"验证BOM码: {next_token}")
@@ -476,18 +496,6 @@ class LogicPanel(ttk.Frame):
                     self.logger.debug(f"错误：BOM码前面的token无效: {last_token}")
                     return False, "error_invalid_before_bom"
                 
-            # 检查NOT的连用
-            if next_token == "NOT":
-                # 计算连续的NOT数量
-                not_count = 1
-                for i in range(len(current_tokens) - 1, -1, -1):
-                    if current_tokens[i] == "NOT":
-                        not_count += 1
-                    else:
-                        break
-                if not_count > 1:
-                    return False, "error_consecutive_not"
-                    
             # 检查括号规则
             if next_token == "(":
                 # 检查连续的左括号
@@ -535,162 +543,13 @@ class LogicPanel(ttk.Frame):
         
     def _on_key_press(self, event):
         """处理按键事件，在输入前验证"""
-        if event.char and event.char.strip():
-            # 更新表达式状态
-            self._update_expression_state()
-            
-            # 获取当前正在输入的token
-            current_line = self.expr_text.get("1.0", "end-1c")
-            current_word = current_line.split()[-1] if current_line.split() else ""
-            current_word = current_word + event.char
-            
-            # 预测可能形成的token
-            possible_token = None
-            if current_word.upper().startswith("K"):
-                possible_token = "K"
-            elif current_word.upper().startswith("BOM"):
-                possible_token = "BOM"
-            elif current_word.upper() in ["AND", "OR", "NOT"]:
-                possible_token = current_word.upper()
-            elif event.char in ["(", ")", "→"]:
-                possible_token = event.char
-                
-            # 如果能预测出token，验证其合法性
-            if possible_token:
-                is_valid, error_msg = self._validate_token_sequence(possible_token)
-                if not is_valid:
-                    self.error_text.set(language_manager.get_text(error_msg))
-                    return "break"
-                    
-            # 获取当前文本和即将插入的字符
-            current_text = self.expr_text.get("1.0", "end-1c")
-            cursor_pos = self.expr_text.index(INSERT)
-            row, col = map(int, cursor_pos.split('.'))
-            
-            # 获取当前行的内容
-            current_line = self.expr_text.get(f"{row}.0", f"{row}.{col}")
-            after_cursor = self.expr_text.get(f"{row}.{col}", f"{row}.end")
-            
-            # 构建新文本
-            new_text = current_line + event.char + after_cursor
-            
-            # 分割当前文本为token列表
-            current_tokens = current_text.split()
-            
-            # 如果是第一个字符
-            if not current_text.strip():
-                if not (event.char in ["(", "K", "N"]):  # 允许左括号、K码开头或NOT开头
-                    self.error_text.set(language_manager.get_text("error_must_start_with_k"))
-                    return "break"
-                    
-            # 获取最后一个完整的token
-            last_token = current_tokens[-1] if current_tokens else ""
-            
-            # 检查输入是否会形成有效token
-            if event.char.isalpha():  # 字母输入
-                # 检查是否可能形成有效的操作符或变量
-                valid_starts = ["K", "BOM", "AND", "OR", "NOT"]
-                current_word = current_line.split()[-1] if current_line.split() else ""
-                current_word = current_word + event.char
-                
-                if not any(current_word.upper().startswith(token) for token in valid_starts):
-                    self.error_text.set(language_manager.get_text("error_invalid_token"))
-                    return "break"
-                    
-            # 特殊字符验证
-            if event.char in ["(", ")", "→"]:
-                # 检查括号匹配
-                if event.char == ")":
-                    left_count = current_text.count("(")
-                    right_count = current_text.count(")")
-                    if right_count >= left_count:
-                        self.error_text.set(language_manager.get_text("error_unmatched_parentheses"))
-                        return "break"
-                
-                # 检查→符号
-                if event.char == "→":
-                    if "→" in current_text:
-                        self.error_text.set(language_manager.get_text("error_multiple_implications"))
-                        return "break"
-                    # 检查左边是否只有K码
-                    if any(token.startswith("BOM") for token in current_tokens):
-                        self.error_text.set(language_manager.get_text("error_bom_before_implication"))
-                        return "break"
-            
-            # 根据上下文验证输入
-            if last_token:
-                # 变量后面的验证
-                if self.validator.is_k_code(last_token) or self.validator.is_bom_code(last_token):
-                    if not event.char in [" ", ")", "→"] and not current_line.endswith(("AND ", "OR ")):
-                        self.error_text.set(language_manager.get_text("error_invalid_after_variable"))
-                        return "break"
-                
-                # 操作符后面的验证
-                if last_token in ["AND", "OR"]:
-                    if not event.char in ["(", "K", "B", "N"]:  # 允许左括号、K码、BOM码或NOT
-                        self.error_text.set(language_manager.get_text("error_invalid_after_operator"))
-                        return "break"
-                
-                # NOT后面的验证
-                if last_token == "NOT":
-                    if not event.char in ["(", "K", "B"]:  # 允许左括号、K码或BOM码
-                        self.error_text.set(language_manager.get_text("error_invalid_after_not"))
-                        return "break"
-                
-                # →后面的验证
-                if last_token == "→":
-                    if not event.char in ["(", "B", "N"]:  # 允许左括号、BOM码或NOT
-                        self.error_text.set(language_manager.get_text("error_invalid_after_implication"))
-                        return "break"
-            
-            # 清除错误提示
-            self.error_text.set("")
-            
-            # 保存最后有效状态
-            self._last_valid_text = current_text
-    
+        # 禁止所有键盘输入，包括复制粘贴
+        return "break"
+        
     def _on_key_release(self, event):
-        """处理按键释放事件，用于处理复制粘贴等操作"""
-        if event.keysym in ('v', 'V') and (event.state & 0x4):  # Ctrl+V
-            # 获取当前文本
-            current_text = self.expr_text.get("1.0", "end-1c")
-            
-            # 检查是否有连续的变量或操作符
-            tokens = current_text.split()
-            for i in range(len(tokens)-1):
-                if (self.validator.is_k_code(tokens[i]) and self.validator.is_k_code(tokens[i+1])) or \
-                   (self.validator.is_bom_code(tokens[i]) and self.validator.is_bom_code(tokens[i+1])):
-                    messagebox.showerror(
-                        language_manager.get_text("error"),
-                        language_manager.get_text("consecutive_codes")
-                    )
-                    self.expr_text.delete("1.0", tk.END)
-                    self.expr_text.insert("1.0", self._last_valid_text if hasattr(self, '_last_valid_text') else "")
-                    return
-                    
-                if tokens[i] in ["AND", "OR", "NOT", "→"] and tokens[i+1] in ["AND", "OR", "NOT", "→"]:
-                    messagebox.showerror(
-                        language_manager.get_text("error"),
-                        language_manager.get_text("consecutive_operators")
-                    )
-                    self.expr_text.delete("1.0", tk.END)
-                    self.expr_text.insert("1.0", self._last_valid_text if hasattr(self, '_last_valid_text') else "")
-                    return
-            
-            # 验证当前文本
-            is_valid, error_msg = self.validator.validate_implication_expression(current_text)
-            if not is_valid:
-                # 显示错误消息
-                messagebox.showerror(
-                    language_manager.get_text("error"),
-                    language_manager.get_text(error_msg)
-                )
-                # 恢复到上一个有效状态
-                self.expr_text.delete("1.0", tk.END)
-                self.expr_text.insert("1.0", self._last_valid_text if hasattr(self, '_last_valid_text') else "")
-            else:
-                # 保存有效状态
-                self._last_valid_text = current_text
+        """处理按键释放事件"""
+        # 禁止所有键盘输入，包括复制粘贴
+        return "break"
     
     def insert_code(self, code: str):
         """插入代码到表达式"""
