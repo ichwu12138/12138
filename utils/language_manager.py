@@ -1,393 +1,358 @@
-from typing import Dict, Any
+from typing import Dict, Any, Callable, List
 from utils.observer import Observable
 from utils.config_manager import config_manager
+import json
+import os
 
 class LanguageManager:
     """语言管理器类"""
     
     def __init__(self):
         """初始化语言管理器"""
-        # 默认语言
-        self.current_language = "zh"
-        
-        # 添加一个回调函数列表
+        self._current_language = "zh"
         self._callbacks = []
-        
-        # 加载翻译
+        self._translations = {
+            "zh": {},
+            "en": {},
+            "de": {}
+        }
         self._load_translations()
         
     def _load_translations(self):
         """加载翻译数据"""
-        self.translations = {
-            # 通用
-            "app_title": {
-                "zh": "ZK逻辑编辑器",
-                "en": "ZK Logic Editor",
-                "de": "ZK Logik-Editor"
-            },
-            "confirm": {
-                "zh": "确认",
-                "en": "Confirm",
-                "de": "Bestätigen"
-            },
-            "cancel": {
-                "zh": "取消",
-                "en": "Cancel",
-                "de": "Abbrechen"
-            },
-            "error": {
-                "zh": "错误",
-                "en": "Error",
-                "de": "Fehler"
-            },
-            "warning": {
-                "zh": "警告",
-                "en": "Warning",
-                "de": "Warnung"
-            },
-            "info": {
-                "zh": "信息",
-                "en": "Information",
-                "de": "Information"
-            },
-            
-            # 菜单
-            "menu_file": {
-                "zh": "文件",
-                "en": "File",
-                "de": "Datei"
-            },
-            "menu_view": {
-                "zh": "视图",
-                "en": "View",
-                "de": "Ansicht"
-            },
-            "menu_help": {
-                "zh": "帮助",
-                "en": "Help",
-                "de": "Hilfe"
-            },
-            "import_config": {
-                "zh": "导入配置",
-                "en": "Import Config",
-                "de": "Konfiguration importieren"
-            },
-            "import_bom": {
-                "zh": "导入BOM",
-                "en": "Import BOM",
-                "de": "BOM importieren"
-            },
-            "logic_library": {
-                "zh": "逻辑关系库",
-                "en": "Logic Library",
-                "de": "Logik-Bibliothek"
-            },
-            "language": {
-                "zh": "语言",
-                "en": "Language",
-                "de": "Sprache"
-            },
-            "theme": {
-                "zh": "主题",
-                "en": "Theme",
-                "de": "Thema"
-            },
-            "view_log": {
-                "zh": "查看日志",
-                "en": "View Log",
-                "de": "Log anzeigen"
-            },
-            "about": {
-                "zh": "关于",
-                "en": "About",
-                "de": "Über"
-            },
-            "exit": {
-                "zh": "退出",
-                "en": "Exit",
-                "de": "Beenden"
-            },
-            
-            # 面板标题
-            "panels_title": {
-                "zh": "ZK逻辑编辑器",
-                "en": "ZK Logic Editor",
-                "de": "ZK Logik-Editor"
-            },
-            "config_panel_title": {
-                "zh": "配置选项",
-                "en": "Configuration",
-                "de": "Konfiguration"
-            },
-            "logic_panel_title": {
-                "zh": "逻辑编辑",
-                "en": "Logic Editor",
-                "de": "Logik-Editor"
-            },
-            "bom_panel_title": {
-                "zh": "BOM管理",
-                "en": "BOM Management",
-                "de": "BOM-Verwaltung"
-            },
-            
-            # 工具栏
-            "tools": {
-                "zh": "工具栏",
-                "en": "Toolbar",
-                "de": "Werkzeugleiste"
-            },
-            "refresh": {
-                "zh": "刷新",
-                "en": "Refresh",
-                "de": "Aktualisieren"
-            },
-            "clear": {
-                "zh": "清除",
-                "en": "Clear",
-                "de": "Löschen"
-            },
-            "save": {
-                "zh": "保存",
-                "en": "Save",
-                "de": "Speichern"
-            },
-            
-            # 逻辑编辑
-            "logic_operators": {
-                "zh": "逻辑操作符",
-                "en": "Logic Operators",
-                "de": "Logische Operatoren"
-            },
-            "brackets": {
-                "zh": "括号",
-                "en": "Brackets",
-                "de": "Klammern"
-            },
-            "rule_status": {
-                "zh": "规则状态",
-                "en": "Rule Status",
-                "de": "Regel-Status"
-            },
-            "enabled": {
-                "zh": "启用",
-                "en": "Enabled",
-                "de": "Aktiviert"
-            },
-            "disabled": {
-                "zh": "禁用",
-                "en": "Disabled",
-                "de": "Deaktiviert"
-            },
-            "testing": {
-                "zh": "测试",
-                "en": "Testing",
-                "de": "Test"
-            },
-            "expression": {
-                "zh": "表达式",
-                "en": "Expression",
-                "de": "Ausdruck"
-            },
-            "saved_rules": {
-                "zh": "已保存规则",
-                "en": "Saved Rules",
-                "de": "Gespeicherte Regeln"
-            },
-            
-            # 树状视图
-            "config_tree": {
-                "zh": "配置树",
-                "en": "Config Tree",
-                "de": "Konfigurations-Baum"
-            },
-            "bom_tree": {
-                "zh": "BOM树",
-                "en": "BOM Tree",
-                "de": "BOM-Baum"
-            },
-            
-            # 逻辑关系库
-            "search": {
-                "zh": "搜索",
-                "en": "Search",
-                "de": "Suche"
-            },
-            "rules": {
-                "zh": "规则",
-                "en": "Rules",
-                "de": "Regeln"
-            },
-            "rule_id": {
-                "zh": "规则ID",
-                "en": "Rule ID",
-                "de": "Regel-ID"
-            },
-            "rule_type": {
-                "zh": "规则类型",
-                "en": "Rule Type",
-                "de": "Regel-Typ"
-            },
-            "condition": {
-                "zh": "条件",
-                "en": "Condition",
-                "de": "Bedingung"
-            },
-            "action": {
-                "zh": "动作",
-                "en": "Action",
-                "de": "Aktion"
-            },
-            "status": {
-                "zh": "状态",
-                "en": "Status",
-                "de": "Status"
-            },
-            
-            # 主题
-            "light_theme": {
-                "zh": "浅色主题",
-                "en": "Light Theme",
-                "de": "Helles Thema"
-            },
-            "dark_theme": {
-                "zh": "深色主题",
-                "en": "Dark Theme",
-                "de": "Dunkles Thema"
-            },
-            
-            # 状态栏
-            "ready": {
-                "zh": "就绪",
-                "en": "Ready",
-                "de": "Bereit"
-            },
-            
-            # 操作提示
-            "copy_code": {
-                "zh": "复制代码",
-                "en": "Copy Code",
-                "de": "Code kopieren"
-            },
-            "copy_item": {
-                "zh": "复制项目",
-                "en": "Copy Item",
-                "de": "Element kopieren"
-            },
-            "edit": {
-                "zh": "编辑",
-                "en": "Edit",
-                "de": "Bearbeiten"
-            },
-            "delete": {
-                "zh": "删除",
-                "en": "Delete",
-                "de": "Löschen"
-            },
-            
-            # 文件选择
-            "select_excel_file": {
-                "zh": "选择Excel文件",
-                "en": "Select Excel File",
-                "de": "Excel-Datei auswählen"
-            },
-            "select_bom_file": {
-                "zh": "选择BOM文件",
-                "en": "Select BOM File",
-                "de": "BOM-Datei auswählen"
-            },
-            "excel_files": {
-                "zh": "Excel文件",
-                "en": "Excel Files",
-                "de": "Excel-Dateien"
-            },
-            "all_files": {
-                "zh": "所有文件",
-                "en": "All Files",
-                "de": "Alle Dateien"
-            },
-            
-            # 消息
-            "confirm_exit": {
-                "zh": "确认退出",
-                "en": "Confirm Exit",
-                "de": "Beenden bestätigen"
-            },
-            "confirm_exit_message": {
-                "zh": "确定要退出程序吗？",
-                "en": "Are you sure you want to exit?",
-                "de": "Möchten Sie das Programm wirklich beenden?"
-            },
-            "excel_imported_successfully": {
-                "zh": "Excel文件导入成功",
-                "en": "Excel file imported successfully",
-                "de": "Excel-Datei erfolgreich importiert"
-            },
-            "bom_imported_successfully": {
-                "zh": "BOM文件导入成功",
-                "en": "BOM file imported successfully",
-                "de": "BOM-Datei erfolgreich importiert"
-            },
-            "excel_import_error": {
-                "zh": "导入Excel文件失败",
-                "en": "Failed to import Excel file",
-                "de": "Fehler beim Importieren der Excel-Datei"
-            },
-            "bom_import_error": {
-                "zh": "导入BOM文件失败",
-                "en": "Failed to import BOM file",
-                "de": "Fehler beim Importieren der BOM-Datei"
-            },
-            "refresh_tree_error": {
-                "zh": "刷新树状图失败",
-                "en": "Failed to refresh tree",
-                "de": "Fehler beim Aktualisieren des Baums"
-            },
-            "open_log_error": {
-                "zh": "打开日志文件失败",
-                "en": "Failed to open log file",
-                "de": "Fehler beim Öffnen der Log-Datei"
-            },
-            
-            # 主题对话框
-            "theme_dialog_title": {
-                "zh": "选择主题",
-                "en": "Select Theme",
-                "de": "Thema auswählen"
-            },
-            "theme_dialog_header": {
-                "zh": "请选择主题",
-                "en": "Please select a theme",
-                "de": "Bitte wählen Sie ein Thema"
-            },
-            "light_theme": {
-                "zh": "浅色主题",
-                "en": "Light Theme",
-                "de": "Helles Thema"
-            },
-            "dark_theme": {
-                "zh": "深色主题",
-                "en": "Dark Theme",
-                "de": "Dunkles Thema"
-            },
-            
-            # 按钮和操作
-            "refresh_tree": {
-                "zh": "刷新树状图",
-                "en": "Refresh Tree",
-                "de": "Baum aktualisieren"
-            },
-            "clear_expression": {
-                "zh": "清除表达式",
-                "en": "Clear Expression",
-                "de": "Ausdruck löschen"
-            },
-            "save_rule": {
-                "zh": "保存规则",
-                "en": "Save Rule",
-                "de": "Regel speichern"
-            },
-        }
-    
+        # 中文翻译
+        self._translations["zh"].update({
+            "app_title": "ZK逻辑编辑器",
+            "confirm": "确认",
+            "cancel": "取消",
+            "error": "错误",
+            "warning": "警告",
+            "info": "信息",
+            "menu_file": "文件",
+            "menu_view": "视图",
+            "menu_help": "帮助",
+            "import_config": "导入配置",
+            "import_bom": "导入BOM",
+            "logic_library": "逻辑关系库",
+            "language": "语言",
+            "theme": "主题",
+            "view_log": "查看日志",
+            "about": "关于",
+            "exit": "退出",
+            "panels_title": "ZK逻辑编辑器",
+            "config_panel_title": "配置选项",
+            "logic_panel_title": "逻辑编辑",
+            "bom_panel_title": "BOM管理",
+            "tools": "工具栏",
+            "refresh": "刷新",
+            "clear": "清除",
+            "save": "保存",
+            "logic_operators": "逻辑操作符",
+            "brackets": "括号",
+            "rule_status": "规则状态",
+            "enabled": "启用",
+            "disabled": "禁用",
+            "testing": "测试",
+            "expression": "表达式",
+            "saved_rules": "已保存规则",
+            "config_tree": "配置树",
+            "bom_tree": "BOM树",
+            "search": "搜索",
+            "rules": "规则",
+            "rule_id": "规则ID",
+            "rule_type": "规则类型",
+            "condition": "条件",
+            "action": "动作",
+            "status": "状态",
+            "light_theme": "浅色主题",
+            "dark_theme": "深色主题",
+            "ready": "就绪",
+            "copy_code": "复制代码",
+            "copy_item": "复制项目",
+            "edit": "编辑",
+            "delete": "删除",
+            "select_excel_file": "选择Excel文件",
+            "select_bom_file": "选择BOM文件",
+            "excel_files": "Excel文件",
+            "all_files": "所有文件",
+            "confirm_exit": "确认退出",
+            "confirm_exit_message": "确定要退出程序吗？",
+            "excel_imported_successfully": "Excel文件导入成功",
+            "bom_imported_successfully": "BOM文件导入成功",
+            "excel_import_error": "导入Excel文件失败",
+            "bom_import_error": "导入BOM文件失败",
+            "refresh_tree_error": "刷新树状图失败",
+            "open_log_error": "打开日志文件失败",
+            "theme_dialog_title": "选择主题",
+            "theme_dialog_header": "请选择主题",
+            "refresh_tree": "刷新树状图",
+            "clear_expression": "清除表达式",
+            "save_rule": "保存规则",
+            "delete_last": "删除上一个",
+            "clear_all": "清除全部",
+            "error_must_start_with_k": "表达式必须以K码开头",
+            "error_bom_before_implication": "在→出现之前不能插入BOM码",
+            "error_k_after_implication": "在→之后不能插入K码",
+            "error_invalid_operator_sequence": "K码之间必须用AND、OR、AND NOT或OR NOT连接",
+            "error_invalid_bracket": "括号使用不正确",
+            "error_invalid_token": "无效的输入",
+            "empty_expression": "表达式不能为空",
+            "missing_implication_operator": "缺少蕴含操作符 →",
+            "empty_left_expression": "→ 左侧表达式不能为空",
+            "empty_right_expression": "→ 右侧表达式不能为空",
+            "left_expression_error": "→ 左侧表达式错误",
+            "right_expression_error": "→ 右侧表达式错误",
+            "not_operator_error": "NOT 操作符使用错误",
+            "parentheses_mismatch": "括号不匹配",
+            "invalid_bool_expression": "无效的布尔表达式",
+            "consecutive_codes": "代码之间必须有操作符",
+            "expression_ends_with_operator": "表达式不能以操作符结尾",
+            "invalid_first_token": "表达式必须以左括号、NOT或K码开头",
+            "invalid_token_after_operator": "操作符后面只能跟左括号、NOT或变量",
+            "invalid_token_after_not": "NOT后面只能跟左括号或变量",
+            "invalid_token_after_left_parenthesis": "左括号后面只能跟左括号、NOT或变量",
+            "invalid_token_after_right_parenthesis": "右括号后面只能跟右括号、AND、OR或→",
+            "invalid_token_after_k_code": "K码后面只能跟右括号、AND、OR或→",
+            "invalid_token_after_implication": "→后面只能跟左括号、NOT或BOM码",
+            "invalid_token_after_bom_code": "BOM码后面只能跟右括号、AND或OR",
+            "invalid_expression_state": "无效的表达式状态",
+            "consecutive_operators": "操作符不能连续使用",
+            "load_last_config_confirm": "是否加载上次的配置文件？",
+            "load_last_bom_confirm": "是否加载上次的BOM文件？",
+            "load_last_config_error": "加载上次配置文件失败",
+            "load_last_bom_error": "加载上次BOM文件失败",
+            "update_display_error": "更新显示失败",
+            "success": "成功",
+            "success_title": "成功",
+            "import_config_success": "配置文件导入成功",
+            "import_bom_success": "BOM文件导入成功",
+            "error_title": "错误",
+            "warning_title": "警告",
+            "confirm_title": "确认"
+        })
+        
+        # 英文翻译
+        self._translations["en"].update({
+            "app_title": "ZK Logic Editor",
+            "confirm": "Confirm",
+            "cancel": "Cancel",
+            "error": "Error",
+            "warning": "Warning",
+            "info": "Information",
+            "menu_file": "File",
+            "menu_view": "View",
+            "menu_help": "Help",
+            "import_config": "Import Config",
+            "import_bom": "Import BOM",
+            "logic_library": "Logic Library",
+            "language": "Language",
+            "theme": "Theme",
+            "view_log": "View Log",
+            "about": "About",
+            "exit": "Exit",
+            "panels_title": "ZK Logic Editor",
+            "config_panel_title": "Configuration",
+            "logic_panel_title": "Logic Editor",
+            "bom_panel_title": "BOM Management",
+            "tools": "Toolbar",
+            "refresh": "Refresh",
+            "clear": "Clear",
+            "save": "Save",
+            "logic_operators": "Logic Operators",
+            "brackets": "Brackets",
+            "rule_status": "Rule Status",
+            "enabled": "Enabled",
+            "disabled": "Disabled",
+            "testing": "Testing",
+            "expression": "Expression",
+            "saved_rules": "Saved Rules",
+            "config_tree": "Config Tree",
+            "bom_tree": "BOM Tree",
+            "search": "Search",
+            "rules": "Rules",
+            "rule_id": "Rule ID",
+            "rule_type": "Rule Type",
+            "condition": "Condition",
+            "action": "Action",
+            "status": "Status",
+            "light_theme": "Light Theme",
+            "dark_theme": "Dark Theme",
+            "ready": "Ready",
+            "copy_code": "Copy Code",
+            "copy_item": "Copy Item",
+            "edit": "Edit",
+            "delete": "Delete",
+            "select_excel_file": "Select Excel File",
+            "select_bom_file": "Select BOM File",
+            "excel_files": "Excel Files",
+            "all_files": "All Files",
+            "confirm_exit": "Confirm Exit",
+            "confirm_exit_message": "Are you sure you want to exit?",
+            "excel_imported_successfully": "Excel file imported successfully",
+            "bom_imported_successfully": "BOM file imported successfully",
+            "excel_import_error": "Failed to import Excel file",
+            "bom_import_error": "Failed to import BOM file",
+            "refresh_tree_error": "Failed to refresh tree",
+            "open_log_error": "Failed to open log file",
+            "theme_dialog_title": "Select Theme",
+            "theme_dialog_header": "Please select a theme",
+            "refresh_tree": "Refresh Tree",
+            "clear_expression": "Clear Expression",
+            "save_rule": "Save Rule",
+            "delete_last": "Delete Last",
+            "clear_all": "Clear All",
+            "error_must_start_with_k": "Expression must start with K code",
+            "error_bom_before_implication": "Cannot insert BOM code before →",
+            "error_k_after_implication": "Cannot insert K code after →",
+            "error_invalid_operator_sequence": "K codes must be connected by AND, OR, AND NOT, or OR NOT",
+            "error_invalid_bracket": "Invalid bracket usage",
+            "error_invalid_token": "Invalid input",
+            "empty_expression": "Expression cannot be empty",
+            "missing_implication_operator": "Missing implication operator →",
+            "empty_left_expression": "Left expression before → cannot be empty",
+            "empty_right_expression": "Right expression after → cannot be empty",
+            "left_expression_error": "Error in left expression before →",
+            "right_expression_error": "Error in right expression after →",
+            "not_operator_error": "Invalid use of NOT operator",
+            "parentheses_mismatch": "Mismatched parentheses",
+            "invalid_bool_expression": "Invalid boolean expression",
+            "consecutive_codes": "Codes must be separated by operators",
+            "expression_ends_with_operator": "Expression cannot end with an operator",
+            "invalid_first_token": "Expression must start with left parenthesis, NOT, or K code",
+            "invalid_token_after_operator": "Operator must be followed by left parenthesis, NOT, or variable",
+            "invalid_token_after_not": "NOT must be followed by left parenthesis or variable",
+            "invalid_token_after_left_parenthesis": "Left parenthesis must be followed by left parenthesis, NOT, or variable",
+            "invalid_token_after_right_parenthesis": "Right parenthesis must be followed by right parenthesis, AND, OR, or →",
+            "invalid_token_after_k_code": "K code must be followed by right parenthesis, AND, OR, or →",
+            "invalid_token_after_implication": "→ must be followed by left parenthesis, NOT, or BOM code",
+            "invalid_token_after_bom_code": "BOM code must be followed by right parenthesis, AND, or OR",
+            "invalid_expression_state": "Invalid expression state",
+            "consecutive_operators": "Operators cannot be used consecutively",
+            "load_last_config_confirm": "Load the last configuration file?",
+            "load_last_bom_confirm": "Load the last BOM file?",
+            "load_last_config_error": "Failed to load last configuration file",
+            "load_last_bom_error": "Failed to load last BOM file",
+            "update_display_error": "Failed to update display",
+            "success": "Success",
+            "success_title": "Success",
+            "import_config_success": "Configuration file imported successfully",
+            "import_bom_success": "BOM file imported successfully",
+            "error_title": "Error",
+            "warning_title": "Warning",
+            "confirm_title": "Confirm"
+        })
+        
+        # 德文翻译
+        self._translations["de"].update({
+            "app_title": "ZK Logik-Editor",
+            "confirm": "Bestätigen",
+            "cancel": "Abbrechen",
+            "error": "Fehler",
+            "warning": "Warnung",
+            "info": "Information",
+            "menu_file": "Datei",
+            "menu_view": "Ansicht",
+            "menu_help": "Hilfe",
+            "import_config": "Konfiguration importieren",
+            "import_bom": "BOM importieren",
+            "logic_library": "Logik-Bibliothek",
+            "language": "Sprache",
+            "theme": "Thema",
+            "view_log": "Log anzeigen",
+            "about": "Über",
+            "exit": "Beenden",
+            "panels_title": "ZK Logik-Editor",
+            "config_panel_title": "Konfiguration",
+            "logic_panel_title": "Logik-Editor",
+            "bom_panel_title": "BOM-Verwaltung",
+            "tools": "Werkzeugleiste",
+            "refresh": "Aktualisieren",
+            "clear": "Löschen",
+            "save": "Speichern",
+            "logic_operators": "Logische Operatoren",
+            "brackets": "Klammern",
+            "rule_status": "Regel-Status",
+            "enabled": "Aktiviert",
+            "disabled": "Deaktiviert",
+            "testing": "Test",
+            "expression": "Ausdruck",
+            "saved_rules": "Gespeicherte Regeln",
+            "config_tree": "Konfigurations-Baum",
+            "bom_tree": "BOM-Baum",
+            "search": "Suche",
+            "rules": "Regeln",
+            "rule_id": "Regel-ID",
+            "rule_type": "Regel-Typ",
+            "condition": "Bedingung",
+            "action": "Aktion",
+            "status": "Status",
+            "light_theme": "Helles Thema",
+            "dark_theme": "Dunkles Thema",
+            "ready": "Bereit",
+            "copy_code": "Code kopieren",
+            "copy_item": "Element kopieren",
+            "edit": "Bearbeiten",
+            "delete": "Löschen",
+            "select_excel_file": "Excel-Datei auswählen",
+            "select_bom_file": "BOM-Datei auswählen",
+            "excel_files": "Excel-Dateien",
+            "all_files": "Alle Dateien",
+            "confirm_exit": "Beenden bestätigen",
+            "confirm_exit_message": "Möchten Sie das Programm wirklich beenden?",
+            "excel_imported_successfully": "Excel-Datei erfolgreich importiert",
+            "bom_imported_successfully": "BOM-Datei erfolgreich importiert",
+            "excel_import_error": "Fehler beim Importieren der Excel-Datei",
+            "bom_import_error": "Fehler beim Importieren der BOM-Datei",
+            "refresh_tree_error": "Fehler beim Aktualisieren des Baums",
+            "open_log_error": "Fehler beim Öffnen der Log-Datei",
+            "theme_dialog_title": "Thema auswählen",
+            "theme_dialog_header": "Bitte wählen Sie ein Thema",
+            "refresh_tree": "Baum aktualisieren",
+            "clear_expression": "Ausdruck löschen",
+            "save_rule": "Regel speichern",
+            "delete_last": "Letztes löschen",
+            "clear_all": "Alles löschen",
+            "error_must_start_with_k": "Ausdruck muss mit K-Code beginnen",
+            "error_bom_before_implication": "BOM-Code kann nicht vor → eingefügt werden",
+            "error_k_after_implication": "K-Code kann nicht nach → eingefügt werden",
+            "error_invalid_operator_sequence": "K-Codes müssen durch AND, OR, AND NOT oder OR NOT verbunden sein",
+            "error_invalid_bracket": "Ungültige Klammerverwendung",
+            "error_invalid_token": "Ungültige Eingabe",
+            "empty_expression": "Ausdruck darf nicht leer sein",
+            "missing_implication_operator": "Fehlender Implikationsoperator →",
+            "empty_left_expression": "Linker Ausdruck vor → darf nicht leer sein",
+            "empty_right_expression": "Rechter Ausdruck nach → darf nicht leer sein",
+            "left_expression_error": "Fehler im linken Ausdruck vor →",
+            "right_expression_error": "Fehler im rechten Ausdruck nach →",
+            "not_operator_error": "Ungültige Verwendung des NOT-Operators",
+            "parentheses_mismatch": "Nicht übereinstimmende Klammern",
+            "invalid_bool_expression": "Ungültiger boolescher Ausdruck",
+            "consecutive_codes": "Codes müssen durch Operatoren getrennt sein",
+            "expression_ends_with_operator": "Ausdruck darf nicht mit einem Operator enden",
+            "invalid_first_token": "Ausdruck muss mit linker Klammer, NOT oder K-Code beginnen",
+            "invalid_token_after_operator": "Operator muss von linker Klammer, NOT oder Variable gefolgt werden",
+            "invalid_token_after_not": "NOT muss von linker Klammer oder Variable gefolgt werden",
+            "invalid_token_after_left_parenthesis": "Linke Klammer muss von linker Klammer, NOT oder Variable gefolgt werden",
+            "invalid_token_after_right_parenthesis": "Rechte Klammer muss von rechter Klammer, AND, OR oder → gefolgt werden",
+            "invalid_token_after_k_code": "K-Code muss von rechter Klammer, AND, OR oder → gefolgt werden",
+            "invalid_token_after_implication": "→ muss von linker Klammer, NOT oder BOM-Code gefolgt werden",
+            "invalid_token_after_bom_code": "BOM-Code muss von rechter Klammer, AND oder OR gefolgt werden",
+            "invalid_expression_state": "Ungültiger Ausdruckszustand",
+            "consecutive_operators": "Operatoren können nicht aufeinanderfolgend verwendet werden",
+            "load_last_config_confirm": "Letzte Konfigurationsdatei laden?",
+            "load_last_bom_confirm": "Letzte BOM-Datei laden?",
+            "load_last_config_error": "Fehler beim Laden der letzten Konfigurationsdatei",
+            "load_last_bom_error": "Fehler beim Laden der letzten BOM-Datei",
+            "update_display_error": "Fehler beim Aktualisieren der Anzeige",
+            "success": "Erfolg",
+            "success_title": "Erfolg",
+            "import_config_success": "Konfigurationsdatei erfolgreich importiert",
+            "import_bom_success": "BOM-Datei erfolgreich importiert",
+            "error_title": "Fehler",
+            "warning_title": "Warnung",
+            "confirm_title": "Bestätigen"
+        })
+        
     def add_callback(self, callback):
         """添加语言变化时的回调函数
         
@@ -412,8 +377,8 @@ class LanguageManager:
         Args:
             lang_code: 语言代码
         """
-        if lang_code in ["zh", "en", "de"] and lang_code != self.current_language:
-            self.current_language = lang_code
+        if lang_code in ["zh", "en", "de"] and lang_code != self._current_language:
+            self._current_language = lang_code
             config_manager.set_app_config("language", lang_code)
             # 调用所有回调函数
             for callback in self._callbacks:
@@ -431,9 +396,7 @@ class LanguageManager:
         Returns:
             str: 翻译文本
         """
-        if key in self.translations:
-            return self.translations[key].get(self.current_language, key)
-        return key
+        return self._translations[self._current_language].get(key, key)
     
     def get_current_language(self) -> str:
         """获取当前语言代码
@@ -441,7 +404,7 @@ class LanguageManager:
         Returns:
             str: 当前语言代码
         """
-        return self.current_language
+        return self._current_language
 
 # 创建全局语言管理器实例
 language_manager = LanguageManager()

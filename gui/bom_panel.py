@@ -8,10 +8,12 @@ from tkinter import ttk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from tkinter import filedialog, messagebox
+import os
 
 from utils.language_manager import language_manager
 from utils.logger import Logger
 from core.bom_processor import BomProcessor
+from utils.config_manager import config_manager
 
 class BomPanel(ttk.Frame):
     """BOM面板类"""
@@ -240,32 +242,62 @@ class BomPanel(ttk.Frame):
             # 显示菜单
             menu.post(event.x_root, event.y_root)
             
-    def _import_bom(self):
-        """导入BOM文件"""
+    def _import_bom(self, file_path=None):
+        """导入BOM文件
+        
+        Args:
+            file_path: 文件路径,如果为None则弹出文件选择对话框
+        """
         try:
-            # 打开文件选择对话框
-            file_path = filedialog.askopenfilename(
-                title=language_manager.get_text("select_bom_file"),
-                filetypes=[
-                    (language_manager.get_text("excel_files"), "*.xlsx *.xlsm"),
-                    (language_manager.get_text("all_files"), "*.*")
-                ]
-            )
-            
+            if file_path is None:
+                # 检查是否有上次的BOM文件路径
+                last_bom_path = config_manager.get_app_config("last_bom_path")
+                if last_bom_path and os.path.exists(last_bom_path):
+                    self.logger.info(f"发现上次的BOM文件路径: {last_bom_path}")
+                    if messagebox.askyesno(
+                        language_manager.get_text("confirm"),
+                        language_manager.get_text("load_last_bom_confirm")
+                    ):
+                        self.logger.info("用户选择加载上次的BOM文件")
+                        file_path = last_bom_path
+                
+                # 如果用户不想加载上次的文件或没有上次的文件，显示文件选择对话框
+                if not file_path:
+                    file_path = filedialog.askopenfilename(
+                        title=language_manager.get_text("select_bom_file"),
+                        filetypes=[
+                            (language_manager.get_text("excel_files"), "*.xlsx *.xlsm"),
+                            (language_manager.get_text("all_files"), "*.*")
+                        ]
+                    )
+                    if file_path:
+                        self.logger.info(f"用户选择了新的BOM文件: {file_path}")
+                
             if file_path:
                 # 导入BOM文件
                 self.bom_processor.import_bom(file_path)
+                self.logger.info(f"成功导入BOM文件: {file_path}")
                 
                 # 刷新树状视图
                 self._refresh_tree()
                 
+                # 保存文件路径到app_config.json
+                if hasattr(self.master, 'main_window'):
+                    self.master.main_window._save_bom_path(file_path)
+                    self.logger.info(f"已保存BOM文件路径到app_config.json: {file_path}")
+                
                 # 显示成功消息
-                from utils.message_utils_tk import show_info
-                show_info("bom_imported_successfully")
+                messagebox.showinfo(
+                    language_manager.get_text("success_title"),
+                    language_manager.get_text("import_bom_success")
+                )
                 
         except Exception as e:
-            from utils.message_utils_tk import show_error
-            show_error("bom_import_error", error=str(e))
+            self.logger.error(f"导入BOM文件失败: {str(e)}", exc_info=True)
+            messagebox.showerror(
+                language_manager.get_text("error_title"),
+                language_manager.get_text("bom_import_error")
+            )
             
     def _on_single_click(self, event):
         """单击事件处理"""

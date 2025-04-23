@@ -1,29 +1,31 @@
 """
 配置面板模块
 
-该模块提供了配置选项的加载和展示功能。
+该模块提供了配置选项的导入、编辑和管理功能。
 """
 import tkinter as tk
 from tkinter import ttk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from tkinter import filedialog, messagebox
+import os
 
 from utils.language_manager import language_manager
 from utils.logger import Logger
 from core.config_processor import ConfigProcessor
+from utils.config_manager import config_manager
 
 class ConfigPanel(ttk.Frame):
     """配置面板类"""
     
-    def __init__(self, parent, config_processor: ConfigProcessor):
+    def __init__(self, master, config_processor: ConfigProcessor):
         """初始化配置面板
         
         Args:
-            parent: 父窗口
-            config_processor: 配置选项处理器实例
+            master: 父窗口
+            config_processor: 配置处理器实例
         """
-        super().__init__(parent, style="Panel.TFrame")
+        super().__init__(master)
         
         # 保存参数
         self.config_processor = config_processor
@@ -31,17 +33,78 @@ class ConfigPanel(ttk.Frame):
         # 获取日志记录器
         self.logger = Logger.get_logger(__name__)
         
-        # 注册语言变化的回调函数
-        language_manager.add_callback(self.refresh_texts)
-        
         # 创建界面
         self._create_widgets()
         
-    def destroy(self):
-        """销毁面板时移除回调函数"""
-        language_manager.remove_callback(self.refresh_texts)
-        super().destroy()
+    def _import_excel(self, file_path=None):
+        """导入Excel文件
         
+        Args:
+            file_path: 文件路径,如果为None则弹出文件选择对话框
+        """
+        try:
+            if file_path is None:
+                # 检查是否有上次的配置文件路径
+                last_config_path = config_manager.get_app_config("last_config_path")
+                if last_config_path and os.path.exists(last_config_path):
+                    self.logger.info(f"发现上次的配置文件路径: {last_config_path}")
+                    if messagebox.askyesno(
+                        language_manager.get_text("confirm"),
+                        language_manager.get_text("load_last_config_confirm")
+                    ):
+                        self.logger.info("用户选择加载上次的配置文件")
+                        file_path = last_config_path
+                
+                # 如果用户不想加载上次的文件或没有上次的文件，显示文件选择对话框
+                if not file_path:
+                    file_path = filedialog.askopenfilename(
+                        title=language_manager.get_text("select_config_file"),
+                        filetypes=[
+                            (language_manager.get_text("excel_files"), "*.xlsx *.xlsm"),
+                            (language_manager.get_text("all_files"), "*.*")
+                        ]
+                    )
+                    if file_path:
+                        self.logger.info(f"用户选择了新的配置文件: {file_path}")
+                
+            if file_path:
+                # 导入Excel文件
+                self.config_processor.import_excel(file_path)
+                self.logger.info(f"成功导入配置文件: {file_path}")
+                
+                # 更新显示
+                self._update_display()
+                
+                # 保存文件路径到app_config.json
+                if hasattr(self.master, 'main_window'):
+                    self.master.main_window._save_config_path(file_path)
+                    self.logger.info(f"已保存配置文件路径到app_config.json: {file_path}")
+                
+                # 显示成功消息
+                messagebox.showinfo(
+                    language_manager.get_text("success_title"),
+                    language_manager.get_text("import_config_success")
+                )
+                
+        except Exception as e:
+            self.logger.error(f"导入配置文件失败: {str(e)}", exc_info=True)
+            messagebox.showerror(
+                language_manager.get_text("error_title"),
+                language_manager.get_text("import_config_error")
+            )
+
+    def _update_display(self):
+        """更新显示"""
+        try:
+            # 刷新树状视图
+            self._refresh_tree()
+        except Exception as e:
+            self.logger.error(f"更新显示失败: {str(e)}")
+            messagebox.showerror(
+                language_manager.get_text("error"),
+                language_manager.get_text("update_display_error")
+            )
+
     def _create_widgets(self):
         """创建界面组件"""
         # 创建标题标签
@@ -209,33 +272,6 @@ class ConfigPanel(ttk.Frame):
                 
             # 显示菜单
             menu.post(event.x_root, event.y_root)
-            
-    def _import_excel(self):
-        """导入Excel文件"""
-        try:
-            # 打开文件选择对话框
-            file_path = filedialog.askopenfilename(
-                title=language_manager.get_text("select_excel_file"),
-                filetypes=[
-                    (language_manager.get_text("excel_files"), "*.xlsx *.xlsm"),
-                    (language_manager.get_text("all_files"), "*.*")
-                ]
-            )
-            
-            if file_path:
-                # 导入Excel文件
-                self.config_processor.import_excel(file_path)
-                
-                # 刷新树状视图
-                self._refresh_tree()
-                
-                # 显示成功消息
-                from utils.message_utils_tk import show_info
-                show_info("excel_imported_successfully")
-                
-        except Exception as e:
-            from utils.message_utils_tk import show_error
-            show_error("excel_import_error", error=str(e))
             
     def _on_single_click(self, event):
         """单击事件处理"""

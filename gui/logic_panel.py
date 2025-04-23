@@ -8,10 +8,12 @@ from tkinter import ttk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from tkinter import filedialog, messagebox
+from typing import List, Tuple
 
 from utils.language_manager import language_manager
 from utils.logger import Logger
 from core.logic_builder import LogicBuilder
+from utils.validator import ExpressionValidator
 
 class LogicPanel(ttk.Frame):
     """逻辑编辑面板类"""
@@ -30,6 +32,15 @@ class LogicPanel(ttk.Frame):
         
         # 获取日志记录器
         self.logger = Logger.get_logger(__name__)
+        
+        # 创建验证器实例
+        self.validator = ExpressionValidator()
+        
+        # 用于记录插入历史
+        self.insert_history: List[Tuple[str, str, str]] = []  # [(start, end, content), ...]
+        
+        # 创建错误文本变量
+        self.error_text = tk.StringVar()
         
         # 注册语言变化的回调函数
         language_manager.add_callback(self.refresh_texts)
@@ -71,6 +82,13 @@ class LogicPanel(ttk.Frame):
             font=("Microsoft YaHei", frame_title_size)
         )
         
+        # 配置错误标签样式
+        style.configure(
+            "Error.TLabel",
+            foreground="red",
+            font=("Microsoft YaHei", 10)
+        )
+        
     def _create_widgets(self):
         """创建界面组件"""
         # 创建标题标签
@@ -93,7 +111,7 @@ class LogicPanel(ttk.Frame):
         )
         self.operators_frame.pack(fill=X, pady=(0, 5))
         
-        operators = ["AND", "OR", "NOT", "XOR"]
+        operators = ["AND", "OR", "NOT", "→"]
         for op in operators:
             btn = ttk.Button(
                 self.operators_frame,
@@ -173,33 +191,63 @@ class LogicPanel(ttk.Frame):
         )
         self.expr_frame.pack(fill=BOTH, expand=YES, pady=(0, 5))
         
+        # 创建表达式文本框容器
+        expr_container = ttk.Frame(self.expr_frame)
+        expr_container.pack(fill=BOTH, expand=YES, padx=5, pady=5)
+        
         # 创建表达式文本框
         self.expr_text = tk.Text(
-            self.expr_frame,
-            height=5,
+            expr_container,
+            height=10,
             wrap=tk.WORD,
-            font=("Microsoft YaHei", 16)
+            font=("Microsoft YaHei", 18)
         )
-        self.expr_text.pack(fill=BOTH, expand=YES, padx=5, pady=5)
+        self.expr_text.pack(fill=BOTH, expand=YES)
+        
+        # 创建错误提示标签
+        self.error_label = ttk.Label(
+            expr_container,
+            textvariable=self.error_text,
+            style="Error.TLabel"
+        )
+        self.error_label.pack(fill=X, pady=(5, 0))
+        
+        # 绑定按键事件，用于实时验证
+        self.expr_text.bind('<Key>', self._on_key_press)
+        self.expr_text.bind('<KeyRelease>', self._on_key_release)
         
         # 创建按钮框架
         btn_frame = ttk.Frame(self.expr_frame)
-        btn_frame.pack(fill=X, padx=5, pady=(0, 5))
+        btn_frame.pack(fill=X, padx=5, pady=5)
         
-        # 清除按钮
-        self.clear_btn = ttk.Button(
-            btn_frame,
-            text=language_manager.get_text("clear"),
+        # 创建左侧按钮框架
+        left_btn_frame = ttk.Frame(btn_frame)
+        left_btn_frame.pack(side=LEFT)
+        
+        # 删除上一个内容按钮
+        self.delete_last_btn = ttk.Button(
+            left_btn_frame,
+            text=language_manager.get_text("delete_last"),
+            command=self._delete_last_content,
+            style="Main.TButton",
+            width=15
+        )
+        self.delete_last_btn.pack(side=LEFT, padx=5)
+        
+        # 清除全部按钮
+        self.clear_all_btn = ttk.Button(
+            left_btn_frame,
+            text=language_manager.get_text("clear_all"),
             command=self._clear_expr,
             style="Main.TButton",
             width=15
         )
-        self.clear_btn.pack(side=LEFT, padx=5)
+        self.clear_all_btn.pack(side=LEFT, padx=5)
         
-        # 保存按钮
+        # 保存规则按钮
         self.save_btn = ttk.Button(
             btn_frame,
-            text=language_manager.get_text("save"),
+            text=language_manager.get_text("save_rule"),
             command=self._save_rule,
             style="success.Main.TButton",
             width=15
@@ -240,21 +288,214 @@ class LogicPanel(ttk.Frame):
         
     def _add_operator(self, operator: str):
         """添加逻辑操作符"""
-        self.expr_text.insert(tk.INSERT, f" {operator} ")
+        try:
+            # 获取当前表达式内容
+            current_expr = self.expr_text.get("1.0", tk.END).strip()
+            
+            # 验证是否可以插入操作符
+            if not current_expr:
+                messagebox.showerror(
+                    language_manager.get_text("error"),
+                    language_manager.get_text("error_must_start_with_k")
+                )
+                return
+            
+            # 记录插入点
+            self.last_insert_start = self.expr_text.index(tk.INSERT)
+            
+            # 插入操作符
+            self.expr_text.insert(tk.INSERT, f" {operator} ")
+            
+            # 更新最后插入点
+            self.last_insert_end = self.expr_text.index(tk.INSERT)
+            
+        except Exception as e:
+            self.logger.error(f"添加操作符时出错: {str(e)}", exc_info=True)
         
     def _add_bracket(self, bracket: str):
         """添加括号"""
         self.expr_text.insert(tk.INSERT, bracket)
         
+    def _delete_last_content(self):
+        """删除上一个插入的内容"""
+        try:
+            # 获取当前文本
+            current_text = self.expr_text.get("1.0", "end-1c")
+            if not current_text:
+                return
+                
+            # 分割当前文本为token列表
+            tokens = current_text.split()
+            if not tokens:
+                return
+                
+            # 获取最后一个token
+            last_token = tokens[-1]
+            
+            # 从文本末尾开始查找最后一个token的位置
+            text_len = len(current_text)
+            token_len = len(last_token)
+            pos = current_text.rstrip().rfind(last_token)
+            
+            if pos >= 0:
+                # 删除最后一个token及其后的空格
+                self.expr_text.delete(f"1.{pos}", "end-1c")
+                
+                # 如果删除后末尾有多余的空格，也删除
+                current_text = self.expr_text.get("1.0", "end-1c")
+                if current_text and current_text[-1].isspace():
+                    self.expr_text.delete("end-2c", "end-1c")
+                
+                # 更新最后有效状态
+                self._last_valid_text = self.expr_text.get("1.0", "end-1c")
+                
+        except Exception as e:
+            self.logger.error(f"删除上一个内容时出错: {str(e)}", exc_info=True)
+        
     def _clear_expr(self):
         """清空表达式"""
         self.expr_text.delete("1.0", tk.END)
+        # 清空插入历史
+        self.insert_history.clear()
+        # 重置最后有效状态
+        self._last_valid_text = ""
         
     def _save_rule(self):
         """保存规则"""
         # TODO: 实现规则保存逻辑
         pass
         
+    def _on_key_press(self, event):
+        """处理按键事件，在输入前验证"""
+        if event.char and event.char.strip():  # 只处理非空字符
+            # 获取当前文本和即将插入的字符
+            current_text = self.expr_text.get("1.0", "end-1c")
+            cursor_pos = self.expr_text.index(INSERT)
+            row, col = map(int, cursor_pos.split('.'))
+            new_text = current_text[:col] + event.char + current_text[col:]
+            
+            # 分割当前文本为token列表
+            tokens = new_text.split()
+            
+            # 定义允许的token列表
+            allowed_tokens = ["K", "BOM", "AND", "OR", "NOT", "→", "(", ")"]
+            
+            # 如果是第一个token，只允许左括号、K码或NOT
+            if not current_text.strip():
+                if not (event.char == "(" or event.char == "K" or new_text.strip() == "NOT"):
+                    messagebox.showerror(
+                        language_manager.get_text("error_title"),
+                        language_manager.get_text("invalid_first_token")
+                    )
+                    return "break"
+            
+            # 检查输入的字符是否可能形成允许的token
+            valid_input = False
+            for token in allowed_tokens:
+                if token.startswith(new_text.strip()) or any(t.startswith(new_text.strip()) for t in tokens):
+                    valid_input = True
+                    break
+            
+            if not valid_input:
+                messagebox.showerror(
+                    language_manager.get_text("error_title"),
+                    language_manager.get_text("error_invalid_token")
+                )
+                return "break"
+            
+            # 检查是否有连续的变量
+            if len(tokens) >= 2:
+                last_two = tokens[-2:]  # 获取最后两个token
+                
+                # 检查连续的K码或BOM码
+                if ((self.validator.is_k_code(last_two[0]) and self.validator.is_k_code(last_two[1])) or
+                    (self.validator.is_bom_code(last_two[0]) and self.validator.is_bom_code(last_two[1]))):
+                    messagebox.showerror(
+                        language_manager.get_text("error_title"),
+                        language_manager.get_text("consecutive_codes")
+                    )
+                    return "break"
+                
+                # 检查连续的操作符
+                operators = ["AND", "OR", "NOT", "→"]
+                if last_two[0] in operators and last_two[1] in operators:
+                    messagebox.showerror(
+                        language_manager.get_text("error_title"),
+                        language_manager.get_text("consecutive_operators")
+                    )
+                    return "break"
+                
+                # 检查K码的位置
+                if "→" in current_text:
+                    if self.validator.is_k_code(last_two[-1]):
+                        messagebox.showerror(
+                            language_manager.get_text("error_title"),
+                            language_manager.get_text("error_k_after_implication")
+                        )
+                        return "break"
+                
+                # 检查BOM码的位置
+                if "→" not in current_text and self.validator.is_bom_code(last_two[-1]):
+                    messagebox.showerror(
+                        language_manager.get_text("error_title"),
+                        language_manager.get_text("error_bom_before_implication")
+                    )
+                    return "break"
+            
+            # 验证新文本
+            is_valid, error_msg = self.validator.validate_implication_expression(new_text)
+            if not is_valid:
+                # 显示错误消息
+                messagebox.showerror(
+                    language_manager.get_text("error_title"),
+                    language_manager.get_text(error_msg)
+                )
+                # 取消事件处理
+                return "break"
+    
+    def _on_key_release(self, event):
+        """处理按键释放事件，用于处理复制粘贴等操作"""
+        if event.keysym in ('v', 'V') and (event.state & 0x4):  # Ctrl+V
+            # 获取当前文本
+            current_text = self.expr_text.get("1.0", "end-1c")
+            
+            # 检查是否有连续的变量或操作符
+            tokens = current_text.split()
+            for i in range(len(tokens)-1):
+                if (self.validator.is_k_code(tokens[i]) and self.validator.is_k_code(tokens[i+1])) or \
+                   (self.validator.is_bom_code(tokens[i]) and self.validator.is_bom_code(tokens[i+1])):
+                    messagebox.showerror(
+                        language_manager.get_text("error"),
+                        language_manager.get_text("consecutive_codes")
+                    )
+                    self.expr_text.delete("1.0", tk.END)
+                    self.expr_text.insert("1.0", self._last_valid_text if hasattr(self, '_last_valid_text') else "")
+                    return
+                    
+                if tokens[i] in ["AND", "OR", "NOT", "→"] and tokens[i+1] in ["AND", "OR", "NOT", "→"]:
+                    messagebox.showerror(
+                        language_manager.get_text("error"),
+                        language_manager.get_text("consecutive_operators")
+                    )
+                    self.expr_text.delete("1.0", tk.END)
+                    self.expr_text.insert("1.0", self._last_valid_text if hasattr(self, '_last_valid_text') else "")
+                    return
+            
+            # 验证当前文本
+            is_valid, error_msg = self.validator.validate_implication_expression(current_text)
+            if not is_valid:
+                # 显示错误消息
+                messagebox.showerror(
+                    language_manager.get_text("error"),
+                    language_manager.get_text(error_msg)
+                )
+                # 恢复到上一个有效状态
+                self.expr_text.delete("1.0", tk.END)
+                self.expr_text.insert("1.0", self._last_valid_text if hasattr(self, '_last_valid_text') else "")
+            else:
+                # 保存有效状态
+                self._last_valid_text = current_text
+    
     def insert_code(self, code: str):
         """插入代码到表达式
         
@@ -264,32 +505,68 @@ class LogicPanel(ttk.Frame):
         try:
             self.logger.debug(f"LogicPanel: 开始插入代码: {code}")
             
-            # 获取当前光标位置
-            current_pos = self.expr_text.index(tk.INSERT)
-            self.logger.debug(f"LogicPanel: 当前光标位置: {current_pos}")
+            # 获取当前表达式内容
+            current_expr = self.expr_text.get("1.0", tk.END).strip()
+            
+            # 验证是否可以插入
+            if not current_expr and not code.startswith("K"):
+                messagebox.showerror(
+                    language_manager.get_text("error"),
+                    language_manager.get_text("error_must_start_with_k")
+                )
+                return
+                
+            # 检查是否有蕴含符号
+            has_implication = "→" in current_expr
+            
+            # 验证BOM码插入
+            if code.startswith("BOM"):
+                if not has_implication:
+                    messagebox.showerror(
+                        language_manager.get_text("error"),
+                        language_manager.get_text("error_bom_before_implication")
+                    )
+                    return
+                    
+            # 验证K码插入
+            if code.startswith("K") and has_implication:
+                messagebox.showerror(
+                    language_manager.get_text("error"),
+                    language_manager.get_text("error_k_after_implication")
+                )
+                return
+            
+            # 记录插入点
+            start_pos = self.expr_text.index(tk.INSERT)
             
             # 获取当前行的内容
-            current_line = self.expr_text.get(f"{current_pos.split('.')[0]}.0", f"{current_pos.split('.')[0]}.end")
-            self.logger.debug(f"LogicPanel: 当前行内容: {current_line}")
+            current_line = self.expr_text.get(f"{start_pos.split('.')[0]}.0", f"{start_pos.split('.')[0]}.end")
             
             # 确定是否需要添加前导空格
             if current_line and not current_line.endswith(" "):
-                self.logger.debug("LogicPanel: 添加前导空格")
                 self.expr_text.insert(tk.INSERT, " ")
+                start_pos = self.expr_text.index(tk.INSERT)
                 
             # 插入代码
             self.expr_text.insert(tk.INSERT, code)
-            self.logger.info(f"LogicPanel: 成功插入代码: {code}")
             
             # 确定是否需要添加后导空格
             next_char = self.expr_text.get(tk.INSERT)
             if next_char and not next_char.isspace():
-                self.logger.debug("LogicPanel: 添加后导空格")
                 self.expr_text.insert(tk.INSERT, " ")
+            
+            # 记录结束点
+            end_pos = self.expr_text.index(tk.INSERT)
+            
+            # 记录插入历史
+            content = self.expr_text.get(start_pos, end_pos)
+            self.insert_history.append((start_pos, end_pos, content))
             
             # 让文本框获得焦点
             self.expr_text.focus_set()
-            self.logger.debug("LogicPanel: 文本框获得焦点")
+            
+            # 保存有效状态
+            self._last_valid_text = self.expr_text.get("1.0", "end-1c")
             
         except Exception as e:
             self.logger.error(f"LogicPanel: 插入代码时出错: {str(e)}", exc_info=True)
@@ -311,9 +588,12 @@ class LogicPanel(ttk.Frame):
         self.testing_rb.configure(text=language_manager.get_text("testing"))
         self.disabled_rb.configure(text=language_manager.get_text("disabled"))
         
+        # 更新新增的按钮文本
+        self.delete_last_btn.configure(text=language_manager.get_text("delete_last"))
+        self.clear_all_btn.configure(text=language_manager.get_text("clear_all"))
+        
         # 更新按钮文本
-        self.clear_btn.configure(text=language_manager.get_text("clear"))
-        self.save_btn.configure(text=language_manager.get_text("save"))
+        self.save_btn.configure(text=language_manager.get_text("save_rule"))
         
         # 强制更新显示
         self.update_idletasks() 

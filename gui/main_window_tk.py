@@ -8,6 +8,8 @@ from tkinter import ttk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from tkinter import filedialog, messagebox
+import json
+import os
 
 from utils.config_manager import config_manager
 from utils.language_manager import language_manager
@@ -64,6 +66,9 @@ class MainWindow:
         
         # 设置窗口标题
         self.root.title(language_manager.get_text("app_title"))
+        
+        # 加载上次的配置
+        self.root.after(1000, self._load_last_config)  # 延迟1秒后执行
         
     def _configure_global_styles(self):
         """配置全局样式"""
@@ -472,3 +477,99 @@ class MainWindow:
             LogicPanel: 逻辑面板实例
         """
         return self.logic_panel if hasattr(self, 'logic_panel') else None
+
+    def _load_last_config(self):
+        """加载上次的配置"""
+        try:
+            # 读取配置文件
+            with open('data/app_config.json', 'r', encoding='utf-8') as f:
+                config = json.load(f)
+            
+            # 检查是否有上次的配置文件路径
+            if config.get('last_config_path'):
+                if messagebox.askyesno(
+                    language_manager.get_text("confirm"),
+                    language_manager.get_text("load_last_config_confirm")
+                ):
+                    try:
+                        self.config_panel._import_excel(config['last_config_path'])
+                        
+                        # 在配置文件导入成功后，询问是否导入BOM文件
+                        if config.get('last_bom_path'):
+                            if messagebox.askyesno(
+                                language_manager.get_text("confirm"),
+                                language_manager.get_text("load_last_bom_confirm")
+                            ):
+                                try:
+                                    self.bom_panel._import_bom(config['last_bom_path'])
+                                except Exception as e:
+                                    self.logger.error(f"加载上次BOM文件失败: {str(e)}")
+                                    messagebox.showerror(
+                                        language_manager.get_text("error"),
+                                        language_manager.get_text("load_last_bom_error")
+                                    )
+                    except Exception as e:
+                        self.logger.error(f"加载上次配置文件失败: {str(e)}")
+                        messagebox.showerror(
+                            language_manager.get_text("error"),
+                            language_manager.get_text("load_last_config_error")
+                        )
+                        
+        except Exception as e:
+            self.logger.error(f"加载上次配置时出错: {str(e)}")
+            
+    def _save_config_path(self, path: str):
+        """保存配置文件路径
+        
+        Args:
+            path: 文件路径
+        """
+        try:
+            # 确保data目录存在
+            os.makedirs('data', exist_ok=True)
+            
+            # 读取现有配置
+            config = {}
+            if os.path.exists('data/app_config.json'):
+                with open('data/app_config.json', 'r', encoding='utf-8') as f:
+                    config = json.load(f)
+            
+            # 更新配置
+            config['last_config_path'] = path
+            
+            # 保存配置
+            with open('data/app_config.json', 'w', encoding='utf-8') as f:
+                json.dump(config, f, indent=4, ensure_ascii=False)
+                
+            self.logger.info(f"成功保存配置文件路径到app_config.json: {path}")
+                
+        except Exception as e:
+            self.logger.error(f"保存配置文件路径时出错: {str(e)}", exc_info=True)
+            
+    def _save_bom_path(self, path: str):
+        """保存BOM文件路径
+        
+        Args:
+            path: 文件路径
+        """
+        try:
+            # 确保data目录存在
+            os.makedirs('data', exist_ok=True)
+            
+            # 读取现有配置
+            config = {}
+            if os.path.exists('data/app_config.json'):
+                with open('data/app_config.json', 'r', encoding='utf-8') as f:
+                    config = json.load(f)
+            
+            # 更新配置
+            config['last_bom_path'] = path
+            
+            # 保存配置
+            with open('data/app_config.json', 'w', encoding='utf-8') as f:
+                json.dump(config, f, indent=4, ensure_ascii=False)
+                
+            self.logger.info(f"成功保存BOM文件路径到app_config.json: {path}")
+                
+        except Exception as e:
+            self.logger.error(f"保存BOM文件路径时出错: {str(e)}", exc_info=True)
