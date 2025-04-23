@@ -1,7 +1,7 @@
 {
-    "app_name": "ZK Logic Builder",
+    "app_name": "ZK配置器",
     "version": "1.0.0",
-    "language": "de",
+    "language": "zh",
     "supported_languages": [
         "zh",
         "en",
@@ -38,7 +38,7 @@
         },
         "font": {
             "family": "Microsoft YaHei",
-            "size": 8
+            "size": 10
         },
         "toolbar": {
             "icon_size": 24,
@@ -55,8 +55,6 @@
         "file_enabled": true,
         "detailed_format": false
     },
-    "last_updated": "2025-04-09",
     "last_config_path": "C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm",
-    "last_logic_path": "C:/Users/mengy/Desktop/1.json",
-    "last_logic_exported": false
+    "last_bom_path": "C:/Users/mengy/Desktop/BOM映射表.xlsx"
 }

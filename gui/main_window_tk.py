@@ -253,7 +253,12 @@ class MainWindow:
     def _create_center_panel(self):
         """创建中间逻辑编辑面板内容"""
         # 创建逻辑编辑面板
-        self.logic_panel = LogicPanel(self.center_panel, self.logic_builder)
+        self.logic_panel = LogicPanel(
+            self.center_panel, 
+            self.logic_builder,
+            config_processor=self.config_processor,
+            bom_processor=self.bom_processor
+        )
         self.logic_panel.pack(fill=BOTH, expand=YES)
         
     def _create_right_panel(self):

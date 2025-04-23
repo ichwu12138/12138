@@ -79,6 +79,14 @@ class ConfigPanel(ttk.Frame):
                 if hasattr(self.master, 'main_window'):
                     self.master.main_window._save_config_path(file_path)
                     self.logger.info(f"已保存配置文件路径到app_config.json: {file_path}")
+                else:
+                    # 尝试从根窗口获取MainWindow实例
+                    root = self.winfo_toplevel()
+                    if hasattr(root, 'main_window'):
+                        root.main_window._save_config_path(file_path)
+                        self.logger.info(f"已保存配置文件路径到app_config.json: {file_path}")
+                    else:
+                        self.logger.warning("无法保存配置文件路径：未找到MainWindow实例")
                 
                 # 显示成功消息
                 messagebox.showinfo(

@@ -17,15 +17,28 @@ class ExpressionValidator:
     BOOL_OPERATORS = {"AND", "OR", "NOT"}  # 布尔操作符
     IMPLICATION_OPERATOR = "→"  # 蕴含操作符
     
-    @staticmethod
-    def is_k_code(token: str) -> bool:
+    def __init__(self, config_processor=None, bom_processor=None):
+        """初始化验证器
+        
+        Args:
+            config_processor: 配置处理器实例
+            bom_processor: BOM处理器实例
+        """
+        self.config_processor = config_processor
+        self.bom_processor = bom_processor
+    
+    def is_k_code(self, token: str) -> bool:
         """检查是否为K码"""
+        if self.config_processor:
+            return self.config_processor.is_valid_k_code(token)
         return bool(re.match(r'^K\d+(?:_\d+)*$', token))
     
-    @staticmethod
-    def is_bom_code(token: str) -> bool:
+    def is_bom_code(self, token: str) -> bool:
         """检查是否为BOM码"""
-        return bool(re.match(r'^BOM\d+(?:_\d+)*$', token))
+        if self.bom_processor:
+            return self.bom_processor.is_valid_bom_code(token)
+        # 如果没有BOM处理器，使用正则表达式作为后备方案
+        return bool(re.match(r'^(BOM\d+(?:_\d+)*|PL-[A-Za-z0-9-]+)$', token))
     
     @staticmethod
     def validate_bool_expression(

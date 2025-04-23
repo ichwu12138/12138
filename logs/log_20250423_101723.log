@@ -1,0 +1,143 @@
+2025-04-23 10:17:23,108 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250423_101723.log
+2025-04-23 10:17:23,359 [INFO] __main__ - 正在启动程序...
+2025-04-23 10:17:23,359 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-23 10:17:23,360 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-23 10:17:23,360 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-23 10:17:23,382 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-23 10:17:24,875 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-23 10:17:24,907 [INFO] __main__ - 语言选择结果: zh
+2025-04-23 10:17:24,907 [INFO] __main__ - 正在创建主题选择对话框...
+2025-04-23 10:17:24,907 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-04-23 10:17:24,914 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-04-23 10:17:25,861 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-04-23 10:17:25,886 [INFO] __main__ - 主题选择结果: light
+2025-04-23 10:17:25,902 [INFO] __main__ - 正在配置主窗口...
+2025-04-23 10:17:25,997 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-23 10:17:25,998 [INFO] core.logic_builder - 已加载 6 条规则
+2025-04-23 10:17:26,049 [INFO] __main__ - MainWindow实例创建完成
+2025-04-23 10:17:26,351 [INFO] __main__ - 开始mainloop()...
+2025-04-23 10:17:28,182 [INFO] core.config_processor - 找到工作表: ['TD', '0.模板&Vorlage', '1.Fahrgestell', '2.Fahrzeug allgemein', '3.Beschriftung&Kennzeichnung', '4. Anbauten&Fahrgestellarbeiten', '5. Fahrer_Mannschaftsraum', '6.Koffer', '7.Lichtmast', '8.Pumpenanlage', '9.Seilwinde&Generator', '10.Halterungen']
+2025-04-23 10:17:28,182 [DEBUG] core.config_processor - 跳过工作表: TD
+2025-04-23 10:17:28,183 [DEBUG] core.config_processor - 跳过工作表: 0.模板&Vorlage
+2025-04-23 10:17:28,183 [INFO] core.config_processor - 处理工作表: 1.Fahrgestell -> 模块: 1.Fahrgestell
+2025-04-23 10:17:28,201 [INFO] core.config_processor - 处理工作表: 2.Fahrzeug allgemein -> 模块: 2.Fahrzeug allgemein
+2025-04-23 10:17:28,217 [INFO] core.config_processor - 处理工作表: 3.Beschriftung&Kennzeichnung -> 模块: 3.Beschriftung&Kennzeichnung
+2025-04-23 10:17:28,233 [INFO] core.config_processor - 处理工作表: 4. Anbauten&Fahrgestellarbeiten -> 模块: 4.Anbauten&Fahrgestellarbeiten
+2025-04-23 10:17:28,248 [INFO] core.config_processor - 处理工作表: 5. Fahrer_Mannschaftsraum -> 模块: 5.Fahrer_Mannschaftsraum
+2025-04-23 10:17:28,268 [INFO] core.config_processor - 处理工作表: 6.Koffer -> 模块: 6.Koffer
+2025-04-23 10:17:28,284 [INFO] core.config_processor - 处理工作表: 7.Lichtmast -> 模块: 7.Lichtmast
+2025-04-23 10:17:28,305 [INFO] core.config_processor - 处理工作表: 8.Pumpenanlage -> 模块: 8.Pumpenanlage
+2025-04-23 10:17:28,327 [INFO] core.config_processor - 处理工作表: 9.Seilwinde&Generator -> 模块: 9.Seilwinde&Generator
+2025-04-23 10:17:28,345 [INFO] core.config_processor - 处理工作表: 10.Halterungen -> 模块: 10.Halterungen
+2025-04-23 10:17:28,362 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-23 10:17:28,365 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-23 10:17:28,366 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-23 10:17:29,841 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-23 10:17:29,846 [INFO] core.bom_processor - 找到工作表: ['MAX-gruppe', 'K码表', '配置', 'Sheet1']
+2025-04-23 10:17:29,857 [INFO] core.bom_processor - BOM文件导入成功
+2025-04-23 10:17:29,858 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-23 10:17:29,860 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-23 10:17:29,860 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-23 10:17:34,520 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I005
+2025-04-23 10:17:34,522 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [2] PL-GrundKabine 10019234 - Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+(Z-Cab NG Alpas 3 RAL XXXX
+Z-Cab NG Alpas 3 RAL XXXX)
+2025-04-23 10:17:34,523 [INFO] gui.bom_panel - BomPanel: 提取到占位符: PL-GrundKabine, Baugruppe码: 10019234
+2025-04-23 10:17:34,524 [INFO] gui.bom_panel - BomPanel: 生成的代码: PL-GrundKabine-10019234
+2025-04-23 10:17:34,525 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-23 10:17:34,525 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-23 10:17:34,526 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-23 10:17:34,527 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-GrundKabine-10019234
+2025-04-23 10:17:35,746 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-GrundKabine-10019234
+2025-04-23 10:18:26,169 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I076
+2025-04-23 10:18:26,170 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: F22 Korrosionsschutz
+2025-04-23 10:18:26,170 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: F22
+2025-04-23 10:18:26,170 [DEBUG] gui.config_panel - ConfigPanel: 忽略非K码: F22
+2025-04-23 10:18:29,841 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I077
+2025-04-23 10:18:29,842 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K03_02_01 Unterbodenschutz
+2025-04-23 10:18:29,842 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K03_02_01
+2025-04-23 10:18:29,843 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K03_02_01
+2025-04-23 10:18:29,843 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-23 10:18:29,843 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-23 10:18:29,844 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-23 10:18:29,844 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K03_02_01
+2025-04-23 10:18:29,845 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K03_02_01
+2025-04-23 10:20:32,275 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I077
+2025-04-23 10:20:32,276 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K03_02_01 Unterbodenschutz
+2025-04-23 10:20:32,277 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K03_02_01
+2025-04-23 10:20:32,277 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K03_02_01
+2025-04-23 10:20:32,277 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-23 10:20:32,277 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-23 10:20:32,278 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-23 10:20:32,278 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K03_02_01
+2025-04-23 10:20:32,278 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K03_02_01
+2025-04-23 10:20:33,576 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I077
+2025-04-23 10:20:33,577 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K03_02_01 Unterbodenschutz
+2025-04-23 10:20:33,578 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K03_02_01
+2025-04-23 10:20:33,578 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K03_02_01
+2025-04-23 10:20:33,579 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-23 10:20:33,579 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-23 10:20:33,580 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-23 10:20:33,580 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K03_02_01
+2025-04-23 10:20:37,751 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K03_02_01
+2025-04-23 10:20:38,442 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I006
+2025-04-23 10:20:38,443 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [2] PL-GrundKabine 10019235 - Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+(Z-Cab NG Alpas 3 RAL 3000
+Z-Cab NG Alpas 3 RAL 3000)
+2025-04-23 10:20:38,443 [INFO] gui.bom_panel - BomPanel: 提取到占位符: PL-GrundKabine, Baugruppe码: 10019235
+2025-04-23 10:20:38,444 [INFO] gui.bom_panel - BomPanel: 生成的代码: PL-GrundKabine-10019235
+2025-04-23 10:20:38,445 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-23 10:20:38,445 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-23 10:20:38,446 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-23 10:20:38,447 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-GrundKabine-10019235
+2025-04-23 10:20:38,447 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-GrundKabine-10019235
+2025-04-23 10:21:05,403 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I077
+2025-04-23 10:21:05,404 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K03_02_01 Unterbodenschutz
+2025-04-23 10:21:05,404 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K03_02_01
+2025-04-23 10:21:05,405 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K03_02_01
+2025-04-23 10:21:05,406 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-23 10:21:05,406 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-23 10:21:05,407 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-23 10:21:05,407 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K03_02_01
+2025-04-23 10:21:43,239 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K03_02_01
+2025-04-23 10:21:47,453 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I077
+2025-04-23 10:21:47,454 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K03_02_01 Unterbodenschutz
+2025-04-23 10:21:47,455 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K03_02_01
+2025-04-23 10:21:47,456 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K03_02_01
+2025-04-23 10:21:47,456 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-23 10:21:47,457 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-23 10:21:47,458 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-23 10:21:47,459 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K03_02_01
+2025-04-23 10:21:47,460 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K03_02_01
+2025-04-23 10:21:52,843 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I077
+2025-04-23 10:21:52,844 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K03_02_01 Unterbodenschutz
+2025-04-23 10:21:52,844 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K03_02_01
+2025-04-23 10:21:52,845 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K03_02_01
+2025-04-23 10:21:52,846 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-23 10:21:52,846 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-23 10:21:52,847 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-23 10:21:52,848 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K03_02_01
+2025-04-23 10:21:52,849 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K03_02_01
+2025-04-23 10:22:02,133 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I077
+2025-04-23 10:22:02,134 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K03_02_01 Unterbodenschutz
+2025-04-23 10:22:02,135 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K03_02_01
+2025-04-23 10:22:02,136 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K03_02_01
+2025-04-23 10:22:02,136 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-23 10:22:02,137 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-23 10:22:02,138 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-23 10:22:02,138 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K03_02_01
+2025-04-23 10:22:02,139 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K03_02_01
+2025-04-23 10:22:04,225 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I005
+2025-04-23 10:22:04,226 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [2] PL-GrundKabine 10019234 - Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+(Z-Cab NG Alpas 3 RAL XXXX
+Z-Cab NG Alpas 3 RAL XXXX)
+2025-04-23 10:22:04,226 [INFO] gui.bom_panel - BomPanel: 提取到占位符: PL-GrundKabine, Baugruppe码: 10019234
+2025-04-23 10:22:04,226 [INFO] gui.bom_panel - BomPanel: 生成的代码: PL-GrundKabine-10019234
+2025-04-23 10:22:04,227 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-23 10:22:04,227 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-23 10:22:04,227 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-23 10:22:04,228 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-GrundKabine-10019234
+2025-04-23 10:22:04,228 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-GrundKabine-10019234

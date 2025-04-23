@@ -128,7 +128,26 @@ class LanguageManager:
             "import_bom_success": "BOM文件导入成功",
             "error_title": "错误",
             "warning_title": "警告",
-            "confirm_title": "确认"
+            "confirm_title": "确认",
+            "error_invalid_before_k": "K码前面必须是左括号、AND、OR或NOT",
+            "error_invalid_before_bom": "BOM码前面必须是→、左括号、AND、OR或NOT",
+            "error_invalid_first_input": "表达式必须以K码、左括号或NOT开头",
+            "error_invalid_sequence": "输入顺序不正确，请检查逻辑表达式规则",
+            "error_unmatched_parentheses": "括号不匹配，请检查左右括号数量",
+            "error_consecutive_not": "NOT操作符不能连续使用",
+            "error_consecutive_left_parentheses": "左括号之间必须有其他内容",
+            "error_consecutive_right_parentheses": "右括号之间必须有其他内容",
+            "error_empty_parentheses": "括号内必须有内容",
+            "error_parentheses_after_not": "NOT后面不能直接跟右括号",
+            "error_operator_before_right_parenthesis": "右括号前不能是操作符",
+            "error_missing_left_parenthesis": "缺少对应的左括号",
+            "error_missing_right_parenthesis": "缺少对应的右括号",
+            "error_invalid_after_operator": "操作符后面必须是K码、BOM码、NOT或左括号",
+            "error_invalid_before_operator": "操作符前面必须是K码、BOM码或右括号",
+            "error_invalid_after_not": "NOT后面必须是K码、BOM码或左括号",
+            "error_invalid_after_left_parenthesis": "左括号后面必须是K码、NOT或左括号",
+            "error_invalid_before_right_parenthesis": "右括号前面必须是K码、BOM码或右括号",
+            "error_invalid_before_implication": "蕴含符号(→)前面必须是K码或右括号"
         })
         
         # 英文翻译
@@ -239,7 +258,26 @@ class LanguageManager:
             "import_bom_success": "BOM file imported successfully",
             "error_title": "Error",
             "warning_title": "Warning",
-            "confirm_title": "Confirm"
+            "confirm_title": "Confirm",
+            "error_invalid_before_k": "K code must be preceded by left parenthesis, AND, OR, or NOT",
+            "error_invalid_before_bom": "BOM code must be preceded by →, left parenthesis, AND, OR, or NOT",
+            "error_invalid_first_input": "Expression must start with K code, left parenthesis, or NOT",
+            "error_invalid_sequence": "Invalid input sequence, please check logic expression rules",
+            "error_unmatched_parentheses": "Unmatched parentheses, please check the number of left and right parentheses",
+            "error_consecutive_not": "NOT operators cannot be used consecutively",
+            "error_consecutive_left_parentheses": "Left parentheses must be separated by other content",
+            "error_consecutive_right_parentheses": "Right parentheses must be separated by other content",
+            "error_empty_parentheses": "Parentheses cannot be empty",
+            "error_parentheses_after_not": "Right parenthesis cannot follow NOT directly",
+            "error_operator_before_right_parenthesis": "Right parenthesis cannot follow an operator",
+            "error_missing_left_parenthesis": "Missing corresponding left parenthesis",
+            "error_missing_right_parenthesis": "Missing corresponding right parenthesis",
+            "error_invalid_after_operator": "Operator must be followed by K code, BOM code, NOT, or left parenthesis",
+            "error_invalid_before_operator": "Operator must be preceded by K code, BOM code, or right parenthesis",
+            "error_invalid_after_not": "NOT must be followed by K code, BOM code, or left parenthesis",
+            "error_invalid_after_left_parenthesis": "Left parenthesis must be followed by K code, NOT, or left parenthesis",
+            "error_invalid_before_right_parenthesis": "Right parenthesis must be preceded by K code, BOM code, or right parenthesis",
+            "error_invalid_before_implication": "Implication operator (→) must be preceded by K code or right parenthesis"
         })
         
         # 德文翻译
@@ -350,7 +388,26 @@ class LanguageManager:
             "import_bom_success": "BOM-Datei erfolgreich importiert",
             "error_title": "Fehler",
             "warning_title": "Warnung",
-            "confirm_title": "Bestätigen"
+            "confirm_title": "Bestätigen",
+            "error_invalid_before_k": "K-Code muss von linker Klammer, AND, OR oder NOT vorangegangen werden",
+            "error_invalid_before_bom": "BOM-Code muss von →, linker Klammer, AND, OR oder NOT vorangegangen werden",
+            "error_invalid_first_input": "Ausdruck muss mit K-Code, linker Klammer oder NOT beginnen",
+            "error_invalid_sequence": "Ungültige Eingabereihenfolge, bitte prüfen Sie die Regeln für logische Ausdrücke",
+            "error_unmatched_parentheses": "Nicht übereinstimmende Klammern, bitte überprüfen Sie die Anzahl der linken und rechten Klammern",
+            "error_consecutive_not": "NOT-Operatoren können nicht aufeinanderfolgend verwendet werden",
+            "error_consecutive_left_parentheses": "Linke Klammern müssen durch anderen Inhalt getrennt sein",
+            "error_consecutive_right_parentheses": "Rechte Klammern müssen durch anderen Inhalt getrennt sein",
+            "error_empty_parentheses": "Klammern dürfen nicht leer sein",
+            "error_parentheses_after_not": "Rechte Klammer kann nicht direkt nach NOT folgen",
+            "error_operator_before_right_parenthesis": "Rechte Klammer kann nicht nach einem Operator folgen",
+            "error_missing_left_parenthesis": "Fehlende entsprechende linke Klammer",
+            "error_missing_right_parenthesis": "Fehlende entsprechende rechte Klammer",
+            "error_invalid_after_operator": "Nach einem Operator muss ein K-Code, BOM-Code, NOT oder eine linke Klammer folgen",
+            "error_invalid_before_operator": "Vor einem Operator muss ein K-Code, BOM-Code oder eine rechte Klammer stehen",
+            "error_invalid_after_not": "Nach NOT muss ein K-Code, BOM-Code oder eine linke Klammer folgen",
+            "error_invalid_after_left_parenthesis": "Nach einer linken Klammer muss ein K-Code, NOT oder eine linke Klammer folgen",
+            "error_invalid_before_right_parenthesis": "Vor einer rechten Klammer muss ein K-Code, BOM-Code oder eine rechte Klammer stehen",
+            "error_invalid_before_implication": "Vor dem Implikationsoperator (→) muss ein K-Code oder eine rechte Klammer stehen"
         })
         
     def add_callback(self, callback):

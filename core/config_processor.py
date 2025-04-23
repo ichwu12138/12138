@@ -106,9 +106,9 @@ class ConfigProcessor:
                 
                 # 提取F码和K码
                 f_code_match = re.search(r'F\d+', str(row['f_code']))
-                k_code = str(row['k_code']).strip()
+                k_code = str(row['k_code']).strip()  # 直接使用选项ID列的值作为K码
                 
-                if f_code_match:
+                if f_code_match and k_code:
                     f_code = f_code_match.group()
                     
                     # 添加到模块的F码列表
@@ -177,4 +177,26 @@ class ConfigProcessor:
         """清空数据"""
         self.modules.clear()
         self.f_k_mapping.clear()
-        self.code_names.clear() 
+        self.code_names.clear()
+    
+    def get_all_k_codes(self) -> List[str]:
+        """获取所有有效的K码
+        
+        Returns:
+            List[str]: K码列表
+        """
+        k_codes = []
+        for f_codes in self.f_k_mapping.values():
+            k_codes.extend(f_codes)
+        return list(set(k_codes))  # 去重
+    
+    def is_valid_k_code(self, code: str) -> bool:
+        """检查是否为有效的K码
+        
+        Args:
+            code: 要检查的代码
+            
+        Returns:
+            bool: 是否为有效的K码
+        """
+        return code in self.get_all_k_codes() 

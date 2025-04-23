@@ -80,14 +80,17 @@ class BomProcessor:
                     except (ValueError, TypeError):
                         continue  # 跳过无效的层级值
                         
-                    item_id = str(row["Baugruppe"]).strip()
+                    baugruppe = str(row["Baugruppe"]).strip()
                     placeholder = str(row["占位符"]).strip() if not pd.isna(row["占位符"]) else ""
                     description = str(row["Beschreibung"]).strip()
                     long_text = str(row["Langtext / long text"]).strip() if not pd.isna(row["Langtext / long text"]) else ""
                     
                     # 跳过空行
-                    if pd.isna(item_id):
+                    if pd.isna(baugruppe):
                         continue
+                    
+                    # 构建BOM码 - 使用占位符和Baugruppe的组合
+                    bom_code = f"{placeholder}-{baugruppe}" if placeholder else baugruppe
                     
                     # 创建节点数据
                     item_data = {
@@ -95,15 +98,16 @@ class BomProcessor:
                         "level": level,
                         "placeholder": placeholder,
                         "long_text": long_text,
-                        "sub_items": {}
+                        "sub_items": {},
+                        "bom_code": bom_code  # 保存构建的BOM码
                     }
                     
                     # 处理层级关系
                     if level == 1:
                         # 一级节点直接添加到根
-                        self.bom_data[item_id] = item_data
-                        current_level_items = {1: item_id}  # 重置层级记录
-                        current_parent = item_id
+                        self.bom_data[baugruppe] = item_data
+                        current_level_items = {1: baugruppe}  # 重置层级记录
+                        current_parent = baugruppe
                         last_level = 1
                     else:
                         # 找到正确的父节点
@@ -112,7 +116,7 @@ class BomProcessor:
                             if current_parent:
                                 parent_data = self._find_item_by_id(current_parent)
                                 if parent_data:
-                                    parent_data["sub_items"][item_id] = item_data
+                                    parent_data["sub_items"][baugruppe] = item_data
                         else:
                             # 层级相同或减小，使用对应上级层级的项作为父节点
                             parent_level = level - 1
@@ -120,11 +124,11 @@ class BomProcessor:
                             if parent_id:
                                 parent_data = self._find_item_by_id(parent_id)
                                 if parent_data:
-                                    parent_data["sub_items"][item_id] = item_data
+                                    parent_data["sub_items"][baugruppe] = item_data
                     
                     # 更新当前层级的项
-                    current_level_items[level] = item_id
-                    current_parent = item_id
+                    current_level_items[level] = baugruppe
+                    current_parent = baugruppe
                     last_level = level
                     
                 except Exception as e:
@@ -251,4 +255,37 @@ class BomProcessor:
         
     def clear(self) -> None:
         """清空数据"""
-        self.bom_data.clear() 
+        self.bom_data.clear()
+    
+    def get_all_bom_codes(self) -> List[str]:
+        """获取所有有效的BOM码
+        
+        Returns:
+            List[str]: BOM码列表，格式为 "占位符-Baugruppe"
+        """
+        bom_codes = []
+        
+        def collect_bom_codes(items: Dict[str, Dict[str, Any]]):
+            for item_data in items.values():
+                # 使用保存的BOM码
+                if "bom_code" in item_data:
+                    bom_codes.append(item_data["bom_code"])
+                
+                # 递归处理子项
+                if "sub_items" in item_data:
+                    collect_bom_codes(item_data["sub_items"])
+        
+        # 从根节点开始收集
+        collect_bom_codes(self.bom_data)
+        return bom_codes
+        
+    def is_valid_bom_code(self, code: str) -> bool:
+        """检查是否为有效的BOM码
+        
+        Args:
+            code: 要检查的代码
+            
+        Returns:
+            bool: 是否为有效的BOM码
+        """
+        return code in self.get_all_bom_codes() 
