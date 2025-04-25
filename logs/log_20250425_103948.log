@@ -1,0 +1,80 @@
+2025-04-25 10:39:48,117 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250425_103948.log
+2025-04-25 10:39:48,390 [INFO] __main__ - 正在启动程序...
+2025-04-25 10:39:48,390 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-25 10:39:48,391 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-25 10:39:48,391 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-25 10:39:48,412 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-25 10:39:49,476 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-25 10:39:49,496 [INFO] __main__ - 语言选择结果: zh
+2025-04-25 10:39:49,497 [INFO] __main__ - 正在创建主题选择对话框...
+2025-04-25 10:39:49,497 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-04-25 10:39:49,510 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-04-25 10:39:50,341 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-04-25 10:39:50,361 [INFO] __main__ - 主题选择结果: light
+2025-04-25 10:39:50,376 [INFO] __main__ - 正在配置主窗口...
+2025-04-25 10:39:50,470 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-25 10:39:50,471 [INFO] core.logic_builder - 已加载 7 条规则
+2025-04-25 10:39:50,516 [INFO] __main__ - MainWindow实例创建完成
+2025-04-25 10:39:50,790 [INFO] __main__ - 开始mainloop()...
+2025-04-25 10:39:52,323 [INFO] core.config_processor - 找到工作表: ['TD', '0.模板&Vorlage', '1.Fahrgestell', '2.Fahrzeug allgemein', '3.Beschriftung&Kennzeichnung', '4. Anbauten&Fahrgestellarbeiten', '5. Fahrer_Mannschaftsraum', '6.Koffer', '7.Lichtmast', '8.Pumpenanlage', '9.Seilwinde&Generator', '10.Halterungen']
+2025-04-25 10:39:52,323 [DEBUG] core.config_processor - 跳过工作表: TD
+2025-04-25 10:39:52,324 [DEBUG] core.config_processor - 跳过工作表: 0.模板&Vorlage
+2025-04-25 10:39:52,324 [INFO] core.config_processor - 处理工作表: 1.Fahrgestell -> 模块: 1.Fahrgestell
+2025-04-25 10:39:52,344 [INFO] core.config_processor - 处理工作表: 2.Fahrzeug allgemein -> 模块: 2.Fahrzeug allgemein
+2025-04-25 10:39:52,360 [INFO] core.config_processor - 处理工作表: 3.Beschriftung&Kennzeichnung -> 模块: 3.Beschriftung&Kennzeichnung
+2025-04-25 10:39:52,376 [INFO] core.config_processor - 处理工作表: 4. Anbauten&Fahrgestellarbeiten -> 模块: 4.Anbauten&Fahrgestellarbeiten
+2025-04-25 10:39:52,392 [INFO] core.config_processor - 处理工作表: 5. Fahrer_Mannschaftsraum -> 模块: 5.Fahrer_Mannschaftsraum
+2025-04-25 10:39:52,412 [INFO] core.config_processor - 处理工作表: 6.Koffer -> 模块: 6.Koffer
+2025-04-25 10:39:52,428 [INFO] core.config_processor - 处理工作表: 7.Lichtmast -> 模块: 7.Lichtmast
+2025-04-25 10:39:52,442 [INFO] core.config_processor - 处理工作表: 8.Pumpenanlage -> 模块: 8.Pumpenanlage
+2025-04-25 10:39:52,458 [INFO] core.config_processor - 处理工作表: 9.Seilwinde&Generator -> 模块: 9.Seilwinde&Generator
+2025-04-25 10:39:52,474 [INFO] core.config_processor - 处理工作表: 10.Halterungen -> 模块: 10.Halterungen
+2025-04-25 10:39:52,488 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-25 10:39:52,492 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-25 10:39:52,492 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-25 10:39:53,885 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 10:39:53,885 [INFO] core.bom_processor - 已清空现有数据
+2025-04-25 10:39:53,885 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-04-25 10:39:53,890 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['MAX-gruppe', 'K码表', '配置', 'Sheet1']
+2025-04-25 10:39:53,890 [INFO] core.bom_processor - 正在读取 MAX-gruppe 工作表...
+2025-04-25 10:39:53,898 [INFO] core.bom_processor - 成功读取工作表，共 154 行数据
+2025-04-25 10:39:53,899 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-04-25 10:39:53,900 [INFO] core.bom_processor - 过滤空层级后剩余 153 行数据
+2025-04-25 10:39:53,901 [INFO] core.bom_processor - 
+开始处理数据...
+2025-04-25 10:39:53,904 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-04-25 10:39:53,904 [INFO] core.bom_processor - 第 1 级节点数量: 1
+2025-04-25 10:39:53,905 [INFO] core.bom_processor - 第 2 级节点数量: 133
+2025-04-25 10:39:53,905 [INFO] core.bom_processor - 第 3 级节点数量: 19
+2025-04-25 10:39:53,905 [INFO] core.bom_processor - BOM文件导入成功，共处理 153 个项目
+2025-04-25 10:39:53,905 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 10:39:53,906 [INFO] gui.bom_panel - 开始刷新树状图
+2025-04-25 10:39:53,906 [INFO] gui.bom_panel - 第 1 级节点数量: 1
+2025-04-25 10:39:53,906 [INFO] gui.bom_panel - 第 2 级节点数量: 133
+2025-04-25 10:39:53,906 [INFO] gui.bom_panel - 第 3 级节点数量: 19
+2025-04-25 10:39:53,908 [INFO] gui.bom_panel - 树状图刷新完成
+2025-04-25 10:39:53,909 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 10:39:53,909 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 10:40:11,407 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I007
+2025-04-25 10:40:11,407 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1115355 - Deckenmodul Standard / ceiling module standard
+Z-Cab NG / Z-cab NG
+
+1117649 - Beleuchtungseinheit Grün-Weiß / lighting unit green-white
+Z-Cab NG Low Budget Version / Z-Cab NG low budget version
+
+1117650 - Beleuchtungseinheit Rot-Weiß / lighting unit red-white
+Z-Cab NG Low Budget Version / Z-Cab NG low budget version
+2025-04-25 10:40:11,408 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1115355
+2025-04-25 10:40:11,408 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Beleuchtungseinheit
+2025-04-25 10:40:11,409 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Beleuchtungseinheit-1115355
+2025-04-25 10:40:11,409 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-25 10:40:11,410 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-25 10:40:11,410 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-25 10:40:11,410 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Beleuchtungseinheit-1115355
+2025-04-25 10:40:12,547 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Beleuchtungseinheit-1115355
+2025-04-25 10:40:12,547 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Beleuchtungseinheit-1115355
+2025-04-25 10:43:04,744 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I001
+2025-04-25 10:43:04,745 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [1] PL-Kabine 0000000010017913NK
+Modulkabine S301000 / S302000
+Modulkabine S301000 / S302000

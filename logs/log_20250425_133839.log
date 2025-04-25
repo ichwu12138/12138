@@ -1,0 +1,129 @@
+2025-04-25 13:38:39,152 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250425_133839.log
+2025-04-25 13:38:39,395 [INFO] __main__ - 正在启动程序...
+2025-04-25 13:38:39,395 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-25 13:38:39,395 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-25 13:38:39,396 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-25 13:38:39,421 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-25 13:38:40,758 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-25 13:38:40,777 [INFO] __main__ - 语言选择结果: zh
+2025-04-25 13:38:40,778 [INFO] __main__ - 正在创建主题选择对话框...
+2025-04-25 13:38:40,778 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-04-25 13:38:40,787 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-04-25 13:38:41,728 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-04-25 13:38:41,748 [INFO] __main__ - 主题选择结果: light
+2025-04-25 13:38:41,764 [INFO] __main__ - 正在配置主窗口...
+2025-04-25 13:38:41,980 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-25 13:38:41,981 [INFO] core.logic_builder - 已加载 7 条规则
+2025-04-25 13:38:42,057 [INFO] __main__ - MainWindow实例创建完成
+2025-04-25 13:38:42,378 [INFO] __main__ - 开始mainloop()...
+2025-04-25 13:38:44,965 [INFO] core.config_processor - 找到工作表: ['TD', '0.模板&Vorlage', '1.Fahrgestell', '2.Fahrzeug allgemein', '3.Beschriftung&Kennzeichnung', '4. Anbauten&Fahrgestellarbeiten', '5. Fahrer_Mannschaftsraum', '6.Koffer', '7.Lichtmast', '8.Pumpenanlage', '9.Seilwinde&Generator', '10.Halterungen']
+2025-04-25 13:38:44,965 [DEBUG] core.config_processor - 跳过工作表: TD
+2025-04-25 13:38:44,965 [DEBUG] core.config_processor - 跳过工作表: 0.模板&Vorlage
+2025-04-25 13:38:44,966 [INFO] core.config_processor - 处理工作表: 1.Fahrgestell -> 模块: 1.Fahrgestell
+2025-04-25 13:38:44,982 [INFO] core.config_processor - 处理工作表: 2.Fahrzeug allgemein -> 模块: 2.Fahrzeug allgemein
+2025-04-25 13:38:44,999 [INFO] core.config_processor - 处理工作表: 3.Beschriftung&Kennzeichnung -> 模块: 3.Beschriftung&Kennzeichnung
+2025-04-25 13:38:45,014 [INFO] core.config_processor - 处理工作表: 4. Anbauten&Fahrgestellarbeiten -> 模块: 4.Anbauten&Fahrgestellarbeiten
+2025-04-25 13:38:45,031 [INFO] core.config_processor - 处理工作表: 5. Fahrer_Mannschaftsraum -> 模块: 5.Fahrer_Mannschaftsraum
+2025-04-25 13:38:45,052 [INFO] core.config_processor - 处理工作表: 6.Koffer -> 模块: 6.Koffer
+2025-04-25 13:38:45,067 [INFO] core.config_processor - 处理工作表: 7.Lichtmast -> 模块: 7.Lichtmast
+2025-04-25 13:38:45,081 [INFO] core.config_processor - 处理工作表: 8.Pumpenanlage -> 模块: 8.Pumpenanlage
+2025-04-25 13:38:45,096 [INFO] core.config_processor - 处理工作表: 9.Seilwinde&Generator -> 模块: 9.Seilwinde&Generator
+2025-04-25 13:38:45,112 [INFO] core.config_processor - 处理工作表: 10.Halterungen -> 模块: 10.Halterungen
+2025-04-25 13:38:45,126 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-25 13:38:45,129 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-25 13:38:45,129 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-25 13:38:48,746 [INFO] gui.bom_panel - 发现上次的BOM文件路径: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 13:38:54,134 [INFO] gui.bom_panel - 用户选择了新的BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 13:38:54,134 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 13:38:54,135 [INFO] core.bom_processor - 已清空现有数据
+2025-04-25 13:38:54,135 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-04-25 13:38:54,139 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['MAX-gruppe', 'K码表', '配置', 'Sheet1']
+2025-04-25 13:38:54,140 [INFO] core.bom_processor - 正在读取 MAX-gruppe 工作表...
+2025-04-25 13:38:54,147 [INFO] core.bom_processor - 成功读取工作表，共 154 行数据
+2025-04-25 13:38:54,148 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-04-25 13:38:54,149 [INFO] core.bom_processor - 过滤空层级后剩余 153 行数据
+2025-04-25 13:38:54,149 [INFO] core.bom_processor - 
+开始处理数据...
+2025-04-25 13:38:54,152 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-04-25 13:38:54,153 [INFO] core.bom_processor - 第 1 级节点数量: 1
+2025-04-25 13:38:54,153 [INFO] core.bom_processor - 第 2 级节点数量: 133
+2025-04-25 13:38:54,153 [INFO] core.bom_processor - 第 3 级节点数量: 19
+2025-04-25 13:38:54,153 [INFO] core.bom_processor - BOM文件导入成功，共处理 153 个项目
+2025-04-25 13:38:54,153 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 13:38:54,154 [INFO] gui.bom_panel - 开始刷新树状图
+2025-04-25 13:38:54,154 [INFO] gui.bom_panel - 第 1 级节点数量: 1
+2025-04-25 13:38:54,154 [INFO] gui.bom_panel - 第 2 级节点数量: 133
+2025-04-25 13:38:54,154 [INFO] gui.bom_panel - 第 3 级节点数量: 19
+2025-04-25 13:38:54,156 [INFO] gui.bom_panel - 树状图刷新完成
+2025-04-25 13:38:54,157 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 13:38:54,157 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 13:39:01,882 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I0B8
+2025-04-25 13:39:01,883 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: F36 Löschwasserbehälter
+2025-04-25 13:39:01,883 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: F36
+2025-04-25 13:39:01,883 [DEBUG] gui.config_panel - ConfigPanel: 忽略非K码: F36
+2025-04-25 13:39:02,540 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I0C4
+2025-04-25 13:39:02,541 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: F37 Schaumtank
+2025-04-25 13:39:02,542 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: F37
+2025-04-25 13:39:02,542 [DEBUG] gui.config_panel - ConfigPanel: 忽略非K码: F37
+2025-04-25 13:39:04,556 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I0CF
+2025-04-25 13:39:04,556 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K04_05_01 ohne
+2025-04-25 13:39:04,557 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K04_05_01
+2025-04-25 13:39:04,557 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K04_05_01
+2025-04-25 13:39:04,558 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-25 13:39:04,558 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-25 13:39:04,558 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-25 13:39:04,558 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K04_05_01
+2025-04-25 13:39:04,558 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K04_05_01, 当前表达式: K04_05_01 
+2025-04-25 13:39:04,559 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K04_05_01
+2025-04-25 13:39:05,972 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I0CF
+2025-04-25 13:39:05,972 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K04_05_01 ohne
+2025-04-25 13:39:05,972 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K04_05_01
+2025-04-25 13:39:05,973 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K04_05_01
+2025-04-25 13:39:05,973 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-25 13:39:05,973 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-25 13:39:05,973 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-25 13:39:05,974 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K04_05_01
+2025-04-25 13:39:06,998 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K04_05_01
+2025-04-25 13:39:08,203 [ERROR] gui.logic_panel - 验证token序列时出错: 'list' object has no attribute 'values'
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_panel.py", line 787, in _validate_token_sequence
+    if self.validator.is_bom_code(next_token):
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\utils\validator.py", line 39, in is_bom_code
+    return self.bom_processor.is_valid_bom_code(token)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\core\bom_processor.py", line 368, in is_valid_bom_code
+    return code in self.get_all_bom_codes()
+                   ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\core\bom_processor.py", line 356, in get_all_bom_codes
+    collect_bom_codes(self.bom_data["hierarchy"])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\core\bom_processor.py", line 353, in collect_bom_codes
+    collect_bom_codes(item_data["children"])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\core\bom_processor.py", line 346, in collect_bom_codes
+    for item_data in items.values():
+                     ^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'values'
+2025-04-25 13:40:59,648 [ERROR] gui.logic_panel - 验证token序列时出错: 'list' object has no attribute 'values'
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_panel.py", line 787, in _validate_token_sequence
+    if self.validator.is_bom_code(next_token):
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\utils\validator.py", line 39, in is_bom_code
+    return self.bom_processor.is_valid_bom_code(token)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\core\bom_processor.py", line 368, in is_valid_bom_code
+    return code in self.get_all_bom_codes()
+                   ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\core\bom_processor.py", line 356, in get_all_bom_codes
+    collect_bom_codes(self.bom_data["hierarchy"])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\core\bom_processor.py", line 353, in collect_bom_codes
+    collect_bom_codes(item_data["children"])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\core\bom_processor.py", line 346, in collect_bom_codes
+    for item_data in items.values():
+                     ^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'values'

@@ -1,0 +1,319 @@
+2025-04-25 10:33:11,279 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250425_103311.log
+2025-04-25 10:33:11,513 [INFO] __main__ - 正在启动程序...
+2025-04-25 10:33:11,513 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-25 10:33:11,513 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-25 10:33:11,513 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-25 10:33:11,533 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-25 10:33:14,000 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-25 10:33:14,031 [INFO] __main__ - 语言选择结果: zh
+2025-04-25 10:33:14,031 [INFO] __main__ - 正在创建主题选择对话框...
+2025-04-25 10:33:14,031 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-04-25 10:33:14,040 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-04-25 10:33:14,844 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-04-25 10:33:14,854 [INFO] __main__ - 主题选择结果: light
+2025-04-25 10:33:14,865 [INFO] __main__ - 正在配置主窗口...
+2025-04-25 10:33:15,006 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-25 10:33:15,007 [INFO] core.logic_builder - 已加载 7 条规则
+2025-04-25 10:33:15,084 [INFO] __main__ - MainWindow实例创建完成
+2025-04-25 10:33:15,395 [INFO] __main__ - 开始mainloop()...
+2025-04-25 10:33:16,817 [INFO] core.config_processor - 找到工作表: ['TD', '0.模板&Vorlage', '1.Fahrgestell', '2.Fahrzeug allgemein', '3.Beschriftung&Kennzeichnung', '4. Anbauten&Fahrgestellarbeiten', '5. Fahrer_Mannschaftsraum', '6.Koffer', '7.Lichtmast', '8.Pumpenanlage', '9.Seilwinde&Generator', '10.Halterungen']
+2025-04-25 10:33:16,817 [DEBUG] core.config_processor - 跳过工作表: TD
+2025-04-25 10:33:16,817 [DEBUG] core.config_processor - 跳过工作表: 0.模板&Vorlage
+2025-04-25 10:33:16,818 [INFO] core.config_processor - 处理工作表: 1.Fahrgestell -> 模块: 1.Fahrgestell
+2025-04-25 10:33:16,835 [INFO] core.config_processor - 处理工作表: 2.Fahrzeug allgemein -> 模块: 2.Fahrzeug allgemein
+2025-04-25 10:33:16,851 [INFO] core.config_processor - 处理工作表: 3.Beschriftung&Kennzeichnung -> 模块: 3.Beschriftung&Kennzeichnung
+2025-04-25 10:33:16,866 [INFO] core.config_processor - 处理工作表: 4. Anbauten&Fahrgestellarbeiten -> 模块: 4.Anbauten&Fahrgestellarbeiten
+2025-04-25 10:33:16,881 [INFO] core.config_processor - 处理工作表: 5. Fahrer_Mannschaftsraum -> 模块: 5.Fahrer_Mannschaftsraum
+2025-04-25 10:33:16,902 [INFO] core.config_processor - 处理工作表: 6.Koffer -> 模块: 6.Koffer
+2025-04-25 10:33:16,917 [INFO] core.config_processor - 处理工作表: 7.Lichtmast -> 模块: 7.Lichtmast
+2025-04-25 10:33:16,931 [INFO] core.config_processor - 处理工作表: 8.Pumpenanlage -> 模块: 8.Pumpenanlage
+2025-04-25 10:33:16,946 [INFO] core.config_processor - 处理工作表: 9.Seilwinde&Generator -> 模块: 9.Seilwinde&Generator
+2025-04-25 10:33:16,961 [INFO] core.config_processor - 处理工作表: 10.Halterungen -> 模块: 10.Halterungen
+2025-04-25 10:33:16,975 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-25 10:33:16,978 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-25 10:33:16,978 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-25 10:33:18,142 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 10:33:18,142 [INFO] core.bom_processor - 已清空现有数据
+2025-04-25 10:33:18,143 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-04-25 10:33:18,147 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['MAX-gruppe', 'K码表', '配置', 'Sheet1']
+2025-04-25 10:33:18,147 [INFO] core.bom_processor - 正在读取 MAX-gruppe 工作表...
+2025-04-25 10:33:18,155 [INFO] core.bom_processor - 成功读取工作表，共 154 行数据
+2025-04-25 10:33:18,155 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-04-25 10:33:18,157 [INFO] core.bom_processor - 过滤空层级后剩余 153 行数据
+2025-04-25 10:33:18,158 [INFO] core.bom_processor - 
+开始处理数据...
+2025-04-25 10:33:18,161 [INFO] core.bom_processor - 
+数据处理完成，成功处理 153 行数据
+2025-04-25 10:33:18,161 [INFO] core.bom_processor - 最终数据包含 1 个一级节点
+2025-04-25 10:33:18,161 [INFO] core.bom_processor - BOM文件导入成功，共处理 153 个项目
+2025-04-25 10:33:18,162 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 10:33:18,162 [INFO] gui.bom_panel - 开始刷新树状图，共有 1 个一级节点
+2025-04-25 10:33:18,163 [INFO] gui.bom_panel - 树状图刷新完成
+2025-04-25 10:33:18,165 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 10:33:18,165 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 10:33:27,968 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I005
+2025-04-25 10:33:27,969 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 10019231 - Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+Z-Cab NG Alpas 3 RAL 3000
+Z-Cab NG Alpas 3 RAL 3000
+
+10019232 - Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+Z-Cab NG Alpas 3 RAL 3020
+Z-Cab NG Alpas 3 RAL 3020
+
+10019233 - Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+Z-Cab NG Alpas 3 RAL 9010
+Z-Cab NG Alpas 3 RAL 9010
+
+10019234 - Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+Z-Cab NG Alpas 3 RAL XXXX
+Z-Cab NG Alpas 3 RAL XXXX
+
+10019235 - Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+Z-Cab NG Alpas 3 RAL 3000
+Z-Cab NG Alpas 3 RAL 3000
+
+10019236 - Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+Z-Cab NG Alpas 3 RAL 3020
+Z-Cab NG Alpas 3 RAL 3020
+
+10019237 - Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+Z-Cab NG Alpas 3 RAL 9010
+Z-Cab NG Alpas 3 RAL 9010
+
+10019238 - Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+Z-Cab NG Alpas 3 RAL XXXX
+Z-Cab NG Alpas 3 RAL XXXX
+
+10019239 - Modulkabine Standard MB
+Modul cabin standard MB
+Z-Cab NG Alpas 3 RAL 3000
+Z-Cab NG Alpas 3 RAL 3000
+
+10019240 - Modulkabine Standard MB
+Modul cabin standard MB
+Z-Cab NG Alpas 3 RAL 3020
+Z-Cab NG Alpas 3 RAL 3020
+
+10019241 - Modulkabine Standard MB
+Modul cabin standard MB
+Z-Cab NG Alpas 3 RAL 9010
+Z-Cab NG Alpas 3 RAL 9010
+
+10019242 - Modulkabine Standard MB
+Modul cabin standard MB
+Z-Cab NG Alpas 3 RAL XXXX
+Z-Cab NG Alpas 3 RAL XXXX
+
+10019243 - Modulkabine Standard Scania Neu
+Modul cabine standard Scania new
+Z-Cab NG RAL 3000
+Z-Cab NG RAL 3000
+
+10019244 - Modulkabine Standard Scania Neu
+Modul cabine standard Scania new
+Z-Cab NG RAL 3020
+Z-Cab NG RAL 3020
+
+10019245 - Modulkabine Standard Scania Neu
+Modul cabine standard Scania new
+Z-Cab NG RAL 9010
+Z-Cab NG RAL 9010
+
+10019246 - Modulkabine Standard Scania Neu
+Modul cabine standard Scania new
+Z-Cab NG RAL XXXX
+Z-Cab NG RAL XXXX
+2025-04-25 10:33:27,969 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 10019231
+2025-04-25 10:33:27,970 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-GrundKabine
+2025-04-25 10:33:27,970 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-GrundKabine-10019231
+2025-04-25 10:33:27,970 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-25 10:33:27,970 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-25 10:33:27,970 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-25 10:33:27,970 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-GrundKabine-10019231
+2025-04-25 10:33:29,280 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-GrundKabine-10019231
+2025-04-25 10:33:29,280 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-GrundKabine-10019231
+2025-04-25 10:33:32,518 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I005
+2025-04-25 10:33:32,518 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 10019231 - Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+Z-Cab NG Alpas 3 RAL 3000
+Z-Cab NG Alpas 3 RAL 3000
+
+10019232 - Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+Z-Cab NG Alpas 3 RAL 3020
+Z-Cab NG Alpas 3 RAL 3020
+
+10019233 - Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+Z-Cab NG Alpas 3 RAL 9010
+Z-Cab NG Alpas 3 RAL 9010
+
+10019234 - Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+Z-Cab NG Alpas 3 RAL XXXX
+Z-Cab NG Alpas 3 RAL XXXX
+
+10019235 - Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+Z-Cab NG Alpas 3 RAL 3000
+Z-Cab NG Alpas 3 RAL 3000
+
+10019236 - Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+Z-Cab NG Alpas 3 RAL 3020
+Z-Cab NG Alpas 3 RAL 3020
+
+10019237 - Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+Z-Cab NG Alpas 3 RAL 9010
+Z-Cab NG Alpas 3 RAL 9010
+
+10019238 - Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+Z-Cab NG Alpas 3 RAL XXXX
+Z-Cab NG Alpas 3 RAL XXXX
+
+10019239 - Modulkabine Standard MB
+Modul cabin standard MB
+Z-Cab NG Alpas 3 RAL 3000
+Z-Cab NG Alpas 3 RAL 3000
+
+10019240 - Modulkabine Standard MB
+Modul cabin standard MB
+Z-Cab NG Alpas 3 RAL 3020
+Z-Cab NG Alpas 3 RAL 3020
+
+10019241 - Modulkabine Standard MB
+Modul cabin standard MB
+Z-Cab NG Alpas 3 RAL 9010
+Z-Cab NG Alpas 3 RAL 9010
+
+10019242 - Modulkabine Standard MB
+Modul cabin standard MB
+Z-Cab NG Alpas 3 RAL XXXX
+Z-Cab NG Alpas 3 RAL XXXX
+
+10019243 - Modulkabine Standard Scania Neu
+Modul cabine standard Scania new
+Z-Cab NG RAL 3000
+Z-Cab NG RAL 3000
+
+10019244 - Modulkabine Standard Scania Neu
+Modul cabine standard Scania new
+Z-Cab NG RAL 3020
+Z-Cab NG RAL 3020
+
+10019245 - Modulkabine Standard Scania Neu
+Modul cabine standard Scania new
+Z-Cab NG RAL 9010
+Z-Cab NG RAL 9010
+
+10019246 - Modulkabine Standard Scania Neu
+Modul cabine standard Scania new
+Z-Cab NG RAL XXXX
+Z-Cab NG RAL XXXX
+2025-04-25 10:33:32,519 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 10019231
+2025-04-25 10:33:32,519 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-GrundKabine
+2025-04-25 10:33:32,519 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-GrundKabine-10019231
+2025-04-25 10:33:32,519 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-25 10:33:32,520 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-25 10:33:32,520 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-25 10:33:32,520 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-GrundKabine-10019231
+2025-04-25 10:33:33,536 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-GrundKabine-10019231
+2025-04-25 10:33:33,536 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-GrundKabine-10019231
+2025-04-25 10:33:36,014 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I004
+2025-04-25 10:33:36,015 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [2] PL-GrundKabine
+2025-04-25 10:33:36,372 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I004
+2025-04-25 10:33:36,373 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [2] PL-GrundKabine
+2025-04-25 10:33:37,260 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I004
+2025-04-25 10:33:37,261 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [2] PL-GrundKabine
+2025-04-25 10:35:13,290 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I014
+2025-04-25 10:35:13,291 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [3] PL-Bedienelemente
+2025-04-25 10:35:13,624 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I014
+2025-04-25 10:35:13,625 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [3] PL-Bedienelemente
+2025-04-25 10:36:03,627 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I015
+2025-04-25 10:36:03,628 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1138846 - Bedienelement li. Weiß / control element le. white
+Z-Cab NG Deckenmodul Version / Z-Cab NG ceiling module version
+
+1138847 - Bedienelement li. Farbe / control element le. colour
+Z-Cab NG Deckenmodul Version / Z-Cab NG ceiling module version
+
+1138850 - Bedienelement li. Weiß-Funk / control element le. white-radio
+Z-Cab NG Deckenmodul Version / Z-Cab NG ceiling module version
+
+1138851 - Bedienelement li. Farbe-Funk / control element le. colour-radio
+Z-Cab NG Deckenmodul Version / Z-Cab NG ceiling module version
+
+1138852 - Bedienelement re. Weiß / control element ri. white
+Z-Cab NG Deckenmodul Version / Z-Cab NG ceiling module version
+
+1138853 - Bedienelement re. Farbe / control element ri. colour
+Z-Cab NG Deckenmodul Version / Z-Cab NG ceiling module version
+
+1138854 - Bedienelement re. Weiß-Funk / control element ri. white-radio
+Z-Cab NG Deckenmodul Version / Z-Cab NG ceiling module version
+
+1138855 - Bedienelement re. Farbe-Funk / control element ri. colour-radio
+Z-Cab NG Deckenmodul Version / Z-Cab NG ceiling module version
+
+1138951 - Bedienelement li. Weiß / control element le. White
+
+1138954 - Bedienelement li. Farbe / control element le. colour
+Z-Cab NG Low Budget Version / Z-Cab NG low budget version
+
+1138956 - Bedienelement li. Weiß-Funk / control element le. white-radio
+Z-Cab NG Low Budget Version / Z-Cab NG low budget version
+
+1138959 - Bedienelement li. Farbe-Funk / control element le. colour-radio
+Z-Cab NG Low Budget Version / Z-Cab NG low budget version
+
+1138961 - Bedienelement re. Weiß / control element ri. White
+Z-Cab NG Low Budget Version / Z-Cab NG low budget version
+
+1138963 - Bedienelement re. Farbe / control element ri. colour
+Z-Cab NG Low Budget Version / Z-Cab NG low budget version
+
+1138965 - Bedienelement re. Weiß-Funk / control element ri. white-radio
+Z-Cab NG Low Budget Version / Z-Cab NG low budget version
+
+1138967 - Bedienelement re. Farbe-Funk / control element ri. colour-radio
+Z-Cab NG Low Budget Version / Z-Cab NG low budget version
+2025-04-25 10:36:03,629 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1138846
+2025-04-25 10:36:03,629 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Bedienelemente
+2025-04-25 10:36:03,630 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Bedienelemente-1138846
+2025-04-25 10:36:03,631 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-25 10:36:03,631 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-25 10:36:03,632 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-25 10:36:03,632 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Bedienelemente-1138846
+2025-04-25 10:36:05,113 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Bedienelemente-1138846
+2025-04-25 10:36:05,114 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Bedienelemente-1138846
+2025-04-25 10:36:06,674 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I017
+2025-04-25 10:36:06,675 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1115355 - Deckenmodul Standard / ceiling module standard
+Z-Cab NG / Z-cab NG
+
+1117649 - Beleuchtungseinheit Grün-Weiß / lighting unit green-white
+Z-Cab NG Low Budget Version / Z-Cab NG low budget version
+
+1117650 - Beleuchtungseinheit Rot-Weiß / lighting unit red-white
+Z-Cab NG Low Budget Version / Z-Cab NG low budget version
+2025-04-25 10:36:06,675 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1115355
+2025-04-25 10:36:06,675 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Beleuchtungseinheit
+2025-04-25 10:36:06,675 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Beleuchtungseinheit-1115355
+2025-04-25 10:36:06,675 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-25 10:36:06,676 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-25 10:36:06,676 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-25 10:36:06,676 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Beleuchtungseinheit-1115355
+2025-04-25 10:36:07,684 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Beleuchtungseinheit-1115355
+2025-04-25 10:36:07,685 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Beleuchtungseinheit-1115355
+2025-04-25 10:36:09,462 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I001
+2025-04-25 10:36:09,462 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [1] PL-Kabine 0000000010017913NK
+Modulkabine S301000 / S302000
+Modulkabine S301000 / S302000

@@ -16,8 +16,12 @@ class BomProcessor:
         # 获取当前类的日志记录器
         self.logger = Logger.get_logger(__name__)
         
-        # 存储BOM数据
-        self.bom_data: Dict[str, Dict[str, Any]] = {}  # 主项ID到数据的映射
+        # 存储BOM数据 - 新的数据结构
+        self.bom_data = {
+            "items": [],  # 按Excel顺序存储所有项目
+            "level_placeholders": {},  # 用于跟踪层级和占位符组合
+            "hierarchy": {}  # 保持层级结构
+        }
         
     def import_bom(self, file_path: str) -> None:
         """导入BOM Excel文件
@@ -59,7 +63,7 @@ class BomProcessor:
             # 处理数据
             self._process_max_gruppe(df)
             
-            self.logger.info(f"BOM文件导入成功，共处理 {len(self.bom_data)} 个一级节点")
+            self.logger.info(f"BOM文件导入成功，共处理 {len(self.bom_data['items'])} 个项目")
             
         except Exception as e:
             self.logger.error(f"导入BOM文件失败: {str(e)}", exc_info=True)
@@ -72,22 +76,25 @@ class BomProcessor:
             df: MAX-gruppe 工作表的数据帧
         """
         try:
-            # 先过滤掉层级为空的行
-            df = df.dropna(subset=["层级"])
+            # 先过滤掉层级为空的行，使用 copy() 避免 SettingWithCopyWarning
+            df = df.dropna(subset=["层级"]).copy()
             self.logger.info(f"过滤空层级后剩余 {len(df)} 行数据")
             
             # 将层级转换为整数
-            df["层级"] = df["层级"].astype(float).astype(int)
+            df.loc[:, "层级"] = df["层级"].astype(float).astype(int)
+            
+            # 清空现有数据
+            self.bom_data = {
+                "items": [],
+                "level_placeholders": {},
+                "hierarchy": {}
+            }
             
             # 按原始顺序处理数据
             self.logger.info("\n开始处理数据...")
             processed_count = 0
-            
-            # 用于跟踪当前处理状态
-            current_level = None
-            current_placeholder = None
             current_parent = None
-            parent_stack = []  # [(level, baugruppe, placeholder), ...]
+            parent_stack = []  # [(level, id), ...]
             
             # 直接按DataFrame的顺序处理每一行
             for idx, row in df.iterrows():
@@ -108,54 +115,44 @@ class BomProcessor:
                     
                     # 创建节点数据
                     item_data = {
+                        "id": len(self.bom_data["items"]),  # 使用唯一ID
                         "name": description,
                         "level": level,
                         "placeholder": placeholder,
                         "long_text": long_text,
-                        "sub_items": {},
                         "bom_code": bom_code,
                         "baugruppe": baugruppe,
-                        "original_index": idx
+                        "original_index": idx,
+                        "children": []  # 存储子节点的ID
                     }
                     
-                    # 处理层级关系
+                    # 将项目添加到items列表
+                    self.bom_data["items"].append(item_data)
+                    current_item_id = item_data["id"]
+                    
+                    # 更新层级占位符跟踪
+                    level_key = f"{level}_{placeholder}"
+                    if level_key not in self.bom_data["level_placeholders"]:
+                        self.bom_data["level_placeholders"][level_key] = []
+                    self.bom_data["level_placeholders"][level_key].append(current_item_id)
+                    
+                    # 更新层级结构
                     if level == 1:
                         # 一级节点直接添加到根
-                        self.bom_data[baugruppe] = item_data
-                        current_level = level
-                        current_placeholder = placeholder
-                        current_parent = baugruppe
-                        parent_stack = [(level, baugruppe, placeholder)]
+                        self.bom_data["hierarchy"][current_item_id] = item_data
+                        parent_stack = [(1, current_item_id)]
                     else:
-                        # 如果层级发生变化或在同一层级占位符发生变化
-                        if level != current_level or placeholder != current_placeholder:
-                            # 调整父节点栈
-                            while parent_stack and parent_stack[-1][0] >= level:
-                                parent_stack.pop()
+                        # 调整父节点栈，移除所有大于等于当前层级的节点
+                        while parent_stack and parent_stack[-1][0] >= level:
+                            parent_stack.pop()
                         
-                        # 获取父节点
+                        # 如果有父节点，添加到父节点的children中
                         if parent_stack:
                             parent_id = parent_stack[-1][1]
-                            parent_placeholder = parent_stack[-1][2]
-                            parent_data = self._find_item_by_id(parent_id)
-                            if parent_data:
-                                # 确保子节点继承父节点的placeholder（如果子节点没有自己的placeholder）
-                                if not placeholder and parent_placeholder:
-                                    placeholder = parent_placeholder
-                                    item_data["placeholder"] = placeholder
-                                parent_data["sub_items"][baugruppe] = item_data
-                            else:
-                                # 创建为根节点
-                                self.bom_data[baugruppe] = item_data
-                        else:
-                            # 如果没有合适的父节点，创建为根节点
-                            self.bom_data[baugruppe] = item_data
+                            self.bom_data["items"][parent_id]["children"].append(current_item_id)
                         
-                        # 更新当前状态
-                        current_level = level
-                        current_placeholder = placeholder
-                        current_parent = baugruppe
-                        parent_stack.append((level, baugruppe, placeholder))
+                        # 将当前节点加入父节点栈
+                        parent_stack.append((level, current_item_id))
                     
                     processed_count += 1
                     
@@ -163,9 +160,18 @@ class BomProcessor:
                     self.logger.error(f"处理第 {idx+1} 行数据时出错: {str(e)}", exc_info=True)
                     continue
             
-            # 记录最终的数据统计
-            self.logger.info(f"\n数据处理完成，成功处理 {processed_count} 行数据")
-            self.logger.info(f"最终数据包含 {len(self.bom_data)} 个一级节点")
+            # 统计各层级节点数量
+            level_counts = {}
+            for item in self.bom_data["items"]:
+                level = item["level"]
+                if level not in level_counts:
+                    level_counts[level] = 0
+                level_counts[level] += 1
+            
+            # 记录统计信息
+            self.logger.info("\n数据处理完成，成功处理 {processed_count} 行数据")
+            for level, count in sorted(level_counts.items()):
+                self.logger.info(f"第 {level} 级节点数量: {count}")
             
         except Exception as e:
             self.logger.error(f"处理 MAX-gruppe 工作表错误: {str(e)}", exc_info=True)
@@ -216,44 +222,44 @@ class BomProcessor:
             Optional[Dict[str, Any]]: 项目数据，如果不存在则返回None
         """
         # 先在一级节点中查找
-        if item_id in self.bom_data:
-            return self.bom_data[item_id]
+        if item_id in self.bom_data["hierarchy"]:
+            return self.bom_data["hierarchy"][item_id]
         
         # 递归查找子节点
-        for main_item in self.bom_data.values():
-            result = self._find_item_in_subitems(item_id, main_item["sub_items"])
+        for main_item in self.bom_data["hierarchy"].values():
+            result = self._find_item_in_subitems(item_id, main_item["children"])
             if result:
                 return result
         
         return None
     
-    def _find_item_in_subitems(self, item_id: str, sub_items: Dict[str, Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+    def _find_item_in_subitems(self, item_id: str, sub_items: List[int]) -> Optional[Dict[str, Any]]:
         """在子项中递归查找项目数据
         
         Args:
             item_id: 项目ID
-            sub_items: 子项字典
+            sub_items: 子项列表
             
         Returns:
             Optional[Dict[str, Any]]: 项目数据，如果不存在则返回None
         """
         # 直接在当前层级查找
         if item_id in sub_items:
-            return sub_items[item_id]
+            return self.bom_data["items"][item_id]
         
         # 递归查找下一层级
-        for sub_item in sub_items.values():
-            result = self._find_item_in_subitems(item_id, sub_item["sub_items"])
+        for sub_item_id in sub_items:
+            result = self._find_item_in_subitems(item_id, self.bom_data["items"][sub_item_id]["children"])
             if result:
                 return result
         
         return None
     
-    def get_bom_data(self) -> Dict[str, Dict[str, Any]]:
+    def get_bom_data(self) -> Dict[str, Any]:
         """获取BOM数据
         
         Returns:
-            Dict[str, Dict[str, Any]]: BOM数据字典
+            Dict[str, Any]: BOM数据字典
         """
         return self.bom_data
     
@@ -278,7 +284,7 @@ class BomProcessor:
             Dict[str, Dict[str, Any]]: 子项字典，如果项目不存在则返回空字典
         """
         item_data = self._find_item_by_id(item_id)
-        return item_data.get("sub_items", {}) if item_data else {}
+        return item_data.get("children", []) if item_data else []
     
     def get_item_name(self, item_id: str) -> str:
         """获取项目名称
@@ -322,7 +328,11 @@ class BomProcessor:
         
     def clear(self) -> None:
         """清空数据"""
-        self.bom_data.clear()
+        self.bom_data = {
+            "items": [],
+            "level_placeholders": {},
+            "hierarchy": {}
+        }
     
     def get_all_bom_codes(self) -> List[str]:
         """获取所有有效的BOM码
@@ -332,19 +342,47 @@ class BomProcessor:
         """
         bom_codes = []
         
-        def collect_bom_codes(items: Dict[str, Dict[str, Any]]):
-            for item_data in items.values():
-                # 使用保存的BOM码
-                if "bom_code" in item_data:
-                    bom_codes.append(item_data["bom_code"])
-                
-                # 递归处理子项
-                if "sub_items" in item_data:
-                    collect_bom_codes(item_data["sub_items"])
+        def collect_bom_codes(items):
+            """递归收集BOM码
+            
+            Args:
+                items: 项目列表或字典
+            """
+            if isinstance(items, list):
+                # 如果是列表（children），遍历列表
+                for item in items:
+                    if isinstance(item, int):
+                        # 如果是ID，获取实际的项目数据
+                        item_data = self.bom_data["items"][item]
+                    else:
+                        # 如果已经是项目数据
+                        item_data = item
+                    
+                    # 添加BOM码
+                    if "bom_code" in item_data:
+                        bom_codes.append(item_data["bom_code"])
+                    
+                    # 递归处理子项
+                    if "children" in item_data and item_data["children"]:
+                        collect_bom_codes(item_data["children"])
+            elif isinstance(items, dict):
+                # 如果是字典（hierarchy），遍历值
+                for item_data in items.values():
+                    # 添加BOM码
+                    if "bom_code" in item_data:
+                        bom_codes.append(item_data["bom_code"])
+                    
+                    # 递归处理子项
+                    if "children" in item_data and item_data["children"]:
+                        collect_bom_codes(item_data["children"])
         
         # 从根节点开始收集
-        collect_bom_codes(self.bom_data)
-        return bom_codes
+        collect_bom_codes(self.bom_data["hierarchy"])
+        # 收集所有项目的BOM码
+        collect_bom_codes(self.bom_data["items"])
+        
+        # 去重并返回
+        return list(set(bom_codes))
         
     def is_valid_bom_code(self, code: str) -> bool:
         """检查是否为有效的BOM码
@@ -355,4 +393,8 @@ class BomProcessor:
         Returns:
             bool: 是否为有效的BOM码
         """
-        return code in self.get_all_bom_codes() 
+        try:
+            return code in self.get_all_bom_codes()
+        except Exception as e:
+            self.logger.error(f"检查BOM码时出错: {str(e)}", exc_info=True)
+            return False 

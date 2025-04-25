@@ -20,9 +20,9 @@
         "text": "",
         "images": {}
       },
-      "selection_expression": "K03_03_02  AND K03_03_03",
+      "selection_expression": "K03_05_02  OR K03_11_02",
       "logic_relation": "→",
-      "impact_expression": "PL-GrundKabine-10019235  AND PL-GrundKabine-10019239"
+      "impact_expression": "PL-Sitze01-1123244  OR PL-Sitze01-1161296  AND ( PL-Sitze01-1161314  AND PL-Sitze01-1161314 )"
     },
     {
       "logic_id": "LS03",
@@ -83,9 +83,33 @@
       "selection_expression": "K03_02_01   AND K03_02_01",
       "logic_relation": "→",
       "impact_expression": "PL-GrundKabine-10019234  AND PL-GrundKabine-10019244"
+    },
+    {
+      "logic_id": "LS08",
+      "tags": "",
+      "tech_doc_path": "",
+      "comment": {
+        "text": "",
+        "images": {}
+      },
+      "selection_expression": "K03_02_01  AND K03_02_02",
+      "logic_relation": "→",
+      "impact_expression": "PL-Sitze06-1161296"
+    },
+    {
+      "logic_id": "LS09",
+      "tags": "",
+      "tech_doc_path": "",
+      "comment": {
+        "text": "",
+        "images": {}
+      },
+      "selection_expression": "K03_05_02  OR K03_11_02",
+      "logic_relation": "→",
+      "impact_expression": "PL-Sitze01-1123244  OR PL-Sitze01-1161296  AND ( PL-Sitze01-1161314  AND PL-Sitze01-1161314 )"
     }
   ],
-  "saved_at": "2025-04-23T14:47:08.148341",
+  "saved_at": "2025-04-25T13:46:27.471804",
   "exported": false,
-  "timestamp": "20250423_144708"
+  "timestamp": "20250425_134627"
 }

@@ -1,0 +1,87 @@
+2025-04-25 13:35:36,952 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250425_133536.log
+2025-04-25 13:35:40,435 [INFO] __main__ - 正在启动程序...
+2025-04-25 13:35:40,435 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-25 13:35:40,436 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-25 13:35:40,436 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-25 13:35:40,808 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-25 13:35:45,807 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-25 13:35:45,830 [INFO] __main__ - 语言选择结果: zh
+2025-04-25 13:35:45,830 [INFO] __main__ - 正在创建主题选择对话框...
+2025-04-25 13:35:45,831 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-04-25 13:35:45,838 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-04-25 13:35:46,641 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-04-25 13:35:46,660 [INFO] __main__ - 主题选择结果: light
+2025-04-25 13:35:46,671 [INFO] __main__ - 正在配置主窗口...
+2025-04-25 13:35:46,898 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-25 13:35:46,900 [INFO] core.logic_builder - 已加载 7 条规则
+2025-04-25 13:35:47,078 [INFO] __main__ - MainWindow实例创建完成
+2025-04-25 13:35:47,345 [INFO] __main__ - 开始mainloop()...
+2025-04-25 13:35:49,103 [INFO] core.config_processor - 找到工作表: ['TD', '0.模板&Vorlage', '1.Fahrgestell', '2.Fahrzeug allgemein', '3.Beschriftung&Kennzeichnung', '4. Anbauten&Fahrgestellarbeiten', '5. Fahrer_Mannschaftsraum', '6.Koffer', '7.Lichtmast', '8.Pumpenanlage', '9.Seilwinde&Generator', '10.Halterungen']
+2025-04-25 13:35:49,104 [DEBUG] core.config_processor - 跳过工作表: TD
+2025-04-25 13:35:49,104 [DEBUG] core.config_processor - 跳过工作表: 0.模板&Vorlage
+2025-04-25 13:35:49,104 [INFO] core.config_processor - 处理工作表: 1.Fahrgestell -> 模块: 1.Fahrgestell
+2025-04-25 13:35:49,121 [INFO] core.config_processor - 处理工作表: 2.Fahrzeug allgemein -> 模块: 2.Fahrzeug allgemein
+2025-04-25 13:35:49,137 [INFO] core.config_processor - 处理工作表: 3.Beschriftung&Kennzeichnung -> 模块: 3.Beschriftung&Kennzeichnung
+2025-04-25 13:35:49,156 [INFO] core.config_processor - 处理工作表: 4. Anbauten&Fahrgestellarbeiten -> 模块: 4.Anbauten&Fahrgestellarbeiten
+2025-04-25 13:35:49,171 [INFO] core.config_processor - 处理工作表: 5. Fahrer_Mannschaftsraum -> 模块: 5.Fahrer_Mannschaftsraum
+2025-04-25 13:35:49,191 [INFO] core.config_processor - 处理工作表: 6.Koffer -> 模块: 6.Koffer
+2025-04-25 13:35:49,207 [INFO] core.config_processor - 处理工作表: 7.Lichtmast -> 模块: 7.Lichtmast
+2025-04-25 13:35:49,220 [INFO] core.config_processor - 处理工作表: 8.Pumpenanlage -> 模块: 8.Pumpenanlage
+2025-04-25 13:35:49,235 [INFO] core.config_processor - 处理工作表: 9.Seilwinde&Generator -> 模块: 9.Seilwinde&Generator
+2025-04-25 13:35:49,250 [INFO] core.config_processor - 处理工作表: 10.Halterungen -> 模块: 10.Halterungen
+2025-04-25 13:35:49,265 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-25 13:35:49,269 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-25 13:35:49,269 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-25 13:35:50,350 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 13:35:50,351 [INFO] core.bom_processor - 已清空现有数据
+2025-04-25 13:35:50,351 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-04-25 13:35:50,356 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['MAX-gruppe', 'K码表', '配置', 'Sheet1']
+2025-04-25 13:35:50,356 [INFO] core.bom_processor - 正在读取 MAX-gruppe 工作表...
+2025-04-25 13:35:50,364 [INFO] core.bom_processor - 成功读取工作表，共 154 行数据
+2025-04-25 13:35:50,365 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-04-25 13:35:50,366 [INFO] core.bom_processor - 过滤空层级后剩余 153 行数据
+2025-04-25 13:35:50,367 [INFO] core.bom_processor - 
+开始处理数据...
+2025-04-25 13:35:50,371 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-04-25 13:35:50,371 [INFO] core.bom_processor - 第 1 级节点数量: 1
+2025-04-25 13:35:50,372 [INFO] core.bom_processor - 第 2 级节点数量: 133
+2025-04-25 13:35:50,372 [INFO] core.bom_processor - 第 3 级节点数量: 19
+2025-04-25 13:35:50,373 [INFO] core.bom_processor - BOM文件导入成功，共处理 153 个项目
+2025-04-25 13:35:50,373 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 13:35:50,374 [INFO] gui.bom_panel - 开始刷新树状图
+2025-04-25 13:35:50,374 [INFO] gui.bom_panel - 第 1 级节点数量: 1
+2025-04-25 13:35:50,375 [INFO] gui.bom_panel - 第 2 级节点数量: 133
+2025-04-25 13:35:50,375 [INFO] gui.bom_panel - 第 3 级节点数量: 19
+2025-04-25 13:35:50,378 [INFO] gui.bom_panel - 树状图刷新完成
+2025-04-25 13:35:50,380 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 13:35:50,380 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 13:35:58,618 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I004
+2025-04-25 13:35:58,619 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [3] PL-Bedienelemente
+2025-04-25 13:36:26,685 [INFO] gui.bom_panel - 发现上次的BOM文件路径: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 13:36:31,549 [INFO] gui.bom_panel - 用户选择了新的BOM文件: C:/Users/mengy/Desktop/BOM映射表(1).xlsx
+2025-04-25 13:36:31,549 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/BOM映射表(1).xlsx
+2025-04-25 13:36:31,550 [INFO] core.bom_processor - 已清空现有数据
+2025-04-25 13:36:31,550 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-04-25 13:36:31,554 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['Sheet1']
+2025-04-25 13:36:31,554 [ERROR] core.bom_processor - 错误：未找到 MAX-gruppe 工作表
+2025-04-25 13:36:31,554 [ERROR] core.bom_processor - 导入BOM文件失败: 未找到 MAX-gruppe 工作表
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\core\bom_processor.py", line 47, in import_bom
+    raise ValueError("未找到 MAX-gruppe 工作表")
+ValueError: 未找到 MAX-gruppe 工作表
+2025-04-25 13:36:31,555 [ERROR] gui.bom_panel - 导入BOM文件失败: 导入BOM文件失败: 未找到 MAX-gruppe 工作表
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\core\bom_processor.py", line 47, in import_bom
+    raise ValueError("未找到 MAX-gruppe 工作表")
+ValueError: 未找到 MAX-gruppe 工作表
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\bom_panel.py", line 349, in _import_bom
+    self.bom_processor.import_bom(file_path)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\core\bom_processor.py", line 70, in import_bom
+    raise ImportError(f"导入BOM文件失败: {str(e)}")
+ImportError: 导入BOM文件失败: 未找到 MAX-gruppe 工作表
