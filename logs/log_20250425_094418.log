@@ -1,0 +1,1892 @@
+2025-04-25 09:44:18,357 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250425_094418.log
+2025-04-25 09:44:21,919 [INFO] __main__ - 正在启动程序...
+2025-04-25 09:44:21,920 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-25 09:44:21,920 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-25 09:44:21,920 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-25 09:44:22,364 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-25 09:44:23,796 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-25 09:44:23,817 [INFO] __main__ - 语言选择结果: zh
+2025-04-25 09:44:23,818 [INFO] __main__ - 正在创建主题选择对话框...
+2025-04-25 09:44:23,819 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-04-25 09:44:23,837 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-04-25 09:44:24,683 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-04-25 09:44:24,706 [INFO] __main__ - 主题选择结果: light
+2025-04-25 09:44:24,717 [INFO] __main__ - 正在配置主窗口...
+2025-04-25 09:44:24,882 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-25 09:44:24,889 [INFO] core.logic_builder - 已加载 7 条规则
+2025-04-25 09:44:24,973 [INFO] __main__ - MainWindow实例创建完成
+2025-04-25 09:44:25,233 [INFO] __main__ - 开始mainloop()...
+2025-04-25 09:44:27,422 [INFO] core.config_processor - 找到工作表: ['TD', '0.模板&Vorlage', '1.Fahrgestell', '2.Fahrzeug allgemein', '3.Beschriftung&Kennzeichnung', '4. Anbauten&Fahrgestellarbeiten', '5. Fahrer_Mannschaftsraum', '6.Koffer', '7.Lichtmast', '8.Pumpenanlage', '9.Seilwinde&Generator', '10.Halterungen']
+2025-04-25 09:44:27,423 [DEBUG] core.config_processor - 跳过工作表: TD
+2025-04-25 09:44:27,423 [DEBUG] core.config_processor - 跳过工作表: 0.模板&Vorlage
+2025-04-25 09:44:27,423 [INFO] core.config_processor - 处理工作表: 1.Fahrgestell -> 模块: 1.Fahrgestell
+2025-04-25 09:44:27,439 [INFO] core.config_processor - 处理工作表: 2.Fahrzeug allgemein -> 模块: 2.Fahrzeug allgemein
+2025-04-25 09:44:27,455 [INFO] core.config_processor - 处理工作表: 3.Beschriftung&Kennzeichnung -> 模块: 3.Beschriftung&Kennzeichnung
+2025-04-25 09:44:27,469 [INFO] core.config_processor - 处理工作表: 4. Anbauten&Fahrgestellarbeiten -> 模块: 4.Anbauten&Fahrgestellarbeiten
+2025-04-25 09:44:27,484 [INFO] core.config_processor - 处理工作表: 5. Fahrer_Mannschaftsraum -> 模块: 5.Fahrer_Mannschaftsraum
+2025-04-25 09:44:27,505 [INFO] core.config_processor - 处理工作表: 6.Koffer -> 模块: 6.Koffer
+2025-04-25 09:44:27,521 [INFO] core.config_processor - 处理工作表: 7.Lichtmast -> 模块: 7.Lichtmast
+2025-04-25 09:44:27,535 [INFO] core.config_processor - 处理工作表: 8.Pumpenanlage -> 模块: 8.Pumpenanlage
+2025-04-25 09:44:27,549 [INFO] core.config_processor - 处理工作表: 9.Seilwinde&Generator -> 模块: 9.Seilwinde&Generator
+2025-04-25 09:44:27,564 [INFO] core.config_processor - 处理工作表: 10.Halterungen -> 模块: 10.Halterungen
+2025-04-25 09:44:27,578 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-25 09:44:27,583 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-25 09:44:27,583 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-25 09:44:32,396 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 09:44:32,397 [INFO] core.bom_processor - 已清空现有数据
+2025-04-25 09:44:32,397 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-04-25 09:44:32,408 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['MAX-gruppe', 'K码表', '配置', 'Sheet1']
+2025-04-25 09:44:32,408 [INFO] core.bom_processor - 正在读取 MAX-gruppe 工作表...
+2025-04-25 09:44:32,415 [INFO] core.bom_processor - 成功读取工作表，共 154 行数据
+2025-04-25 09:44:32,416 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-04-25 09:44:32,417 [INFO] core.bom_processor - 过滤空层级后剩余 153 行数据
+2025-04-25 09:44:32,418 [INFO] core.bom_processor - 
+开始处理数据...
+2025-04-25 09:44:32,418 [DEBUG] core.bom_processor - 
+处理第 1 行:
+2025-04-25 09:44:32,419 [DEBUG] core.bom_processor -   层级: 1
+2025-04-25 09:44:32,419 [DEBUG] core.bom_processor -   Baugruppe: 0000000010017913NK
+2025-04-25 09:44:32,419 [DEBUG] core.bom_processor -   占位符: PL-Kabine
+2025-04-25 09:44:32,419 [DEBUG] core.bom_processor -   描述: Modulkabine S301000 / S302000
+2025-04-25 09:44:32,419 [DEBUG] core.bom_processor - 添加一级节点: 0000000010017913NK
+2025-04-25 09:44:32,420 [ERROR] core.bom_processor - 处理第 1 行数据时出错: cannot access local variable 'parent_id' where it is not associated with a value
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\core\bom_processor.py", line 178, in _process_max_gruppe
+    self.logger.debug(f"处理节点: {baugruppe}, 占位符: {placeholder}, 父节点: {parent_id if parent_stack else 'None'}")
+                                                                               ^^^^^^^^^
+UnboundLocalError: cannot access local variable 'parent_id' where it is not associated with a value
+2025-04-25 09:44:32,420 [DEBUG] core.bom_processor - 
+处理第 2 行:
+2025-04-25 09:44:32,420 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,420 [DEBUG] core.bom_processor -   Baugruppe: 10019231
+2025-04-25 09:44:32,420 [DEBUG] core.bom_processor -   占位符: PL-GrundKabine
+2025-04-25 09:44:32,421 [DEBUG] core.bom_processor -   描述: Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+2025-04-25 09:44:32,421 [DEBUG] core.bom_processor - 添加子节点: 10019231 -> 父节点: 0000000010017913NK
+2025-04-25 09:44:32,421 [DEBUG] core.bom_processor -   子节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,421 [DEBUG] core.bom_processor -   父节点占位符: PL-Kabine
+2025-04-25 09:44:32,421 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019231, 实际占位符: PL-GrundKabine
+2025-04-25 09:44:32,421 [DEBUG] core.bom_processor - 处理节点: 10019231, 占位符: PL-GrundKabine, 父节点: 0000000010017913NK
+2025-04-25 09:44:32,421 [DEBUG] core.bom_processor - 
+处理第 3 行:
+2025-04-25 09:44:32,421 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,421 [DEBUG] core.bom_processor -   Baugruppe: 10019232
+2025-04-25 09:44:32,421 [DEBUG] core.bom_processor -   占位符: PL-GrundKabine
+2025-04-25 09:44:32,422 [DEBUG] core.bom_processor -   描述: Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+2025-04-25 09:44:32,422 [DEBUG] core.bom_processor - 添加子节点: 10019232 -> 父节点: 10019231
+2025-04-25 09:44:32,422 [DEBUG] core.bom_processor -   子节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,422 [DEBUG] core.bom_processor -   父节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,422 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019232, 实际占位符: PL-GrundKabine
+2025-04-25 09:44:32,422 [DEBUG] core.bom_processor - 处理节点: 10019232, 占位符: PL-GrundKabine, 父节点: 10019231
+2025-04-25 09:44:32,422 [DEBUG] core.bom_processor - 
+处理第 4 行:
+2025-04-25 09:44:32,422 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,422 [DEBUG] core.bom_processor -   Baugruppe: 10019233
+2025-04-25 09:44:32,422 [DEBUG] core.bom_processor -   占位符: PL-GrundKabine
+2025-04-25 09:44:32,423 [DEBUG] core.bom_processor -   描述: Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+2025-04-25 09:44:32,423 [DEBUG] core.bom_processor - 添加子节点: 10019233 -> 父节点: 10019232
+2025-04-25 09:44:32,423 [DEBUG] core.bom_processor -   子节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,423 [DEBUG] core.bom_processor -   父节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,423 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019233, 实际占位符: PL-GrundKabine
+2025-04-25 09:44:32,423 [DEBUG] core.bom_processor - 处理节点: 10019233, 占位符: PL-GrundKabine, 父节点: 10019232
+2025-04-25 09:44:32,423 [DEBUG] core.bom_processor - 
+处理第 5 行:
+2025-04-25 09:44:32,424 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,424 [DEBUG] core.bom_processor -   Baugruppe: 10019234
+2025-04-25 09:44:32,424 [DEBUG] core.bom_processor -   占位符: PL-GrundKabine
+2025-04-25 09:44:32,424 [DEBUG] core.bom_processor -   描述: Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+2025-04-25 09:44:32,424 [DEBUG] core.bom_processor - 添加子节点: 10019234 -> 父节点: 10019233
+2025-04-25 09:44:32,424 [DEBUG] core.bom_processor -   子节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,424 [DEBUG] core.bom_processor -   父节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,425 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019234, 实际占位符: PL-GrundKabine
+2025-04-25 09:44:32,425 [DEBUG] core.bom_processor - 处理节点: 10019234, 占位符: PL-GrundKabine, 父节点: 10019233
+2025-04-25 09:44:32,425 [DEBUG] core.bom_processor - 
+处理第 6 行:
+2025-04-25 09:44:32,425 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,425 [DEBUG] core.bom_processor -   Baugruppe: 10019235
+2025-04-25 09:44:32,425 [DEBUG] core.bom_processor -   占位符: PL-GrundKabine
+2025-04-25 09:44:32,426 [DEBUG] core.bom_processor -   描述: Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+2025-04-25 09:44:32,426 [DEBUG] core.bom_processor - 添加子节点: 10019235 -> 父节点: 10019234
+2025-04-25 09:44:32,426 [DEBUG] core.bom_processor -   子节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,426 [DEBUG] core.bom_processor -   父节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,427 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019235, 实际占位符: PL-GrundKabine
+2025-04-25 09:44:32,427 [DEBUG] core.bom_processor - 处理节点: 10019235, 占位符: PL-GrundKabine, 父节点: 10019234
+2025-04-25 09:44:32,427 [DEBUG] core.bom_processor - 
+处理第 7 行:
+2025-04-25 09:44:32,427 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,427 [DEBUG] core.bom_processor -   Baugruppe: 10019236
+2025-04-25 09:44:32,427 [DEBUG] core.bom_processor -   占位符: PL-GrundKabine
+2025-04-25 09:44:32,427 [DEBUG] core.bom_processor -   描述: Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+2025-04-25 09:44:32,427 [DEBUG] core.bom_processor - 添加子节点: 10019236 -> 父节点: 10019235
+2025-04-25 09:44:32,427 [DEBUG] core.bom_processor -   子节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,427 [DEBUG] core.bom_processor -   父节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,427 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019236, 实际占位符: PL-GrundKabine
+2025-04-25 09:44:32,428 [DEBUG] core.bom_processor - 处理节点: 10019236, 占位符: PL-GrundKabine, 父节点: 10019235
+2025-04-25 09:44:32,428 [DEBUG] core.bom_processor - 
+处理第 8 行:
+2025-04-25 09:44:32,428 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,428 [DEBUG] core.bom_processor -   Baugruppe: 10019237
+2025-04-25 09:44:32,428 [DEBUG] core.bom_processor -   占位符: PL-GrundKabine
+2025-04-25 09:44:32,428 [DEBUG] core.bom_processor -   描述: Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+2025-04-25 09:44:32,428 [DEBUG] core.bom_processor - 添加子节点: 10019237 -> 父节点: 10019236
+2025-04-25 09:44:32,428 [DEBUG] core.bom_processor -   子节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,428 [DEBUG] core.bom_processor -   父节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,428 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019237, 实际占位符: PL-GrundKabine
+2025-04-25 09:44:32,428 [DEBUG] core.bom_processor - 处理节点: 10019237, 占位符: PL-GrundKabine, 父节点: 10019236
+2025-04-25 09:44:32,429 [DEBUG] core.bom_processor - 
+处理第 9 行:
+2025-04-25 09:44:32,429 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,429 [DEBUG] core.bom_processor -   Baugruppe: 10019238
+2025-04-25 09:44:32,429 [DEBUG] core.bom_processor -   占位符: PL-GrundKabine
+2025-04-25 09:44:32,429 [DEBUG] core.bom_processor -   描述: Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+2025-04-25 09:44:32,429 [DEBUG] core.bom_processor - 添加子节点: 10019238 -> 父节点: 10019237
+2025-04-25 09:44:32,429 [DEBUG] core.bom_processor -   子节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,429 [DEBUG] core.bom_processor -   父节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,429 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019238, 实际占位符: PL-GrundKabine
+2025-04-25 09:44:32,429 [DEBUG] core.bom_processor - 处理节点: 10019238, 占位符: PL-GrundKabine, 父节点: 10019237
+2025-04-25 09:44:32,429 [DEBUG] core.bom_processor - 
+处理第 10 行:
+2025-04-25 09:44:32,429 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,430 [DEBUG] core.bom_processor -   Baugruppe: 10019239
+2025-04-25 09:44:32,430 [DEBUG] core.bom_processor -   占位符: PL-GrundKabine
+2025-04-25 09:44:32,430 [DEBUG] core.bom_processor -   描述: Modulkabine Standard MB
+Modul cabin standard MB
+2025-04-25 09:44:32,430 [DEBUG] core.bom_processor - 添加子节点: 10019239 -> 父节点: 10019238
+2025-04-25 09:44:32,430 [DEBUG] core.bom_processor -   子节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,430 [DEBUG] core.bom_processor -   父节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,430 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019239, 实际占位符: PL-GrundKabine
+2025-04-25 09:44:32,430 [DEBUG] core.bom_processor - 处理节点: 10019239, 占位符: PL-GrundKabine, 父节点: 10019238
+2025-04-25 09:44:32,430 [DEBUG] core.bom_processor - 
+处理第 11 行:
+2025-04-25 09:44:32,430 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,430 [DEBUG] core.bom_processor -   Baugruppe: 10019240
+2025-04-25 09:44:32,430 [DEBUG] core.bom_processor -   占位符: PL-GrundKabine
+2025-04-25 09:44:32,430 [DEBUG] core.bom_processor -   描述: Modulkabine Standard MB
+Modul cabin standard MB
+2025-04-25 09:44:32,431 [DEBUG] core.bom_processor - 添加子节点: 10019240 -> 父节点: 10019239
+2025-04-25 09:44:32,431 [DEBUG] core.bom_processor -   子节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,431 [DEBUG] core.bom_processor -   父节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,431 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019240, 实际占位符: PL-GrundKabine
+2025-04-25 09:44:32,431 [DEBUG] core.bom_processor - 处理节点: 10019240, 占位符: PL-GrundKabine, 父节点: 10019239
+2025-04-25 09:44:32,431 [DEBUG] core.bom_processor - 
+处理第 12 行:
+2025-04-25 09:44:32,431 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,431 [DEBUG] core.bom_processor -   Baugruppe: 10019241
+2025-04-25 09:44:32,431 [DEBUG] core.bom_processor -   占位符: PL-GrundKabine
+2025-04-25 09:44:32,431 [DEBUG] core.bom_processor -   描述: Modulkabine Standard MB
+Modul cabin standard MB
+2025-04-25 09:44:32,431 [DEBUG] core.bom_processor - 添加子节点: 10019241 -> 父节点: 10019240
+2025-04-25 09:44:32,432 [DEBUG] core.bom_processor -   子节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,432 [DEBUG] core.bom_processor -   父节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,432 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019241, 实际占位符: PL-GrundKabine
+2025-04-25 09:44:32,432 [DEBUG] core.bom_processor - 处理节点: 10019241, 占位符: PL-GrundKabine, 父节点: 10019240
+2025-04-25 09:44:32,432 [DEBUG] core.bom_processor - 
+处理第 13 行:
+2025-04-25 09:44:32,432 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,432 [DEBUG] core.bom_processor -   Baugruppe: 10019242
+2025-04-25 09:44:32,432 [DEBUG] core.bom_processor -   占位符: PL-GrundKabine
+2025-04-25 09:44:32,432 [DEBUG] core.bom_processor -   描述: Modulkabine Standard MB
+Modul cabin standard MB
+2025-04-25 09:44:32,432 [DEBUG] core.bom_processor - 添加子节点: 10019242 -> 父节点: 10019241
+2025-04-25 09:44:32,432 [DEBUG] core.bom_processor -   子节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,433 [DEBUG] core.bom_processor -   父节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,433 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019242, 实际占位符: PL-GrundKabine
+2025-04-25 09:44:32,433 [DEBUG] core.bom_processor - 处理节点: 10019242, 占位符: PL-GrundKabine, 父节点: 10019241
+2025-04-25 09:44:32,433 [DEBUG] core.bom_processor - 
+处理第 14 行:
+2025-04-25 09:44:32,433 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,433 [DEBUG] core.bom_processor -   Baugruppe: 10019243
+2025-04-25 09:44:32,433 [DEBUG] core.bom_processor -   占位符: PL-GrundKabine
+2025-04-25 09:44:32,433 [DEBUG] core.bom_processor -   描述: Modulkabine Standard Scania Neu
+Modul cabine standard Scania new
+2025-04-25 09:44:32,433 [DEBUG] core.bom_processor - 添加子节点: 10019243 -> 父节点: 10019242
+2025-04-25 09:44:32,433 [DEBUG] core.bom_processor -   子节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,433 [DEBUG] core.bom_processor -   父节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,433 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019243, 实际占位符: PL-GrundKabine
+2025-04-25 09:44:32,433 [DEBUG] core.bom_processor - 处理节点: 10019243, 占位符: PL-GrundKabine, 父节点: 10019242
+2025-04-25 09:44:32,433 [DEBUG] core.bom_processor - 
+处理第 15 行:
+2025-04-25 09:44:32,434 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,434 [DEBUG] core.bom_processor -   Baugruppe: 10019244
+2025-04-25 09:44:32,434 [DEBUG] core.bom_processor -   占位符: PL-GrundKabine
+2025-04-25 09:44:32,434 [DEBUG] core.bom_processor -   描述: Modulkabine Standard Scania Neu
+Modul cabine standard Scania new
+2025-04-25 09:44:32,434 [DEBUG] core.bom_processor - 添加子节点: 10019244 -> 父节点: 10019243
+2025-04-25 09:44:32,434 [DEBUG] core.bom_processor -   子节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,434 [DEBUG] core.bom_processor -   父节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,434 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019244, 实际占位符: PL-GrundKabine
+2025-04-25 09:44:32,434 [DEBUG] core.bom_processor - 处理节点: 10019244, 占位符: PL-GrundKabine, 父节点: 10019243
+2025-04-25 09:44:32,434 [DEBUG] core.bom_processor - 
+处理第 16 行:
+2025-04-25 09:44:32,434 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,435 [DEBUG] core.bom_processor -   Baugruppe: 10019245
+2025-04-25 09:44:32,435 [DEBUG] core.bom_processor -   占位符: PL-GrundKabine
+2025-04-25 09:44:32,435 [DEBUG] core.bom_processor -   描述: Modulkabine Standard Scania Neu
+Modul cabine standard Scania new
+2025-04-25 09:44:32,435 [DEBUG] core.bom_processor - 添加子节点: 10019245 -> 父节点: 10019244
+2025-04-25 09:44:32,435 [DEBUG] core.bom_processor -   子节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,435 [DEBUG] core.bom_processor -   父节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,435 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019245, 实际占位符: PL-GrundKabine
+2025-04-25 09:44:32,435 [DEBUG] core.bom_processor - 处理节点: 10019245, 占位符: PL-GrundKabine, 父节点: 10019244
+2025-04-25 09:44:32,435 [DEBUG] core.bom_processor - 
+处理第 17 行:
+2025-04-25 09:44:32,436 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,436 [DEBUG] core.bom_processor -   Baugruppe: 10019246
+2025-04-25 09:44:32,436 [DEBUG] core.bom_processor -   占位符: PL-GrundKabine
+2025-04-25 09:44:32,436 [DEBUG] core.bom_processor -   描述: Modulkabine Standard Scania Neu
+Modul cabine standard Scania new
+2025-04-25 09:44:32,436 [DEBUG] core.bom_processor - 添加子节点: 10019246 -> 父节点: 10019245
+2025-04-25 09:44:32,437 [DEBUG] core.bom_processor -   子节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,437 [DEBUG] core.bom_processor -   父节点占位符: PL-GrundKabine
+2025-04-25 09:44:32,437 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019246, 实际占位符: PL-GrundKabine
+2025-04-25 09:44:32,437 [DEBUG] core.bom_processor - 处理节点: 10019246, 占位符: PL-GrundKabine, 父节点: 10019245
+2025-04-25 09:44:32,438 [DEBUG] core.bom_processor - 
+处理第 18 行:
+2025-04-25 09:44:32,438 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,438 [DEBUG] core.bom_processor -   Baugruppe: 1123244
+2025-04-25 09:44:32,438 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,438 [DEBUG] core.bom_processor -   描述: Einzelsitz Std Airbag Stra.li. / single seat std. airbag tensioner le.
+2025-04-25 09:44:32,438 [DEBUG] core.bom_processor - 同层级占位符变化: PL-GrundKabine -> PL-Sitze01
+2025-04-25 09:44:32,439 [DEBUG] core.bom_processor - 添加子节点: 1123244 -> 父节点: 0000000010017913NK
+2025-04-25 09:44:32,439 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,439 [DEBUG] core.bom_processor -   父节点占位符: PL-Kabine
+2025-04-25 09:44:32,439 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123244, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,439 [DEBUG] core.bom_processor - 处理节点: 1123244, 占位符: PL-Sitze01, 父节点: 0000000010017913NK
+2025-04-25 09:44:32,439 [DEBUG] core.bom_processor - 
+处理第 19 行:
+2025-04-25 09:44:32,439 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,440 [DEBUG] core.bom_processor -   Baugruppe: 1161296
+2025-04-25 09:44:32,440 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,440 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. mechanisch / BA-seat mechanically
+2025-04-25 09:44:32,440 [DEBUG] core.bom_processor - 添加子节点: 1161296 -> 父节点: 1123244
+2025-04-25 09:44:32,440 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,440 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze01
+2025-04-25 09:44:32,440 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161296, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,441 [DEBUG] core.bom_processor - 处理节点: 1161296, 占位符: PL-Sitze01, 父节点: 1123244
+2025-04-25 09:44:32,441 [DEBUG] core.bom_processor - 
+处理第 20 行:
+2025-04-25 09:44:32,441 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,441 [DEBUG] core.bom_processor -   Baugruppe: 1161297
+2025-04-25 09:44:32,441 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,442 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. mechanisch / BA-seat mechanically
+2025-04-25 09:44:32,442 [DEBUG] core.bom_processor - 添加子节点: 1161297 -> 父节点: 1161296
+2025-04-25 09:44:32,442 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,442 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze01
+2025-04-25 09:44:32,443 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161297, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,443 [DEBUG] core.bom_processor - 处理节点: 1161297, 占位符: PL-Sitze01, 父节点: 1161296
+2025-04-25 09:44:32,444 [DEBUG] core.bom_processor - 
+处理第 21 行:
+2025-04-25 09:44:32,444 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,444 [DEBUG] core.bom_processor -   Baugruppe: 1161313
+2025-04-25 09:44:32,444 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,445 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.mech / BA-seat f. tensioner le. cpl. mech.
+2025-04-25 09:44:32,445 [DEBUG] core.bom_processor - 添加子节点: 1161313 -> 父节点: 1161297
+2025-04-25 09:44:32,445 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,445 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze01
+2025-04-25 09:44:32,445 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161313, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,446 [DEBUG] core.bom_processor - 处理节点: 1161313, 占位符: PL-Sitze01, 父节点: 1161297
+2025-04-25 09:44:32,446 [DEBUG] core.bom_processor - 
+处理第 22 行:
+2025-04-25 09:44:32,446 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,446 [DEBUG] core.bom_processor -   Baugruppe: 1161314
+2025-04-25 09:44:32,446 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,446 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.mech / BA-seat f. tensioner le. cpl. mech.
+2025-04-25 09:44:32,447 [DEBUG] core.bom_processor - 添加子节点: 1161314 -> 父节点: 1161313
+2025-04-25 09:44:32,447 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,447 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze01
+2025-04-25 09:44:32,447 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161314, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,447 [DEBUG] core.bom_processor - 处理节点: 1161314, 占位符: PL-Sitze01, 父节点: 1161313
+2025-04-25 09:44:32,447 [DEBUG] core.bom_processor - 
+处理第 23 行:
+2025-04-25 09:44:32,447 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,447 [DEBUG] core.bom_processor -   Baugruppe: 1161294
+2025-04-25 09:44:32,447 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,447 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. elektrisch / BA-seat std. electric
+2025-04-25 09:44:32,448 [DEBUG] core.bom_processor - 添加子节点: 1161294 -> 父节点: 1161314
+2025-04-25 09:44:32,448 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,448 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze01
+2025-04-25 09:44:32,449 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161294, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,449 [DEBUG] core.bom_processor - 处理节点: 1161294, 占位符: PL-Sitze01, 父节点: 1161314
+2025-04-25 09:44:32,449 [DEBUG] core.bom_processor - 
+处理第 24 行:
+2025-04-25 09:44:32,449 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,449 [DEBUG] core.bom_processor -   Baugruppe: 1161295
+2025-04-25 09:44:32,450 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,450 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. elektrisch / BA-seat std. electric
+2025-04-25 09:44:32,451 [DEBUG] core.bom_processor - 添加子节点: 1161295 -> 父节点: 1161294
+2025-04-25 09:44:32,451 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,451 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze01
+2025-04-25 09:44:32,452 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161295, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,452 [DEBUG] core.bom_processor - 处理节点: 1161295, 占位符: PL-Sitze01, 父节点: 1161294
+2025-04-25 09:44:32,452 [DEBUG] core.bom_processor - 
+处理第 25 行:
+2025-04-25 09:44:32,453 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,453 [DEBUG] core.bom_processor -   Baugruppe: 1161309
+2025-04-25 09:44:32,453 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,453 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.
+2025-04-25 09:44:32,453 [DEBUG] core.bom_processor - 添加子节点: 1161309 -> 父节点: 1161295
+2025-04-25 09:44:32,453 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,454 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze01
+2025-04-25 09:44:32,454 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161309, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,455 [DEBUG] core.bom_processor - 处理节点: 1161309, 占位符: PL-Sitze01, 父节点: 1161295
+2025-04-25 09:44:32,455 [DEBUG] core.bom_processor - 
+处理第 26 行:
+2025-04-25 09:44:32,456 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,456 [DEBUG] core.bom_processor -   Baugruppe: 1161310
+2025-04-25 09:44:32,457 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,457 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.
+2025-04-25 09:44:32,458 [DEBUG] core.bom_processor - 添加子节点: 1161310 -> 父节点: 1161309
+2025-04-25 09:44:32,458 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,458 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze01
+2025-04-25 09:44:32,459 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161310, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,459 [DEBUG] core.bom_processor - 处理节点: 1161310, 占位符: PL-Sitze01, 父节点: 1161309
+2025-04-25 09:44:32,459 [DEBUG] core.bom_processor - 
+处理第 27 行:
+2025-04-25 09:44:32,459 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,459 [DEBUG] core.bom_processor -   Baugruppe: 1123266
+2025-04-25 09:44:32,460 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,460 [DEBUG] core.bom_processor -   描述: Einzelsitz m.Tisch f.Straf.li. / single seat w. table f. tensioner le.
+2025-04-25 09:44:32,460 [DEBUG] core.bom_processor - 添加子节点: 1123266 -> 父节点: 1161310
+2025-04-25 09:44:32,460 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,460 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze01
+2025-04-25 09:44:32,460 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123266, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,460 [DEBUG] core.bom_processor - 处理节点: 1123266, 占位符: PL-Sitze01, 父节点: 1161310
+2025-04-25 09:44:32,460 [DEBUG] core.bom_processor - 
+处理第 28 行:
+2025-04-25 09:44:32,460 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,460 [DEBUG] core.bom_processor -   Baugruppe: 1161307
+2025-04-25 09:44:32,460 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,460 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.mech / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,460 [DEBUG] core.bom_processor - 添加子节点: 1161307 -> 父节点: 1123266
+2025-04-25 09:44:32,461 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,461 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze01
+2025-04-25 09:44:32,461 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161307, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,461 [DEBUG] core.bom_processor - 处理节点: 1161307, 占位符: PL-Sitze01, 父节点: 1123266
+2025-04-25 09:44:32,461 [DEBUG] core.bom_processor - 
+处理第 29 行:
+2025-04-25 09:44:32,461 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,461 [DEBUG] core.bom_processor -   Baugruppe: 1161308
+2025-04-25 09:44:32,461 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,461 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.mech / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,461 [DEBUG] core.bom_processor - 添加子节点: 1161308 -> 父节点: 1161307
+2025-04-25 09:44:32,461 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,462 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze01
+2025-04-25 09:44:32,462 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161308, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,462 [DEBUG] core.bom_processor - 处理节点: 1161308, 占位符: PL-Sitze01, 父节点: 1161307
+2025-04-25 09:44:32,462 [DEBUG] core.bom_processor - 
+处理第 30 行:
+2025-04-25 09:44:32,462 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,463 [DEBUG] core.bom_processor -   Baugruppe: 1123246
+2025-04-25 09:44:32,463 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,463 [DEBUG] core.bom_processor -   描述: Einzelsitz Std Airbag Stra.re. / single seat w. table f. tensioner ri.
+2025-04-25 09:44:32,463 [DEBUG] core.bom_processor - 添加子节点: 1123246 -> 父节点: 1161308
+2025-04-25 09:44:32,463 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,463 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze01
+2025-04-25 09:44:32,463 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123246, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,463 [DEBUG] core.bom_processor - 处理节点: 1123246, 占位符: PL-Sitze01, 父节点: 1161308
+2025-04-25 09:44:32,464 [DEBUG] core.bom_processor - 
+处理第 31 行:
+2025-04-25 09:44:32,464 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,464 [DEBUG] core.bom_processor -   Baugruppe: 1161305
+2025-04-25 09:44:32,464 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,464 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.el. / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,464 [DEBUG] core.bom_processor - 添加子节点: 1161305 -> 父节点: 1123246
+2025-04-25 09:44:32,464 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,464 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze01
+2025-04-25 09:44:32,464 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161305, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,464 [DEBUG] core.bom_processor - 处理节点: 1161305, 占位符: PL-Sitze01, 父节点: 1123246
+2025-04-25 09:44:32,464 [DEBUG] core.bom_processor - 
+处理第 32 行:
+2025-04-25 09:44:32,464 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,465 [DEBUG] core.bom_processor -   Baugruppe: 1161306
+2025-04-25 09:44:32,465 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,465 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.el. / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,466 [DEBUG] core.bom_processor - 添加子节点: 1161306 -> 父节点: 1161305
+2025-04-25 09:44:32,466 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,466 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze01
+2025-04-25 09:44:32,467 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161306, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,467 [DEBUG] core.bom_processor - 处理节点: 1161306, 占位符: PL-Sitze01, 父节点: 1161305
+2025-04-25 09:44:32,467 [DEBUG] core.bom_processor - 
+处理第 33 行:
+2025-04-25 09:44:32,468 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,468 [DEBUG] core.bom_processor -   Baugruppe: 10028644
+2025-04-25 09:44:32,468 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,469 [DEBUG] core.bom_processor -   描述: PA-Sitz MAN elektrisch 1 FL / BA seat MAN electric 1btl.
+2025-04-25 09:44:32,469 [DEBUG] core.bom_processor - 添加子节点: 10028644 -> 父节点: 1161306
+2025-04-25 09:44:32,469 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,469 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze01
+2025-04-25 09:44:32,469 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10028644, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,470 [DEBUG] core.bom_processor - 处理节点: 10028644, 占位符: PL-Sitze01, 父节点: 1161306
+2025-04-25 09:44:32,470 [DEBUG] core.bom_processor - 
+处理第 34 行:
+2025-04-25 09:44:32,470 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,470 [DEBUG] core.bom_processor -   Baugruppe: 10028647
+2025-04-25 09:44:32,470 [DEBUG] core.bom_processor -   占位符: PL-Sitze01
+2025-04-25 09:44:32,470 [DEBUG] core.bom_processor -   描述: PA-Sitz MAN elektrisch 2 FL / BA seat MAN electric 2btl.
+2025-04-25 09:44:32,470 [DEBUG] core.bom_processor - 添加子节点: 10028647 -> 父节点: 10028644
+2025-04-25 09:44:32,470 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze01
+2025-04-25 09:44:32,470 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze01
+2025-04-25 09:44:32,470 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10028647, 实际占位符: PL-Sitze01
+2025-04-25 09:44:32,471 [DEBUG] core.bom_processor - 处理节点: 10028647, 占位符: PL-Sitze01, 父节点: 10028644
+2025-04-25 09:44:32,471 [DEBUG] core.bom_processor - 
+处理第 35 行:
+2025-04-25 09:44:32,471 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,471 [DEBUG] core.bom_processor -   Baugruppe: 1123244
+2025-04-25 09:44:32,471 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,471 [DEBUG] core.bom_processor -   描述: Einzelsitz Std Airbag Stra.li. / single seat std. airbag tensioner le.
+2025-04-25 09:44:32,471 [DEBUG] core.bom_processor - 同层级占位符变化: PL-Sitze01 -> PL-Sitze02
+2025-04-25 09:44:32,472 [DEBUG] core.bom_processor - 添加子节点: 1123244 -> 父节点: 0000000010017913NK
+2025-04-25 09:44:32,472 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,472 [DEBUG] core.bom_processor -   父节点占位符: PL-Kabine
+2025-04-25 09:44:32,472 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123244, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,472 [DEBUG] core.bom_processor - 处理节点: 1123244, 占位符: PL-Sitze02, 父节点: 0000000010017913NK
+2025-04-25 09:44:32,472 [DEBUG] core.bom_processor - 
+处理第 36 行:
+2025-04-25 09:44:32,472 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,472 [DEBUG] core.bom_processor -   Baugruppe: 1161296
+2025-04-25 09:44:32,472 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,472 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. mechanisch / BA-seat mechanically
+2025-04-25 09:44:32,472 [DEBUG] core.bom_processor - 添加子节点: 1161296 -> 父节点: 1123244
+2025-04-25 09:44:32,473 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,473 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze02
+2025-04-25 09:44:32,473 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161296, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,473 [DEBUG] core.bom_processor - 处理节点: 1161296, 占位符: PL-Sitze02, 父节点: 1123244
+2025-04-25 09:44:32,473 [DEBUG] core.bom_processor - 
+处理第 37 行:
+2025-04-25 09:44:32,473 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,473 [DEBUG] core.bom_processor -   Baugruppe: 1161297
+2025-04-25 09:44:32,473 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,473 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. mechanisch / BA-seat mechanically
+2025-04-25 09:44:32,473 [DEBUG] core.bom_processor - 添加子节点: 1161297 -> 父节点: 1161296
+2025-04-25 09:44:32,473 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,474 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze02
+2025-04-25 09:44:32,474 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161297, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,474 [DEBUG] core.bom_processor - 处理节点: 1161297, 占位符: PL-Sitze02, 父节点: 1161296
+2025-04-25 09:44:32,474 [DEBUG] core.bom_processor - 
+处理第 38 行:
+2025-04-25 09:44:32,474 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,474 [DEBUG] core.bom_processor -   Baugruppe: 1161313
+2025-04-25 09:44:32,474 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,474 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.mech / BA-seat f. tensioner le. cpl. mech.
+2025-04-25 09:44:32,474 [DEBUG] core.bom_processor - 添加子节点: 1161313 -> 父节点: 1161297
+2025-04-25 09:44:32,474 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,474 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze02
+2025-04-25 09:44:32,475 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161313, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,475 [DEBUG] core.bom_processor - 处理节点: 1161313, 占位符: PL-Sitze02, 父节点: 1161297
+2025-04-25 09:44:32,475 [DEBUG] core.bom_processor - 
+处理第 39 行:
+2025-04-25 09:44:32,475 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,475 [DEBUG] core.bom_processor -   Baugruppe: 1161314
+2025-04-25 09:44:32,475 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,475 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.mech / BA-seat f. tensioner le. cpl. mech.
+2025-04-25 09:44:32,475 [DEBUG] core.bom_processor - 添加子节点: 1161314 -> 父节点: 1161313
+2025-04-25 09:44:32,475 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,475 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze02
+2025-04-25 09:44:32,475 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161314, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,475 [DEBUG] core.bom_processor - 处理节点: 1161314, 占位符: PL-Sitze02, 父节点: 1161313
+2025-04-25 09:44:32,476 [DEBUG] core.bom_processor - 
+处理第 40 行:
+2025-04-25 09:44:32,476 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,476 [DEBUG] core.bom_processor -   Baugruppe: 1161294
+2025-04-25 09:44:32,476 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,476 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. elektrisch / BA-seat std. electric
+2025-04-25 09:44:32,476 [DEBUG] core.bom_processor - 添加子节点: 1161294 -> 父节点: 1161314
+2025-04-25 09:44:32,476 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,476 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze02
+2025-04-25 09:44:32,476 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161294, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,476 [DEBUG] core.bom_processor - 处理节点: 1161294, 占位符: PL-Sitze02, 父节点: 1161314
+2025-04-25 09:44:32,477 [DEBUG] core.bom_processor - 
+处理第 41 行:
+2025-04-25 09:44:32,477 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,477 [DEBUG] core.bom_processor -   Baugruppe: 1161295
+2025-04-25 09:44:32,477 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,477 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. elektrisch / BA-seat std. electric
+2025-04-25 09:44:32,477 [DEBUG] core.bom_processor - 添加子节点: 1161295 -> 父节点: 1161294
+2025-04-25 09:44:32,477 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,477 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze02
+2025-04-25 09:44:32,477 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161295, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,477 [DEBUG] core.bom_processor - 处理节点: 1161295, 占位符: PL-Sitze02, 父节点: 1161294
+2025-04-25 09:44:32,477 [DEBUG] core.bom_processor - 
+处理第 42 行:
+2025-04-25 09:44:32,477 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,478 [DEBUG] core.bom_processor -   Baugruppe: 1161309
+2025-04-25 09:44:32,478 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,478 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.
+2025-04-25 09:44:32,478 [DEBUG] core.bom_processor - 添加子节点: 1161309 -> 父节点: 1161295
+2025-04-25 09:44:32,478 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,478 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze02
+2025-04-25 09:44:32,478 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161309, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,478 [DEBUG] core.bom_processor - 处理节点: 1161309, 占位符: PL-Sitze02, 父节点: 1161295
+2025-04-25 09:44:32,478 [DEBUG] core.bom_processor - 
+处理第 43 行:
+2025-04-25 09:44:32,478 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,478 [DEBUG] core.bom_processor -   Baugruppe: 1161310
+2025-04-25 09:44:32,478 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,478 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.
+2025-04-25 09:44:32,479 [DEBUG] core.bom_processor - 添加子节点: 1161310 -> 父节点: 1161309
+2025-04-25 09:44:32,479 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,479 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze02
+2025-04-25 09:44:32,479 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161310, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,479 [DEBUG] core.bom_processor - 处理节点: 1161310, 占位符: PL-Sitze02, 父节点: 1161309
+2025-04-25 09:44:32,479 [DEBUG] core.bom_processor - 
+处理第 44 行:
+2025-04-25 09:44:32,479 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,479 [DEBUG] core.bom_processor -   Baugruppe: 1123266
+2025-04-25 09:44:32,479 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,479 [DEBUG] core.bom_processor -   描述: Einzelsitz m.Tisch f.Straf.li. / single seat w. table f. tensioner le.
+2025-04-25 09:44:32,479 [DEBUG] core.bom_processor - 添加子节点: 1123266 -> 父节点: 1161310
+2025-04-25 09:44:32,479 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,479 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze02
+2025-04-25 09:44:32,480 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123266, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,480 [DEBUG] core.bom_processor - 处理节点: 1123266, 占位符: PL-Sitze02, 父节点: 1161310
+2025-04-25 09:44:32,480 [DEBUG] core.bom_processor - 
+处理第 45 行:
+2025-04-25 09:44:32,480 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,480 [DEBUG] core.bom_processor -   Baugruppe: 1161307
+2025-04-25 09:44:32,480 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,480 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.mech / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,480 [DEBUG] core.bom_processor - 添加子节点: 1161307 -> 父节点: 1123266
+2025-04-25 09:44:32,480 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,480 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze02
+2025-04-25 09:44:32,480 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161307, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,480 [DEBUG] core.bom_processor - 处理节点: 1161307, 占位符: PL-Sitze02, 父节点: 1123266
+2025-04-25 09:44:32,480 [DEBUG] core.bom_processor - 
+处理第 46 行:
+2025-04-25 09:44:32,480 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,481 [DEBUG] core.bom_processor -   Baugruppe: 1161308
+2025-04-25 09:44:32,481 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,481 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.mech / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,481 [DEBUG] core.bom_processor - 添加子节点: 1161308 -> 父节点: 1161307
+2025-04-25 09:44:32,481 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,481 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze02
+2025-04-25 09:44:32,481 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161308, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,481 [DEBUG] core.bom_processor - 处理节点: 1161308, 占位符: PL-Sitze02, 父节点: 1161307
+2025-04-25 09:44:32,481 [DEBUG] core.bom_processor - 
+处理第 47 行:
+2025-04-25 09:44:32,481 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,481 [DEBUG] core.bom_processor -   Baugruppe: 1123246
+2025-04-25 09:44:32,481 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,482 [DEBUG] core.bom_processor -   描述: Einzelsitz Std Airbag Stra.re. / single seat w. table f. tensioner ri.
+2025-04-25 09:44:32,482 [DEBUG] core.bom_processor - 添加子节点: 1123246 -> 父节点: 1161308
+2025-04-25 09:44:32,482 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,482 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze02
+2025-04-25 09:44:32,482 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123246, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,482 [DEBUG] core.bom_processor - 处理节点: 1123246, 占位符: PL-Sitze02, 父节点: 1161308
+2025-04-25 09:44:32,482 [DEBUG] core.bom_processor - 
+处理第 48 行:
+2025-04-25 09:44:32,482 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,482 [DEBUG] core.bom_processor -   Baugruppe: 1161305
+2025-04-25 09:44:32,482 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,482 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.el. / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,482 [DEBUG] core.bom_processor - 添加子节点: 1161305 -> 父节点: 1123246
+2025-04-25 09:44:32,482 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,483 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze02
+2025-04-25 09:44:32,483 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161305, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,483 [DEBUG] core.bom_processor - 处理节点: 1161305, 占位符: PL-Sitze02, 父节点: 1123246
+2025-04-25 09:44:32,483 [DEBUG] core.bom_processor - 
+处理第 49 行:
+2025-04-25 09:44:32,483 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,483 [DEBUG] core.bom_processor -   Baugruppe: 1161306
+2025-04-25 09:44:32,483 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,483 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.el. / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,483 [DEBUG] core.bom_processor - 添加子节点: 1161306 -> 父节点: 1161305
+2025-04-25 09:44:32,483 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,483 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze02
+2025-04-25 09:44:32,483 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161306, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,484 [DEBUG] core.bom_processor - 处理节点: 1161306, 占位符: PL-Sitze02, 父节点: 1161305
+2025-04-25 09:44:32,484 [DEBUG] core.bom_processor - 
+处理第 50 行:
+2025-04-25 09:44:32,484 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,484 [DEBUG] core.bom_processor -   Baugruppe: 10028644
+2025-04-25 09:44:32,484 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,484 [DEBUG] core.bom_processor -   描述: PA-Sitz MAN elektrisch 1 FL / BA seat MAN electric 1btl.
+2025-04-25 09:44:32,484 [DEBUG] core.bom_processor - 添加子节点: 10028644 -> 父节点: 1161306
+2025-04-25 09:44:32,484 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,484 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze02
+2025-04-25 09:44:32,484 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10028644, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,484 [DEBUG] core.bom_processor - 处理节点: 10028644, 占位符: PL-Sitze02, 父节点: 1161306
+2025-04-25 09:44:32,485 [DEBUG] core.bom_processor - 
+处理第 51 行:
+2025-04-25 09:44:32,485 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,485 [DEBUG] core.bom_processor -   Baugruppe: 10028647
+2025-04-25 09:44:32,485 [DEBUG] core.bom_processor -   占位符: PL-Sitze02
+2025-04-25 09:44:32,485 [DEBUG] core.bom_processor -   描述: PA-Sitz MAN elektrisch 2 FL / BA seat MAN electric 2btl.
+2025-04-25 09:44:32,485 [DEBUG] core.bom_processor - 添加子节点: 10028647 -> 父节点: 10028644
+2025-04-25 09:44:32,485 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze02
+2025-04-25 09:44:32,485 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze02
+2025-04-25 09:44:32,485 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10028647, 实际占位符: PL-Sitze02
+2025-04-25 09:44:32,485 [DEBUG] core.bom_processor - 处理节点: 10028647, 占位符: PL-Sitze02, 父节点: 10028644
+2025-04-25 09:44:32,485 [DEBUG] core.bom_processor - 
+处理第 52 行:
+2025-04-25 09:44:32,486 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,486 [DEBUG] core.bom_processor -   Baugruppe: 1123244
+2025-04-25 09:44:32,486 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,486 [DEBUG] core.bom_processor -   描述: Einzelsitz Std Airbag Stra.li. / single seat std. airbag tensioner le.
+2025-04-25 09:44:32,486 [DEBUG] core.bom_processor - 同层级占位符变化: PL-Sitze02 -> PL-Sitze03
+2025-04-25 09:44:32,486 [DEBUG] core.bom_processor - 添加子节点: 1123244 -> 父节点: 0000000010017913NK
+2025-04-25 09:44:32,486 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,486 [DEBUG] core.bom_processor -   父节点占位符: PL-Kabine
+2025-04-25 09:44:32,486 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123244, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,486 [DEBUG] core.bom_processor - 处理节点: 1123244, 占位符: PL-Sitze03, 父节点: 0000000010017913NK
+2025-04-25 09:44:32,486 [DEBUG] core.bom_processor - 
+处理第 53 行:
+2025-04-25 09:44:32,486 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,487 [DEBUG] core.bom_processor -   Baugruppe: 1161296
+2025-04-25 09:44:32,487 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,487 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. mechanisch / BA-seat mechanically
+2025-04-25 09:44:32,487 [DEBUG] core.bom_processor - 添加子节点: 1161296 -> 父节点: 1123244
+2025-04-25 09:44:32,487 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,487 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze03
+2025-04-25 09:44:32,487 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161296, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,487 [DEBUG] core.bom_processor - 处理节点: 1161296, 占位符: PL-Sitze03, 父节点: 1123244
+2025-04-25 09:44:32,487 [DEBUG] core.bom_processor - 
+处理第 54 行:
+2025-04-25 09:44:32,488 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,488 [DEBUG] core.bom_processor -   Baugruppe: 1161297
+2025-04-25 09:44:32,488 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,488 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. mechanisch / BA-seat mechanically
+2025-04-25 09:44:32,488 [DEBUG] core.bom_processor - 添加子节点: 1161297 -> 父节点: 1161296
+2025-04-25 09:44:32,488 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,488 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze03
+2025-04-25 09:44:32,488 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161297, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,488 [DEBUG] core.bom_processor - 处理节点: 1161297, 占位符: PL-Sitze03, 父节点: 1161296
+2025-04-25 09:44:32,488 [DEBUG] core.bom_processor - 
+处理第 55 行:
+2025-04-25 09:44:32,489 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,489 [DEBUG] core.bom_processor -   Baugruppe: 1161313
+2025-04-25 09:44:32,489 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,489 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.mech / BA-seat f. tensioner le. cpl. mech.
+2025-04-25 09:44:32,489 [DEBUG] core.bom_processor - 添加子节点: 1161313 -> 父节点: 1161297
+2025-04-25 09:44:32,489 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,489 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze03
+2025-04-25 09:44:32,489 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161313, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,489 [DEBUG] core.bom_processor - 处理节点: 1161313, 占位符: PL-Sitze03, 父节点: 1161297
+2025-04-25 09:44:32,489 [DEBUG] core.bom_processor - 
+处理第 56 行:
+2025-04-25 09:44:32,489 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,489 [DEBUG] core.bom_processor -   Baugruppe: 1161314
+2025-04-25 09:44:32,489 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,489 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.mech / BA-seat f. tensioner le. cpl. mech.
+2025-04-25 09:44:32,489 [DEBUG] core.bom_processor - 添加子节点: 1161314 -> 父节点: 1161313
+2025-04-25 09:44:32,490 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,490 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze03
+2025-04-25 09:44:32,490 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161314, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,490 [DEBUG] core.bom_processor - 处理节点: 1161314, 占位符: PL-Sitze03, 父节点: 1161313
+2025-04-25 09:44:32,490 [DEBUG] core.bom_processor - 
+处理第 57 行:
+2025-04-25 09:44:32,490 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,490 [DEBUG] core.bom_processor -   Baugruppe: 1161294
+2025-04-25 09:44:32,490 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,490 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. elektrisch / BA-seat std. electric
+2025-04-25 09:44:32,490 [DEBUG] core.bom_processor - 添加子节点: 1161294 -> 父节点: 1161314
+2025-04-25 09:44:32,490 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,490 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze03
+2025-04-25 09:44:32,490 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161294, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,491 [DEBUG] core.bom_processor - 处理节点: 1161294, 占位符: PL-Sitze03, 父节点: 1161314
+2025-04-25 09:44:32,491 [DEBUG] core.bom_processor - 
+处理第 58 行:
+2025-04-25 09:44:32,491 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,491 [DEBUG] core.bom_processor -   Baugruppe: 1161295
+2025-04-25 09:44:32,491 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,491 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. elektrisch / BA-seat std. electric
+2025-04-25 09:44:32,491 [DEBUG] core.bom_processor - 添加子节点: 1161295 -> 父节点: 1161294
+2025-04-25 09:44:32,491 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,491 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze03
+2025-04-25 09:44:32,491 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161295, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,491 [DEBUG] core.bom_processor - 处理节点: 1161295, 占位符: PL-Sitze03, 父节点: 1161294
+2025-04-25 09:44:32,492 [DEBUG] core.bom_processor - 
+处理第 59 行:
+2025-04-25 09:44:32,492 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,492 [DEBUG] core.bom_processor -   Baugruppe: 1161309
+2025-04-25 09:44:32,492 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,492 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.
+2025-04-25 09:44:32,492 [DEBUG] core.bom_processor - 添加子节点: 1161309 -> 父节点: 1161295
+2025-04-25 09:44:32,492 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,492 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze03
+2025-04-25 09:44:32,492 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161309, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,492 [DEBUG] core.bom_processor - 处理节点: 1161309, 占位符: PL-Sitze03, 父节点: 1161295
+2025-04-25 09:44:32,492 [DEBUG] core.bom_processor - 
+处理第 60 行:
+2025-04-25 09:44:32,493 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,493 [DEBUG] core.bom_processor -   Baugruppe: 1161310
+2025-04-25 09:44:32,493 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,493 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.
+2025-04-25 09:44:32,493 [DEBUG] core.bom_processor - 添加子节点: 1161310 -> 父节点: 1161309
+2025-04-25 09:44:32,493 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,493 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze03
+2025-04-25 09:44:32,493 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161310, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,493 [DEBUG] core.bom_processor - 处理节点: 1161310, 占位符: PL-Sitze03, 父节点: 1161309
+2025-04-25 09:44:32,493 [DEBUG] core.bom_processor - 
+处理第 61 行:
+2025-04-25 09:44:32,493 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,493 [DEBUG] core.bom_processor -   Baugruppe: 1123266
+2025-04-25 09:44:32,493 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,493 [DEBUG] core.bom_processor -   描述: Einzelsitz m.Tisch f.Straf.li. / single seat w. table f. tensioner le.
+2025-04-25 09:44:32,493 [DEBUG] core.bom_processor - 添加子节点: 1123266 -> 父节点: 1161310
+2025-04-25 09:44:32,494 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,494 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze03
+2025-04-25 09:44:32,494 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123266, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,494 [DEBUG] core.bom_processor - 处理节点: 1123266, 占位符: PL-Sitze03, 父节点: 1161310
+2025-04-25 09:44:32,494 [DEBUG] core.bom_processor - 
+处理第 62 行:
+2025-04-25 09:44:32,494 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,494 [DEBUG] core.bom_processor -   Baugruppe: 1161307
+2025-04-25 09:44:32,494 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,494 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.mech / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,494 [DEBUG] core.bom_processor - 添加子节点: 1161307 -> 父节点: 1123266
+2025-04-25 09:44:32,494 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,494 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze03
+2025-04-25 09:44:32,494 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161307, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,494 [DEBUG] core.bom_processor - 处理节点: 1161307, 占位符: PL-Sitze03, 父节点: 1123266
+2025-04-25 09:44:32,495 [DEBUG] core.bom_processor - 
+处理第 63 行:
+2025-04-25 09:44:32,495 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,495 [DEBUG] core.bom_processor -   Baugruppe: 1161308
+2025-04-25 09:44:32,495 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,495 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.mech / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,495 [DEBUG] core.bom_processor - 添加子节点: 1161308 -> 父节点: 1161307
+2025-04-25 09:44:32,495 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,495 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze03
+2025-04-25 09:44:32,495 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161308, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,495 [DEBUG] core.bom_processor - 处理节点: 1161308, 占位符: PL-Sitze03, 父节点: 1161307
+2025-04-25 09:44:32,495 [DEBUG] core.bom_processor - 
+处理第 64 行:
+2025-04-25 09:44:32,495 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,495 [DEBUG] core.bom_processor -   Baugruppe: 1123246
+2025-04-25 09:44:32,496 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,496 [DEBUG] core.bom_processor -   描述: Einzelsitz Std Airbag Stra.re. / single seat w. table f. tensioner ri.
+2025-04-25 09:44:32,496 [DEBUG] core.bom_processor - 添加子节点: 1123246 -> 父节点: 1161308
+2025-04-25 09:44:32,496 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,496 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze03
+2025-04-25 09:44:32,496 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123246, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,496 [DEBUG] core.bom_processor - 处理节点: 1123246, 占位符: PL-Sitze03, 父节点: 1161308
+2025-04-25 09:44:32,496 [DEBUG] core.bom_processor - 
+处理第 65 行:
+2025-04-25 09:44:32,496 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,496 [DEBUG] core.bom_processor -   Baugruppe: 1161305
+2025-04-25 09:44:32,496 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,496 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.el. / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,497 [DEBUG] core.bom_processor - 添加子节点: 1161305 -> 父节点: 1123246
+2025-04-25 09:44:32,497 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,497 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze03
+2025-04-25 09:44:32,497 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161305, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,497 [DEBUG] core.bom_processor - 处理节点: 1161305, 占位符: PL-Sitze03, 父节点: 1123246
+2025-04-25 09:44:32,497 [DEBUG] core.bom_processor - 
+处理第 66 行:
+2025-04-25 09:44:32,497 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,497 [DEBUG] core.bom_processor -   Baugruppe: 1161306
+2025-04-25 09:44:32,497 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,497 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.el. / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,497 [DEBUG] core.bom_processor - 添加子节点: 1161306 -> 父节点: 1161305
+2025-04-25 09:44:32,497 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,497 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze03
+2025-04-25 09:44:32,498 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161306, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,498 [DEBUG] core.bom_processor - 处理节点: 1161306, 占位符: PL-Sitze03, 父节点: 1161305
+2025-04-25 09:44:32,498 [DEBUG] core.bom_processor - 
+处理第 67 行:
+2025-04-25 09:44:32,498 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,498 [DEBUG] core.bom_processor -   Baugruppe: 10028644
+2025-04-25 09:44:32,498 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,498 [DEBUG] core.bom_processor -   描述: PA-Sitz MAN elektrisch 1 FL / BA seat MAN electric 1btl.
+2025-04-25 09:44:32,498 [DEBUG] core.bom_processor - 添加子节点: 10028644 -> 父节点: 1161306
+2025-04-25 09:44:32,498 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,498 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze03
+2025-04-25 09:44:32,498 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10028644, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,498 [DEBUG] core.bom_processor - 处理节点: 10028644, 占位符: PL-Sitze03, 父节点: 1161306
+2025-04-25 09:44:32,498 [DEBUG] core.bom_processor - 
+处理第 68 行:
+2025-04-25 09:44:32,499 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,499 [DEBUG] core.bom_processor -   Baugruppe: 10028647
+2025-04-25 09:44:32,499 [DEBUG] core.bom_processor -   占位符: PL-Sitze03
+2025-04-25 09:44:32,499 [DEBUG] core.bom_processor -   描述: PA-Sitz MAN elektrisch 2 FL / BA seat MAN electric 2btl.
+2025-04-25 09:44:32,499 [DEBUG] core.bom_processor - 添加子节点: 10028647 -> 父节点: 10028644
+2025-04-25 09:44:32,499 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze03
+2025-04-25 09:44:32,499 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze03
+2025-04-25 09:44:32,499 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10028647, 实际占位符: PL-Sitze03
+2025-04-25 09:44:32,499 [DEBUG] core.bom_processor - 处理节点: 10028647, 占位符: PL-Sitze03, 父节点: 10028644
+2025-04-25 09:44:32,499 [DEBUG] core.bom_processor - 
+处理第 69 行:
+2025-04-25 09:44:32,499 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,499 [DEBUG] core.bom_processor -   Baugruppe: 1123244
+2025-04-25 09:44:32,499 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,499 [DEBUG] core.bom_processor -   描述: Einzelsitz Std Airbag Stra.li. / single seat std. airbag tensioner le.
+2025-04-25 09:44:32,499 [DEBUG] core.bom_processor - 同层级占位符变化: PL-Sitze03 -> PL-Sitze04
+2025-04-25 09:44:32,499 [DEBUG] core.bom_processor - 添加子节点: 1123244 -> 父节点: 0000000010017913NK
+2025-04-25 09:44:32,500 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,500 [DEBUG] core.bom_processor -   父节点占位符: PL-Kabine
+2025-04-25 09:44:32,500 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123244, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,500 [DEBUG] core.bom_processor - 处理节点: 1123244, 占位符: PL-Sitze04, 父节点: 0000000010017913NK
+2025-04-25 09:44:32,500 [DEBUG] core.bom_processor - 
+处理第 70 行:
+2025-04-25 09:44:32,500 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,500 [DEBUG] core.bom_processor -   Baugruppe: 1161296
+2025-04-25 09:44:32,500 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,500 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. mechanisch / BA-seat mechanically
+2025-04-25 09:44:32,501 [DEBUG] core.bom_processor - 添加子节点: 1161296 -> 父节点: 1123244
+2025-04-25 09:44:32,501 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,501 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze04
+2025-04-25 09:44:32,501 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161296, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,501 [DEBUG] core.bom_processor - 处理节点: 1161296, 占位符: PL-Sitze04, 父节点: 1123244
+2025-04-25 09:44:32,501 [DEBUG] core.bom_processor - 
+处理第 71 行:
+2025-04-25 09:44:32,501 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,501 [DEBUG] core.bom_processor -   Baugruppe: 1161297
+2025-04-25 09:44:32,501 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,501 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. mechanisch / BA-seat mechanically
+2025-04-25 09:44:32,501 [DEBUG] core.bom_processor - 添加子节点: 1161297 -> 父节点: 1161296
+2025-04-25 09:44:32,502 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,502 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze04
+2025-04-25 09:44:32,502 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161297, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,502 [DEBUG] core.bom_processor - 处理节点: 1161297, 占位符: PL-Sitze04, 父节点: 1161296
+2025-04-25 09:44:32,502 [DEBUG] core.bom_processor - 
+处理第 72 行:
+2025-04-25 09:44:32,502 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,502 [DEBUG] core.bom_processor -   Baugruppe: 1161313
+2025-04-25 09:44:32,502 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,502 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.mech / BA-seat f. tensioner le. cpl. mech.
+2025-04-25 09:44:32,502 [DEBUG] core.bom_processor - 添加子节点: 1161313 -> 父节点: 1161297
+2025-04-25 09:44:32,502 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,503 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze04
+2025-04-25 09:44:32,503 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161313, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,503 [DEBUG] core.bom_processor - 处理节点: 1161313, 占位符: PL-Sitze04, 父节点: 1161297
+2025-04-25 09:44:32,503 [DEBUG] core.bom_processor - 
+处理第 73 行:
+2025-04-25 09:44:32,503 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,503 [DEBUG] core.bom_processor -   Baugruppe: 1161314
+2025-04-25 09:44:32,503 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,503 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.mech / BA-seat f. tensioner le. cpl. mech.
+2025-04-25 09:44:32,503 [DEBUG] core.bom_processor - 添加子节点: 1161314 -> 父节点: 1161313
+2025-04-25 09:44:32,503 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,503 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze04
+2025-04-25 09:44:32,503 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161314, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,503 [DEBUG] core.bom_processor - 处理节点: 1161314, 占位符: PL-Sitze04, 父节点: 1161313
+2025-04-25 09:44:32,504 [DEBUG] core.bom_processor - 
+处理第 74 行:
+2025-04-25 09:44:32,504 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,504 [DEBUG] core.bom_processor -   Baugruppe: 1161294
+2025-04-25 09:44:32,504 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,504 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. elektrisch / BA-seat std. electric
+2025-04-25 09:44:32,504 [DEBUG] core.bom_processor - 添加子节点: 1161294 -> 父节点: 1161314
+2025-04-25 09:44:32,504 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,504 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze04
+2025-04-25 09:44:32,504 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161294, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,504 [DEBUG] core.bom_processor - 处理节点: 1161294, 占位符: PL-Sitze04, 父节点: 1161314
+2025-04-25 09:44:32,504 [DEBUG] core.bom_processor - 
+处理第 75 行:
+2025-04-25 09:44:32,505 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,505 [DEBUG] core.bom_processor -   Baugruppe: 1161295
+2025-04-25 09:44:32,505 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,505 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. elektrisch / BA-seat std. electric
+2025-04-25 09:44:32,505 [DEBUG] core.bom_processor - 添加子节点: 1161295 -> 父节点: 1161294
+2025-04-25 09:44:32,505 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,505 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze04
+2025-04-25 09:44:32,505 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161295, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,505 [DEBUG] core.bom_processor - 处理节点: 1161295, 占位符: PL-Sitze04, 父节点: 1161294
+2025-04-25 09:44:32,505 [DEBUG] core.bom_processor - 
+处理第 76 行:
+2025-04-25 09:44:32,505 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,506 [DEBUG] core.bom_processor -   Baugruppe: 1161309
+2025-04-25 09:44:32,506 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,506 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.
+2025-04-25 09:44:32,506 [DEBUG] core.bom_processor - 添加子节点: 1161309 -> 父节点: 1161295
+2025-04-25 09:44:32,506 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,506 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze04
+2025-04-25 09:44:32,506 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161309, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,506 [DEBUG] core.bom_processor - 处理节点: 1161309, 占位符: PL-Sitze04, 父节点: 1161295
+2025-04-25 09:44:32,506 [DEBUG] core.bom_processor - 
+处理第 77 行:
+2025-04-25 09:44:32,506 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,507 [DEBUG] core.bom_processor -   Baugruppe: 1161310
+2025-04-25 09:44:32,507 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,507 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.
+2025-04-25 09:44:32,507 [DEBUG] core.bom_processor - 添加子节点: 1161310 -> 父节点: 1161309
+2025-04-25 09:44:32,507 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,507 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze04
+2025-04-25 09:44:32,507 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161310, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,507 [DEBUG] core.bom_processor - 处理节点: 1161310, 占位符: PL-Sitze04, 父节点: 1161309
+2025-04-25 09:44:32,507 [DEBUG] core.bom_processor - 
+处理第 78 行:
+2025-04-25 09:44:32,507 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,507 [DEBUG] core.bom_processor -   Baugruppe: 1123266
+2025-04-25 09:44:32,507 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,508 [DEBUG] core.bom_processor -   描述: Einzelsitz m.Tisch f.Straf.li. / single seat w. table f. tensioner le.
+2025-04-25 09:44:32,508 [DEBUG] core.bom_processor - 添加子节点: 1123266 -> 父节点: 1161310
+2025-04-25 09:44:32,508 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,508 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze04
+2025-04-25 09:44:32,508 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123266, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,508 [DEBUG] core.bom_processor - 处理节点: 1123266, 占位符: PL-Sitze04, 父节点: 1161310
+2025-04-25 09:44:32,508 [DEBUG] core.bom_processor - 
+处理第 79 行:
+2025-04-25 09:44:32,508 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,508 [DEBUG] core.bom_processor -   Baugruppe: 1161307
+2025-04-25 09:44:32,508 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,508 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.mech / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,508 [DEBUG] core.bom_processor - 添加子节点: 1161307 -> 父节点: 1123266
+2025-04-25 09:44:32,509 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,509 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze04
+2025-04-25 09:44:32,509 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161307, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,509 [DEBUG] core.bom_processor - 处理节点: 1161307, 占位符: PL-Sitze04, 父节点: 1123266
+2025-04-25 09:44:32,509 [DEBUG] core.bom_processor - 
+处理第 80 行:
+2025-04-25 09:44:32,509 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,509 [DEBUG] core.bom_processor -   Baugruppe: 1161308
+2025-04-25 09:44:32,509 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,509 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.mech / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,509 [DEBUG] core.bom_processor - 添加子节点: 1161308 -> 父节点: 1161307
+2025-04-25 09:44:32,509 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,509 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze04
+2025-04-25 09:44:32,509 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161308, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,509 [DEBUG] core.bom_processor - 处理节点: 1161308, 占位符: PL-Sitze04, 父节点: 1161307
+2025-04-25 09:44:32,509 [DEBUG] core.bom_processor - 
+处理第 81 行:
+2025-04-25 09:44:32,510 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,510 [DEBUG] core.bom_processor -   Baugruppe: 1123246
+2025-04-25 09:44:32,510 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,510 [DEBUG] core.bom_processor -   描述: Einzelsitz Std Airbag Stra.re. / single seat w. table f. tensioner ri.
+2025-04-25 09:44:32,510 [DEBUG] core.bom_processor - 添加子节点: 1123246 -> 父节点: 1161308
+2025-04-25 09:44:32,510 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,510 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze04
+2025-04-25 09:44:32,510 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123246, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,510 [DEBUG] core.bom_processor - 处理节点: 1123246, 占位符: PL-Sitze04, 父节点: 1161308
+2025-04-25 09:44:32,510 [DEBUG] core.bom_processor - 
+处理第 82 行:
+2025-04-25 09:44:32,510 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,510 [DEBUG] core.bom_processor -   Baugruppe: 1161305
+2025-04-25 09:44:32,510 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,510 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.el. / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,511 [DEBUG] core.bom_processor - 添加子节点: 1161305 -> 父节点: 1123246
+2025-04-25 09:44:32,511 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,511 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze04
+2025-04-25 09:44:32,511 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161305, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,511 [DEBUG] core.bom_processor - 处理节点: 1161305, 占位符: PL-Sitze04, 父节点: 1123246
+2025-04-25 09:44:32,511 [DEBUG] core.bom_processor - 
+处理第 83 行:
+2025-04-25 09:44:32,511 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,511 [DEBUG] core.bom_processor -   Baugruppe: 1161306
+2025-04-25 09:44:32,511 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,511 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.el. / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,511 [DEBUG] core.bom_processor - 添加子节点: 1161306 -> 父节点: 1161305
+2025-04-25 09:44:32,511 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,512 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze04
+2025-04-25 09:44:32,512 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161306, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,512 [DEBUG] core.bom_processor - 处理节点: 1161306, 占位符: PL-Sitze04, 父节点: 1161305
+2025-04-25 09:44:32,512 [DEBUG] core.bom_processor - 
+处理第 84 行:
+2025-04-25 09:44:32,512 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,512 [DEBUG] core.bom_processor -   Baugruppe: 10028644
+2025-04-25 09:44:32,512 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,512 [DEBUG] core.bom_processor -   描述: PA-Sitz MAN elektrisch 1 FL / BA seat MAN electric 1btl.
+2025-04-25 09:44:32,512 [DEBUG] core.bom_processor - 添加子节点: 10028644 -> 父节点: 1161306
+2025-04-25 09:44:32,512 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,512 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze04
+2025-04-25 09:44:32,512 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10028644, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,512 [DEBUG] core.bom_processor - 处理节点: 10028644, 占位符: PL-Sitze04, 父节点: 1161306
+2025-04-25 09:44:32,513 [DEBUG] core.bom_processor - 
+处理第 85 行:
+2025-04-25 09:44:32,513 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,513 [DEBUG] core.bom_processor -   Baugruppe: 10028647
+2025-04-25 09:44:32,513 [DEBUG] core.bom_processor -   占位符: PL-Sitze04
+2025-04-25 09:44:32,513 [DEBUG] core.bom_processor -   描述: PA-Sitz MAN elektrisch 2 FL / BA seat MAN electric 2btl.
+2025-04-25 09:44:32,513 [DEBUG] core.bom_processor - 添加子节点: 10028647 -> 父节点: 10028644
+2025-04-25 09:44:32,513 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze04
+2025-04-25 09:44:32,513 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze04
+2025-04-25 09:44:32,513 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10028647, 实际占位符: PL-Sitze04
+2025-04-25 09:44:32,513 [DEBUG] core.bom_processor - 处理节点: 10028647, 占位符: PL-Sitze04, 父节点: 10028644
+2025-04-25 09:44:32,513 [DEBUG] core.bom_processor - 
+处理第 86 行:
+2025-04-25 09:44:32,513 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,513 [DEBUG] core.bom_processor -   Baugruppe: 1161298
+2025-04-25 09:44:32,514 [DEBUG] core.bom_processor -   占位符: PL-Sitze05
+2025-04-25 09:44:32,514 [DEBUG] core.bom_processor -   描述: Teilesatz Standardsitz / parts set type seat
+2025-04-25 09:44:32,514 [DEBUG] core.bom_processor - 同层级占位符变化: PL-Sitze04 -> PL-Sitze05
+2025-04-25 09:44:32,514 [DEBUG] core.bom_processor - 添加子节点: 1161298 -> 父节点: 0000000010017913NK
+2025-04-25 09:44:32,514 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze05
+2025-04-25 09:44:32,514 [DEBUG] core.bom_processor -   父节点占位符: PL-Kabine
+2025-04-25 09:44:32,514 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161298, 实际占位符: PL-Sitze05
+2025-04-25 09:44:32,514 [DEBUG] core.bom_processor - 处理节点: 1161298, 占位符: PL-Sitze05, 父节点: 0000000010017913NK
+2025-04-25 09:44:32,514 [DEBUG] core.bom_processor - 
+处理第 87 行:
+2025-04-25 09:44:32,514 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,514 [DEBUG] core.bom_processor -   Baugruppe: 1142075
+2025-04-25 09:44:32,514 [DEBUG] core.bom_processor -   占位符: PL-Sitze05
+2025-04-25 09:44:32,514 [DEBUG] core.bom_processor -   描述: Teilesatz Sitzgestell / parts set seat frame
+2025-04-25 09:44:32,515 [DEBUG] core.bom_processor - 添加子节点: 1142075 -> 父节点: 1161298
+2025-04-25 09:44:32,515 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze05
+2025-04-25 09:44:32,515 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze05
+2025-04-25 09:44:32,515 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1142075, 实际占位符: PL-Sitze05
+2025-04-25 09:44:32,515 [DEBUG] core.bom_processor - 处理节点: 1142075, 占位符: PL-Sitze05, 父节点: 1161298
+2025-04-25 09:44:32,515 [DEBUG] core.bom_processor - 
+处理第 88 行:
+2025-04-25 09:44:32,515 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,515 [DEBUG] core.bom_processor -   Baugruppe: 1135804
+2025-04-25 09:44:32,515 [DEBUG] core.bom_processor -   占位符: PL-Sitze05
+2025-04-25 09:44:32,515 [DEBUG] core.bom_processor -   描述: Teilesatz Gerätewand / parts set device wall
+2025-04-25 09:44:32,515 [DEBUG] core.bom_processor - 添加子节点: 1135804 -> 父节点: 1142075
+2025-04-25 09:44:32,515 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze05
+2025-04-25 09:44:32,515 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze05
+2025-04-25 09:44:32,515 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1135804, 实际占位符: PL-Sitze05
+2025-04-25 09:44:32,516 [DEBUG] core.bom_processor - 处理节点: 1135804, 占位符: PL-Sitze05, 父节点: 1142075
+2025-04-25 09:44:32,516 [DEBUG] core.bom_processor - 
+处理第 89 行:
+2025-04-25 09:44:32,516 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,516 [DEBUG] core.bom_processor -   Baugruppe: 1161299
+2025-04-25 09:44:32,516 [DEBUG] core.bom_processor -   占位符: PL-Sitze05
+2025-04-25 09:44:32,516 [DEBUG] core.bom_processor -   描述: Teilesatz Einzelsitz m.Tisch / parts set single seat w. table
+2025-04-25 09:44:32,516 [DEBUG] core.bom_processor - 添加子节点: 1161299 -> 父节点: 1135804
+2025-04-25 09:44:32,516 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze05
+2025-04-25 09:44:32,516 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze05
+2025-04-25 09:44:32,516 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161299, 实际占位符: PL-Sitze05
+2025-04-25 09:44:32,516 [DEBUG] core.bom_processor - 处理节点: 1161299, 占位符: PL-Sitze05, 父节点: 1135804
+2025-04-25 09:44:32,517 [DEBUG] core.bom_processor - 
+处理第 90 行:
+2025-04-25 09:44:32,517 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,517 [DEBUG] core.bom_processor -   Baugruppe: 1149353
+2025-04-25 09:44:32,517 [DEBUG] core.bom_processor -   占位符: PL-Sitze05
+2025-04-25 09:44:32,517 [DEBUG] core.bom_processor -   描述: Schrank m.Rollo in MR kpl. / tower w. shutter in cabin cpl.
+2025-04-25 09:44:32,517 [DEBUG] core.bom_processor - 添加子节点: 1149353 -> 父节点: 1161299
+2025-04-25 09:44:32,517 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze05
+2025-04-25 09:44:32,517 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze05
+2025-04-25 09:44:32,517 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1149353, 实际占位符: PL-Sitze05
+2025-04-25 09:44:32,517 [DEBUG] core.bom_processor - 处理节点: 1149353, 占位符: PL-Sitze05, 父节点: 1161299
+2025-04-25 09:44:32,518 [DEBUG] core.bom_processor - 
+处理第 91 行:
+2025-04-25 09:44:32,518 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,518 [DEBUG] core.bom_processor -   Baugruppe: 1149465
+2025-04-25 09:44:32,518 [DEBUG] core.bom_processor -   占位符: PL-Sitze05
+2025-04-25 09:44:32,518 [DEBUG] core.bom_processor -   描述: Schrank o.Rollo in MR kpl. / tower no shutter in cabin cpl.
+2025-04-25 09:44:32,518 [DEBUG] core.bom_processor - 添加子节点: 1149465 -> 父节点: 1149353
+2025-04-25 09:44:32,518 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze05
+2025-04-25 09:44:32,518 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze05
+2025-04-25 09:44:32,518 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1149465, 实际占位符: PL-Sitze05
+2025-04-25 09:44:32,518 [DEBUG] core.bom_processor - 处理节点: 1149465, 占位符: PL-Sitze05, 父节点: 1149353
+2025-04-25 09:44:32,518 [DEBUG] core.bom_processor - 
+处理第 92 行:
+2025-04-25 09:44:32,519 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,519 [DEBUG] core.bom_processor -   Baugruppe: 10019388
+2025-04-25 09:44:32,519 [DEBUG] core.bom_processor -   占位符: PL-Sitze05
+2025-04-25 09:44:32,519 [DEBUG] core.bom_processor -   描述: Teilesatz MAN Sitz m.Tisch / parts set MAN seat w. table
+2025-04-25 09:44:32,519 [DEBUG] core.bom_processor - 添加子节点: 10019388 -> 父节点: 1149465
+2025-04-25 09:44:32,519 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze05
+2025-04-25 09:44:32,519 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze05
+2025-04-25 09:44:32,519 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019388, 实际占位符: PL-Sitze05
+2025-04-25 09:44:32,519 [DEBUG] core.bom_processor - 处理节点: 10019388, 占位符: PL-Sitze05, 父节点: 1149465
+2025-04-25 09:44:32,519 [DEBUG] core.bom_processor - 
+处理第 93 行:
+2025-04-25 09:44:32,519 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,519 [DEBUG] core.bom_processor -   Baugruppe: 10019390
+2025-04-25 09:44:32,520 [DEBUG] core.bom_processor -   占位符: PL-Sitze05
+2025-04-25 09:44:32,520 [DEBUG] core.bom_processor -   描述: Teilesatz PA-Sitz MAN mech. 1 FL / parts set BA-seat MAN mech. 1 btl.
+2025-04-25 09:44:32,520 [DEBUG] core.bom_processor - 添加子节点: 10019390 -> 父节点: 10019388
+2025-04-25 09:44:32,520 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze05
+2025-04-25 09:44:32,520 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze05
+2025-04-25 09:44:32,520 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019390, 实际占位符: PL-Sitze05
+2025-04-25 09:44:32,520 [DEBUG] core.bom_processor - 处理节点: 10019390, 占位符: PL-Sitze05, 父节点: 10019388
+2025-04-25 09:44:32,520 [DEBUG] core.bom_processor - 
+处理第 94 行:
+2025-04-25 09:44:32,520 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,520 [DEBUG] core.bom_processor -   Baugruppe: 10019392
+2025-04-25 09:44:32,520 [DEBUG] core.bom_processor -   占位符: PL-Sitze05
+2025-04-25 09:44:32,520 [DEBUG] core.bom_processor -   描述: Teilesatz PA-Sitz MAN mech. 2 FL / parts set BA-seat MAN mech. 2 btl.
+2025-04-25 09:44:32,520 [DEBUG] core.bom_processor - 添加子节点: 10019392 -> 父节点: 10019390
+2025-04-25 09:44:32,520 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze05
+2025-04-25 09:44:32,521 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze05
+2025-04-25 09:44:32,521 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019392, 实际占位符: PL-Sitze05
+2025-04-25 09:44:32,521 [DEBUG] core.bom_processor - 处理节点: 10019392, 占位符: PL-Sitze05, 父节点: 10019390
+2025-04-25 09:44:32,521 [DEBUG] core.bom_processor - 
+处理第 95 行:
+2025-04-25 09:44:32,521 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,521 [DEBUG] core.bom_processor -   Baugruppe: 10019393
+2025-04-25 09:44:32,521 [DEBUG] core.bom_processor -   占位符: PL-Sitze05
+2025-04-25 09:44:32,521 [DEBUG] core.bom_processor -   描述: Teilesatz Standardsitz MAN / parts set standard seat MAN
+2025-04-25 09:44:32,521 [DEBUG] core.bom_processor - 添加子节点: 10019393 -> 父节点: 10019392
+2025-04-25 09:44:32,521 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze05
+2025-04-25 09:44:32,522 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze05
+2025-04-25 09:44:32,522 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10019393, 实际占位符: PL-Sitze05
+2025-04-25 09:44:32,522 [DEBUG] core.bom_processor - 处理节点: 10019393, 占位符: PL-Sitze05, 父节点: 10019392
+2025-04-25 09:44:32,522 [DEBUG] core.bom_processor - 
+处理第 96 行:
+2025-04-25 09:44:32,522 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,522 [DEBUG] core.bom_processor -   Baugruppe: 10026208
+2025-04-25 09:44:32,522 [DEBUG] core.bom_processor -   占位符: PL-Sitze05
+2025-04-25 09:44:32,522 [DEBUG] core.bom_processor -   描述: Teilesatz Gerätewand / parts set device wall
+2025-04-25 09:44:32,522 [DEBUG] core.bom_processor - 添加子节点: 10026208 -> 父节点: 10019393
+2025-04-25 09:44:32,522 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze05
+2025-04-25 09:44:32,522 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze05
+2025-04-25 09:44:32,523 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10026208, 实际占位符: PL-Sitze05
+2025-04-25 09:44:32,523 [DEBUG] core.bom_processor - 处理节点: 10026208, 占位符: PL-Sitze05, 父节点: 10019393
+2025-04-25 09:44:32,523 [DEBUG] core.bom_processor - 
+处理第 97 行:
+2025-04-25 09:44:32,523 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,523 [DEBUG] core.bom_processor -   Baugruppe: 10023661
+2025-04-25 09:44:32,523 [DEBUG] core.bom_processor -   占位符: PL-Sitze05
+2025-04-25 09:44:32,523 [DEBUG] core.bom_processor -   描述: Schrank o.Rollo in MR S2 / tower no shutter in cabin S2
+2025-04-25 09:44:32,523 [DEBUG] core.bom_processor - 添加子节点: 10023661 -> 父节点: 10026208
+2025-04-25 09:44:32,523 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze05
+2025-04-25 09:44:32,523 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze05
+2025-04-25 09:44:32,523 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10023661, 实际占位符: PL-Sitze05
+2025-04-25 09:44:32,523 [DEBUG] core.bom_processor - 处理节点: 10023661, 占位符: PL-Sitze05, 父节点: 10026208
+2025-04-25 09:44:32,523 [DEBUG] core.bom_processor - 
+处理第 98 行:
+2025-04-25 09:44:32,524 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,524 [DEBUG] core.bom_processor -   Baugruppe: 1146163
+2025-04-25 09:44:32,524 [DEBUG] core.bom_processor -   占位符: PL-Sitze05
+2025-04-25 09:44:32,524 [DEBUG] core.bom_processor -   描述: Schrank m.Rollo in MR S2 / tower no shutter in cabin S2
+2025-04-25 09:44:32,524 [DEBUG] core.bom_processor - 添加子节点: 1146163 -> 父节点: 10023661
+2025-04-25 09:44:32,524 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze05
+2025-04-25 09:44:32,524 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze05
+2025-04-25 09:44:32,524 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1146163, 实际占位符: PL-Sitze05
+2025-04-25 09:44:32,524 [DEBUG] core.bom_processor - 处理节点: 1146163, 占位符: PL-Sitze05, 父节点: 10023661
+2025-04-25 09:44:32,524 [DEBUG] core.bom_processor - 
+处理第 99 行:
+2025-04-25 09:44:32,524 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,524 [DEBUG] core.bom_processor -   Baugruppe: 1126282
+2025-04-25 09:44:32,524 [DEBUG] core.bom_processor -   占位符: PL-Sitze05
+2025-04-25 09:44:32,525 [DEBUG] core.bom_processor -   描述: Schrank o.Rollo in MR S2 / tower no shutter in cabin S2
+2025-04-25 09:44:32,525 [DEBUG] core.bom_processor - 添加子节点: 1126282 -> 父节点: 1146163
+2025-04-25 09:44:32,525 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze05
+2025-04-25 09:44:32,525 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze05
+2025-04-25 09:44:32,525 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1126282, 实际占位符: PL-Sitze05
+2025-04-25 09:44:32,525 [DEBUG] core.bom_processor - 处理节点: 1126282, 占位符: PL-Sitze05, 父节点: 1146163
+2025-04-25 09:44:32,525 [DEBUG] core.bom_processor - 
+处理第 100 行:
+2025-04-25 09:44:32,525 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,525 [DEBUG] core.bom_processor -   Baugruppe: 1123244
+2025-04-25 09:44:32,525 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,525 [DEBUG] core.bom_processor -   描述: Einzelsitz Std Airbag Stra.li. / single seat std. airbag tensioner le.
+2025-04-25 09:44:32,526 [DEBUG] core.bom_processor - 同层级占位符变化: PL-Sitze05 -> PL-Sitze06
+2025-04-25 09:44:32,526 [DEBUG] core.bom_processor - 添加子节点: 1123244 -> 父节点: 0000000010017913NK
+2025-04-25 09:44:32,526 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,526 [DEBUG] core.bom_processor -   父节点占位符: PL-Kabine
+2025-04-25 09:44:32,526 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123244, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,526 [DEBUG] core.bom_processor - 处理节点: 1123244, 占位符: PL-Sitze06, 父节点: 0000000010017913NK
+2025-04-25 09:44:32,526 [DEBUG] core.bom_processor - 
+处理第 101 行:
+2025-04-25 09:44:32,526 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,526 [DEBUG] core.bom_processor -   Baugruppe: 1161296
+2025-04-25 09:44:32,526 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,526 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. mechanisch / BA-seat mechanically
+2025-04-25 09:44:32,526 [DEBUG] core.bom_processor - 添加子节点: 1161296 -> 父节点: 1123244
+2025-04-25 09:44:32,527 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,527 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze06
+2025-04-25 09:44:32,527 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161296, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,527 [DEBUG] core.bom_processor - 处理节点: 1161296, 占位符: PL-Sitze06, 父节点: 1123244
+2025-04-25 09:44:32,527 [DEBUG] core.bom_processor - 
+处理第 102 行:
+2025-04-25 09:44:32,527 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,527 [DEBUG] core.bom_processor -   Baugruppe: 1161297
+2025-04-25 09:44:32,527 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,527 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. mechanisch / BA-seat mechanically
+2025-04-25 09:44:32,527 [DEBUG] core.bom_processor - 添加子节点: 1161297 -> 父节点: 1161296
+2025-04-25 09:44:32,527 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,527 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze06
+2025-04-25 09:44:32,527 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161297, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,527 [DEBUG] core.bom_processor - 处理节点: 1161297, 占位符: PL-Sitze06, 父节点: 1161296
+2025-04-25 09:44:32,528 [DEBUG] core.bom_processor - 
+处理第 103 行:
+2025-04-25 09:44:32,528 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,528 [DEBUG] core.bom_processor -   Baugruppe: 1161313
+2025-04-25 09:44:32,528 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,528 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.mech / BA-seat f. tensioner le. cpl. mech.
+2025-04-25 09:44:32,528 [DEBUG] core.bom_processor - 添加子节点: 1161313 -> 父节点: 1161297
+2025-04-25 09:44:32,528 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,528 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze06
+2025-04-25 09:44:32,528 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161313, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,528 [DEBUG] core.bom_processor - 处理节点: 1161313, 占位符: PL-Sitze06, 父节点: 1161297
+2025-04-25 09:44:32,528 [DEBUG] core.bom_processor - 
+处理第 104 行:
+2025-04-25 09:44:32,528 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,529 [DEBUG] core.bom_processor -   Baugruppe: 1161314
+2025-04-25 09:44:32,529 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,529 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.mech / BA-seat f. tensioner le. cpl. mech.
+2025-04-25 09:44:32,529 [DEBUG] core.bom_processor - 添加子节点: 1161314 -> 父节点: 1161313
+2025-04-25 09:44:32,529 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,529 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze06
+2025-04-25 09:44:32,529 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161314, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,529 [DEBUG] core.bom_processor - 处理节点: 1161314, 占位符: PL-Sitze06, 父节点: 1161313
+2025-04-25 09:44:32,529 [DEBUG] core.bom_processor - 
+处理第 105 行:
+2025-04-25 09:44:32,529 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,529 [DEBUG] core.bom_processor -   Baugruppe: 1161294
+2025-04-25 09:44:32,529 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,529 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. elektrisch / BA-seat std. electric
+2025-04-25 09:44:32,530 [DEBUG] core.bom_processor - 添加子节点: 1161294 -> 父节点: 1161314
+2025-04-25 09:44:32,530 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,530 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze06
+2025-04-25 09:44:32,530 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161294, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,530 [DEBUG] core.bom_processor - 处理节点: 1161294, 占位符: PL-Sitze06, 父节点: 1161314
+2025-04-25 09:44:32,530 [DEBUG] core.bom_processor - 
+处理第 106 行:
+2025-04-25 09:44:32,530 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,530 [DEBUG] core.bom_processor -   Baugruppe: 1161295
+2025-04-25 09:44:32,530 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,530 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. elektrisch / BA-seat std. electric
+2025-04-25 09:44:32,530 [DEBUG] core.bom_processor - 添加子节点: 1161295 -> 父节点: 1161294
+2025-04-25 09:44:32,530 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,530 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze06
+2025-04-25 09:44:32,531 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161295, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,531 [DEBUG] core.bom_processor - 处理节点: 1161295, 占位符: PL-Sitze06, 父节点: 1161294
+2025-04-25 09:44:32,531 [DEBUG] core.bom_processor - 
+处理第 107 行:
+2025-04-25 09:44:32,531 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,531 [DEBUG] core.bom_processor -   Baugruppe: 1161309
+2025-04-25 09:44:32,531 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,531 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.
+2025-04-25 09:44:32,531 [DEBUG] core.bom_processor - 添加子节点: 1161309 -> 父节点: 1161295
+2025-04-25 09:44:32,531 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,531 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze06
+2025-04-25 09:44:32,531 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161309, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,532 [DEBUG] core.bom_processor - 处理节点: 1161309, 占位符: PL-Sitze06, 父节点: 1161295
+2025-04-25 09:44:32,532 [DEBUG] core.bom_processor - 
+处理第 108 行:
+2025-04-25 09:44:32,532 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,532 [DEBUG] core.bom_processor -   Baugruppe: 1161310
+2025-04-25 09:44:32,532 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,532 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.
+2025-04-25 09:44:32,532 [DEBUG] core.bom_processor - 添加子节点: 1161310 -> 父节点: 1161309
+2025-04-25 09:44:32,532 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,532 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze06
+2025-04-25 09:44:32,532 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161310, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,532 [DEBUG] core.bom_processor - 处理节点: 1161310, 占位符: PL-Sitze06, 父节点: 1161309
+2025-04-25 09:44:32,532 [DEBUG] core.bom_processor - 
+处理第 109 行:
+2025-04-25 09:44:32,532 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,533 [DEBUG] core.bom_processor -   Baugruppe: 1123266
+2025-04-25 09:44:32,533 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,533 [DEBUG] core.bom_processor -   描述: Einzelsitz m.Tisch f.Straf.li. / single seat w. table f. tensioner le.
+2025-04-25 09:44:32,533 [DEBUG] core.bom_processor - 添加子节点: 1123266 -> 父节点: 1161310
+2025-04-25 09:44:32,533 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,533 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze06
+2025-04-25 09:44:32,533 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123266, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,533 [DEBUG] core.bom_processor - 处理节点: 1123266, 占位符: PL-Sitze06, 父节点: 1161310
+2025-04-25 09:44:32,533 [DEBUG] core.bom_processor - 
+处理第 110 行:
+2025-04-25 09:44:32,533 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,533 [DEBUG] core.bom_processor -   Baugruppe: 1161307
+2025-04-25 09:44:32,533 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,533 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.mech / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,534 [DEBUG] core.bom_processor - 添加子节点: 1161307 -> 父节点: 1123266
+2025-04-25 09:44:32,534 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,534 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze06
+2025-04-25 09:44:32,534 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161307, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,534 [DEBUG] core.bom_processor - 处理节点: 1161307, 占位符: PL-Sitze06, 父节点: 1123266
+2025-04-25 09:44:32,534 [DEBUG] core.bom_processor - 
+处理第 111 行:
+2025-04-25 09:44:32,534 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,534 [DEBUG] core.bom_processor -   Baugruppe: 1161308
+2025-04-25 09:44:32,535 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,535 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.mech / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,535 [DEBUG] core.bom_processor - 添加子节点: 1161308 -> 父节点: 1161307
+2025-04-25 09:44:32,535 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,535 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze06
+2025-04-25 09:44:32,535 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161308, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,535 [DEBUG] core.bom_processor - 处理节点: 1161308, 占位符: PL-Sitze06, 父节点: 1161307
+2025-04-25 09:44:32,535 [DEBUG] core.bom_processor - 
+处理第 112 行:
+2025-04-25 09:44:32,535 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,535 [DEBUG] core.bom_processor -   Baugruppe: 1123246
+2025-04-25 09:44:32,536 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,536 [DEBUG] core.bom_processor -   描述: Einzelsitz Std Airbag Stra.re. / single seat w. table f. tensioner ri.
+2025-04-25 09:44:32,536 [DEBUG] core.bom_processor - 添加子节点: 1123246 -> 父节点: 1161308
+2025-04-25 09:44:32,536 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,536 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze06
+2025-04-25 09:44:32,536 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123246, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,536 [DEBUG] core.bom_processor - 处理节点: 1123246, 占位符: PL-Sitze06, 父节点: 1161308
+2025-04-25 09:44:32,536 [DEBUG] core.bom_processor - 
+处理第 113 行:
+2025-04-25 09:44:32,536 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,536 [DEBUG] core.bom_processor -   Baugruppe: 1161305
+2025-04-25 09:44:32,537 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,537 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.el. / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,537 [DEBUG] core.bom_processor - 添加子节点: 1161305 -> 父节点: 1123246
+2025-04-25 09:44:32,537 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,537 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze06
+2025-04-25 09:44:32,537 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161305, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,537 [DEBUG] core.bom_processor - 处理节点: 1161305, 占位符: PL-Sitze06, 父节点: 1123246
+2025-04-25 09:44:32,537 [DEBUG] core.bom_processor - 
+处理第 114 行:
+2025-04-25 09:44:32,537 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,537 [DEBUG] core.bom_processor -   Baugruppe: 1161306
+2025-04-25 09:44:32,537 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,537 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.el. / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,538 [DEBUG] core.bom_processor - 添加子节点: 1161306 -> 父节点: 1161305
+2025-04-25 09:44:32,538 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,538 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze06
+2025-04-25 09:44:32,538 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161306, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,538 [DEBUG] core.bom_processor - 处理节点: 1161306, 占位符: PL-Sitze06, 父节点: 1161305
+2025-04-25 09:44:32,538 [DEBUG] core.bom_processor - 
+处理第 115 行:
+2025-04-25 09:44:32,538 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,538 [DEBUG] core.bom_processor -   Baugruppe: 10028644
+2025-04-25 09:44:32,538 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,538 [DEBUG] core.bom_processor -   描述: PA-Sitz MAN elektrisch 1 FL / BA seat MAN electric 1btl.
+2025-04-25 09:44:32,539 [DEBUG] core.bom_processor - 添加子节点: 10028644 -> 父节点: 1161306
+2025-04-25 09:44:32,539 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,539 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze06
+2025-04-25 09:44:32,539 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10028644, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,539 [DEBUG] core.bom_processor - 处理节点: 10028644, 占位符: PL-Sitze06, 父节点: 1161306
+2025-04-25 09:44:32,539 [DEBUG] core.bom_processor - 
+处理第 116 行:
+2025-04-25 09:44:32,539 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,539 [DEBUG] core.bom_processor -   Baugruppe: 10028647
+2025-04-25 09:44:32,539 [DEBUG] core.bom_processor -   占位符: PL-Sitze06
+2025-04-25 09:44:32,539 [DEBUG] core.bom_processor -   描述: PA-Sitz MAN elektrisch 2 FL / BA seat MAN electric 2btl.
+2025-04-25 09:44:32,539 [DEBUG] core.bom_processor - 添加子节点: 10028647 -> 父节点: 10028644
+2025-04-25 09:44:32,539 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze06
+2025-04-25 09:44:32,539 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze06
+2025-04-25 09:44:32,540 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10028647, 实际占位符: PL-Sitze06
+2025-04-25 09:44:32,540 [DEBUG] core.bom_processor - 处理节点: 10028647, 占位符: PL-Sitze06, 父节点: 10028644
+2025-04-25 09:44:32,540 [DEBUG] core.bom_processor - 
+处理第 117 行:
+2025-04-25 09:44:32,540 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,540 [DEBUG] core.bom_processor -   Baugruppe: 1123244
+2025-04-25 09:44:32,540 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,540 [DEBUG] core.bom_processor -   描述: Einzelsitz Std Airbag Stra.li. / single seat std. airbag tensioner le.
+2025-04-25 09:44:32,540 [DEBUG] core.bom_processor - 同层级占位符变化: PL-Sitze06 -> PL-Sitze07
+2025-04-25 09:44:32,540 [DEBUG] core.bom_processor - 添加子节点: 1123244 -> 父节点: 0000000010017913NK
+2025-04-25 09:44:32,540 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,540 [DEBUG] core.bom_processor -   父节点占位符: PL-Kabine
+2025-04-25 09:44:32,540 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123244, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,540 [DEBUG] core.bom_processor - 处理节点: 1123244, 占位符: PL-Sitze07, 父节点: 0000000010017913NK
+2025-04-25 09:44:32,541 [DEBUG] core.bom_processor - 
+处理第 118 行:
+2025-04-25 09:44:32,541 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,541 [DEBUG] core.bom_processor -   Baugruppe: 1161296
+2025-04-25 09:44:32,541 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,541 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. mechanisch / BA-seat mechanically
+2025-04-25 09:44:32,541 [DEBUG] core.bom_processor - 添加子节点: 1161296 -> 父节点: 1123244
+2025-04-25 09:44:32,541 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,541 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze07
+2025-04-25 09:44:32,541 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161296, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,541 [DEBUG] core.bom_processor - 处理节点: 1161296, 占位符: PL-Sitze07, 父节点: 1123244
+2025-04-25 09:44:32,541 [DEBUG] core.bom_processor - 
+处理第 119 行:
+2025-04-25 09:44:32,541 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,542 [DEBUG] core.bom_processor -   Baugruppe: 1161297
+2025-04-25 09:44:32,542 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,542 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. mechanisch / BA-seat mechanically
+2025-04-25 09:44:32,542 [DEBUG] core.bom_processor - 添加子节点: 1161297 -> 父节点: 1161296
+2025-04-25 09:44:32,542 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,542 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze07
+2025-04-25 09:44:32,542 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161297, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,542 [DEBUG] core.bom_processor - 处理节点: 1161297, 占位符: PL-Sitze07, 父节点: 1161296
+2025-04-25 09:44:32,542 [DEBUG] core.bom_processor - 
+处理第 120 行:
+2025-04-25 09:44:32,542 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,542 [DEBUG] core.bom_processor -   Baugruppe: 1161313
+2025-04-25 09:44:32,542 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,542 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.mech / BA-seat f. tensioner le. cpl. mech.
+2025-04-25 09:44:32,542 [DEBUG] core.bom_processor - 添加子节点: 1161313 -> 父节点: 1161297
+2025-04-25 09:44:32,543 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,543 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze07
+2025-04-25 09:44:32,543 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161313, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,543 [DEBUG] core.bom_processor - 处理节点: 1161313, 占位符: PL-Sitze07, 父节点: 1161297
+2025-04-25 09:44:32,543 [DEBUG] core.bom_processor - 
+处理第 121 行:
+2025-04-25 09:44:32,543 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,543 [DEBUG] core.bom_processor -   Baugruppe: 1161314
+2025-04-25 09:44:32,543 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,543 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.mech / BA-seat f. tensioner le. cpl. mech.
+2025-04-25 09:44:32,543 [DEBUG] core.bom_processor - 添加子节点: 1161314 -> 父节点: 1161313
+2025-04-25 09:44:32,543 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,543 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze07
+2025-04-25 09:44:32,544 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161314, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,544 [DEBUG] core.bom_processor - 处理节点: 1161314, 占位符: PL-Sitze07, 父节点: 1161313
+2025-04-25 09:44:32,544 [DEBUG] core.bom_processor - 
+处理第 122 行:
+2025-04-25 09:44:32,544 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,544 [DEBUG] core.bom_processor -   Baugruppe: 1161294
+2025-04-25 09:44:32,544 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,544 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. elektrisch / BA-seat std. electric
+2025-04-25 09:44:32,544 [DEBUG] core.bom_processor - 添加子节点: 1161294 -> 父节点: 1161314
+2025-04-25 09:44:32,544 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,544 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze07
+2025-04-25 09:44:32,544 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161294, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,545 [DEBUG] core.bom_processor - 处理节点: 1161294, 占位符: PL-Sitze07, 父节点: 1161314
+2025-04-25 09:44:32,545 [DEBUG] core.bom_processor - 
+处理第 123 行:
+2025-04-25 09:44:32,545 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,545 [DEBUG] core.bom_processor -   Baugruppe: 1161295
+2025-04-25 09:44:32,545 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,545 [DEBUG] core.bom_processor -   描述: PA-Sitz Std. elektrisch / BA-seat std. electric
+2025-04-25 09:44:32,545 [DEBUG] core.bom_processor - 添加子节点: 1161295 -> 父节点: 1161294
+2025-04-25 09:44:32,545 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,545 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze07
+2025-04-25 09:44:32,545 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161295, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,545 [DEBUG] core.bom_processor - 处理节点: 1161295, 占位符: PL-Sitze07, 父节点: 1161294
+2025-04-25 09:44:32,545 [DEBUG] core.bom_processor - 
+处理第 124 行:
+2025-04-25 09:44:32,546 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,546 [DEBUG] core.bom_processor -   Baugruppe: 1161309
+2025-04-25 09:44:32,546 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,546 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.
+2025-04-25 09:44:32,546 [DEBUG] core.bom_processor - 添加子节点: 1161309 -> 父节点: 1161295
+2025-04-25 09:44:32,546 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,546 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze07
+2025-04-25 09:44:32,546 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161309, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,546 [DEBUG] core.bom_processor - 处理节点: 1161309, 占位符: PL-Sitze07, 父节点: 1161295
+2025-04-25 09:44:32,546 [DEBUG] core.bom_processor - 
+处理第 125 行:
+2025-04-25 09:44:32,547 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,547 [DEBUG] core.bom_processor -   Baugruppe: 1161310
+2025-04-25 09:44:32,547 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,547 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.
+2025-04-25 09:44:32,547 [DEBUG] core.bom_processor - 添加子节点: 1161310 -> 父节点: 1161309
+2025-04-25 09:44:32,547 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,547 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze07
+2025-04-25 09:44:32,547 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161310, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,547 [DEBUG] core.bom_processor - 处理节点: 1161310, 占位符: PL-Sitze07, 父节点: 1161309
+2025-04-25 09:44:32,547 [DEBUG] core.bom_processor - 
+处理第 126 行:
+2025-04-25 09:44:32,547 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,547 [DEBUG] core.bom_processor -   Baugruppe: 1123266
+2025-04-25 09:44:32,547 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,548 [DEBUG] core.bom_processor -   描述: Einzelsitz m.Tisch f.Straf.li. / single seat w. table f. tensioner le.
+2025-04-25 09:44:32,548 [DEBUG] core.bom_processor - 添加子节点: 1123266 -> 父节点: 1161310
+2025-04-25 09:44:32,548 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,548 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze07
+2025-04-25 09:44:32,548 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123266, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,548 [DEBUG] core.bom_processor - 处理节点: 1123266, 占位符: PL-Sitze07, 父节点: 1161310
+2025-04-25 09:44:32,548 [DEBUG] core.bom_processor - 
+处理第 127 行:
+2025-04-25 09:44:32,548 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,548 [DEBUG] core.bom_processor -   Baugruppe: 1161307
+2025-04-25 09:44:32,548 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,548 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.mech / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,548 [DEBUG] core.bom_processor - 添加子节点: 1161307 -> 父节点: 1123266
+2025-04-25 09:44:32,548 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,548 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze07
+2025-04-25 09:44:32,548 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161307, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,549 [DEBUG] core.bom_processor - 处理节点: 1161307, 占位符: PL-Sitze07, 父节点: 1123266
+2025-04-25 09:44:32,549 [DEBUG] core.bom_processor - 
+处理第 128 行:
+2025-04-25 09:44:32,549 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,549 [DEBUG] core.bom_processor -   Baugruppe: 1161308
+2025-04-25 09:44:32,549 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,549 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.mech / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,549 [DEBUG] core.bom_processor - 添加子节点: 1161308 -> 父节点: 1161307
+2025-04-25 09:44:32,549 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,549 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze07
+2025-04-25 09:44:32,549 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161308, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,549 [DEBUG] core.bom_processor - 处理节点: 1161308, 占位符: PL-Sitze07, 父节点: 1161307
+2025-04-25 09:44:32,550 [DEBUG] core.bom_processor - 
+处理第 129 行:
+2025-04-25 09:44:32,550 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,550 [DEBUG] core.bom_processor -   Baugruppe: 1123246
+2025-04-25 09:44:32,550 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,550 [DEBUG] core.bom_processor -   描述: Einzelsitz Std Airbag Stra.re. / single seat w. table f. tensioner ri.
+2025-04-25 09:44:32,550 [DEBUG] core.bom_processor - 添加子节点: 1123246 -> 父节点: 1161308
+2025-04-25 09:44:32,550 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,550 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze07
+2025-04-25 09:44:32,550 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1123246, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,550 [DEBUG] core.bom_processor - 处理节点: 1123246, 占位符: PL-Sitze07, 父节点: 1161308
+2025-04-25 09:44:32,551 [DEBUG] core.bom_processor - 
+处理第 130 行:
+2025-04-25 09:44:32,551 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,551 [DEBUG] core.bom_processor -   Baugruppe: 1161305
+2025-04-25 09:44:32,551 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,551 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.el. / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,551 [DEBUG] core.bom_processor - 添加子节点: 1161305 -> 父节点: 1123246
+2025-04-25 09:44:32,551 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,551 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze07
+2025-04-25 09:44:32,551 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161305, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,551 [DEBUG] core.bom_processor - 处理节点: 1161305, 占位符: PL-Sitze07, 父节点: 1123246
+2025-04-25 09:44:32,552 [DEBUG] core.bom_processor - 
+处理第 131 行:
+2025-04-25 09:44:32,552 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,552 [DEBUG] core.bom_processor -   Baugruppe: 1161306
+2025-04-25 09:44:32,552 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,552 [DEBUG] core.bom_processor -   描述: PA-Sitz f.Straffer re.kpl.el. / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,552 [DEBUG] core.bom_processor - 添加子节点: 1161306 -> 父节点: 1161305
+2025-04-25 09:44:32,552 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,552 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze07
+2025-04-25 09:44:32,552 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1161306, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,552 [DEBUG] core.bom_processor - 处理节点: 1161306, 占位符: PL-Sitze07, 父节点: 1161305
+2025-04-25 09:44:32,552 [DEBUG] core.bom_processor - 
+处理第 132 行:
+2025-04-25 09:44:32,552 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,552 [DEBUG] core.bom_processor -   Baugruppe: 10028644
+2025-04-25 09:44:32,552 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,553 [DEBUG] core.bom_processor -   描述: PA-Sitz MAN elektrisch 1 FL / BA seat MAN electric 1btl.
+2025-04-25 09:44:32,553 [DEBUG] core.bom_processor - 添加子节点: 10028644 -> 父节点: 1161306
+2025-04-25 09:44:32,553 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,553 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze07
+2025-04-25 09:44:32,553 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10028644, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,553 [DEBUG] core.bom_processor - 处理节点: 10028644, 占位符: PL-Sitze07, 父节点: 1161306
+2025-04-25 09:44:32,553 [DEBUG] core.bom_processor - 
+处理第 133 行:
+2025-04-25 09:44:32,553 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,553 [DEBUG] core.bom_processor -   Baugruppe: 10028647
+2025-04-25 09:44:32,553 [DEBUG] core.bom_processor -   占位符: PL-Sitze07
+2025-04-25 09:44:32,553 [DEBUG] core.bom_processor -   描述: PA-Sitz MAN elektrisch 2 FL / BA seat MAN electric 2btl.
+2025-04-25 09:44:32,553 [DEBUG] core.bom_processor - 添加子节点: 10028647 -> 父节点: 10028644
+2025-04-25 09:44:32,554 [DEBUG] core.bom_processor -   子节点占位符: PL-Sitze07
+2025-04-25 09:44:32,554 [DEBUG] core.bom_processor -   父节点占位符: PL-Sitze07
+2025-04-25 09:44:32,554 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 10028647, 实际占位符: PL-Sitze07
+2025-04-25 09:44:32,554 [DEBUG] core.bom_processor - 处理节点: 10028647, 占位符: PL-Sitze07, 父节点: 10028644
+2025-04-25 09:44:32,554 [DEBUG] core.bom_processor - 
+处理第 134 行:
+2025-04-25 09:44:32,554 [DEBUG] core.bom_processor -   层级: 2
+2025-04-25 09:44:32,554 [DEBUG] core.bom_processor -   Baugruppe: 1003568
+2025-04-25 09:44:32,554 [DEBUG] core.bom_processor -   占位符: PL-Beleuchtung
+2025-04-25 09:44:32,554 [DEBUG] core.bom_processor -   描述: 1234
+2025-04-25 09:44:32,554 [DEBUG] core.bom_processor - 同层级占位符变化: PL-Sitze07 -> PL-Beleuchtung
+2025-04-25 09:44:32,554 [DEBUG] core.bom_processor - 添加子节点: 1003568 -> 父节点: 0000000010017913NK
+2025-04-25 09:44:32,554 [DEBUG] core.bom_processor -   子节点占位符: PL-Beleuchtung
+2025-04-25 09:44:32,555 [DEBUG] core.bom_processor -   父节点占位符: PL-Kabine
+2025-04-25 09:44:32,555 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1003568, 实际占位符: PL-Beleuchtung
+2025-04-25 09:44:32,555 [DEBUG] core.bom_processor - 处理节点: 1003568, 占位符: PL-Beleuchtung, 父节点: 0000000010017913NK
+2025-04-25 09:44:32,555 [DEBUG] core.bom_processor - 
+处理第 135 行:
+2025-04-25 09:44:32,555 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,555 [DEBUG] core.bom_processor -   Baugruppe: 1115355
+2025-04-25 09:44:32,555 [DEBUG] core.bom_processor -   占位符: PL-Beleuchtungseinheit
+2025-04-25 09:44:32,555 [DEBUG] core.bom_processor -   描述: Deckenmodul Standard / ceiling module standard
+2025-04-25 09:44:32,555 [DEBUG] core.bom_processor - 添加子节点: 1115355 -> 父节点: 1003568
+2025-04-25 09:44:32,555 [DEBUG] core.bom_processor -   子节点占位符: PL-Beleuchtungseinheit
+2025-04-25 09:44:32,555 [DEBUG] core.bom_processor -   父节点占位符: PL-Beleuchtung
+2025-04-25 09:44:32,555 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1115355, 实际占位符: PL-Beleuchtungseinheit
+2025-04-25 09:44:32,556 [DEBUG] core.bom_processor - 处理节点: 1115355, 占位符: PL-Beleuchtungseinheit, 父节点: 1003568
+2025-04-25 09:44:32,556 [DEBUG] core.bom_processor - 
+处理第 136 行:
+2025-04-25 09:44:32,556 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,556 [DEBUG] core.bom_processor -   Baugruppe: 1117649
+2025-04-25 09:44:32,556 [DEBUG] core.bom_processor -   占位符: PL-Beleuchtungseinheit
+2025-04-25 09:44:32,556 [DEBUG] core.bom_processor -   描述: Beleuchtungseinheit Grün-Weiß / lighting unit green-white
+2025-04-25 09:44:32,556 [DEBUG] core.bom_processor - 添加子节点: 1117649 -> 父节点: 1115355
+2025-04-25 09:44:32,556 [DEBUG] core.bom_processor -   子节点占位符: PL-Beleuchtungseinheit
+2025-04-25 09:44:32,556 [DEBUG] core.bom_processor -   父节点占位符: PL-Beleuchtungseinheit
+2025-04-25 09:44:32,556 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1117649, 实际占位符: PL-Beleuchtungseinheit
+2025-04-25 09:44:32,556 [DEBUG] core.bom_processor - 处理节点: 1117649, 占位符: PL-Beleuchtungseinheit, 父节点: 1115355
+2025-04-25 09:44:32,557 [DEBUG] core.bom_processor - 
+处理第 137 行:
+2025-04-25 09:44:32,557 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,557 [DEBUG] core.bom_processor -   Baugruppe: 1117650
+2025-04-25 09:44:32,557 [DEBUG] core.bom_processor -   占位符: PL-Beleuchtungseinheit
+2025-04-25 09:44:32,557 [DEBUG] core.bom_processor -   描述: Beleuchtungseinheit Rot-Weiß / lighting unit red-white
+2025-04-25 09:44:32,557 [DEBUG] core.bom_processor - 添加子节点: 1117650 -> 父节点: 1117649
+2025-04-25 09:44:32,557 [DEBUG] core.bom_processor -   子节点占位符: PL-Beleuchtungseinheit
+2025-04-25 09:44:32,557 [DEBUG] core.bom_processor -   父节点占位符: PL-Beleuchtungseinheit
+2025-04-25 09:44:32,557 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1117650, 实际占位符: PL-Beleuchtungseinheit
+2025-04-25 09:44:32,557 [DEBUG] core.bom_processor - 处理节点: 1117650, 占位符: PL-Beleuchtungseinheit, 父节点: 1117649
+2025-04-25 09:44:32,557 [DEBUG] core.bom_processor - 
+处理第 138 行:
+2025-04-25 09:44:32,558 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,558 [DEBUG] core.bom_processor -   Baugruppe: 1138846
+2025-04-25 09:44:32,558 [DEBUG] core.bom_processor -   占位符: PL-Bedienelemente
+2025-04-25 09:44:32,558 [DEBUG] core.bom_processor -   描述: Bedienelement li. Weiß / control element le. white
+2025-04-25 09:44:32,558 [DEBUG] core.bom_processor - 同层级占位符变化: PL-Beleuchtungseinheit -> PL-Bedienelemente
+2025-04-25 09:44:32,558 [DEBUG] core.bom_processor - 添加子节点: 1138846 -> 父节点: 1003568
+2025-04-25 09:44:32,558 [DEBUG] core.bom_processor -   子节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,558 [DEBUG] core.bom_processor -   父节点占位符: PL-Beleuchtung
+2025-04-25 09:44:32,558 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1138846, 实际占位符: PL-Bedienelemente
+2025-04-25 09:44:32,558 [DEBUG] core.bom_processor - 处理节点: 1138846, 占位符: PL-Bedienelemente, 父节点: 1003568
+2025-04-25 09:44:32,558 [DEBUG] core.bom_processor - 
+处理第 139 行:
+2025-04-25 09:44:32,559 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,559 [DEBUG] core.bom_processor -   Baugruppe: 1138847
+2025-04-25 09:44:32,559 [DEBUG] core.bom_processor -   占位符: PL-Bedienelemente
+2025-04-25 09:44:32,559 [DEBUG] core.bom_processor -   描述: Bedienelement li. Farbe / control element le. colour
+2025-04-25 09:44:32,559 [DEBUG] core.bom_processor - 添加子节点: 1138847 -> 父节点: 1138846
+2025-04-25 09:44:32,559 [DEBUG] core.bom_processor -   子节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,559 [DEBUG] core.bom_processor -   父节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,559 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1138847, 实际占位符: PL-Bedienelemente
+2025-04-25 09:44:32,559 [DEBUG] core.bom_processor - 处理节点: 1138847, 占位符: PL-Bedienelemente, 父节点: 1138846
+2025-04-25 09:44:32,559 [DEBUG] core.bom_processor - 
+处理第 140 行:
+2025-04-25 09:44:32,559 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,559 [DEBUG] core.bom_processor -   Baugruppe: 1138850
+2025-04-25 09:44:32,559 [DEBUG] core.bom_processor -   占位符: PL-Bedienelemente
+2025-04-25 09:44:32,560 [DEBUG] core.bom_processor -   描述: Bedienelement li. Weiß-Funk / control element le. white-radio
+2025-04-25 09:44:32,560 [DEBUG] core.bom_processor - 添加子节点: 1138850 -> 父节点: 1138847
+2025-04-25 09:44:32,560 [DEBUG] core.bom_processor -   子节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,560 [DEBUG] core.bom_processor -   父节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,560 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1138850, 实际占位符: PL-Bedienelemente
+2025-04-25 09:44:32,560 [DEBUG] core.bom_processor - 处理节点: 1138850, 占位符: PL-Bedienelemente, 父节点: 1138847
+2025-04-25 09:44:32,560 [DEBUG] core.bom_processor - 
+处理第 141 行:
+2025-04-25 09:44:32,560 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,560 [DEBUG] core.bom_processor -   Baugruppe: 1138851
+2025-04-25 09:44:32,560 [DEBUG] core.bom_processor -   占位符: PL-Bedienelemente
+2025-04-25 09:44:32,560 [DEBUG] core.bom_processor -   描述: Bedienelement li. Farbe-Funk / control element le. colour-radio
+2025-04-25 09:44:32,560 [DEBUG] core.bom_processor - 添加子节点: 1138851 -> 父节点: 1138850
+2025-04-25 09:44:32,560 [DEBUG] core.bom_processor -   子节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,560 [DEBUG] core.bom_processor -   父节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,561 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1138851, 实际占位符: PL-Bedienelemente
+2025-04-25 09:44:32,561 [DEBUG] core.bom_processor - 处理节点: 1138851, 占位符: PL-Bedienelemente, 父节点: 1138850
+2025-04-25 09:44:32,561 [DEBUG] core.bom_processor - 
+处理第 142 行:
+2025-04-25 09:44:32,561 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,561 [DEBUG] core.bom_processor -   Baugruppe: 1138852
+2025-04-25 09:44:32,561 [DEBUG] core.bom_processor -   占位符: PL-Bedienelemente
+2025-04-25 09:44:32,561 [DEBUG] core.bom_processor -   描述: Bedienelement re. Weiß / control element ri. white
+2025-04-25 09:44:32,561 [DEBUG] core.bom_processor - 添加子节点: 1138852 -> 父节点: 1138851
+2025-04-25 09:44:32,561 [DEBUG] core.bom_processor -   子节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,561 [DEBUG] core.bom_processor -   父节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,561 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1138852, 实际占位符: PL-Bedienelemente
+2025-04-25 09:44:32,561 [DEBUG] core.bom_processor - 处理节点: 1138852, 占位符: PL-Bedienelemente, 父节点: 1138851
+2025-04-25 09:44:32,562 [DEBUG] core.bom_processor - 
+处理第 143 行:
+2025-04-25 09:44:32,562 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,562 [DEBUG] core.bom_processor -   Baugruppe: 1138853
+2025-04-25 09:44:32,562 [DEBUG] core.bom_processor -   占位符: PL-Bedienelemente
+2025-04-25 09:44:32,562 [DEBUG] core.bom_processor -   描述: Bedienelement re. Farbe / control element ri. colour
+2025-04-25 09:44:32,562 [DEBUG] core.bom_processor - 添加子节点: 1138853 -> 父节点: 1138852
+2025-04-25 09:44:32,562 [DEBUG] core.bom_processor -   子节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,562 [DEBUG] core.bom_processor -   父节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,562 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1138853, 实际占位符: PL-Bedienelemente
+2025-04-25 09:44:32,562 [DEBUG] core.bom_processor - 处理节点: 1138853, 占位符: PL-Bedienelemente, 父节点: 1138852
+2025-04-25 09:44:32,562 [DEBUG] core.bom_processor - 
+处理第 144 行:
+2025-04-25 09:44:32,562 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,562 [DEBUG] core.bom_processor -   Baugruppe: 1138854
+2025-04-25 09:44:32,563 [DEBUG] core.bom_processor -   占位符: PL-Bedienelemente
+2025-04-25 09:44:32,563 [DEBUG] core.bom_processor -   描述: Bedienelement re. Weiß-Funk / control element ri. white-radio
+2025-04-25 09:44:32,563 [DEBUG] core.bom_processor - 添加子节点: 1138854 -> 父节点: 1138853
+2025-04-25 09:44:32,563 [DEBUG] core.bom_processor -   子节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,563 [DEBUG] core.bom_processor -   父节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,563 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1138854, 实际占位符: PL-Bedienelemente
+2025-04-25 09:44:32,563 [DEBUG] core.bom_processor - 处理节点: 1138854, 占位符: PL-Bedienelemente, 父节点: 1138853
+2025-04-25 09:44:32,563 [DEBUG] core.bom_processor - 
+处理第 145 行:
+2025-04-25 09:44:32,563 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,563 [DEBUG] core.bom_processor -   Baugruppe: 1138855
+2025-04-25 09:44:32,563 [DEBUG] core.bom_processor -   占位符: PL-Bedienelemente
+2025-04-25 09:44:32,563 [DEBUG] core.bom_processor -   描述: Bedienelement re. Farbe-Funk / control element ri. colour-radio
+2025-04-25 09:44:32,564 [DEBUG] core.bom_processor - 添加子节点: 1138855 -> 父节点: 1138854
+2025-04-25 09:44:32,564 [DEBUG] core.bom_processor -   子节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,564 [DEBUG] core.bom_processor -   父节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,564 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1138855, 实际占位符: PL-Bedienelemente
+2025-04-25 09:44:32,564 [DEBUG] core.bom_processor - 处理节点: 1138855, 占位符: PL-Bedienelemente, 父节点: 1138854
+2025-04-25 09:44:32,564 [DEBUG] core.bom_processor - 
+处理第 146 行:
+2025-04-25 09:44:32,564 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,564 [DEBUG] core.bom_processor -   Baugruppe: 1138951
+2025-04-25 09:44:32,564 [DEBUG] core.bom_processor -   占位符: PL-Bedienelemente
+2025-04-25 09:44:32,564 [DEBUG] core.bom_processor -   描述: Bedienelement li. Weiß / control element le. White
+2025-04-25 09:44:32,564 [DEBUG] core.bom_processor - 添加子节点: 1138951 -> 父节点: 1138855
+2025-04-25 09:44:32,564 [DEBUG] core.bom_processor -   子节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,565 [DEBUG] core.bom_processor -   父节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,565 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1138951, 实际占位符: PL-Bedienelemente
+2025-04-25 09:44:32,565 [DEBUG] core.bom_processor - 处理节点: 1138951, 占位符: PL-Bedienelemente, 父节点: 1138855
+2025-04-25 09:44:32,565 [DEBUG] core.bom_processor - 
+处理第 147 行:
+2025-04-25 09:44:32,565 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,565 [DEBUG] core.bom_processor -   Baugruppe: 1138954
+2025-04-25 09:44:32,565 [DEBUG] core.bom_processor -   占位符: PL-Bedienelemente
+2025-04-25 09:44:32,565 [DEBUG] core.bom_processor -   描述: Bedienelement li. Farbe / control element le. colour
+2025-04-25 09:44:32,565 [DEBUG] core.bom_processor - 添加子节点: 1138954 -> 父节点: 1138951
+2025-04-25 09:44:32,565 [DEBUG] core.bom_processor -   子节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,565 [DEBUG] core.bom_processor -   父节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,566 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1138954, 实际占位符: PL-Bedienelemente
+2025-04-25 09:44:32,566 [DEBUG] core.bom_processor - 处理节点: 1138954, 占位符: PL-Bedienelemente, 父节点: 1138951
+2025-04-25 09:44:32,566 [DEBUG] core.bom_processor - 
+处理第 148 行:
+2025-04-25 09:44:32,566 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,566 [DEBUG] core.bom_processor -   Baugruppe: 1138956
+2025-04-25 09:44:32,566 [DEBUG] core.bom_processor -   占位符: PL-Bedienelemente
+2025-04-25 09:44:32,566 [DEBUG] core.bom_processor -   描述: Bedienelement li. Weiß-Funk / control element le. white-radio
+2025-04-25 09:44:32,566 [DEBUG] core.bom_processor - 添加子节点: 1138956 -> 父节点: 1138954
+2025-04-25 09:44:32,566 [DEBUG] core.bom_processor -   子节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,566 [DEBUG] core.bom_processor -   父节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,567 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1138956, 实际占位符: PL-Bedienelemente
+2025-04-25 09:44:32,567 [DEBUG] core.bom_processor - 处理节点: 1138956, 占位符: PL-Bedienelemente, 父节点: 1138954
+2025-04-25 09:44:32,567 [DEBUG] core.bom_processor - 
+处理第 149 行:
+2025-04-25 09:44:32,567 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,567 [DEBUG] core.bom_processor -   Baugruppe: 1138959
+2025-04-25 09:44:32,567 [DEBUG] core.bom_processor -   占位符: PL-Bedienelemente
+2025-04-25 09:44:32,567 [DEBUG] core.bom_processor -   描述: Bedienelement li. Farbe-Funk / control element le. colour-radio
+2025-04-25 09:44:32,567 [DEBUG] core.bom_processor - 添加子节点: 1138959 -> 父节点: 1138956
+2025-04-25 09:44:32,567 [DEBUG] core.bom_processor -   子节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,567 [DEBUG] core.bom_processor -   父节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,567 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1138959, 实际占位符: PL-Bedienelemente
+2025-04-25 09:44:32,567 [DEBUG] core.bom_processor - 处理节点: 1138959, 占位符: PL-Bedienelemente, 父节点: 1138956
+2025-04-25 09:44:32,568 [DEBUG] core.bom_processor - 
+处理第 150 行:
+2025-04-25 09:44:32,568 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,568 [DEBUG] core.bom_processor -   Baugruppe: 1138961
+2025-04-25 09:44:32,568 [DEBUG] core.bom_processor -   占位符: PL-Bedienelemente
+2025-04-25 09:44:32,568 [DEBUG] core.bom_processor -   描述: Bedienelement re. Weiß / control element ri. White
+2025-04-25 09:44:32,568 [DEBUG] core.bom_processor - 添加子节点: 1138961 -> 父节点: 1138959
+2025-04-25 09:44:32,568 [DEBUG] core.bom_processor -   子节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,568 [DEBUG] core.bom_processor -   父节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,568 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1138961, 实际占位符: PL-Bedienelemente
+2025-04-25 09:44:32,568 [DEBUG] core.bom_processor - 处理节点: 1138961, 占位符: PL-Bedienelemente, 父节点: 1138959
+2025-04-25 09:44:32,568 [DEBUG] core.bom_processor - 
+处理第 151 行:
+2025-04-25 09:44:32,569 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,569 [DEBUG] core.bom_processor -   Baugruppe: 1138963
+2025-04-25 09:44:32,569 [DEBUG] core.bom_processor -   占位符: PL-Bedienelemente
+2025-04-25 09:44:32,569 [DEBUG] core.bom_processor -   描述: Bedienelement re. Farbe / control element ri. colour
+2025-04-25 09:44:32,569 [DEBUG] core.bom_processor - 添加子节点: 1138963 -> 父节点: 1138961
+2025-04-25 09:44:32,569 [DEBUG] core.bom_processor -   子节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,569 [DEBUG] core.bom_processor -   父节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,569 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1138963, 实际占位符: PL-Bedienelemente
+2025-04-25 09:44:32,569 [DEBUG] core.bom_processor - 处理节点: 1138963, 占位符: PL-Bedienelemente, 父节点: 1138961
+2025-04-25 09:44:32,569 [DEBUG] core.bom_processor - 
+处理第 152 行:
+2025-04-25 09:44:32,570 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,570 [DEBUG] core.bom_processor -   Baugruppe: 1138965
+2025-04-25 09:44:32,570 [DEBUG] core.bom_processor -   占位符: PL-Bedienelemente
+2025-04-25 09:44:32,570 [DEBUG] core.bom_processor -   描述: Bedienelement re. Weiß-Funk / control element ri. white-radio
+2025-04-25 09:44:32,570 [DEBUG] core.bom_processor - 添加子节点: 1138965 -> 父节点: 1138963
+2025-04-25 09:44:32,570 [DEBUG] core.bom_processor -   子节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,570 [DEBUG] core.bom_processor -   父节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,570 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1138965, 实际占位符: PL-Bedienelemente
+2025-04-25 09:44:32,570 [DEBUG] core.bom_processor - 处理节点: 1138965, 占位符: PL-Bedienelemente, 父节点: 1138963
+2025-04-25 09:44:32,570 [DEBUG] core.bom_processor - 
+处理第 153 行:
+2025-04-25 09:44:32,570 [DEBUG] core.bom_processor -   层级: 3
+2025-04-25 09:44:32,570 [DEBUG] core.bom_processor -   Baugruppe: 1138967
+2025-04-25 09:44:32,570 [DEBUG] core.bom_processor -   占位符: PL-Bedienelemente
+2025-04-25 09:44:32,571 [DEBUG] core.bom_processor -   描述: Bedienelement re. Farbe-Funk / control element ri. colour-radio
+2025-04-25 09:44:32,571 [DEBUG] core.bom_processor - 添加子节点: 1138967 -> 父节点: 1138965
+2025-04-25 09:44:32,571 [DEBUG] core.bom_processor -   子节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,571 [DEBUG] core.bom_processor -   父节点占位符: PL-Bedienelemente
+2025-04-25 09:44:32,571 [DEBUG] core.bom_processor - 添加子节点后验证 - 节点: 1138967, 实际占位符: PL-Bedienelemente
+2025-04-25 09:44:32,571 [DEBUG] core.bom_processor - 处理节点: 1138967, 占位符: PL-Bedienelemente, 父节点: 1138965
+2025-04-25 09:44:32,571 [INFO] core.bom_processor - 
+数据处理完成，成功处理 152 行数据
+2025-04-25 09:44:32,571 [INFO] core.bom_processor - 最终数据包含 1 个一级节点
+2025-04-25 09:44:32,571 [INFO] core.bom_processor - 
+开始验证数据完整性...
+2025-04-25 09:44:32,572 [INFO] core.bom_processor - 总节点数: 68
+2025-04-25 09:44:32,572 [INFO] core.bom_processor - 发现的所有占位符: ['PL-Bedienelemente', 'PL-Beleuchtung', 'PL-Beleuchtungseinheit', 'PL-GrundKabine', 'PL-Kabine', 'PL-Sitze05', 'PL-Sitze07']
+2025-04-25 09:44:32,572 [INFO] core.bom_processor - 占位符 PL-Bedienelemente 的节点: 16 个
+2025-04-25 09:44:32,572 [DEBUG] core.bom_processor -   节点 1138846: Bedienelement li. Weiß / control element le. white
+2025-04-25 09:44:32,572 [DEBUG] core.bom_processor -   节点 1138847: Bedienelement li. Farbe / control element le. colour
+2025-04-25 09:44:32,572 [DEBUG] core.bom_processor -   节点 1138850: Bedienelement li. Weiß-Funk / control element le. white-radio
+2025-04-25 09:44:32,572 [DEBUG] core.bom_processor -   节点 1138851: Bedienelement li. Farbe-Funk / control element le. colour-radio
+2025-04-25 09:44:32,572 [DEBUG] core.bom_processor -   节点 1138852: Bedienelement re. Weiß / control element ri. white
+2025-04-25 09:44:32,572 [DEBUG] core.bom_processor -   节点 1138853: Bedienelement re. Farbe / control element ri. colour
+2025-04-25 09:44:32,572 [DEBUG] core.bom_processor -   节点 1138854: Bedienelement re. Weiß-Funk / control element ri. white-radio
+2025-04-25 09:44:32,572 [DEBUG] core.bom_processor -   节点 1138855: Bedienelement re. Farbe-Funk / control element ri. colour-radio
+2025-04-25 09:44:32,572 [DEBUG] core.bom_processor -   节点 1138951: Bedienelement li. Weiß / control element le. White
+2025-04-25 09:44:32,572 [DEBUG] core.bom_processor -   节点 1138954: Bedienelement li. Farbe / control element le. colour
+2025-04-25 09:44:32,573 [DEBUG] core.bom_processor -   节点 1138956: Bedienelement li. Weiß-Funk / control element le. white-radio
+2025-04-25 09:44:32,573 [DEBUG] core.bom_processor -   节点 1138959: Bedienelement li. Farbe-Funk / control element le. colour-radio
+2025-04-25 09:44:32,573 [DEBUG] core.bom_processor -   节点 1138961: Bedienelement re. Weiß / control element ri. White
+2025-04-25 09:44:32,573 [DEBUG] core.bom_processor -   节点 1138963: Bedienelement re. Farbe / control element ri. colour
+2025-04-25 09:44:32,573 [DEBUG] core.bom_processor -   节点 1138965: Bedienelement re. Weiß-Funk / control element ri. white-radio
+2025-04-25 09:44:32,573 [DEBUG] core.bom_processor -   节点 1138967: Bedienelement re. Farbe-Funk / control element ri. colour-radio
+2025-04-25 09:44:32,573 [INFO] core.bom_processor - 占位符 PL-Beleuchtung 的节点: 1 个
+2025-04-25 09:44:32,573 [DEBUG] core.bom_processor -   节点 1003568: 1234
+2025-04-25 09:44:32,573 [INFO] core.bom_processor - 占位符 PL-Beleuchtungseinheit 的节点: 3 个
+2025-04-25 09:44:32,573 [DEBUG] core.bom_processor -   节点 1115355: Deckenmodul Standard / ceiling module standard
+2025-04-25 09:44:32,573 [DEBUG] core.bom_processor -   节点 1117649: Beleuchtungseinheit Grün-Weiß / lighting unit green-white
+2025-04-25 09:44:32,573 [DEBUG] core.bom_processor -   节点 1117650: Beleuchtungseinheit Rot-Weiß / lighting unit red-white
+2025-04-25 09:44:32,573 [INFO] core.bom_processor - 占位符 PL-GrundKabine 的节点: 16 个
+2025-04-25 09:44:32,574 [DEBUG] core.bom_processor -   节点 10019231: Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+2025-04-25 09:44:32,574 [DEBUG] core.bom_processor -   节点 10019232: Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+2025-04-25 09:44:32,574 [DEBUG] core.bom_processor -   节点 10019233: Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+2025-04-25 09:44:32,574 [DEBUG] core.bom_processor -   节点 10019234: Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+2025-04-25 09:44:32,574 [DEBUG] core.bom_processor -   节点 10019235: Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+2025-04-25 09:44:32,574 [DEBUG] core.bom_processor -   节点 10019236: Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+2025-04-25 09:44:32,574 [DEBUG] core.bom_processor -   节点 10019237: Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+2025-04-25 09:44:32,574 [DEBUG] core.bom_processor -   节点 10019238: Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6
+2025-04-25 09:44:32,574 [DEBUG] core.bom_processor -   节点 10019239: Modulkabine Standard MB
+Modul cabin standard MB
+2025-04-25 09:44:32,574 [DEBUG] core.bom_processor -   节点 10019240: Modulkabine Standard MB
+Modul cabin standard MB
+2025-04-25 09:44:32,574 [DEBUG] core.bom_processor -   节点 10019241: Modulkabine Standard MB
+Modul cabin standard MB
+2025-04-25 09:44:32,574 [DEBUG] core.bom_processor -   节点 10019242: Modulkabine Standard MB
+Modul cabin standard MB
+2025-04-25 09:44:32,574 [DEBUG] core.bom_processor -   节点 10019243: Modulkabine Standard Scania Neu
+Modul cabine standard Scania new
+2025-04-25 09:44:32,574 [DEBUG] core.bom_processor -   节点 10019244: Modulkabine Standard Scania Neu
+Modul cabine standard Scania new
+2025-04-25 09:44:32,574 [DEBUG] core.bom_processor -   节点 10019245: Modulkabine Standard Scania Neu
+Modul cabine standard Scania new
+2025-04-25 09:44:32,574 [DEBUG] core.bom_processor -   节点 10019246: Modulkabine Standard Scania Neu
+Modul cabine standard Scania new
+2025-04-25 09:44:32,575 [INFO] core.bom_processor - 占位符 PL-Kabine 的节点: 1 个
+2025-04-25 09:44:32,575 [DEBUG] core.bom_processor -   节点 0000000010017913NK: Modulkabine S301000 / S302000
+2025-04-25 09:44:32,575 [INFO] core.bom_processor - 占位符 PL-Sitze05 的节点: 14 个
+2025-04-25 09:44:32,575 [DEBUG] core.bom_processor -   节点 1161298: Teilesatz Standardsitz / parts set type seat
+2025-04-25 09:44:32,575 [DEBUG] core.bom_processor -   节点 1142075: Teilesatz Sitzgestell / parts set seat frame
+2025-04-25 09:44:32,575 [DEBUG] core.bom_processor -   节点 1135804: Teilesatz Gerätewand / parts set device wall
+2025-04-25 09:44:32,575 [DEBUG] core.bom_processor -   节点 1161299: Teilesatz Einzelsitz m.Tisch / parts set single seat w. table
+2025-04-25 09:44:32,575 [DEBUG] core.bom_processor -   节点 1149353: Schrank m.Rollo in MR kpl. / tower w. shutter in cabin cpl.
+2025-04-25 09:44:32,575 [DEBUG] core.bom_processor -   节点 1149465: Schrank o.Rollo in MR kpl. / tower no shutter in cabin cpl.
+2025-04-25 09:44:32,575 [DEBUG] core.bom_processor -   节点 10019388: Teilesatz MAN Sitz m.Tisch / parts set MAN seat w. table
+2025-04-25 09:44:32,575 [DEBUG] core.bom_processor -   节点 10019390: Teilesatz PA-Sitz MAN mech. 1 FL / parts set BA-seat MAN mech. 1 btl.
+2025-04-25 09:44:32,575 [DEBUG] core.bom_processor -   节点 10019392: Teilesatz PA-Sitz MAN mech. 2 FL / parts set BA-seat MAN mech. 2 btl.
+2025-04-25 09:44:32,576 [DEBUG] core.bom_processor -   节点 10019393: Teilesatz Standardsitz MAN / parts set standard seat MAN
+2025-04-25 09:44:32,576 [DEBUG] core.bom_processor -   节点 10026208: Teilesatz Gerätewand / parts set device wall
+2025-04-25 09:44:32,576 [DEBUG] core.bom_processor -   节点 10023661: Schrank o.Rollo in MR S2 / tower no shutter in cabin S2
+2025-04-25 09:44:32,576 [DEBUG] core.bom_processor -   节点 1146163: Schrank m.Rollo in MR S2 / tower no shutter in cabin S2
+2025-04-25 09:44:32,576 [DEBUG] core.bom_processor -   节点 1126282: Schrank o.Rollo in MR S2 / tower no shutter in cabin S2
+2025-04-25 09:44:32,576 [INFO] core.bom_processor - 占位符 PL-Sitze07 的节点: 17 个
+2025-04-25 09:44:32,576 [DEBUG] core.bom_processor -   节点 1123244: Einzelsitz Std Airbag Stra.li. / single seat std. airbag tensioner le.
+2025-04-25 09:44:32,576 [DEBUG] core.bom_processor -   节点 1161296: PA-Sitz Std. mechanisch / BA-seat mechanically
+2025-04-25 09:44:32,576 [DEBUG] core.bom_processor -   节点 1161297: PA-Sitz Std. mechanisch / BA-seat mechanically
+2025-04-25 09:44:32,576 [DEBUG] core.bom_processor -   节点 1161313: PA-Sitz f.Straffer li.kpl.mech / BA-seat f. tensioner le. cpl. mech.
+2025-04-25 09:44:32,576 [DEBUG] core.bom_processor -   节点 1161314: PA-Sitz f.Straffer li.kpl.mech / BA-seat f. tensioner le. cpl. mech.
+2025-04-25 09:44:32,576 [DEBUG] core.bom_processor -   节点 1161294: PA-Sitz Std. elektrisch / BA-seat std. electric
+2025-04-25 09:44:32,576 [DEBUG] core.bom_processor -   节点 1161295: PA-Sitz Std. elektrisch / BA-seat std. electric
+2025-04-25 09:44:32,577 [DEBUG] core.bom_processor -   节点 1161309: PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.
+2025-04-25 09:44:32,577 [DEBUG] core.bom_processor -   节点 1161310: PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.
+2025-04-25 09:44:32,577 [DEBUG] core.bom_processor -   节点 1123266: Einzelsitz m.Tisch f.Straf.li. / single seat w. table f. tensioner le.
+2025-04-25 09:44:32,577 [DEBUG] core.bom_processor -   节点 1161307: PA-Sitz f.Straffer re.kpl.mech / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,577 [DEBUG] core.bom_processor -   节点 1161308: PA-Sitz f.Straffer re.kpl.mech / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,577 [DEBUG] core.bom_processor -   节点 1123246: Einzelsitz Std Airbag Stra.re. / single seat w. table f. tensioner ri.
+2025-04-25 09:44:32,577 [DEBUG] core.bom_processor -   节点 1161305: PA-Sitz f.Straffer re.kpl.el. / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,577 [DEBUG] core.bom_processor -   节点 1161306: PA-Sitz f.Straffer re.kpl.el. / BA-seat f. tensioner ri. cpl. el.
+2025-04-25 09:44:32,577 [DEBUG] core.bom_processor -   节点 10028644: PA-Sitz MAN elektrisch 1 FL / BA seat MAN electric 1btl.
+2025-04-25 09:44:32,577 [DEBUG] core.bom_processor -   节点 10028647: PA-Sitz MAN elektrisch 2 FL / BA seat MAN electric 2btl.
+2025-04-25 09:44:32,577 [INFO] core.bom_processor - BOM文件导入成功，共处理 1 个一级节点
+2025-04-25 09:44:32,577 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 09:44:32,577 [INFO] gui.bom_panel - 开始刷新树状图，共有 1 个一级节点
+2025-04-25 09:44:32,579 [INFO] gui.bom_panel - 树状图刷新完成
+2025-04-25 09:44:32,580 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 09:44:32,581 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-25 09:44:39,287 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I002
+2025-04-25 09:44:39,287 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 0000000010017913NK - Modulkabine S301000 / S302000
+Modulkabine S301000 / S302000
+2025-04-25 09:44:39,288 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 0000000010017913NK
+2025-04-25 09:44:39,288 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Kabine
+Modulkabine S301000 / S302000
+Modulkabine S301000 / S302000
+2025-04-25 09:44:39,288 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Kabine
+Modulkabine S301000 / S302000
+Modulkabine S301000 / S302000-0000000010017913NK
+2025-04-25 09:44:39,289 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-25 09:44:39,289 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-25 09:44:39,289 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-25 09:44:39,290 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Kabine
+Modulkabine S301000 / S302000
+Modulkabine S301000 / S302000-0000000010017913NK
+2025-04-25 09:44:41,713 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Kabine
+Modulkabine S301000 / S302000
+Modulkabine S301000 / S302000-0000000010017913NK
+2025-04-25 09:44:41,713 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Kabine
+Modulkabine S301000 / S302000
+Modulkabine S301000 / S302000-0000000010017913NK
+2025-04-25 09:45:04,490 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I001
+2025-04-25 09:45:04,491 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [1] PL-Kabine
+Modulkabine S301000 / S302000
+Modulkabine S301000 / S302000
+2025-04-25 09:45:51,892 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I001
+2025-04-25 09:45:51,892 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [1] PL-Kabine
+Modulkabine S301000 / S302000
+Modulkabine S301000 / S302000
+2025-04-25 09:49:11,822 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I001
+2025-04-25 09:49:11,823 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [1] PL-Kabine
+Modulkabine S301000 / S302000
+Modulkabine S301000 / S302000

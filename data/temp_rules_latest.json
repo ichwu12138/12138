@@ -8,9 +8,9 @@
         "text": "",
         "images": {}
       },
-      "selection_expression": "K03_02_01",
+      "selection_expression": "K03_02_01   AND K03_02_01",
       "logic_relation": "→",
-      "impact_expression": "PL-GrundKabine-10019234"
+      "impact_expression": "PL-GrundKabine-10019234  AND PL-GrundKabine-100192443"
     },
     {
       "logic_id": "BL02",
@@ -47,9 +47,45 @@
       "selection_expression": "K03_02_01",
       "logic_relation": "→",
       "impact_expression": "PL-GrundKabine-10019235"
+    },
+    {
+      "logic_id": "LS05",
+      "tags": "",
+      "tech_doc_path": "",
+      "comment": {
+        "text": "",
+        "images": {}
+      },
+      "selection_expression": "K03_02_02",
+      "logic_relation": "→",
+      "impact_expression": "PL-GrundKabine-10019234"
+    },
+    {
+      "logic_id": "LS06",
+      "tags": "",
+      "tech_doc_path": "",
+      "comment": {
+        "text": "",
+        "images": {}
+      },
+      "selection_expression": "K05_03_01",
+      "logic_relation": "→",
+      "impact_expression": "PL-GrundKabine-10019235"
+    },
+    {
+      "logic_id": "LS07",
+      "tags": "",
+      "tech_doc_path": "",
+      "comment": {
+        "text": "",
+        "images": {}
+      },
+      "selection_expression": "K03_02_01   AND K03_02_01",
+      "logic_relation": "→",
+      "impact_expression": "PL-GrundKabine-10019234  AND PL-GrundKabine-10019244"
     }
   ],
-  "saved_at": "2025-04-23T14:10:51.408065",
+  "saved_at": "2025-04-23T14:47:08.148341",
   "exported": false,
-  "timestamp": "20250423_141051"
+  "timestamp": "20250423_144708"
 }

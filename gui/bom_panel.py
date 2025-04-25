@@ -154,70 +154,114 @@ class BomPanel(ttk.Frame):
                 
             # 获取所有BOM数据
             bom_data = self.bom_processor.get_bom_data()
+            self.logger.info(f"开始刷新树状图，共有 {len(bom_data)} 个一级节点")
             
-            # 添加BOM节点
-            for item_id, item_data in bom_data.items():
-                # 只处理一级节点
-                if item_data.get("level", 1) == 1:
-                    self._add_tree_node("", item_id, item_data)
+            # 处理所有节点
+            def process_items(items_dict, parent_node=""):
+                # 将所有项目按层级和占位符分组
+                level_groups = {}  # {(level, placeholder): [items]}
+                
+                for item_id, item_data in items_dict.items():
+                    level = item_data.get("level", 1)
+                    placeholder = item_data.get("placeholder", "")
+                    key = (level, placeholder)
+                    if key not in level_groups:
+                        level_groups[key] = []
+                    level_groups[key].append((item_id, item_data))
+                
+                # 按层级排序处理分组
+                for (level, placeholder), items in sorted(level_groups.items(), key=lambda x: x[0][0]):
+                    if level == 1:
+                        # 一级节点直接作为根节点
+                        for item_id, item_data in items:
+                            # 创建一级节点文本（三行格式）
+                            level_text = f"[{level}] {placeholder} {item_data['baugruppe']}\n{item_data['name']}"
+                            if item_data.get("long_text"):
+                                level_text += f"\n{item_data['long_text']}"
+                            
+                            # 创建一级节点
+                            node = self.tree.insert(
+                                parent_node,
+                                "end",
+                                text=level_text,
+                                tags=("level_1",)
+                            )
+                            
+                            # 如果有子项，递归处理
+                            if item_data.get("sub_items"):
+                                process_items(item_data["sub_items"], node)
+                    else:
+                        # 非一级节点，创建层级+占位符节点
+                        level_text = f"[{level}] {placeholder}"
+                        group_node = self.tree.insert(
+                            parent_node,
+                            "end",
+                            text=level_text,
+                            tags=("other_level",)
+                        )
+                        
+                        # 将该层级下的所有物料作为一个文本列表
+                        materials_text = []
+                        sub_items_exist = False
+                        
+                        for item_id, item_data in items:
+                            # 检查是否有子项
+                            if item_data.get("sub_items"):
+                                sub_items_exist = True
+                                # 创建物料节点，因为它有子项
+                                material_text = f"{item_data['baugruppe']} - {item_data['name']}"
+                                if item_data.get("long_text"):
+                                    material_text += f"\n{item_data['long_text']}"
+                                
+                                material_node = self.tree.insert(
+                                    group_node,
+                                    "end",
+                                    text=material_text,
+                                    tags=("material",)
+                                )
+                                # 递归处理子项
+                                process_items(item_data["sub_items"], material_node)
+                            else:
+                                # 没有子项的物料添加到文本列表
+                                material_text = f"{item_data['baugruppe']} - {item_data['name']}"
+                                if item_data.get("long_text"):
+                                    material_text += f"\n{item_data['long_text']}"
+                                materials_text.append(material_text)
+                        
+                        # 如果有没有子项的物料，将它们作为一个节点显示
+                        if materials_text:
+                            combined_text = "\n\n".join(materials_text)
+                            self.tree.insert(
+                                group_node,
+                                "end",
+                                text=combined_text,
+                                tags=("material",)
+                            )
             
-            # 配置标签样式 - 一级用18号，其他级别统一用16号
+            # 开始处理所有节点
+            process_items(bom_data)
+            
+            # 配置标签样式
             self.tree.tag_configure("level_1", font=("Microsoft YaHei", 18, "bold"))
             self.tree.tag_configure("other_level", font=("Microsoft YaHei", 16, "bold"))
+            self.tree.tag_configure("material", font=("Microsoft YaHei", 14))
             
             # 设置行高
             style = ttk.Style()
-            style.configure("Main.Treeview", rowheight=100)  # 设置行高为100像素
+            style.configure("Main.Treeview", rowheight=100)
             
             # 绑定鼠标悬停事件
             self.tree.bind("<Motion>", self._on_mouse_motion)
             
             # 创建工具提示窗口（但暂不显示）
             self.tooltip = None
+            
+            self.logger.info("树状图刷新完成")
                         
         except Exception as e:
+            self.logger.error(f"刷新树状图时出错: {str(e)}", exc_info=True)
             from utils.message_utils_tk import show_error
             show_error("refresh_tree_error", error=str(e))
-            
-    def _add_tree_node(self, parent: str, item_id: str, item_data: dict):
-        """递归添加树节点
-        
-        Args:
-            parent: 父节点ID
-            item_id: 当前节点ID
-            item_data: 节点数据
-        """
-        # 获取层级
-        level = item_data.get("level", 1)
-        
-        # 创建主节点文本 - 显示层级、占位符和编号
-        main_text = f"[{level}]"
-        if item_data.get("placeholder"):  # 如果有占位符，添加到层级后面
-            main_text += f" {item_data['placeholder']}"
-            
-        main_text += f" {item_id}"  # 添加Baugruppe码
-        
-        if item_data.get("name"):  # 添加描述
-            main_text += f" - {item_data['name']}"
-            
-        # 如果有长文本，添加到下一行（用圆括号包起来）
-        if item_data.get("long_text"):
-            main_text += f"\n({item_data['long_text']})"
-            
-        # 一级用level_1标签，其他级别用other_level标签
-        level_tag = "level_1" if level == 1 else "other_level"
-        
-        # 创建节点
-        node = self.tree.insert(
-            parent,
-            "end",
-            text=main_text,
-            tags=(level_tag,)
-        )
-        
-        # 递归添加子节点
-        for sub_id, sub_data in item_data.get("sub_items", {}).items():
-            self._add_tree_node(node, sub_id, sub_data)
             
     def _on_right_click(self, event):
         """右键事件处理"""
@@ -331,27 +375,32 @@ class BomPanel(ttk.Frame):
             text = self.tree.item(item, "text")
             self.logger.debug(f"BomPanel: 选中项文本: {text}")
             
-            # 提取Baugruppe码 - 格式为 "[层级] 占位符 Baugruppe - 描述"
-            match = re.match(r'\[\d+\]\s+(?:(\S+)\s+)?(\S+)', text)
-            if match:
-                placeholder = match.group(1) if match.group(1) else ""
-                baugruppe = match.group(2)
-                self.logger.debug(f"BomPanel: 提取到占位符: {placeholder}, Baugruppe: {baugruppe}")
+            # 如果是层级节点（以[开头），不处理
+            if text.startswith("["):
+                return
                 
-                # 获取对应的数据
-                item_data = self.bom_processor.get_item_data(baugruppe)
-                if item_data:
-                    # 使用保存的BOM码
-                    bom_code = item_data.get("bom_code")
-                    if bom_code:
-                        self.logger.info(f"BomPanel: 准备插入BOM码: {bom_code}")
-                        self.insert_code(bom_code)
-                    else:
-                        self.logger.warning(f"BomPanel: 未找到BOM码: {text}")
-                else:
-                    self.logger.warning(f"BomPanel: 未找到项目数据: {text}")
-            else:
-                self.logger.warning(f"BomPanel: 无法解析文本: {text}")
+            # 提取Baugruppe码 - 格式为 "Baugruppe - 描述"
+            baugruppe = text.split(" - ")[0].strip()
+            self.logger.debug(f"BomPanel: 提取到Baugruppe: {baugruppe}")
+            
+            # 获取父节点（层级节点）的文本
+            parent = self.tree.parent(item)
+            parent_text = self.tree.item(parent, "text")
+            
+            # 从父节点提取占位符 - 格式为 "[层级] 占位符"
+            placeholder = ""
+            if " " in parent_text:
+                placeholder = parent_text.split(" ", 1)[1].strip()
+            
+            self.logger.debug(f"BomPanel: 提取到占位符: {placeholder}")
+            
+            # 构建完整的BOM码
+            bom_code = f"{placeholder}-{baugruppe}" if placeholder else baugruppe
+            self.logger.debug(f"BomPanel: 构建的BOM码: {bom_code}")
+            
+            # 插入BOM码
+            self.insert_code(bom_code)
+            self.logger.info(f"BomPanel: 成功插入BOM码: {bom_code}")
                 
         except Exception as e:
             self.logger.error(f"BomPanel: 双击处理出错: {str(e)}", exc_info=True)

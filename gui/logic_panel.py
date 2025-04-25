@@ -325,12 +325,12 @@ class LogicPanel(ttk.Frame):
         style.configure(
             "Large.Treeview",
             font=("Microsoft YaHei", 18),
-            rowheight=36  # 调整行高以适应更大的字体
+            rowheight=100  # 调整行高以适应更大的字体
         )
         style.configure(
             "Large.Treeview.Heading",
             font=("Microsoft YaHei", 18, "bold"),
-            rowheight=36
+            rowheight=100
         )
         
         # 创建右键菜单
