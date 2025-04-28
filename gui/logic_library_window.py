@@ -247,6 +247,16 @@ class LogicLibraryWindow(tk.Toplevel):
                         language_manager.get_text(result["status"].value)
                     )
                 )
+                
+                # 更新逻辑构建器中的规则
+                rule.condition = result["condition"]
+                rule.action = result["effect"]
+                rule.status = result["status"]
+                self.logic_builder._save_rules()  # 保存更改
+                
+                # 通知规则变更
+                self.logic_builder.notify_rule_change("modified", rule.rule_id, rule)
+                
                 self.logger.info(f"已编辑规则: {rule.rule_id}")
                 
         except Exception as e:
@@ -277,6 +287,9 @@ class LogicLibraryWindow(tk.Toplevel):
             
             # 从树形视图中删除
             self.tree.delete(item)
+            
+            # 通知规则变更
+            self.logic_builder.notify_rule_change("deleted", item)
             
             self.logger.info(f"已删除规则: {item}")
             
@@ -309,6 +322,9 @@ class LogicLibraryWindow(tk.Toplevel):
             
             # 保存更改
             self.logic_builder._save_rules()
+            
+            # 通知规则变更
+            self.logic_builder.notify_rule_change("modified", rule.rule_id, rule)
             
             self.logger.info(f"已更改规则状态: {item} -> {new_status.value}")
             
@@ -376,6 +392,8 @@ class LogicLibraryWindow(tk.Toplevel):
     def _on_rule_change(self, change_type, rule_id=None, rule=None):
         """规则变更事件处理"""
         try:
+            self.logger.info(f"收到规则变更事件: type={change_type}, rule_id={rule_id}")
+            
             if change_type == "imported":
                 # 重新加载所有规则
                 self._load_rules()
@@ -385,36 +403,44 @@ class LogicLibraryWindow(tk.Toplevel):
                 if rule_id and rule_id in self.tree.get_children():
                     self.tree.delete(rule_id)
                     self.logger.info(f"已删除规则: {rule_id}")
-            elif change_type == "added" or change_type == "modified":
+            elif change_type == "cleared":
+                # 清空所有规则
+                for item in self.tree.get_children():
+                    self.tree.delete(item)
+                self.logger.info("已清空所有规则")
+            elif change_type in ["added", "modified"]:
                 # 更新或添加规则
                 if rule:
                     effect_text = f"→ {rule.action}"
-                    if rule.rule_id in self.tree.get_children():
-                        # 更新现有规则
-                        self.tree.item(
-                            rule.rule_id,
-                            values=(
+                    try:
+                        if rule.rule_id in self.tree.get_children():
+                            # 更新现有规则
+                            self.tree.item(
                                 rule.rule_id,
-                                rule.condition,
-                                effect_text,
-                                language_manager.get_text(rule.status.value)
+                                values=(
+                                    rule.rule_id,
+                                    rule.condition,
+                                    effect_text,
+                                    language_manager.get_text(rule.status.value)
+                                )
                             )
-                        )
-                        self.logger.info(f"已更新规则: {rule.rule_id}")
-                    else:
-                        # 添加新规则
-                        self.tree.insert(
-                            "",
-                            "end",
-                            iid=rule.rule_id,
-                            values=(
-                                rule.rule_id,
-                                rule.condition,
-                                effect_text,
-                                language_manager.get_text(rule.status.value)
+                            self.logger.info(f"已更新规则: {rule.rule_id}")
+                        else:
+                            # 添加新规则
+                            self.tree.insert(
+                                "",
+                                "end",
+                                iid=rule.rule_id,
+                                values=(
+                                    rule.rule_id,
+                                    rule.condition,
+                                    effect_text,
+                                    language_manager.get_text(rule.status.value)
+                                )
                             )
-                        )
-                        self.logger.info(f"已添加新规则: {rule.rule_id}")
+                            self.logger.info(f"已添加新规则: {rule.rule_id}")
+                    except Exception as e:
+                        self.logger.error(f"更新/添加规则到树状视图失败: {str(e)}, 规则ID: {rule.rule_id}")
                         
         except Exception as e:
             self.logger.error(f"处理规则变更事件失败: {str(e)}", exc_info=True)

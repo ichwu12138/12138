@@ -422,6 +422,9 @@ class LogicPanel(ttk.Frame):
         if rule:
             rule.status = new_status
             self.logic_builder._save_rules()  # 保存更改
+            
+            # 通知规则变更
+            self.logic_builder.notify_rule_change("modified", rule_id, rule)
 
     def _edit_rule(self, event):
         """编辑规则"""
@@ -486,6 +489,9 @@ class LogicPanel(ttk.Frame):
                 rule.action = result["effect"]
                 rule.status = result["status"]
                 self.logic_builder._save_rules()  # 保存更改
+                
+                # 通知规则变更
+                self.logic_builder.notify_rule_change("modified", rule_id, rule)
 
     def _show_rule_menu(self, event):
         """显示规则右键菜单"""
@@ -531,6 +537,9 @@ class LogicPanel(ttk.Frame):
         
         # 保存更改到临时文件
         self.logic_builder.save_to_temp_file()
+        
+        # 通知规则变更
+        self.logic_builder.notify_rule_change("deleted", item)
 
     def _log_input(self, input_type: str, content: str):
         """记录输入历史
@@ -972,38 +981,64 @@ class LogicPanel(ttk.Frame):
         try:
             # 检查规则是否已加载
             if not hasattr(self.master, 'main_window') or not self.master.main_window.rules_loaded:
+                self.logger.debug("规则未加载，跳过显示")
+                # 清空现有数据和已使用的ID集合
+                for item in self.tree.get_children():
+                    self.tree.delete(item)
+                self.used_rule_ids.clear()
                 return
                 
-            # 清空现有数据
+            self.logger.info("开始加载现有规则到树状视图")
+            
+            # 清空现有数据和已使用的ID集合
             for item in self.tree.get_children():
                 self.tree.delete(item)
-                
+            self.used_rule_ids.clear()
+            
             # 加载所有规则
-            for rule in self.logic_builder.get_rules():
-                effect_text = f"→ {rule.action}"
-                self.tree.insert(
-                    "",
-                    "end",
-                    iid=rule.rule_id,
-                    values=(
-                        rule.rule_id,
-                        rule.condition,
-                        effect_text,
-                        language_manager.get_text(rule.status.value)
-                    )
-                )
-                
-                # 更新已使用的规则ID
+            rules = self.logic_builder.get_rules()
+            self.logger.debug(f"从LogicBuilder获取到 {len(rules)} 条规则")
+            
+            for rule in rules:
                 try:
-                    rule_number = int(rule.rule_id[2:])  # 提取数字部分
-                    self.used_rule_ids.add(rule_number)
-                except (ValueError, IndexError):
-                    self.logger.error(f"无法解析规则ID: {rule.rule_id}")
-                
-            self.logger.info(f"已加载 {len(self.tree.get_children())} 条规则到逻辑编辑面板")
-                
+                    # 构建显示文本
+                    effect_text = f"→ {rule.action}"
+                    status_text = language_manager.get_text(rule.status.value)
+                    
+                    # 插入到树形视图
+                    self.tree.insert(
+                        "",
+                        "end",
+                        iid=rule.rule_id,
+                        values=(
+                            rule.rule_id,
+                            rule.condition,
+                            effect_text,
+                            status_text
+                        )
+                    )
+                    
+                    # 更新已使用的规则ID
+                    try:
+                        if rule.rule_id.startswith('BL'):
+                            rule_number = int(rule.rule_id[2:])
+                            self.used_rule_ids.add(rule_number)
+                            self.logger.debug(f"添加规则ID: {rule_number} 到已使用集合")
+                    except (ValueError, IndexError) as e:
+                        self.logger.error(f"无法解析规则ID: {rule.rule_id}, 错误: {str(e)}")
+                        
+                except Exception as e:
+                    self.logger.error(f"插入规则到树状视图失败: {str(e)}, 规则ID: {rule.rule_id}")
+                    continue
+                    
+            self.logger.info(f"成功加载 {len(self.tree.get_children())} 条规则到逻辑编辑面板")
+            
         except Exception as e:
             self.logger.error(f"加载现有规则失败: {str(e)}", exc_info=True)
+            messagebox.showerror(
+                language_manager.get_text("error"),
+                str(e)
+            )
 
     def _on_rule_change(self, change_type, rule_id=None, rule=None):
         """处理规则变更事件
@@ -1014,10 +1049,8 @@ class LogicPanel(ttk.Frame):
             rule: 规则对象
         """
         try:
-            # 检查规则是否已加载
-            if not hasattr(self.master, 'main_window') or not self.master.main_window.rules_loaded:
-                return
-                
+            self.logger.info(f"收到规则变更事件: type={change_type}, rule_id={rule_id}")
+            
             if change_type == "imported":
                 # 重新加载所有规则
                 self._load_existing_rules()
@@ -1040,36 +1073,41 @@ class LogicPanel(ttk.Frame):
                 # 更新或添加规则
                 if rule:
                     effect_text = f"→ {rule.action}"
-                    if rule.rule_id in self.tree.get_children():
-                        # 更新现有规则
-                        self.tree.item(
-                            rule.rule_id,
-                            values=(
+                    try:
+                        if rule.rule_id in self.tree.get_children():
+                            # 更新现有规则
+                            self.tree.item(
                                 rule.rule_id,
-                                rule.condition,
-                                effect_text,
-                                language_manager.get_text(rule.status.value)
+                                values=(
+                                    rule.rule_id,
+                                    rule.condition,
+                                    effect_text,
+                                    language_manager.get_text(rule.status.value)
+                                )
                             )
-                        )
-                    else:
-                        # 添加新规则
-                        self.tree.insert(
-                            "",
-                            "end",
-                            iid=rule.rule_id,
-                            values=(
-                                rule.rule_id,
-                                rule.condition,
-                                effect_text,
-                                language_manager.get_text(rule.status.value)
+                            self.logger.debug(f"更新规则显示: {rule.rule_id}")
+                        else:
+                            # 添加新规则
+                            self.tree.insert(
+                                "",
+                                "end",
+                                iid=rule.rule_id,
+                                values=(
+                                    rule.rule_id,
+                                    rule.condition,
+                                    effect_text,
+                                    language_manager.get_text(rule.status.value)
+                                )
                             )
-                        )
-                        # 更新已使用的规则ID
-                        try:
-                            rule_number = int(rule.rule_id[2:])
-                            self.used_rule_ids.add(rule_number)
-                        except (ValueError, IndexError):
-                            self.logger.error(f"无法解析规则ID: {rule.rule_id}")
+                            # 更新已使用的规则ID
+                            try:
+                                rule_number = int(rule.rule_id[2:])
+                                self.used_rule_ids.add(rule_number)
+                            except (ValueError, IndexError):
+                                self.logger.error(f"无法解析规则ID: {rule.rule_id}")
+                            self.logger.debug(f"添加新规则显示: {rule.rule_id}")
+                    except Exception as e:
+                        self.logger.error(f"更新/添加规则到树状视图失败: {str(e)}, 规则ID: {rule.rule_id}")
                             
         except Exception as e:
             self.logger.error(f"处理规则变更事件失败: {str(e)}", exc_info=True) 

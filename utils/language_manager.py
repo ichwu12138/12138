@@ -177,7 +177,15 @@ class LanguageManager:
             "import_logic_rules": "导入BOM逻辑关系",
             "select_import_file": "选择导入文件",
             "import_rules_success": "BOM逻辑关系导入成功",
-            "import_rules_error": "BOM逻辑关系导入失败"
+            "import_rules_error": "BOM逻辑关系导入失败",
+            "unsaved_rules_import_confirm": "检测到有未导出的BOM逻辑关系，导入新的规则将清空当前规则，是否继续？",
+            "unsaved_rules_warning": "有未导出的BOM逻辑关系",
+            "temp_rules_loaded": "已加载临时保存的BOM逻辑关系",
+            "temp_rules_not_found": "未找到临时保存的BOM逻辑关系",
+            "temp_rules_load_error": "加载临时保存的BOM逻辑关系失败",
+            "temp_rules_save_success": "BOM逻辑关系已临时保存",
+            "temp_rules_save_error": "临时保存BOM逻辑关系失败",
+            "confirm_delete_rule": "确定要删除这条规则吗？"
         })
         
         # 英文翻译
@@ -337,7 +345,15 @@ class LanguageManager:
             "import_logic_rules": "Import BOM Logic Rules",
             "select_import_file": "Select Import File",
             "import_rules_success": "BOM logic rules imported successfully",
-            "import_rules_error": "Failed to import BOM logic rules"
+            "import_rules_error": "Failed to import BOM logic rules",
+            "unsaved_rules_import_confirm": "Detected unexported BOM logic rules, importing new rules will clear current rules, continue?",
+            "unsaved_rules_warning": "There are unexported BOM logic rules",
+            "temp_rules_loaded": "Temporarily saved BOM logic rules loaded",
+            "temp_rules_not_found": "No temporarily saved BOM logic rules found",
+            "temp_rules_load_error": "Failed to load temporarily saved BOM logic rules",
+            "temp_rules_save_success": "BOM logic rules temporarily saved",
+            "temp_rules_save_error": "Failed to temporarily save BOM logic rules",
+            "confirm_delete_rule": "Are you sure you want to delete this rule?"
         })
         
         # 德文翻译
@@ -497,7 +513,15 @@ class LanguageManager:
             "import_logic_rules": "BOM-Logikregeln importieren",
             "select_import_file": "Importdatei auswählen",
             "import_rules_success": "BOM-Logikregeln erfolgreich importiert",
-            "import_rules_error": "Fehler beim Importieren der BOM-Logikregeln"
+            "import_rules_error": "Fehler beim Importieren der BOM-Logikregeln",
+            "unsaved_rules_import_confirm": "Nicht exportierte BOM-Logikregeln erkannt, beim Importieren neuer Regeln werden die aktuellen Regeln gelöscht, fortfahren?",
+            "unsaved_rules_warning": "Es gibt nicht exportierte BOM-Logikregeln",
+            "temp_rules_loaded": "Temporär gespeicherte BOM-Logikregeln geladen",
+            "temp_rules_not_found": "Keine temporär gespeicherten BOM-Logikregeln gefunden",
+            "temp_rules_load_error": "Fehler beim Laden der temporär gespeicherten BOM-Logikregeln",
+            "temp_rules_save_success": "BOM-Logikregeln temporär gespeichert",
+            "temp_rules_save_error": "Fehler beim temporären Speichern der BOM-Logikregeln",
+            "confirm_delete_rule": "Möchten Sie diese Regel wirklich löschen?"
         })
         
     def add_callback(self, callback):
@@ -506,8 +530,11 @@ class LanguageManager:
         Args:
             callback: 回调函数
         """
-        if callback not in self._callbacks:
-            self._callbacks.append(callback)
+        try:
+            if callback not in self._callbacks:
+                self._callbacks.append(callback)
+        except Exception as e:
+            print(f"添加回调函数时出错: {str(e)}")
             
     def remove_callback(self, callback):
         """移除回调函数
@@ -515,8 +542,11 @@ class LanguageManager:
         Args:
             callback: 要移除的回调函数
         """
-        if callback in self._callbacks:
-            self._callbacks.remove(callback)
+        try:
+            if callback in self._callbacks:
+                self._callbacks.remove(callback)
+        except Exception as e:
+            print(f"移除回调函数时出错: {str(e)}")
             
     def set_language(self, lang_code: str) -> None:
         """设置当前语言
@@ -524,15 +554,20 @@ class LanguageManager:
         Args:
             lang_code: 语言代码
         """
-        if lang_code in ["zh", "en", "de"] and lang_code != self._current_language:
-            self._current_language = lang_code
-            config_manager.set_app_config("language", lang_code)
-            # 调用所有回调函数
-            for callback in self._callbacks:
-                try:
-                    callback()
-                except Exception as e:
-                    print(f"回调函数执行出错: {str(e)}")
+        try:
+            if lang_code in ["zh", "en", "de"] and lang_code != self._current_language:
+                self._current_language = lang_code
+                config_manager.set_app_config("language", lang_code)
+                # 调用所有回调函数
+                for callback in self._callbacks[:]:  # 创建副本以避免迭代时修改
+                    try:
+                        callback()
+                    except Exception as e:
+                        print(f"回调函数执行出错: {str(e)}")
+                        # 如果回调函数不再有效，从列表中移除
+                        self._callbacks.remove(callback)
+        except Exception as e:
+            print(f"设置语言时出错: {str(e)}")
     
     def get_text(self, key: str) -> str:
         """获取指定键的翻译文本
@@ -543,7 +578,11 @@ class LanguageManager:
         Returns:
             str: 翻译文本
         """
-        return self._translations[self._current_language].get(key, key)
+        try:
+            return self._translations[self._current_language].get(key, key)
+        except Exception as e:
+            print(f"获取翻译文本时出错: {str(e)}")
+            return key
     
     def get_current_language(self) -> str:
         """获取当前语言代码

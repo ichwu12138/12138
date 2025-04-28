@@ -441,32 +441,36 @@ class LogicBuilder(Observable):
         Returns:
             Dict[str, Any]: 规则数据
         """
-        rules_data = []
-        
-        for rule in self.rules.values():
-            rules_data.append({
-                'rule_id': rule.rule_id,
-                'rule_type': rule.rule_type.value,
-                'condition': rule.condition,
-                'action': rule.action,
-                'relation': rule.relation,
-                'status': rule.status.value,
-                'tags': rule.tags
-            })
+        try:
+            self.logger.info("开始导出规则数据")
+            rules_data = []
             
-        # 标记规则已导出
-        self.rules_exported = True
-        
-        # 保存导出状态
-        self._save_rules()
-        
-        # 清空规则
-        self.clear_rules()
-        
-        return {
-            'rules': rules_data,
-            'exported_at': datetime.now().isoformat()
-        }
+            for rule in self.rules.values():
+                rule_dict = rule.to_dict()
+                rules_data.append(rule_dict)
+                self.logger.debug(f"已导出规则: ID={rule.rule_id}, 类型={rule.rule_type.value}")
+            
+            # 标记规则已导出
+            self.rules_exported = True
+            
+            # 保存导出状态
+            self._save_rules()
+            
+            export_data = {
+                'rules': rules_data,
+                'exported_at': datetime.now().isoformat()
+            }
+            
+            self.logger.info(f"规则导出完成，共导出 {len(rules_data)} 条规则")
+            
+            # 清空规则
+            self.clear_rules()
+            
+            return export_data
+            
+        except Exception as e:
+            self.logger.error(f"导出规则数据失败: {str(e)}", exc_info=True)
+            raise
     
     def _extract_codes(self, expression: str) -> List[str]:
         """提取表达式中的F码和K码
@@ -488,44 +492,64 @@ class LogicBuilder(Observable):
             file_path: 规则文件路径
         """
         try:
+            self.logger.info(f"开始导入规则文件: {file_path}")
+            
             with open(file_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
                 
             # 清空现有规则
             self.rules.clear()
+            self.logger.info("已清空现有规则")
             
             # 解析数据并创建规则
+            imported_count = 0
+            max_rule_number = 0
+            
             for rule_data in data.get('rules', []):
                 try:
-                    # 使用LogicRule.from_dict方法统一创建规则
-                    rule = LogicRule.from_dict(rule_data)
+                    # 获取规则ID
+                    rule_id = rule_data.get('logic_id', '')
+                    if rule_id.startswith('BL'):
+                        try:
+                            rule_number = int(rule_id[2:])
+                            max_rule_number = max(max_rule_number, rule_number)
+                        except (ValueError, IndexError):
+                            self.logger.warning(f"无法解析规则ID: {rule_id}")
                     
-                    # 检查一下规则类型是否明确
-                    if rule.rule_id.startswith('LD'):
-                        rule.rule_type = RuleType.DYNAMIC
-                    elif rule.rule_id.startswith('LS'):
-                        rule.rule_type = RuleType.STATIC
+                    # 创建规则对象
+                    rule = LogicRule(
+                        rule_id=rule_id,
+                        rule_type=RuleType.STATIC,
+                        condition=rule_data.get('selection_expression', ''),
+                        action=rule_data.get('impact_expression', ''),
+                        relation=rule_data.get('logic_relation', '→'),
+                        status=RuleStatus.ENABLED  # 默认启用状态
+                    )
                     
                     # 添加到规则字典
-                    self.rules[rule.rule_id] = rule
+                    self.rules[rule_id] = rule
+                    imported_count += 1
                     
-                    self.logger.debug(f"导入规则: ID={rule.rule_id}, 类型={rule.rule_type.value}")
+                    self.logger.debug(f"成功导入规则: ID={rule_id}")
                     
                 except Exception as e:
                     self.logger.error(f"导入规则失败: {str(e)}", exc_info=True)
                     continue
-                    
-            # 保存规则
+            
+            # 更新规则计数器
+            self.rule_counter = max_rule_number + 1
+            
+            # 设置导出状态为False
+            self.rules_exported = False
+            
+            # 保存到临时文件
             self._save_rules()
             
             # 通知观察者
             self.notify_observers()
+            self.notify_rule_change("imported")
             
-            # 通知规则变更
-            for rule_id, rule in self.rules.items():
-                self.notify_rule_change("imported", rule_id, rule)
-            
-            self.logger.info(f"已导入 {len(self.rules)} 条规则")
+            self.logger.info(f"规则导入完成，成功导入 {imported_count} 条规则")
             
         except Exception as e:
             self.logger.error(f"导入规则数据失败: {str(e)}", exc_info=True)
@@ -551,7 +575,7 @@ class LogicBuilder(Observable):
         self.notify_observers()
     
     def _save_rules(self):
-        """保存规则数据"""
+        """保存规则数据到临时文件"""
         try:
             # 确保数据目录存在
             os.makedirs(DATA_DIR, exist_ok=True)
@@ -559,21 +583,38 @@ class LogicBuilder(Observable):
             # 获取当前时间戳
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             
-            # 准备要保存的数据
+            # 准备规则数据
+            rules_data = []
+            for rule in self.rules.values():
+                rule_dict = {
+                    "logic_id": rule.rule_id,
+                    "tags": "",
+                    "tech_doc_path": "",
+                    "comment": {
+                        "text": "",
+                        "images": {}
+                    },
+                    "selection_expression": rule.condition,
+                    "logic_relation": rule.relation,
+                    "impact_expression": rule.action
+                }
+                rules_data.append(rule_dict)
+            
+            # 准备完整数据结构
             data = {
-                'rules': [rule.to_dict() for rule in self.rules.values()],
+                'rules': rules_data,
                 'saved_at': datetime.now().isoformat(),
                 'exported': self.rules_exported,
                 'timestamp': timestamp
             }
             
-            # 保存新的规则数据
+            # 保存到临时文件
             with open(RULES_DATA_FILE, 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
                 f.flush()
-                os.fsync(f.fileno())  # 确保数据写入磁盘
+                os.fsync(f.fileno())
                 
-            self.logger.info(f"规则数据已保存到文件: {RULES_DATA_FILE}")
+            self.logger.info(f"规则数据已保存到临时文件，共 {len(rules_data)} 条规则")
             
             # 通知观察者
             self.notify_observers()
@@ -718,7 +759,7 @@ class LogicBuilder(Observable):
             # 使用固定名称的文件或指定的文件路径
             if not file_path:
                 file_path = RULES_DATA_FILE
-                self.logger.info(f"使用规则文件: {file_path}")
+                self.logger.info(f"准备从临时文件加载规则: {file_path}")
             
             # 检查文件是否存在
             if not os.path.exists(file_path):
@@ -728,8 +769,9 @@ class LogicBuilder(Observable):
             # 从文件导入规则
             self.import_rules(file_path)
             
+            self.logger.info("从临时文件加载规则完成")
             return True
             
         except Exception as e:
-            self.logger.error(f"从文件加载规则失败: {str(e)}", exc_info=True)
+            self.logger.error(f"从临时文件加载规则失败: {str(e)}", exc_info=True)
             return False 

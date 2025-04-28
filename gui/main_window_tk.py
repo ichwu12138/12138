@@ -345,6 +345,14 @@ class MainWindow:
     def _import_logic_rules(self):
         """导入BOM逻辑关系"""
         try:
+            # 检查是否有未导出的规则
+            if self.logic_builder.has_unsaved_rules():
+                if not messagebox.askyesno(
+                    language_manager.get_text("confirm"),
+                    language_manager.get_text("unsaved_rules_import_confirm")
+                ):
+                    return
+            
             # 打开文件选择对话框
             file_path = filedialog.askopenfilename(
                 title=language_manager.get_text("select_import_file"),
@@ -354,21 +362,14 @@ class MainWindow:
             if file_path:
                 try:
                     # 导入规则
-                    with open(file_path, 'r', encoding='utf-8') as f:
-                        data = json.load(f)
-                    
-                    # 检查文件格式
-                    if not isinstance(data, dict) or 'rules' not in data:
-                        raise ValueError("无效的规则文件格式")
-                    
-                    # 清空现有规则
-                    self.logic_builder.clear_rules()
-                    
-                    # 导入规则
                     self.logic_builder.import_rules(file_path)
                     
                     # 设置规则已加载标志
                     self.rules_loaded = True
+                    
+                    # 强制刷新逻辑面板
+                    if hasattr(self, 'logic_panel'):
+                        self.logic_panel._load_existing_rules()
                     
                     # 显示成功消息
                     messagebox.showinfo(
@@ -397,15 +398,22 @@ class MainWindow:
     
     def _show_language_dialog(self):
         """显示语言选择对话框"""
-        dialog = LanguageDialog(self.root)
-        selected_lang = dialog.show()
-        if selected_lang and selected_lang != language_manager.get_current_language():
-            # 设置新的语言
-            language_manager.set_language(selected_lang)
-            # 强制更新所有面板
-            self.refresh_all_texts()
-            # 强制更新显示
-            self.root.update_idletasks()
+        try:
+            dialog = LanguageDialog(self.root)
+            selected_lang = dialog.show()
+            if selected_lang and selected_lang != language_manager.get_current_language():
+                # 设置新的语言
+                language_manager.set_language(selected_lang)
+                # 强制更新所有面板
+                self.refresh_all_texts()
+                # 强制更新显示
+                self.root.update_idletasks()
+        except Exception as e:
+            self.logger.error(f"切换语言时出错: {str(e)}", exc_info=True)
+            messagebox.showerror(
+                language_manager.get_text("error"),
+                str(e)
+            )
             
     def _update_widget_texts(self, widget):
         """递归更新所有组件的文本
@@ -600,30 +608,49 @@ class MainWindow:
             
             # 检查是否有未导出的逻辑关系
             if os.path.exists(RULES_DATA_FILE):
-                with open(RULES_DATA_FILE, 'r', encoding='utf-8') as f:
-                    rules_data = json.load(f)
-                    if not rules_data.get('exported', True):
-                        if messagebox.askyesno(
-                            language_manager.get_text("confirm"),
-                            language_manager.get_text("load_last_rules_confirm")
-                        ):
-                            # 清空现有规则
-                            self.logic_builder.clear_rules()
-                            # 设置规则已加载标志
-                            self.rules_loaded = True
-                            # 加载规则
-                            self.logic_builder.load_from_temp_file()
-                        else:
-                            # 删除规则
-                            self.logic_builder.clear_rules()
-                            messagebox.showinfo(
-                                language_manager.get_text("info"),
-                                language_manager.get_text("rules_deleted")
-                            )
+                try:
+                    with open(RULES_DATA_FILE, 'r', encoding='utf-8') as f:
+                        rules_data = json.load(f)
+                        if not rules_data.get('exported', True) and rules_data.get('rules', []):
+                            if messagebox.askyesno(
+                                language_manager.get_text("confirm"),
+                                language_manager.get_text("load_last_rules_confirm")
+                            ):
+                                # 加载规则
+                                self.logic_builder.load_from_temp_file()
+                                # 设置规则已加载标志
+                                self.rules_loaded = True
+                                # 强制刷新逻辑面板
+                                if hasattr(self, 'logic_panel'):
+                                    self.logic_panel._load_existing_rules()
+                                # 显示成功消息
+                                messagebox.showinfo(
+                                    language_manager.get_text("success"),
+                                    language_manager.get_text("temp_rules_loaded")
+                                )
+                            else:
+                                # 删除规则
+                                self.logic_builder.clear_rules()
+                                # 重置规则已加载标志
+                                self.rules_loaded = False
+                                messagebox.showinfo(
+                                    language_manager.get_text("info"),
+                                    language_manager.get_text("rules_deleted")
+                                )
+                except Exception as e:
+                    self.logger.error(f"加载临时规则文件失败: {str(e)}")
+                    messagebox.showerror(
+                        language_manager.get_text("error"),
+                        language_manager.get_text("temp_rules_load_error")
+                    )
                 
         except Exception as e:
             self.logger.error(f"加载上次配置时出错: {str(e)}")
-            
+            messagebox.showerror(
+                language_manager.get_text("error"),
+                str(e)
+            )
+
     def _save_config_path(self, path: str):
         """保存配置文件路径
         

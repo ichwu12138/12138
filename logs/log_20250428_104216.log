@@ -1,0 +1,71 @@
+2025-04-28 10:42:16,272 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250428_104216.log
+2025-04-28 10:42:16,507 [INFO] __main__ - 正在启动程序...
+2025-04-28 10:42:16,507 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-28 10:42:16,508 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-28 10:42:16,508 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-28 10:42:16,529 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-28 10:42:18,514 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-28 10:42:18,543 [INFO] __main__ - 语言选择结果: zh
+2025-04-28 10:42:18,543 [INFO] __main__ - 正在创建主题选择对话框...
+2025-04-28 10:42:18,544 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-04-28 10:42:18,553 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-04-28 10:42:19,445 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-04-28 10:42:19,469 [INFO] __main__ - 主题选择结果: light
+2025-04-28 10:42:19,480 [INFO] __main__ - 正在配置主窗口...
+2025-04-28 10:42:19,607 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-28 10:42:19,608 [INFO] core.logic_builder - 已加载 2 条规则
+2025-04-28 10:42:19,669 [INFO] __main__ - MainWindow实例创建完成
+2025-04-28 10:42:19,984 [INFO] __main__ - 开始mainloop()...
+2025-04-28 10:42:21,423 [INFO] core.config_processor - 找到工作表: ['TD', '0.模板&Vorlage', '1.Fahrgestell', '2.Fahrzeug allgemein', '3.Beschriftung&Kennzeichnung', '4. Anbauten&Fahrgestellarbeiten', '5. Fahrer_Mannschaftsraum', '6.Koffer', '7.Lichtmast', '8.Pumpenanlage', '9.Seilwinde&Generator', '10.Halterungen']
+2025-04-28 10:42:21,424 [DEBUG] core.config_processor - 跳过工作表: TD
+2025-04-28 10:42:21,424 [DEBUG] core.config_processor - 跳过工作表: 0.模板&Vorlage
+2025-04-28 10:42:21,424 [INFO] core.config_processor - 处理工作表: 1.Fahrgestell -> 模块: 1.Fahrgestell
+2025-04-28 10:42:21,441 [INFO] core.config_processor - 处理工作表: 2.Fahrzeug allgemein -> 模块: 2.Fahrzeug allgemein
+2025-04-28 10:42:21,458 [INFO] core.config_processor - 处理工作表: 3.Beschriftung&Kennzeichnung -> 模块: 3.Beschriftung&Kennzeichnung
+2025-04-28 10:42:21,474 [INFO] core.config_processor - 处理工作表: 4. Anbauten&Fahrgestellarbeiten -> 模块: 4.Anbauten&Fahrgestellarbeiten
+2025-04-28 10:42:21,491 [INFO] core.config_processor - 处理工作表: 5. Fahrer_Mannschaftsraum -> 模块: 5.Fahrer_Mannschaftsraum
+2025-04-28 10:42:21,513 [INFO] core.config_processor - 处理工作表: 6.Koffer -> 模块: 6.Koffer
+2025-04-28 10:42:21,529 [INFO] core.config_processor - 处理工作表: 7.Lichtmast -> 模块: 7.Lichtmast
+2025-04-28 10:42:21,544 [INFO] core.config_processor - 处理工作表: 8.Pumpenanlage -> 模块: 8.Pumpenanlage
+2025-04-28 10:42:21,559 [INFO] core.config_processor - 处理工作表: 9.Seilwinde&Generator -> 模块: 9.Seilwinde&Generator
+2025-04-28 10:42:21,574 [INFO] core.config_processor - 处理工作表: 10.Halterungen -> 模块: 10.Halterungen
+2025-04-28 10:42:21,588 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-28 10:42:21,592 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-28 10:42:21,592 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-28 10:42:22,856 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-28 10:42:22,856 [INFO] core.bom_processor - 已清空现有数据
+2025-04-28 10:42:22,857 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-04-28 10:42:22,862 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['Max-Gruppe']
+2025-04-28 10:42:22,862 [INFO] core.bom_processor - 正在读取 Max-Gruppe 工作表...
+2025-04-28 10:42:22,871 [INFO] core.bom_processor - 成功读取工作表，共 154 行数据
+2025-04-28 10:42:22,871 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-04-28 10:42:22,873 [INFO] core.bom_processor - 过滤空层级后剩余 153 行数据
+2025-04-28 10:42:22,873 [INFO] core.bom_processor - 
+开始处理数据...
+2025-04-28 10:42:22,876 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-04-28 10:42:22,877 [INFO] core.bom_processor - 第 1 级节点数量: 1
+2025-04-28 10:42:22,877 [INFO] core.bom_processor - 第 2 级节点数量: 133
+2025-04-28 10:42:22,877 [INFO] core.bom_processor - 第 3 级节点数量: 19
+2025-04-28 10:42:22,877 [INFO] core.bom_processor - BOM文件导入成功，共处理 153 个项目
+2025-04-28 10:42:22,878 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-28 10:42:22,878 [INFO] gui.bom_panel - 开始刷新树状图
+2025-04-28 10:42:22,879 [INFO] gui.bom_panel - 树状图刷新完成
+2025-04-28 10:42:22,880 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-28 10:42:22,880 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-28 10:42:24,899 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:42:24,900 [INFO] core.logic_builder - 开始导入规则文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:42:24,900 [INFO] core.logic_builder - 已清空现有规则
+2025-04-28 10:42:24,901 [DEBUG] core.logic_builder - 成功导入规则: ID=BL01, 类型=static
+2025-04-28 10:42:24,901 [DEBUG] core.logic_builder - 成功导入规则: ID=BL02, 类型=static
+2025-04-28 10:42:24,914 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:42:24,914 [INFO] core.logic_builder - 规则导入完成，成功导入 2 条规则
+2025-04-28 10:42:24,914 [INFO] core.logic_builder - 从临时文件加载规则完成
+2025-04-28 10:42:28,231 [INFO] gui.logic_library_window - 已加载 2 条 BOM 逻辑关系规则
+2025-04-28 10:53:09,122 [INFO] core.logic_builder - 开始导入规则文件: C:/Users/mengy/Desktop/11111.json
+2025-04-28 10:53:09,123 [INFO] core.logic_builder - 已清空现有规则
+2025-04-28 10:53:09,123 [DEBUG] core.logic_builder - 成功导入规则: ID=BL01, 类型=static
+2025-04-28 10:53:09,123 [DEBUG] core.logic_builder - 成功导入规则: ID=BL02, 类型=static
+2025-04-28 10:53:09,134 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:53:09,135 [INFO] core.logic_builder - 规则导入完成，成功导入 2 条规则
+2025-04-28 10:53:14,051 [INFO] gui.logic_library_window - 已加载 2 条 BOM 逻辑关系规则
