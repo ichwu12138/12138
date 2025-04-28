@@ -41,18 +41,18 @@ class BomProcessor:
             xl = pd.ExcelFile(file_path)
             self.logger.info(f"成功打开Excel文件，包含以下工作表: {xl.sheet_names}")
             
-            # 检查是否存在 MAX-gruppe 工作表
-            if "MAX-gruppe" not in xl.sheet_names:
-                self.logger.error("错误：未找到 MAX-gruppe 工作表")
-                raise ValueError("未找到 MAX-gruppe 工作表")
+            # 检查是否存在 Max-Gruppe 工作表
+            if "Max-Gruppe" not in xl.sheet_names:
+                self.logger.error("错误：未找到 Max-Gruppe 工作表")
+                raise ValueError("未找到 Max-Gruppe 工作表")
             
-            # 读取 MAX-gruppe 工作表
-            self.logger.info("正在读取 MAX-gruppe 工作表...")
-            df = pd.read_excel(file_path, sheet_name="MAX-gruppe")
+            # 读取 Max-Gruppe 工作表
+            self.logger.info("正在读取 Max-Gruppe 工作表...")
+            df = pd.read_excel(file_path, sheet_name="Max-Gruppe")
             self.logger.info(f"成功读取工作表，共 {len(df)} 行数据")
             
             # 检查必需的列是否存在
-            required_columns = ["层级", "占位符", "Baugruppe", "Beschreibung", "Langtext / long text"]
+            required_columns = ["Auflösungsstufe", "Placeholder", "Baugruppe", "Objektkurztext", "Langtext"]
             missing_columns = [col for col in required_columns if col not in df.columns]
             if missing_columns:
                 self.logger.error(f"错误：缺少必需的列: {', '.join(missing_columns)}")
@@ -70,18 +70,18 @@ class BomProcessor:
             raise ImportError(f"导入BOM文件失败: {str(e)}")
     
     def _process_max_gruppe(self, df: pd.DataFrame) -> None:
-        """处理 MAX-gruppe 工作表数据
+        """处理 Max-Gruppe 工作表数据
         
         Args:
-            df: MAX-gruppe 工作表的数据帧
+            df: Max-Gruppe 工作表的数据帧
         """
         try:
             # 先过滤掉层级为空的行，使用 copy() 避免 SettingWithCopyWarning
-            df = df.dropna(subset=["层级"]).copy()
+            df = df.dropna(subset=["Auflösungsstufe"]).copy()
             self.logger.info(f"过滤空层级后剩余 {len(df)} 行数据")
             
             # 将层级转换为整数
-            df.loc[:, "层级"] = df["层级"].astype(float).astype(int)
+            df.loc[:, "Auflösungsstufe"] = df["Auflösungsstufe"].astype(float).astype(int)
             
             # 清空现有数据
             self.bom_data = {
@@ -99,11 +99,11 @@ class BomProcessor:
             # 直接按DataFrame的顺序处理每一行
             for idx, row in df.iterrows():
                 try:
-                    level = int(row["层级"])
+                    level = int(row["Auflösungsstufe"])
                     baugruppe = str(row["Baugruppe"]).strip()
-                    placeholder = str(row["占位符"]).strip() if not pd.isna(row["占位符"]) else ""
-                    description = str(row["Beschreibung"]).strip()
-                    long_text = str(row["Langtext / long text"]).strip() if not pd.isna(row["Langtext / long text"]) else ""
+                    placeholder = str(row["Placeholder"]).strip() if not pd.isna(row["Placeholder"]) else ""
+                    description = str(row["Objektkurztext"]).strip()
+                    long_text = str(row["Langtext"]).strip() if not pd.isna(row["Langtext"]) else ""
                     
                     # 跳过空的Baugruppe
                     if pd.isna(baugruppe):
@@ -174,7 +174,7 @@ class BomProcessor:
                 self.logger.info(f"第 {level} 级节点数量: {count}")
             
         except Exception as e:
-            self.logger.error(f"处理 MAX-gruppe 工作表错误: {str(e)}", exc_info=True)
+            self.logger.error(f"处理 Max-Gruppe 工作表错误: {str(e)}", exc_info=True)
             raise
             
     def _verify_data_integrity(self):

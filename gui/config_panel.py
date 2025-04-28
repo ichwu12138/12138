@@ -44,28 +44,16 @@ class ConfigPanel(ttk.Frame):
         """
         try:
             if file_path is None:
-                # 检查是否有上次的配置文件路径
-                last_config_path = config_manager.get_app_config("last_config_path")
-                if last_config_path and os.path.exists(last_config_path):
-                    self.logger.info(f"发现上次的配置文件路径: {last_config_path}")
-                    if messagebox.askyesno(
-                        language_manager.get_text("confirm"),
-                        language_manager.get_text("load_last_config_confirm")
-                    ):
-                        self.logger.info("用户选择加载上次的配置文件")
-                        file_path = last_config_path
-                
-                # 如果用户不想加载上次的文件或没有上次的文件，显示文件选择对话框
-                if not file_path:
-                    file_path = filedialog.askopenfilename(
-                        title=language_manager.get_text("select_config_file"),
-                        filetypes=[
-                            (language_manager.get_text("excel_files"), "*.xlsx *.xlsm"),
-                            (language_manager.get_text("all_files"), "*.*")
-                        ]
-                    )
-                    if file_path:
-                        self.logger.info(f"用户选择了新的配置文件: {file_path}")
+                # 显示文件选择对话框
+                file_path = filedialog.askopenfilename(
+                    title=language_manager.get_text("select_config_file"),
+                    filetypes=[
+                        (language_manager.get_text("excel_files"), "*.xlsx *.xlsm"),
+                        (language_manager.get_text("all_files"), "*.*")
+                    ]
+                )
+                if file_path:
+                    self.logger.info(f"用户选择了新的配置文件: {file_path}")
                 
             if file_path:
                 # 导入Excel文件

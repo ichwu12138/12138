@@ -498,27 +498,37 @@ class MainWindow:
                 ):
                     try:
                         self.config_panel._import_excel(config['last_config_path'])
-                        
-                        # 在配置文件导入成功后，询问是否导入BOM文件
-                        if config.get('last_bom_path'):
-                            if messagebox.askyesno(
-                                language_manager.get_text("confirm"),
-                                language_manager.get_text("load_last_bom_confirm")
-                            ):
-                                try:
-                                    self.bom_panel._import_bom(config['last_bom_path'])
-                                except Exception as e:
-                                    self.logger.error(f"加载上次BOM文件失败: {str(e)}")
-                                    messagebox.showerror(
-                                        language_manager.get_text("error"),
-                                        language_manager.get_text("load_last_bom_error")
-                                    )
                     except Exception as e:
                         self.logger.error(f"加载上次配置文件失败: {str(e)}")
                         messagebox.showerror(
                             language_manager.get_text("error"),
                             language_manager.get_text("load_last_config_error")
                         )
+                else:
+                    # 用户选择不加载上次配置，删除保存的路径
+                    config.pop('last_config_path', None)
+                    with open('data/app_config.json', 'w', encoding='utf-8') as f:
+                        json.dump(config, f, indent=4, ensure_ascii=False)
+            
+            # 无论用户是否加载了上次的配置，都询问是否加载BOM文件
+            if config.get('last_bom_path'):
+                if messagebox.askyesno(
+                    language_manager.get_text("confirm"),
+                    language_manager.get_text("load_last_bom_confirm")
+                ):
+                    try:
+                        self.bom_panel._import_bom(config['last_bom_path'])
+                    except Exception as e:
+                        self.logger.error(f"加载上次BOM文件失败: {str(e)}")
+                        messagebox.showerror(
+                            language_manager.get_text("error"),
+                            language_manager.get_text("load_last_bom_error")
+                        )
+                else:
+                    # 用户选择不加载上次BOM，删除保存的路径
+                    config.pop('last_bom_path', None)
+                    with open('data/app_config.json', 'w', encoding='utf-8') as f:
+                        json.dump(config, f, indent=4, ensure_ascii=False)
                         
         except Exception as e:
             self.logger.error(f"加载上次配置时出错: {str(e)}")

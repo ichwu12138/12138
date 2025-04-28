@@ -1,0 +1,64 @@
+2025-04-28 09:15:36,481 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250428_091536.log
+2025-04-28 09:15:40,729 [INFO] __main__ - 正在启动程序...
+2025-04-28 09:15:40,729 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-28 09:15:40,729 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-28 09:15:40,730 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-28 09:15:41,224 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-28 09:15:44,342 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-28 09:15:44,366 [INFO] __main__ - 语言选择结果: zh
+2025-04-28 09:15:44,367 [INFO] __main__ - 正在创建主题选择对话框...
+2025-04-28 09:15:44,367 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-04-28 09:15:44,384 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-04-28 09:15:45,468 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-04-28 09:15:45,480 [INFO] __main__ - 主题选择结果: light
+2025-04-28 09:15:45,484 [INFO] __main__ - 正在配置主窗口...
+2025-04-28 09:15:45,664 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-28 09:15:45,665 [INFO] core.logic_builder - 已加载 4 条规则
+2025-04-28 09:15:45,830 [INFO] __main__ - MainWindow实例创建完成
+2025-04-28 09:15:46,102 [INFO] __main__ - 开始mainloop()...
+2025-04-28 09:15:48,366 [INFO] core.config_processor - 找到工作表: ['TD', '0.模板&Vorlage', '1.Fahrgestell', '2.Fahrzeug allgemein', '3.Beschriftung&Kennzeichnung', '4. Anbauten&Fahrgestellarbeiten', '5. Fahrer_Mannschaftsraum', '6.Koffer', '7.Lichtmast', '8.Pumpenanlage', '9.Seilwinde&Generator', '10.Halterungen']
+2025-04-28 09:15:48,366 [DEBUG] core.config_processor - 跳过工作表: TD
+2025-04-28 09:15:48,366 [DEBUG] core.config_processor - 跳过工作表: 0.模板&Vorlage
+2025-04-28 09:15:48,367 [INFO] core.config_processor - 处理工作表: 1.Fahrgestell -> 模块: 1.Fahrgestell
+2025-04-28 09:15:48,385 [INFO] core.config_processor - 处理工作表: 2.Fahrzeug allgemein -> 模块: 2.Fahrzeug allgemein
+2025-04-28 09:15:48,401 [INFO] core.config_processor - 处理工作表: 3.Beschriftung&Kennzeichnung -> 模块: 3.Beschriftung&Kennzeichnung
+2025-04-28 09:15:48,418 [INFO] core.config_processor - 处理工作表: 4. Anbauten&Fahrgestellarbeiten -> 模块: 4.Anbauten&Fahrgestellarbeiten
+2025-04-28 09:15:48,434 [INFO] core.config_processor - 处理工作表: 5. Fahrer_Mannschaftsraum -> 模块: 5.Fahrer_Mannschaftsraum
+2025-04-28 09:15:48,454 [INFO] core.config_processor - 处理工作表: 6.Koffer -> 模块: 6.Koffer
+2025-04-28 09:15:48,470 [INFO] core.config_processor - 处理工作表: 7.Lichtmast -> 模块: 7.Lichtmast
+2025-04-28 09:15:48,485 [INFO] core.config_processor - 处理工作表: 8.Pumpenanlage -> 模块: 8.Pumpenanlage
+2025-04-28 09:15:48,501 [INFO] core.config_processor - 处理工作表: 9.Seilwinde&Generator -> 模块: 9.Seilwinde&Generator
+2025-04-28 09:15:48,517 [INFO] core.config_processor - 处理工作表: 10.Halterungen -> 模块: 10.Halterungen
+2025-04-28 09:15:48,532 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-28 09:15:48,536 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-28 09:15:48,536 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-28 09:15:51,403 [INFO] gui.bom_panel - 发现上次的BOM文件路径: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-28 09:16:00,512 [INFO] gui.bom_panel - 用户选择了新的BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-28 09:16:00,512 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-28 09:16:00,513 [INFO] core.bom_processor - 已清空现有数据
+2025-04-28 09:16:00,513 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-04-28 09:16:00,518 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['MAX-gruppe', 'K码表', '配置', 'Sheet1']
+2025-04-28 09:16:00,518 [INFO] core.bom_processor - 正在读取 MAX-gruppe 工作表...
+2025-04-28 09:16:00,526 [INFO] core.bom_processor - 成功读取工作表，共 154 行数据
+2025-04-28 09:16:00,526 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-04-28 09:16:00,527 [INFO] core.bom_processor - 过滤空层级后剩余 153 行数据
+2025-04-28 09:16:00,528 [INFO] core.bom_processor - 
+开始处理数据...
+2025-04-28 09:16:00,531 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-04-28 09:16:00,532 [INFO] core.bom_processor - 第 1 级节点数量: 1
+2025-04-28 09:16:00,532 [INFO] core.bom_processor - 第 2 级节点数量: 133
+2025-04-28 09:16:00,532 [INFO] core.bom_processor - 第 3 级节点数量: 19
+2025-04-28 09:16:00,532 [INFO] core.bom_processor - BOM文件导入成功，共处理 153 个项目
+2025-04-28 09:16:00,532 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-28 09:16:00,532 [INFO] gui.bom_panel - 开始刷新树状图
+2025-04-28 09:16:00,532 [INFO] gui.bom_panel - 第 1 级节点数量: 1
+2025-04-28 09:16:00,533 [INFO] gui.bom_panel - 第 2 级节点数量: 133
+2025-04-28 09:16:00,533 [INFO] gui.bom_panel - 第 3 级节点数量: 19
+2025-04-28 09:16:00,538 [INFO] gui.bom_panel - 树状图刷新完成
+2025-04-28 09:16:00,539 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-28 09:16:00,539 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/BOM映射表.xlsx
+2025-04-28 09:17:18,972 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I02A
+2025-04-28 09:17:18,974 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [2] PL-Sitze01
+2025-04-28 09:17:19,843 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I03C
+2025-04-28 09:17:19,844 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [2] PL-Sitze02
