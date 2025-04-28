@@ -1,20 +1,33 @@
 {
   "rules": [
     {
-      "logic_id": "BL01",
+      "logic_id": "BL02",
       "tags": "",
       "tech_doc_path": "",
       "comment": {
         "text": "",
         "images": {}
       },
-      "selection_expression": "K02_02_01",
+      "selection_expression": "K03_03_02",
       "logic_relation": "→",
-      "impact_expression": "PL-Sitze02-1161313",
+      "impact_expression": "PL-Sitze04-1161296",
+      "status": "enabled"
+    },
+    {
+      "logic_id": "BL05",
+      "tags": "",
+      "tech_doc_path": "",
+      "comment": {
+        "text": "",
+        "images": {}
+      },
+      "selection_expression": "K03_04_02",
+      "logic_relation": "→",
+      "impact_expression": "PL-Sitze04-1161313",
       "status": "enabled"
     }
   ],
-  "saved_at": "2025-04-28T13:21:46.923272",
+  "saved_at": "2025-04-28T13:27:47.756237",
   "exported": false,
-  "timestamp": "20250428_132146"
+  "timestamp": "20250428_132747"
 }

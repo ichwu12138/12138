@@ -720,6 +720,9 @@ class LogicPanel(ttk.Frame):
             # 清空表达式
             self.expr_text.delete("1.0", "end")
             
+            # 通知规则变更
+            self.logic_builder.notify_rule_change("added", rule_id, rule)
+            
             # 显示成功消息
             messagebox.showinfo(
                 language_manager.get_text("success"),
