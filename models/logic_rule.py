@@ -105,63 +105,44 @@ class LogicRule:
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'LogicRule':
-        """从字典创建实例"""
+        """从字典创建规则实例
+        
+        Args:
+            data: 规则数据字典
+            
+        Returns:
+            LogicRule: 规则实例
+        """
         try:
-            # 处理comment数据
-            comment = data.get('comment', {'text': '', 'images': {}})
-            comment_text = ''
-            if isinstance(comment, dict):
-                comment_text = comment.get('text', '')
-            else:
-                comment_text = str(comment)
-            
-            # 处理tags数据
-            tags = data.get('tags', '').split(',')
+            # 处理tags字段
+            tags = data.get('tags', [])
             if isinstance(tags, str):
-                tags = [tags]
+                tags = tags.split(',') if tags else []
             elif not isinstance(tags, list):
-                tags = [str(tag) for tag in tags if tag]
+                tags = []
             
-            # 处理技术文档路径
-            tech_doc_path = data.get('tech_doc_path', '')
-            if not isinstance(tech_doc_path, str):
-                tech_doc_path = str(tech_doc_path)
-            
-            # 获取表达式
-            selection_expr = data.get('selection_expression', '')
-            
-            # 更智能地确定规则类型
-            # 1. 如果显式指定了rule_type，使用它
-            if 'rule_type' in data:
-                rule_type = RuleType.DYNAMIC if data.get('rule_type') == 'dynamic' else RuleType.STATIC
-            # 2. 根据选择表达式格式判断
-            elif selection_expr:
-                # 动态规则通常以if、when、after、before等关键词开头
-                first_word = selection_expr.split(' ')[0].lower() if selection_expr else ''
-                dynamic_keywords = ['if', 'when', 'after', 'before', 'on']
-                rule_type = RuleType.DYNAMIC if first_word in dynamic_keywords else RuleType.STATIC
+            # 处理旧格式数据
+            if 'selection_expression' in data:
+                condition = data.get('selection_expression', '')
+                action = data.get('impact_expression', '')
+                relation = data.get('logic_relation', '→')
+                rule_id = data.get('logic_id', '')
             else:
-                # 默认为静态规则
-                rule_type = RuleType.STATIC
+                condition = data.get('condition', '')
+                action = data.get('action', '')
+                relation = data.get('relation', '→')
+                rule_id = data.get('rule_id', '')
             
-            logic_id = data.get('logic_id', '')
-            # 根据ID前缀再次确认类型（如果ID符合LD/LS格式）
-            if logic_id.startswith('LD'):
-                rule_type = RuleType.DYNAMIC
-            elif logic_id.startswith('LS'):
-                rule_type = RuleType.STATIC
-            
-            # 创建实例
+            # 创建规则实例
             return cls(
-                rule_id=logic_id,
-                rule_type=rule_type,
-                condition=selection_expr,
-                action=data.get('impact_expression', ''),
-                relation=data.get('logic_relation', '→'),
-                status=RuleStatus.ENABLED,
-                tags=tags,
-                tech_doc_path=tech_doc_path,
-                comment=comment_text
+                rule_id=rule_id,
+                rule_type=RuleType(data.get('rule_type', 'static')),
+                condition=condition,
+                action=action,
+                relation=relation,
+                status=RuleStatus(data.get('status', 'enabled')),
+                tags=tags
             )
+            
         except Exception as e:
             raise ValueError(f"创建规则实例失败: {str(e)}, 数据: {data}") 

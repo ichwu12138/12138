@@ -456,8 +456,12 @@ class LogicBuilder(Observable):
             
         # 标记规则已导出
         self.rules_exported = True
-        # 保存状态
+        
+        # 保存导出状态
         self._save_rules()
+        
+        # 清空规则
+        self.clear_rules()
         
         return {
             'rules': rules_data,
@@ -583,13 +587,13 @@ class LogicBuilder(Observable):
         try:
             # 清空内存中的规则
             self.rules.clear()
-            self.rules_exported = False
             
             # 创建空的规则数据
             data = {
                 'rules': [],
                 'saved_at': datetime.now().isoformat(),
-                'exported': self.rules_exported
+                'exported': True,  # 设置为已导出状态
+                'timestamp': datetime.now().strftime("%Y%m%d_%H%M%S")
             }
             
             # 确保数据目录存在
@@ -603,6 +607,9 @@ class LogicBuilder(Observable):
             
             # 通知观察者
             self.notify_observers()
+            
+            # 通知规则变更
+            self.notify_rule_change("cleared")
             
         except Exception as e:
             self.logger.error(f"清空规则数据失败: {str(e)}", exc_info=True)

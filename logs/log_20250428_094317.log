@@ -59,3 +59,140 @@ Modulkabine S301000 / S302000
 Modulkabine S301000 / S302000
 2025-04-28 09:43:35,285 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I002
 2025-04-28 09:43:35,286 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [2] PL-GrundKabine
+2025-04-28 09:45:05,554 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I1C0
+2025-04-28 09:45:05,555 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K06_01_01 Rollladen seitlich u. Heck
+2025-04-28 09:45:05,555 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K06_01_01
+2025-04-28 09:45:05,555 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K06_01_01
+2025-04-28 09:45:05,555 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-28 09:45:05,556 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-28 09:45:05,556 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-28 09:45:05,556 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K06_01_01
+2025-04-28 09:45:05,556 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K06_01_01, 当前表达式: K06_01_01 
+2025-04-28 09:45:05,557 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K06_01_01
+2025-04-28 09:45:06,682 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K06_01_01  → 
+2025-04-28 09:45:07,507 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I09B
+2025-04-28 09:45:07,508 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1138854 - Bedienelement re. Weiß-Funk / control element ri. white-radio
+Z-Cab NG Deckenmodul Version / Z-Cab NG ceiling module version
+2025-04-28 09:45:07,509 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1138854
+2025-04-28 09:45:07,509 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Bedienelemente
+2025-04-28 09:45:07,510 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Bedienelemente-1138854
+2025-04-28 09:45:07,511 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-28 09:45:07,512 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-28 09:45:07,512 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-28 09:45:07,513 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Bedienelemente-1138854
+2025-04-28 09:45:07,514 [DEBUG] gui.logic_panel - 验证BOM码: PL-Bedienelemente-1138854
+2025-04-28 09:45:07,515 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-Bedienelemente-1138854, 当前表达式: K06_01_01  → PL-Bedienelemente-1138854 
+2025-04-28 09:45:07,516 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Bedienelemente-1138854
+2025-04-28 09:45:07,517 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Bedienelemente-1138854
+2025-04-28 09:45:08,510 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 09:45:08,515 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 09:45:08,516 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 09:45:08,516 [INFO] gui.logic_panel - 已保存新的BOM逻辑关系规则: ID=BL01, 选择项=K06_01_01, 影响项=PL-Bedienelemente-1138854, 状态=enabled
+2025-04-28 09:45:10,455 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I1C1
+2025-04-28 09:45:10,456 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K06_01_02 Rollladen seitlich + Heckklappe
+2025-04-28 09:45:10,457 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K06_01_02
+2025-04-28 09:45:10,457 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K06_01_02
+2025-04-28 09:45:10,457 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-28 09:45:10,458 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-28 09:45:10,459 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-28 09:45:10,460 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K06_01_02
+2025-04-28 09:45:10,460 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K06_01_02, 当前表达式: K06_01_02 
+2025-04-28 09:45:10,461 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K06_01_02
+2025-04-28 09:45:10,719 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I1C1
+2025-04-28 09:45:10,720 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K06_01_02 Rollladen seitlich + Heckklappe
+2025-04-28 09:45:10,721 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K06_01_02
+2025-04-28 09:45:10,721 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K06_01_02
+2025-04-28 09:45:10,722 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-28 09:45:10,722 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-28 09:45:10,723 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-28 09:45:10,724 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K06_01_02
+2025-04-28 09:45:11,774 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K06_01_02
+2025-04-28 09:45:12,473 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: AND, 当前表达式: K06_01_02  AND 
+2025-04-28 09:45:13,369 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I1C1
+2025-04-28 09:45:13,370 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K06_01_02 Rollladen seitlich + Heckklappe
+2025-04-28 09:45:13,371 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K06_01_02
+2025-04-28 09:45:13,372 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K06_01_02
+2025-04-28 09:45:13,373 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-28 09:45:13,374 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-28 09:45:13,375 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-28 09:45:13,376 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K06_01_02
+2025-04-28 09:45:13,377 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K06_01_02, 当前表达式: K06_01_02  AND K06_01_02 
+2025-04-28 09:45:13,378 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K06_01_02
+2025-04-28 09:45:13,586 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I1C1
+2025-04-28 09:45:13,587 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K06_01_02 Rollladen seitlich + Heckklappe
+2025-04-28 09:45:13,588 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K06_01_02
+2025-04-28 09:45:13,589 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K06_01_02
+2025-04-28 09:45:13,589 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-28 09:45:13,590 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-28 09:45:13,591 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-28 09:45:13,592 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K06_01_02
+2025-04-28 09:45:14,665 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K06_01_02
+2025-04-28 09:45:17,796 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: OR, 当前表达式: K06_01_02  AND K06_01_02  OR 
+2025-04-28 09:45:18,297 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: NOT, 当前表达式: K06_01_02  AND K06_01_02  OR  NOT 
+2025-04-28 09:45:19,197 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I1C1
+2025-04-28 09:45:19,198 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K06_01_02 Rollladen seitlich + Heckklappe
+2025-04-28 09:45:19,199 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K06_01_02
+2025-04-28 09:45:19,199 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K06_01_02
+2025-04-28 09:45:19,200 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-28 09:45:19,201 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-28 09:45:19,202 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-28 09:45:19,202 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K06_01_02
+2025-04-28 09:45:19,203 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K06_01_02, 当前表达式: K06_01_02  AND K06_01_02  OR  NOT K06_01_02 
+2025-04-28 09:45:19,207 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K06_01_02
+2025-04-28 09:45:19,852 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I1C1
+2025-04-28 09:45:19,853 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K06_01_02 Rollladen seitlich + Heckklappe
+2025-04-28 09:45:19,854 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K06_01_02
+2025-04-28 09:45:19,855 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K06_01_02
+2025-04-28 09:45:19,856 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-28 09:45:19,856 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-28 09:45:19,857 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-28 09:45:19,858 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K06_01_02
+2025-04-28 09:45:20,743 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K06_01_02
+2025-04-28 09:45:21,466 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K06_01_02  AND K06_01_02  OR  NOT K06_01_02  → 
+2025-04-28 09:45:22,151 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I0A1
+2025-04-28 09:45:22,152 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1138961 - Bedienelement re. Weiß / control element ri. White
+Z-Cab NG Low Budget Version / Z-Cab NG low budget version
+2025-04-28 09:45:22,153 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1138961
+2025-04-28 09:45:22,154 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Bedienelemente
+2025-04-28 09:45:22,154 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Bedienelemente-1138961
+2025-04-28 09:45:22,155 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-28 09:45:22,156 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-28 09:45:22,156 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-28 09:45:22,157 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Bedienelemente-1138961
+2025-04-28 09:45:22,158 [DEBUG] gui.logic_panel - 验证BOM码: PL-Bedienelemente-1138961
+2025-04-28 09:45:22,159 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-Bedienelemente-1138961, 当前表达式: K06_01_02  AND K06_01_02  OR  NOT K06_01_02  → PL-Bedienelemente-1138961 
+2025-04-28 09:45:22,160 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Bedienelemente-1138961
+2025-04-28 09:45:22,161 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Bedienelemente-1138961
+2025-04-28 09:45:22,877 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I0A2
+2025-04-28 09:45:22,878 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1138963 - Bedienelement re. Farbe / control element ri. colour
+Z-Cab NG Low Budget Version / Z-Cab NG low budget version
+2025-04-28 09:45:22,879 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1138963
+2025-04-28 09:45:22,880 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Bedienelemente
+2025-04-28 09:45:22,881 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Bedienelemente-1138963
+2025-04-28 09:45:22,881 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-28 09:45:22,882 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-28 09:45:22,883 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-28 09:45:22,884 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Bedienelemente-1138963
+2025-04-28 09:45:23,839 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Bedienelemente-1138963
+2025-04-28 09:45:23,840 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Bedienelemente-1138963
+2025-04-28 09:45:24,706 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: AND, 当前表达式: K06_01_02  AND K06_01_02  OR  NOT K06_01_02  → PL-Bedienelemente-1138961  AND 
+2025-04-28 09:45:25,667 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I0A1
+2025-04-28 09:45:25,668 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1138961 - Bedienelement re. Weiß / control element ri. White
+Z-Cab NG Low Budget Version / Z-Cab NG low budget version
+2025-04-28 09:45:25,669 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1138961
+2025-04-28 09:45:25,669 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Bedienelemente
+2025-04-28 09:45:25,670 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Bedienelemente-1138961
+2025-04-28 09:45:25,671 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-28 09:45:25,672 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-28 09:45:25,672 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-28 09:45:25,673 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Bedienelemente-1138961
+2025-04-28 09:45:25,674 [DEBUG] gui.logic_panel - 验证BOM码: PL-Bedienelemente-1138961
+2025-04-28 09:45:25,675 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-Bedienelemente-1138961, 当前表达式: K06_01_02  AND K06_01_02  OR  NOT K06_01_02  → PL-Bedienelemente-1138961  AND PL-Bedienelemente-1138961 
+2025-04-28 09:45:25,675 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Bedienelemente-1138961
+2025-04-28 09:45:25,676 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Bedienelemente-1138961
+2025-04-28 09:45:28,254 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 09:45:28,259 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 09:45:28,260 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 09:45:28,260 [INFO] gui.logic_panel - 已保存新的BOM逻辑关系规则: ID=BL02, 选择项=K06_01_02  AND K06_01_02  OR  NOT K06_01_02, 影响项=PL-Bedienelemente-1138961  AND PL-Bedienelemente-1138961, 状态=enabled
+2025-04-28 09:45:33,275 [INFO] gui.logic_library_window - 已加载 6 条 BOM 逻辑关系规则
+2025-04-28 09:46:49,968 [INFO] gui.logic_library_window - 已加载 6 条 BOM 逻辑关系规则

@@ -352,17 +352,21 @@ class LogicLibraryWindow(tk.Toplevel):
             # 加载所有规则
             for rule in self.logic_builder.get_rules():
                 effect_text = f"→ {rule.action}"
-                self.tree.insert(
-                    "",
-                    "end",
-                    iid=rule.rule_id,
-                    values=(
-                        rule.rule_id,
-                        rule.condition,
-                        effect_text,
-                        language_manager.get_text(rule.status.value)
+                try:
+                    self.tree.insert(
+                        "",
+                        "end",
+                        iid=rule.rule_id,
+                        values=(
+                            rule.rule_id,
+                            rule.condition,
+                            effect_text,
+                            language_manager.get_text(rule.status.value)
+                        )
                     )
-                )
+                except Exception as e:
+                    self.logger.error(f"插入规则到树状视图失败: {str(e)}, 规则ID: {rule.rule_id}")
+                    continue
                 
             self.logger.info(f"已加载 {len(self.tree.get_children())} 条 BOM 逻辑关系规则")
                 

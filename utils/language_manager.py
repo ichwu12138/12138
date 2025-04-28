@@ -165,7 +165,19 @@ class LanguageManager:
             "edit_rule": "编辑逻辑规则",
             "edit_rule_condition": "选择项表达式",
             "edit_rule_effect": "影响项表达式",
-            "edit_rule_status": "规则状态"
+            "edit_rule_status": "规则状态",
+            "export_logic_rules": "导出BOM逻辑关系",
+            "load_last_rules_confirm": "检测到上次有未导出的BOM逻辑关系，是否加载？",
+            "unsaved_rules_exit_confirm": "检测到还有未导出的BOM逻辑关系，确定要退出吗？",
+            "export_rules_success": "BOM逻辑关系导出成功",
+            "export_rules_error": "BOM逻辑关系导出失败",
+            "select_export_file": "选择导出文件位置",
+            "json_files": "JSON文件",
+            "rules_deleted": "未保存的BOM逻辑关系已删除",
+            "import_logic_rules": "导入BOM逻辑关系",
+            "select_import_file": "选择导入文件",
+            "import_rules_success": "BOM逻辑关系导入成功",
+            "import_rules_error": "BOM逻辑关系导入失败"
         })
         
         # 英文翻译
@@ -313,7 +325,19 @@ class LanguageManager:
             "edit_rule": "Edit Logic Rule",
             "edit_rule_condition": "Selection Expression",
             "edit_rule_effect": "Impact Expression",
-            "edit_rule_status": "Rule Status"
+            "edit_rule_status": "Rule Status",
+            "export_logic_rules": "Export BOM Logic Rules",
+            "load_last_rules_confirm": "Detected unexported BOM logic rules from last session, load them?",
+            "unsaved_rules_exit_confirm": "There are unexported BOM logic rules, are you sure to exit?",
+            "export_rules_success": "BOM logic rules exported successfully",
+            "export_rules_error": "Failed to export BOM logic rules",
+            "select_export_file": "Select export file location",
+            "json_files": "JSON Files",
+            "rules_deleted": "Unsaved BOM logic rules have been deleted",
+            "import_logic_rules": "Import BOM Logic Rules",
+            "select_import_file": "Select Import File",
+            "import_rules_success": "BOM logic rules imported successfully",
+            "import_rules_error": "Failed to import BOM logic rules"
         })
         
         # 德文翻译
@@ -461,7 +485,19 @@ class LanguageManager:
             "edit_rule": "Logikregel bearbeiten",
             "edit_rule_condition": "Auswahlausdruck",
             "edit_rule_effect": "Wirkungsausdruck",
-            "edit_rule_status": "Regelstatus"
+            "edit_rule_status": "Regelstatus",
+            "export_logic_rules": "BOM-Logikregeln exportieren",
+            "load_last_rules_confirm": "Nicht exportierte BOM-Logikregeln aus der letzten Sitzung erkannt, laden?",
+            "unsaved_rules_exit_confirm": "Es gibt nicht exportierte BOM-Logikregeln, möchten Sie wirklich beenden?",
+            "export_rules_success": "BOM-Logikregeln erfolgreich exportiert",
+            "export_rules_error": "Fehler beim Exportieren der BOM-Logikregeln",
+            "select_export_file": "Exportdatei-Speicherort auswählen",
+            "json_files": "JSON-Dateien",
+            "rules_deleted": "Nicht gespeicherte BOM-Logikregeln wurden gelöscht",
+            "import_logic_rules": "BOM-Logikregeln importieren",
+            "select_import_file": "Importdatei auswählen",
+            "import_rules_success": "BOM-Logikregeln erfolgreich importiert",
+            "import_rules_error": "Fehler beim Importieren der BOM-Logikregeln"
         })
         
     def add_callback(self, callback):

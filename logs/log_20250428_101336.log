@@ -1,0 +1,319 @@
+2025-04-28 10:13:36,667 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250428_101336.log
+2025-04-28 10:13:36,897 [INFO] __main__ - 正在启动程序...
+2025-04-28 10:13:36,898 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-28 10:13:36,898 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-28 10:13:36,898 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-28 10:13:36,919 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-28 10:13:38,297 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-28 10:13:38,318 [INFO] __main__ - 语言选择结果: zh
+2025-04-28 10:13:38,319 [INFO] __main__ - 正在创建主题选择对话框...
+2025-04-28 10:13:38,319 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-04-28 10:13:38,324 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-04-28 10:13:39,267 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-04-28 10:13:39,288 [INFO] __main__ - 主题选择结果: light
+2025-04-28 10:13:39,291 [INFO] __main__ - 正在配置主窗口...
+2025-04-28 10:13:39,436 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-28 10:13:39,437 [INFO] core.logic_builder - 已加载 0 条规则
+2025-04-28 10:13:39,487 [INFO] __main__ - MainWindow实例创建完成
+2025-04-28 10:13:39,817 [INFO] __main__ - 开始mainloop()...
+2025-04-28 10:13:41,447 [INFO] core.config_processor - 找到工作表: ['TD', '0.模板&Vorlage', '1.Fahrgestell', '2.Fahrzeug allgemein', '3.Beschriftung&Kennzeichnung', '4. Anbauten&Fahrgestellarbeiten', '5. Fahrer_Mannschaftsraum', '6.Koffer', '7.Lichtmast', '8.Pumpenanlage', '9.Seilwinde&Generator', '10.Halterungen']
+2025-04-28 10:13:41,448 [DEBUG] core.config_processor - 跳过工作表: TD
+2025-04-28 10:13:41,448 [DEBUG] core.config_processor - 跳过工作表: 0.模板&Vorlage
+2025-04-28 10:13:41,449 [INFO] core.config_processor - 处理工作表: 1.Fahrgestell -> 模块: 1.Fahrgestell
+2025-04-28 10:13:41,466 [INFO] core.config_processor - 处理工作表: 2.Fahrzeug allgemein -> 模块: 2.Fahrzeug allgemein
+2025-04-28 10:13:41,484 [INFO] core.config_processor - 处理工作表: 3.Beschriftung&Kennzeichnung -> 模块: 3.Beschriftung&Kennzeichnung
+2025-04-28 10:13:41,500 [INFO] core.config_processor - 处理工作表: 4. Anbauten&Fahrgestellarbeiten -> 模块: 4.Anbauten&Fahrgestellarbeiten
+2025-04-28 10:13:41,515 [INFO] core.config_processor - 处理工作表: 5. Fahrer_Mannschaftsraum -> 模块: 5.Fahrer_Mannschaftsraum
+2025-04-28 10:13:41,536 [INFO] core.config_processor - 处理工作表: 6.Koffer -> 模块: 6.Koffer
+2025-04-28 10:13:41,553 [INFO] core.config_processor - 处理工作表: 7.Lichtmast -> 模块: 7.Lichtmast
+2025-04-28 10:13:41,567 [INFO] core.config_processor - 处理工作表: 8.Pumpenanlage -> 模块: 8.Pumpenanlage
+2025-04-28 10:13:41,582 [INFO] core.config_processor - 处理工作表: 9.Seilwinde&Generator -> 模块: 9.Seilwinde&Generator
+2025-04-28 10:13:41,598 [INFO] core.config_processor - 处理工作表: 10.Halterungen -> 模块: 10.Halterungen
+2025-04-28 10:13:41,612 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-28 10:13:41,616 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-28 10:13:41,616 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-28 10:13:42,667 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-28 10:13:42,667 [INFO] core.bom_processor - 已清空现有数据
+2025-04-28 10:13:42,667 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-04-28 10:13:42,671 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['Max-Gruppe']
+2025-04-28 10:13:42,671 [INFO] core.bom_processor - 正在读取 Max-Gruppe 工作表...
+2025-04-28 10:13:42,680 [INFO] core.bom_processor - 成功读取工作表，共 154 行数据
+2025-04-28 10:13:42,680 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-04-28 10:13:42,681 [INFO] core.bom_processor - 过滤空层级后剩余 153 行数据
+2025-04-28 10:13:42,682 [INFO] core.bom_processor - 
+开始处理数据...
+2025-04-28 10:13:42,686 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-04-28 10:13:42,686 [INFO] core.bom_processor - 第 1 级节点数量: 1
+2025-04-28 10:13:42,686 [INFO] core.bom_processor - 第 2 级节点数量: 133
+2025-04-28 10:13:42,687 [INFO] core.bom_processor - 第 3 级节点数量: 19
+2025-04-28 10:13:42,687 [INFO] core.bom_processor - BOM文件导入成功，共处理 153 个项目
+2025-04-28 10:13:42,687 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-28 10:13:42,687 [INFO] gui.bom_panel - 开始刷新树状图
+2025-04-28 10:13:42,689 [INFO] gui.bom_panel - 树状图刷新完成
+2025-04-28 10:13:42,689 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-28 10:13:42,690 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-28 10:13:46,359 [INFO] core.logic_builder - 使用规则文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:13:46,372 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:13:46,372 [INFO] core.logic_builder - 已导入 0 条规则
+2025-04-28 10:14:01,826 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I077
+2025-04-28 10:14:01,827 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K03_02_01 Unterbodenschutz
+2025-04-28 10:14:01,828 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K03_02_01
+2025-04-28 10:14:01,829 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K03_02_01
+2025-04-28 10:14:01,830 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-28 10:14:01,830 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-28 10:14:01,830 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-28 10:14:01,831 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K03_02_01
+2025-04-28 10:14:01,832 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K03_02_01, 当前表达式: K03_02_01 
+2025-04-28 10:14:01,832 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K03_02_01
+2025-04-28 10:14:02,733 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K03_02_01  → 
+2025-04-28 10:14:04,855 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I014
+2025-04-28 10:14:04,856 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1123244 - Einzelsitz Std Airbag Stra.li. / single seat std. airbag tensioner le.
+Z-Cab NG / Z-Cab NG
+2025-04-28 10:14:04,857 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1123244
+2025-04-28 10:14:04,857 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Sitze01
+2025-04-28 10:14:04,858 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Sitze01-1123244
+2025-04-28 10:14:04,859 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-28 10:14:04,860 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-28 10:14:04,860 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-28 10:14:04,861 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Sitze01-1123244
+2025-04-28 10:14:04,862 [DEBUG] gui.logic_panel - 验证BOM码: PL-Sitze01-1123244
+2025-04-28 10:14:04,863 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-Sitze01-1123244, 当前表达式: K03_02_01  → PL-Sitze01-1123244 
+2025-04-28 10:14:04,863 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Sitze01-1123244
+2025-04-28 10:14:04,864 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Sitze01-1123244
+2025-04-28 10:14:06,573 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:14:06,579 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:14:06,579 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:14:06,580 [INFO] gui.logic_panel - 已保存新的BOM逻辑关系规则: ID=BL01, 选择项=K03_02_01, 影响项=PL-Sitze01-1123244, 状态=enabled
+2025-04-28 10:14:09,963 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I074
+2025-04-28 10:14:09,964 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K03_01_02 RAL 3020 verkehrsrot
+2025-04-28 10:14:09,965 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K03_01_02
+2025-04-28 10:14:09,966 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K03_01_02
+2025-04-28 10:14:09,966 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-28 10:14:09,967 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-28 10:14:09,968 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-28 10:14:09,968 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K03_01_02
+2025-04-28 10:14:09,969 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K03_01_02, 当前表达式: K03_01_02 
+2025-04-28 10:14:09,970 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K03_01_02
+2025-04-28 10:14:11,558 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K03_01_02  → 
+2025-04-28 10:14:12,309 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I019
+2025-04-28 10:14:12,310 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1161294 - PA-Sitz Std. elektrisch / BA-seat std. electric
+Z-Cab NG Einflaschengerät / Z-Cab NG single-bottle device
+2025-04-28 10:14:12,311 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1161294
+2025-04-28 10:14:12,311 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Sitze01
+2025-04-28 10:14:12,311 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Sitze01-1161294
+2025-04-28 10:14:12,312 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-28 10:14:12,312 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-28 10:14:12,312 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-28 10:14:12,312 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Sitze01-1161294
+2025-04-28 10:14:12,314 [DEBUG] gui.logic_panel - 验证BOM码: PL-Sitze01-1161294
+2025-04-28 10:14:12,315 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-Sitze01-1161294, 当前表达式: K03_01_02  → PL-Sitze01-1161294 
+2025-04-28 10:14:12,316 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Sitze01-1161294
+2025-04-28 10:14:12,316 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Sitze01-1161294
+2025-04-28 10:14:13,427 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: AND, 当前表达式: K03_01_02  → PL-Sitze01-1161294  AND 
+2025-04-28 10:14:14,147 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I01B
+2025-04-28 10:14:14,148 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1161309 - PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.
+Z-Cab NG Einflaschengerät / Z-Cab NG single-bottle device
+2025-04-28 10:14:14,149 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1161309
+2025-04-28 10:14:14,150 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Sitze01
+2025-04-28 10:14:14,150 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Sitze01-1161309
+2025-04-28 10:14:14,151 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-28 10:14:14,152 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-28 10:14:14,153 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-28 10:14:14,154 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Sitze01-1161309
+2025-04-28 10:14:14,155 [DEBUG] gui.logic_panel - 验证BOM码: PL-Sitze01-1161309
+2025-04-28 10:14:14,156 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-Sitze01-1161309, 当前表达式: K03_01_02  → PL-Sitze01-1161294  AND PL-Sitze01-1161309 
+2025-04-28 10:14:14,157 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Sitze01-1161309
+2025-04-28 10:14:14,157 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Sitze01-1161309
+2025-04-28 10:14:15,137 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:14:15,140 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:14:15,141 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:14:15,141 [INFO] gui.logic_panel - 已保存新的BOM逻辑关系规则: ID=BL02, 选择项=K03_01_02, 影响项=PL-Sitze01-1161294  AND PL-Sitze01-1161309, 状态=enabled
+2025-04-28 10:14:18,648 [INFO] gui.logic_library_window - 已加载 2 条 BOM 逻辑关系规则
+2025-04-28 10:14:21,681 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:14:21,682 [INFO] gui.logic_library_window - 已删除规则: BL02
+2025-04-28 10:14:39,904 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I074
+2025-04-28 10:14:39,905 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K03_01_02 RAL 3020 verkehrsrot
+2025-04-28 10:14:39,905 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K03_01_02
+2025-04-28 10:14:39,906 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K03_01_02
+2025-04-28 10:14:39,906 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-28 10:14:39,907 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-28 10:14:39,907 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-28 10:14:39,908 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K03_01_02
+2025-04-28 10:14:39,908 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K03_01_02, 当前表达式: K03_01_02 
+2025-04-28 10:14:39,909 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K03_01_02
+2025-04-28 10:14:40,747 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K03_01_02  → 
+2025-04-28 10:14:41,329 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I017
+2025-04-28 10:14:41,330 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1161313 - PA-Sitz f.Straffer li.kpl.mech / BA-seat f. tensioner le. cpl. mech.
+Z-Cab NG Einflaschengerät / Z-Cab NG single-bottle device
+2025-04-28 10:14:41,330 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1161313
+2025-04-28 10:14:41,331 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Sitze01
+2025-04-28 10:14:41,332 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Sitze01-1161313
+2025-04-28 10:14:41,332 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-28 10:14:41,332 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-28 10:14:41,333 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-28 10:14:41,333 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Sitze01-1161313
+2025-04-28 10:14:41,335 [DEBUG] gui.logic_panel - 验证BOM码: PL-Sitze01-1161313
+2025-04-28 10:14:41,336 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-Sitze01-1161313, 当前表达式: K03_01_02  → PL-Sitze01-1161313 
+2025-04-28 10:14:41,337 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Sitze01-1161313
+2025-04-28 10:14:41,337 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Sitze01-1161313
+2025-04-28 10:14:42,084 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:14:42,089 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:14:42,090 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:14:42,091 [INFO] gui.logic_panel - 已保存新的BOM逻辑关系规则: ID=BL02, 选择项=K03_01_02, 影响项=PL-Sitze01-1161313, 状态=enabled
+2025-04-28 10:14:44,179 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I07B
+2025-04-28 10:14:44,180 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K03_03_02 RAL 3020 verkehrsrot
+2025-04-28 10:14:44,180 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K03_03_02
+2025-04-28 10:14:44,181 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K03_03_02
+2025-04-28 10:14:44,182 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-28 10:14:44,182 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-28 10:14:44,183 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-28 10:14:44,184 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K03_03_02
+2025-04-28 10:14:44,184 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K03_03_02, 当前表达式: K03_03_02 
+2025-04-28 10:14:44,185 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K03_03_02
+2025-04-28 10:14:45,216 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K03_03_02  → 
+2025-04-28 10:14:45,841 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I01A
+2025-04-28 10:14:45,843 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1161295 - PA-Sitz Std. elektrisch / BA-seat std. electric
+Z-Cab NG Zweiflaschengerät / Z-Cab NG twin-bottle device
+2025-04-28 10:14:45,843 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1161295
+2025-04-28 10:14:45,844 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Sitze01
+2025-04-28 10:14:45,845 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Sitze01-1161295
+2025-04-28 10:14:45,846 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-28 10:14:45,846 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-28 10:14:45,846 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-28 10:14:45,847 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Sitze01-1161295
+2025-04-28 10:14:45,848 [DEBUG] gui.logic_panel - 验证BOM码: PL-Sitze01-1161295
+2025-04-28 10:14:45,849 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-Sitze01-1161295, 当前表达式: K03_03_02  → PL-Sitze01-1161295 
+2025-04-28 10:14:45,850 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Sitze01-1161295
+2025-04-28 10:14:45,850 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Sitze01-1161295
+2025-04-28 10:14:46,834 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:14:46,839 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:14:46,840 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:14:46,841 [INFO] gui.logic_panel - 已保存新的BOM逻辑关系规则: ID=BL03, 选择项=K03_03_02, 影响项=PL-Sitze01-1161295, 状态=enabled
+2025-04-28 10:14:49,327 [INFO] gui.logic_library_window - 已加载 3 条 BOM 逻辑关系规则
+2025-04-28 10:14:54,947 [INFO] gui.logic_library_window - 已加载 3 条 BOM 逻辑关系规则
+2025-04-28 10:16:06,866 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:16:06,867 [INFO] gui.logic_library_window - 已删除规则: BL02
+2025-04-28 10:17:43,281 [INFO] gui.language_dialog_tk - 已选择语言: de
+2025-04-28 10:17:43,321 [CRITICAL] __main__ - 未捕获的异常: unknown option "-label"
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 384, in _show_language_dialog
+    self.refresh_all_texts()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 468, in refresh_all_texts
+    self._refresh_menu_texts()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 488, in _refresh_menu_texts
+    self.file_menu.entryconfig(4, label=language_manager.get_text("exit"))
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\tkinter\__init__.py", line 3574, in entryconfigure
+    return self._configure(('entryconfigure', index), cnf, kw)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\tkinter\__init__.py", line 1812, in _configure
+    self.tk.call(_flatten((self._w, cmd)) + self._options(cnf))
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_tkinter.TclError: unknown option "-label"
+2025-04-28 10:17:43,348 [CRITICAL] __main__ - 详细错误栈:
+['Traceback (most recent call last):\n', '  File "D:\\Python\\Lib\\tkinter\\__init__.py", line 2068, in __call__\n    return self.func(*args)\n           ~~~~~~~~~^^^^^^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\main_window_tk.py", line 384, in _show_language_dialog\n    self.refresh_all_texts()\n    ~~~~~~~~~~~~~~~~~~~~~~^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\main_window_tk.py", line 468, in refresh_all_texts\n    self._refresh_menu_texts()\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\main_window_tk.py", line 488, in _refresh_menu_texts\n    self.file_menu.entryconfig(4, label=language_manager.get_text("exit"))\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "D:\\Python\\Lib\\tkinter\\__init__.py", line 3574, in entryconfigure\n    return self._configure((\'entryconfigure\', index), cnf, kw)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "D:\\Python\\Lib\\tkinter\\__init__.py", line 1812, in _configure\n    self.tk.call(_flatten((self._w, cmd)) + self._options(cnf))\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '_tkinter.TclError: unknown option "-label"\n']
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 384, in _show_language_dialog
+    self.refresh_all_texts()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 468, in refresh_all_texts
+    self._refresh_menu_texts()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 488, in _refresh_menu_texts
+    self.file_menu.entryconfig(4, label=language_manager.get_text("exit"))
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\tkinter\__init__.py", line 3574, in entryconfigure
+    return self._configure(('entryconfigure', index), cnf, kw)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\tkinter\__init__.py", line 1812, in _configure
+    self.tk.call(_flatten((self._w, cmd)) + self._options(cnf))
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_tkinter.TclError: unknown option "-label"
+2025-04-28 10:19:16,847 [INFO] gui.logic_library_window - 已加载 2 条 BOM 逻辑关系规则
+2025-04-28 10:19:20,263 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-28 10:19:20,309 [CRITICAL] __main__ - 未捕获的异常: unknown option "-label"
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 384, in _show_language_dialog
+    self.refresh_all_texts()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 468, in refresh_all_texts
+    self._refresh_menu_texts()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 488, in _refresh_menu_texts
+    self.file_menu.entryconfig(4, label=language_manager.get_text("exit"))
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\tkinter\__init__.py", line 3574, in entryconfigure
+    return self._configure(('entryconfigure', index), cnf, kw)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\tkinter\__init__.py", line 1812, in _configure
+    self.tk.call(_flatten((self._w, cmd)) + self._options(cnf))
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_tkinter.TclError: unknown option "-label"
+2025-04-28 10:19:20,310 [CRITICAL] __main__ - 详细错误栈:
+['Traceback (most recent call last):\n', '  File "D:\\Python\\Lib\\tkinter\\__init__.py", line 2068, in __call__\n    return self.func(*args)\n           ~~~~~~~~~^^^^^^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\main_window_tk.py", line 384, in _show_language_dialog\n    self.refresh_all_texts()\n    ~~~~~~~~~~~~~~~~~~~~~~^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\main_window_tk.py", line 468, in refresh_all_texts\n    self._refresh_menu_texts()\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^\n', '  File "c:\\Users\\mengy\\Desktop\\ZK_LogicBom_Builder\\gui\\main_window_tk.py", line 488, in _refresh_menu_texts\n    self.file_menu.entryconfig(4, label=language_manager.get_text("exit"))\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "D:\\Python\\Lib\\tkinter\\__init__.py", line 3574, in entryconfigure\n    return self._configure((\'entryconfigure\', index), cnf, kw)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "D:\\Python\\Lib\\tkinter\\__init__.py", line 1812, in _configure\n    self.tk.call(_flatten((self._w, cmd)) + self._options(cnf))\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '_tkinter.TclError: unknown option "-label"\n']
+Traceback (most recent call last):
+  File "D:\Python\Lib\tkinter\__init__.py", line 2068, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 384, in _show_language_dialog
+    self.refresh_all_texts()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 468, in refresh_all_texts
+    self._refresh_menu_texts()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\main_window_tk.py", line 488, in _refresh_menu_texts
+    self.file_menu.entryconfig(4, label=language_manager.get_text("exit"))
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\tkinter\__init__.py", line 3574, in entryconfigure
+    return self._configure(('entryconfigure', index), cnf, kw)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\tkinter\__init__.py", line 1812, in _configure
+    self.tk.call(_flatten((self._w, cmd)) + self._options(cnf))
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_tkinter.TclError: unknown option "-label"
+2025-04-28 10:19:27,378 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:19:27,379 [INFO] core.logic_builder - 规则数据已成功清空
+2025-04-28 10:19:34,315 [ERROR] core.logic_builder - 导入规则失败: 创建规则实例失败: 'list' object has no attribute 'split', 数据: {'rule_id': 'BL01', 'rule_type': 'static', 'condition': 'K03_02_01', 'action': 'PL-Sitze01-1123244', 'relation': '→', 'status': 'enabled', 'tags': []}
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\models\logic_rule.py", line 119, in from_dict
+    tags = data.get('tags', '').split(',')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'split'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\core\logic_builder.py", line 497, in import_rules
+    rule = LogicRule.from_dict(rule_data)
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\models\logic_rule.py", line 167, in from_dict
+    raise ValueError(f"创建规则实例失败: {str(e)}, 数据: {data}")
+ValueError: 创建规则实例失败: 'list' object has no attribute 'split', 数据: {'rule_id': 'BL01', 'rule_type': 'static', 'condition': 'K03_02_01', 'action': 'PL-Sitze01-1123244', 'relation': '→', 'status': 'enabled', 'tags': []}
+2025-04-28 10:19:34,316 [ERROR] core.logic_builder - 导入规则失败: 创建规则实例失败: 'list' object has no attribute 'split', 数据: {'rule_id': 'BL03', 'rule_type': 'static', 'condition': 'K03_03_02', 'action': 'PL-Sitze01-1161295', 'relation': '→', 'status': 'enabled', 'tags': []}
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\models\logic_rule.py", line 119, in from_dict
+    tags = data.get('tags', '').split(',')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'split'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\core\logic_builder.py", line 497, in import_rules
+    rule = LogicRule.from_dict(rule_data)
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\models\logic_rule.py", line 167, in from_dict
+    raise ValueError(f"创建规则实例失败: {str(e)}, 数据: {data}")
+ValueError: 创建规则实例失败: 'list' object has no attribute 'split', 数据: {'rule_id': 'BL03', 'rule_type': 'static', 'condition': 'K03_03_02', 'action': 'PL-Sitze01-1161295', 'relation': '→', 'status': 'enabled', 'tags': []}
+2025-04-28 10:19:34,322 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 10:19:34,323 [INFO] core.logic_builder - 已导入 0 条规则

@@ -14,7 +14,7 @@ import os
 from utils.config_manager import config_manager
 from utils.language_manager import language_manager
 from utils.logger import Logger
-from core.logic_builder import LogicBuilder
+from core.logic_builder import LogicBuilder, RULES_DATA_FILE
 from core.config_processor import ConfigProcessor
 from core.bom_processor import BomProcessor
 from gui.logic_panel import LogicPanel
@@ -48,6 +48,9 @@ class MainWindow:
         
         # 创建逻辑构建器
         self.logic_builder = LogicBuilder(self.config_processor)
+        
+        # 标记规则是否已加载
+        self.rules_loaded = False
         
         # 注册语言变化的回调函数
         language_manager.add_callback(self.refresh_all_texts)
@@ -280,6 +283,10 @@ class MainWindow:
                                  command=self._import_config)
         self.file_menu.add_command(label=language_manager.get_text("import_bom"), 
                                  command=self._import_bom)
+        self.file_menu.add_command(label=language_manager.get_text("import_logic_rules"), 
+                                 command=self._import_logic_rules)
+        self.file_menu.add_command(label=language_manager.get_text("export_logic_rules"), 
+                                 command=self._export_logic_rules)
         self.file_menu.add_separator()
         self.file_menu.add_command(label=language_manager.get_text("exit"), 
                                  command=self._on_closing)
@@ -308,13 +315,22 @@ class MainWindow:
         
     def _on_closing(self):
         """窗口关闭事件处理"""
-        if messagebox.askokcancel(
+        # 检查是否有未导出的规则
+        if self.logic_builder.has_unsaved_rules():
+            if not messagebox.askyesno(
+                language_manager.get_text("confirm_exit"),
+                language_manager.get_text("unsaved_rules_exit_confirm")
+            ):
+                return
+        elif not messagebox.askyesno(
             language_manager.get_text("confirm_exit"),
             language_manager.get_text("confirm_exit_message")
         ):
-            # 移除语言变化的回调函数
-            language_manager.remove_callback(self.refresh_all_texts)
-            self.root.destroy()
+            return
+            
+        # 移除语言变化的回调函数
+        language_manager.remove_callback(self.refresh_all_texts)
+        self.root.destroy()
             
     def _import_config(self):
         """导入配置文件"""
@@ -326,6 +342,54 @@ class MainWindow:
         if hasattr(self, 'bom_panel'):
             self.bom_panel._import_bom()
             
+    def _import_logic_rules(self):
+        """导入BOM逻辑关系"""
+        try:
+            # 打开文件选择对话框
+            file_path = filedialog.askopenfilename(
+                title=language_manager.get_text("select_import_file"),
+                filetypes=[(language_manager.get_text("json_files"), "*.json")]
+            )
+            
+            if file_path:
+                try:
+                    # 导入规则
+                    with open(file_path, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                    
+                    # 检查文件格式
+                    if not isinstance(data, dict) or 'rules' not in data:
+                        raise ValueError("无效的规则文件格式")
+                    
+                    # 清空现有规则
+                    self.logic_builder.clear_rules()
+                    
+                    # 导入规则
+                    self.logic_builder.import_rules(file_path)
+                    
+                    # 设置规则已加载标志
+                    self.rules_loaded = True
+                    
+                    # 显示成功消息
+                    messagebox.showinfo(
+                        language_manager.get_text("success"),
+                        language_manager.get_text("import_rules_success")
+                    )
+                    
+                except Exception as e:
+                    self.logger.error(f"导入BOM逻辑关系失败: {str(e)}", exc_info=True)
+                    messagebox.showerror(
+                        language_manager.get_text("error"),
+                        language_manager.get_text("import_rules_error") + f"\n\n{str(e)}"
+                    )
+                
+        except Exception as e:
+            self.logger.error(f"导入BOM逻辑关系失败: {str(e)}", exc_info=True)
+            messagebox.showerror(
+                language_manager.get_text("error"),
+                language_manager.get_text("import_rules_error")
+            )
+
     def _show_logic_library(self):
         """显示逻辑关系库窗口"""
         window = LogicLibraryWindow(self.root, self.logic_builder)
@@ -417,6 +481,28 @@ class MainWindow:
         except Exception as e:
             self.logger.error(f"更新组件文本时出错: {str(e)}", exc_info=True)
             
+    def _refresh_menu_texts(self):
+        """刷新菜单文本"""
+        # 文件菜单
+        self.menubar.entryconfig(0, label=language_manager.get_text("menu_file"))
+        self.menubar.entryconfig(1, label=language_manager.get_text("menu_view"))
+        self.menubar.entryconfig(2, label=language_manager.get_text("menu_help"))
+        
+        # 文件菜单项
+        self.file_menu.entryconfigure(0, label=language_manager.get_text("import_config"))
+        self.file_menu.entryconfigure(1, label=language_manager.get_text("import_bom"))
+        self.file_menu.entryconfigure(2, label=language_manager.get_text("import_logic_rules"))
+        self.file_menu.entryconfigure(3, label=language_manager.get_text("export_logic_rules"))
+        self.file_menu.entryconfigure(5, label=language_manager.get_text("exit"))
+        
+        # 视图菜单
+        self.view_menu.entryconfigure(0, label=language_manager.get_text("logic_library"))
+        self.view_menu.entryconfigure(2, label=language_manager.get_text("language"))
+        
+        # 帮助菜单
+        self.help_menu.entryconfigure(0, label=language_manager.get_text("view_log"))
+        self.help_menu.entryconfigure(1, label=language_manager.get_text("about"))
+        
     def refresh_all_texts(self):
         """刷新所有文本"""
         # 刷新窗口标题
@@ -435,26 +521,6 @@ class MainWindow:
             
         # 强制更新显示
         self.root.update_idletasks()
-        
-    def _refresh_menu_texts(self):
-        """刷新菜单文本"""
-        # 文件菜单
-        self.file_menu.entryconfig(0, label=language_manager.get_text("import_config"))
-        self.file_menu.entryconfig(1, label=language_manager.get_text("import_bom"))
-        self.file_menu.entryconfig(3, label=language_manager.get_text("exit"))
-        
-        # 视图菜单
-        self.view_menu.entryconfig(0, label=language_manager.get_text("logic_library"))
-        self.view_menu.entryconfig(2, label=language_manager.get_text("language"))
-        
-        # 帮助菜单
-        self.help_menu.entryconfig(0, label=language_manager.get_text("view_log"))
-        self.help_menu.entryconfig(1, label=language_manager.get_text("about"))
-        
-        # 菜单标签
-        self.menubar.entryconfig(0, label=language_manager.get_text("menu_file"))
-        self.menubar.entryconfig(1, label=language_manager.get_text("menu_view"))
-        self.menubar.entryconfig(2, label=language_manager.get_text("menu_help"))
         
     def _show_log_viewer(self):
         """显示日志查看器"""
@@ -491,6 +557,7 @@ class MainWindow:
                 config = json.load(f)
             
             # 检查是否有上次的配置文件路径
+            config_loaded = False
             if config.get('last_config_path'):
                 if messagebox.askyesno(
                     language_manager.get_text("confirm"),
@@ -498,6 +565,7 @@ class MainWindow:
                 ):
                     try:
                         self.config_panel._import_excel(config['last_config_path'])
+                        config_loaded = True
                     except Exception as e:
                         self.logger.error(f"加载上次配置文件失败: {str(e)}")
                         messagebox.showerror(
@@ -505,12 +573,10 @@ class MainWindow:
                             language_manager.get_text("load_last_config_error")
                         )
                 else:
-                    # 用户选择不加载上次配置，删除保存的路径
+                    # 用户选择不加载，删除保存的路径
                     config.pop('last_config_path', None)
-                    with open('data/app_config.json', 'w', encoding='utf-8') as f:
-                        json.dump(config, f, indent=4, ensure_ascii=False)
             
-            # 无论用户是否加载了上次的配置，都询问是否加载BOM文件
+            # 检查是否有上次的BOM文件路径
             if config.get('last_bom_path'):
                 if messagebox.askyesno(
                     language_manager.get_text("confirm"),
@@ -525,11 +591,36 @@ class MainWindow:
                             language_manager.get_text("load_last_bom_error")
                         )
                 else:
-                    # 用户选择不加载上次BOM，删除保存的路径
+                    # 用户选择不加载，删除保存的路径
                     config.pop('last_bom_path', None)
-                    with open('data/app_config.json', 'w', encoding='utf-8') as f:
-                        json.dump(config, f, indent=4, ensure_ascii=False)
-                        
+            
+            # 保存更新后的配置
+            with open('data/app_config.json', 'w', encoding='utf-8') as f:
+                json.dump(config, f, indent=4, ensure_ascii=False)
+            
+            # 检查是否有未导出的逻辑关系
+            if os.path.exists(RULES_DATA_FILE):
+                with open(RULES_DATA_FILE, 'r', encoding='utf-8') as f:
+                    rules_data = json.load(f)
+                    if not rules_data.get('exported', True):
+                        if messagebox.askyesno(
+                            language_manager.get_text("confirm"),
+                            language_manager.get_text("load_last_rules_confirm")
+                        ):
+                            # 清空现有规则
+                            self.logic_builder.clear_rules()
+                            # 设置规则已加载标志
+                            self.rules_loaded = True
+                            # 加载规则
+                            self.logic_builder.load_from_temp_file()
+                        else:
+                            # 删除规则
+                            self.logic_builder.clear_rules()
+                            messagebox.showinfo(
+                                language_manager.get_text("info"),
+                                language_manager.get_text("rules_deleted")
+                            )
+                
         except Exception as e:
             self.logger.error(f"加载上次配置时出错: {str(e)}")
             
@@ -588,3 +679,37 @@ class MainWindow:
                 
         except Exception as e:
             self.logger.error(f"保存BOM文件路径时出错: {str(e)}", exc_info=True)
+
+    def _export_logic_rules(self):
+        """导出BOM逻辑关系"""
+        try:
+            # 打开文件选择对话框
+            file_path = filedialog.asksaveasfilename(
+                title=language_manager.get_text("select_export_file"),
+                defaultextension=".json",
+                filetypes=[(language_manager.get_text("json_files"), "*.json")]
+            )
+            
+            if file_path:
+                # 导出规则
+                rules_data = self.logic_builder.export_rules()
+                
+                # 保存到文件
+                with open(file_path, 'w', encoding='utf-8') as f:
+                    json.dump(rules_data, f, ensure_ascii=False, indent=2)
+                
+                # 清空临时规则
+                self.logic_builder.clear_rules()
+                
+                # 显示成功消息
+                messagebox.showinfo(
+                    language_manager.get_text("success"),
+                    language_manager.get_text("export_rules_success")
+                )
+                
+        except Exception as e:
+            self.logger.error(f"导出BOM逻辑关系失败: {str(e)}", exc_info=True)
+            messagebox.showerror(
+                language_manager.get_text("error"),
+                language_manager.get_text("export_rules_error")
+            )

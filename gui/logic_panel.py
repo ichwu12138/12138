@@ -53,6 +53,9 @@ class LogicPanel(ttk.Frame):
         # 注册语言变化的回调函数
         language_manager.add_callback(self.refresh_texts)
         
+        # 注册规则变化的观察者
+        self.logic_builder.add_rule_observer(self._on_rule_change)
+        
         # 创建自定义样式
         self._create_custom_styles()
         
@@ -71,9 +74,13 @@ class LogicPanel(ttk.Frame):
         # 添加输入历史记录
         self.input_history = []
         
+        # 加载现有规则
+        self._load_existing_rules()
+        
     def destroy(self):
         """销毁面板时移除回调函数"""
         language_manager.remove_callback(self.refresh_texts)
+        self.logic_builder.remove_rule_observer(self._on_rule_change)
         super().destroy()
         
     def _create_custom_styles(self):
@@ -506,6 +513,9 @@ class LogicPanel(ttk.Frame):
         ):
             return
             
+        # 从LogicBuilder中删除规则
+        self.logic_builder.delete_rule(item)
+        
         # 获取规则ID编号
         values = self.tree.item(item)["values"]
         if values:
@@ -519,6 +529,9 @@ class LogicPanel(ttk.Frame):
         # 从树形视图中删除
         self.tree.delete(item)
         
+        # 保存更改到临时文件
+        self.logic_builder.save_to_temp_file()
+
     def _log_input(self, input_type: str, content: str):
         """记录输入历史
         
@@ -926,6 +939,12 @@ class LogicPanel(ttk.Frame):
         # 更新状态子菜单
         self._update_status_menu()
         
+        # 更新树状视图列标题
+        self.tree.heading("rule_id", text=language_manager.get_text("rule_id"))
+        self.tree.heading("condition", text=language_manager.get_text("edit_rule_condition"))
+        self.tree.heading("effect", text=language_manager.get_text("edit_rule_effect"))
+        self.tree.heading("status", text=language_manager.get_text("edit_rule_status"))
+        
         # 更新所有规则的状态显示
         for item in self.tree.get_children():
             values = list(self.tree.item(item)["values"])
@@ -947,3 +966,110 @@ class LogicPanel(ttk.Frame):
         while rule_id in self.used_rule_ids:
             rule_id += 1
         return rule_id 
+
+    def _load_existing_rules(self):
+        """加载现有规则到树状视图"""
+        try:
+            # 检查规则是否已加载
+            if not hasattr(self.master, 'main_window') or not self.master.main_window.rules_loaded:
+                return
+                
+            # 清空现有数据
+            for item in self.tree.get_children():
+                self.tree.delete(item)
+                
+            # 加载所有规则
+            for rule in self.logic_builder.get_rules():
+                effect_text = f"→ {rule.action}"
+                self.tree.insert(
+                    "",
+                    "end",
+                    iid=rule.rule_id,
+                    values=(
+                        rule.rule_id,
+                        rule.condition,
+                        effect_text,
+                        language_manager.get_text(rule.status.value)
+                    )
+                )
+                
+                # 更新已使用的规则ID
+                try:
+                    rule_number = int(rule.rule_id[2:])  # 提取数字部分
+                    self.used_rule_ids.add(rule_number)
+                except (ValueError, IndexError):
+                    self.logger.error(f"无法解析规则ID: {rule.rule_id}")
+                
+            self.logger.info(f"已加载 {len(self.tree.get_children())} 条规则到逻辑编辑面板")
+                
+        except Exception as e:
+            self.logger.error(f"加载现有规则失败: {str(e)}", exc_info=True)
+
+    def _on_rule_change(self, change_type, rule_id=None, rule=None):
+        """处理规则变更事件
+        
+        Args:
+            change_type: 变更类型（'imported', 'added', 'modified', 'deleted', 'cleared'）
+            rule_id: 规则ID
+            rule: 规则对象
+        """
+        try:
+            # 检查规则是否已加载
+            if not hasattr(self.master, 'main_window') or not self.master.main_window.rules_loaded:
+                return
+                
+            if change_type == "imported":
+                # 重新加载所有规则
+                self._load_existing_rules()
+            elif change_type == "deleted":
+                # 删除规则
+                if rule_id and rule_id in self.tree.get_children():
+                    self.tree.delete(rule_id)
+                    # 从已使用ID集合中移除
+                    try:
+                        rule_number = int(rule_id[2:])
+                        self.used_rule_ids.remove(rule_number)
+                    except (ValueError, IndexError):
+                        self.logger.error(f"无法解析规则ID: {rule_id}")
+            elif change_type == "cleared":
+                # 清空所有规则
+                for item in self.tree.get_children():
+                    self.tree.delete(item)
+                self.used_rule_ids.clear()
+            elif change_type in ["added", "modified"]:
+                # 更新或添加规则
+                if rule:
+                    effect_text = f"→ {rule.action}"
+                    if rule.rule_id in self.tree.get_children():
+                        # 更新现有规则
+                        self.tree.item(
+                            rule.rule_id,
+                            values=(
+                                rule.rule_id,
+                                rule.condition,
+                                effect_text,
+                                language_manager.get_text(rule.status.value)
+                            )
+                        )
+                    else:
+                        # 添加新规则
+                        self.tree.insert(
+                            "",
+                            "end",
+                            iid=rule.rule_id,
+                            values=(
+                                rule.rule_id,
+                                rule.condition,
+                                effect_text,
+                                language_manager.get_text(rule.status.value)
+                            )
+                        )
+                        # 更新已使用的规则ID
+                        try:
+                            rule_number = int(rule.rule_id[2:])
+                            self.used_rule_ids.add(rule_number)
+                        except (ValueError, IndexError):
+                            self.logger.error(f"无法解析规则ID: {rule.rule_id}")
+                            
+        except Exception as e:
+            self.logger.error(f"处理规则变更事件失败: {str(e)}", exc_info=True) 

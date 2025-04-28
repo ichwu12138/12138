@@ -349,5 +349,15 @@ class ConfigPanel(ttk.Frame):
         # 更新树状视图框架标题
         self.tree_frame.configure(text=language_manager.get_text("config_tree"))
         
+        # 更新树状视图列标题
+        self.tree.heading("rule_id", text=language_manager.get_text("rule_id"))
+        self.tree.heading("condition", text=language_manager.get_text("edit_rule_condition"))
+        self.tree.heading("effect", text=language_manager.get_text("edit_rule_effect"))
+        self.tree.heading("status", text=language_manager.get_text("edit_rule_status"))
+        
+        # 更新右键菜单文本
+        if hasattr(self, 'context_menu'):
+            self.context_menu.entryconfigure(0, label=language_manager.get_text("copy_code"))
+        
         # 强制更新显示
         self.update_idletasks() 

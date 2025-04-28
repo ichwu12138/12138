@@ -1,54 +1,6 @@
 {
   "rules": [
     {
-      "logic_id": "LS07",
-      "tags": "",
-      "tech_doc_path": "",
-      "comment": {
-        "text": "",
-        "images": {}
-      },
-      "selection_expression": "K03_02_01   AND K03_02_01",
-      "logic_relation": "→",
-      "impact_expression": "PL-GrundKabine-10019234  AND PL-GrundKabine-10019244"
-    },
-    {
-      "logic_id": "LS08",
-      "tags": "",
-      "tech_doc_path": "",
-      "comment": {
-        "text": "",
-        "images": {}
-      },
-      "selection_expression": "K03_02_01  AND K03_02_02",
-      "logic_relation": "→",
-      "impact_expression": "PL-Sitze06-1161296"
-    },
-    {
-      "logic_id": "LS09",
-      "tags": "",
-      "tech_doc_path": "",
-      "comment": {
-        "text": "",
-        "images": {}
-      },
-      "selection_expression": "K03_05_02  OR K03_11_02",
-      "logic_relation": "→",
-      "impact_expression": "PL-Sitze01-1123244  OR PL-Sitze01-1161296  AND ( PL-Sitze01-1161314  AND PL-Sitze01-1161314 )"
-    },
-    {
-      "logic_id": "BL03",
-      "tags": "",
-      "tech_doc_path": "",
-      "comment": {
-        "text": "",
-        "images": {}
-      },
-      "selection_expression": "K04_01_02  AND K04_06_02",
-      "logic_relation": "→",
-      "impact_expression": "PL-Sitze01-1123244  AND PL-Sitze05-10019392"
-    },
-    {
       "logic_id": "BL01",
       "tags": "",
       "tech_doc_path": "",
@@ -56,9 +8,9 @@
         "text": "",
         "images": {}
       },
-      "selection_expression": "K06_01_01",
+      "selection_expression": "K03_02_02",
       "logic_relation": "→",
-      "impact_expression": "PL-Bedienelemente-1138854"
+      "impact_expression": "PL-Sitze03-1161296"
     },
     {
       "logic_id": "BL02",
@@ -68,12 +20,12 @@
         "text": "",
         "images": {}
       },
-      "selection_expression": "K06_01_02  AND K06_01_02  OR  NOT K06_01_02",
+      "selection_expression": "K03_06_02",
       "logic_relation": "→",
-      "impact_expression": "PL-Bedienelemente-1138961  AND PL-Bedienelemente-1138961"
+      "impact_expression": "PL-Sitze03-1161294"
     }
   ],
-  "saved_at": "2025-04-28T09:45:28.256206",
+  "saved_at": "2025-04-28T10:32:31.749540",
   "exported": false,
-  "timestamp": "20250428_094528"
+  "timestamp": "20250428_103231"
 }
