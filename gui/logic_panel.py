@@ -979,16 +979,27 @@ class LogicPanel(ttk.Frame):
     def _load_existing_rules(self):
         """加载现有规则到树状视图"""
         try:
-            # 检查规则是否已加载
-            if not hasattr(self.master, 'main_window') or not self.master.main_window.rules_loaded:
-                self.logger.debug("规则未加载，跳过显示")
+            # 检查是否是程序启动时的加载
+            main_window = None
+            # 尝试从不同路径获取main_window实例
+            if hasattr(self.master, 'main_window'):
+                main_window = self.master.main_window
+            elif hasattr(self.winfo_toplevel(), 'main_window'):
+                main_window = self.winfo_toplevel().main_window
+                
+            if main_window is None:
+                self.logger.error("无法获取main_window实例")
+                return
+                
+            if not main_window.rules_loaded:
+                self.logger.info("规则未加载状态，等待用户确认后再加载规则")
                 # 清空现有数据和已使用的ID集合
                 for item in self.tree.get_children():
                     self.tree.delete(item)
                 self.used_rule_ids.clear()
                 return
                 
-            self.logger.info("开始加载现有规则到树状视图")
+            self.logger.info("开始加载规则到已保存规则框架")
             
             # 清空现有数据和已使用的ID集合
             for item in self.tree.get_children():
@@ -999,6 +1010,10 @@ class LogicPanel(ttk.Frame):
             rules = self.logic_builder.get_rules()
             self.logger.debug(f"从LogicBuilder获取到 {len(rules)} 条规则")
             
+            if not rules:
+                self.logger.info("没有规则需要加载")
+                return
+                
             for rule in rules:
                 try:
                     # 构建显示文本
@@ -1031,7 +1046,7 @@ class LogicPanel(ttk.Frame):
                     self.logger.error(f"插入规则到树状视图失败: {str(e)}, 规则ID: {rule.rule_id}")
                     continue
                     
-            self.logger.info(f"成功加载 {len(self.tree.get_children())} 条规则到逻辑编辑面板")
+            self.logger.info(f"成功加载 {len(self.tree.get_children())} 条规则到已保存规则框架")
             
         except Exception as e:
             self.logger.error(f"加载现有规则失败: {str(e)}", exc_info=True)
@@ -1051,9 +1066,24 @@ class LogicPanel(ttk.Frame):
         try:
             self.logger.info(f"收到规则变更事件: type={change_type}, rule_id={rule_id}")
             
+            # 获取main_window实例
+            main_window = None
+            if hasattr(self.master, 'main_window'):
+                main_window = self.master.main_window
+            elif hasattr(self.winfo_toplevel(), 'main_window'):
+                main_window = self.winfo_toplevel().main_window
+            
             if change_type == "imported":
-                # 重新加载所有规则
-                self._load_existing_rules()
+                # 检查是否有规则
+                rules = self.logic_builder.get_rules()
+                if rules:
+                    # 检查是否已经设置了rules_loaded标志
+                    if main_window is not None and main_window.rules_loaded:
+                        self.logger.info("规则已加载状态，开始更新已保存规则框架")
+                        # 重新加载所有规则
+                        self._load_existing_rules()
+                    else:
+                        self.logger.info("规则未加载状态，等待用户确认")
             elif change_type == "deleted":
                 # 删除规则
                 if rule_id and rule_id in self.tree.get_children():
@@ -1062,6 +1092,7 @@ class LogicPanel(ttk.Frame):
                     try:
                         rule_number = int(rule_id[2:])
                         self.used_rule_ids.remove(rule_number)
+                        self.logger.info(f"已删除规则: {rule_id}")
                     except (ValueError, IndexError):
                         self.logger.error(f"无法解析规则ID: {rule_id}")
             elif change_type == "cleared":
@@ -1069,6 +1100,12 @@ class LogicPanel(ttk.Frame):
                 for item in self.tree.get_children():
                     self.tree.delete(item)
                 self.used_rule_ids.clear()
+                # 重置规则已加载标志
+                if main_window is not None:
+                    main_window.rules_loaded = False
+                    self.logger.info("已清空所有规则，重置规则已加载标志")
+                else:
+                    self.logger.info("已清空所有规则")
             elif change_type in ["added", "modified"]:
                 # 更新或添加规则
                 if rule:
@@ -1085,7 +1122,7 @@ class LogicPanel(ttk.Frame):
                                     language_manager.get_text(rule.status.value)
                                 )
                             )
-                            self.logger.debug(f"更新规则显示: {rule.rule_id}")
+                            self.logger.info(f"已更新规则: {rule.rule_id}")
                         else:
                             # 添加新规则
                             self.tree.insert(
@@ -1103,9 +1140,9 @@ class LogicPanel(ttk.Frame):
                             try:
                                 rule_number = int(rule.rule_id[2:])
                                 self.used_rule_ids.add(rule_number)
+                                self.logger.info(f"已添加新规则: {rule.rule_id}")
                             except (ValueError, IndexError):
                                 self.logger.error(f"无法解析规则ID: {rule.rule_id}")
-                            self.logger.debug(f"添加新规则显示: {rule.rule_id}")
                     except Exception as e:
                         self.logger.error(f"更新/添加规则到树状视图失败: {str(e)}, 规则ID: {rule.rule_id}")
                             

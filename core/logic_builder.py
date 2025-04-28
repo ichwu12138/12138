@@ -80,308 +80,22 @@ class LogicBuilder(Observable):
         except Exception as e:
             self.logger.error(f"加载规则数据失败: {str(e)}", exc_info=True)
     
-    def build_dynamic_rule(self, condition: str, action: str, status: RuleStatus = RuleStatus.ENABLED, relation: str = "") -> LogicRule:
-        """构建动态逻辑规则
-        
-        Args:
-            condition: 条件表达式
-            action: 影响表达式
-            status: 规则状态
-            relation: 逻辑关系
-            
-        Returns:
-            LogicRule: 创建的逻辑规则
-        """
-        # 验证条件表达式
-        valid, message = self._validate_dynamic_expression(condition)
-        if not valid:
-            raise ValueError(f"条件表达式无效: {message}")
-        
-        # 特殊情况处理
-        # 检查是否是before...choose情况
-        tokens = condition.split()
-        condition_type = tokens[0].lower() if tokens else None
-        is_before_choose = False
-        
-        tokens_action = action.split()
-        effect_type = tokens_action[0].lower() if tokens_action else None
-        
-        # 检查before情况，before只能跟choose
-        if condition_type == "before" and effect_type != "choose":
-            raise ValueError(f"before条件只能使用choose影响类型")
-        
-        # 检查是否是before...choose组合
-        if condition_type == "before" and effect_type == "choose":
-            is_before_choose = True
-            # before...choose组合不需要验证括号内容
-            valid = True
-        # 检查是否是info类型
-        elif effect_type == "info":
-            # info类型不需要方括号，但需要检查是否有引号文本
-            has_quoted_text = False
-            for token in tokens_action[1:]:
-                if token.startswith('"') and token.endswith('"'):
-                    has_quoted_text = True
-                    break
-            
-            if not has_quoted_text:
-                raise ValueError("info类型需要引号包裹的文本")
-            
-            # info类型+引号文本是有效的，不检查方括号
-            valid = True
-        else:
-            # 其他情况，验证影响表达式
-            # 从action中提取方括号内容进行验证
-            bracket_content = ""
-            if "[" in action and "]" in action:
-                bracket_start = action.find("[")
-                bracket_end = action.rfind("]")
-                if bracket_start < bracket_end:
-                    bracket_content = action[bracket_start+1:bracket_end].strip()
-            
-            # 只有当存在方括号内容时才验证
-            if bracket_content:
-                valid, message = self._validate_code_expression(bracket_content)
-                if not valid:
-                    raise ValueError(f"影响表达式无效: {message}")
-            elif not is_before_choose:  # 非before...choose情况必须有方括号，但info除外
-                if effect_type != "info":  # 确保info类型不需要方括号
-                    raise ValueError("影响表达式缺少方括号")
-        
-        # 创建规则ID
-        rule_id = self._generate_rule_id(RuleType.DYNAMIC)
-        
-        # 创建规则
-        rule = LogicRule(
-            rule_id=rule_id,
-            rule_type=RuleType.DYNAMIC,
-            condition=condition,
-            action=action,
-            relation=relation,
-            status=status
-        )
-        
-        # 添加到规则字典
-        self.rules[rule_id] = rule
-        
-        # 保存规则
-        self._save_rules()
-        
-        # 通知规则创建观察者
-        for observer in self._rule_created_observers:
-            observer(rule)
-        
-        return rule
-    
-    def build_static_rule(self, condition: str, effect_expr: str, status: RuleStatus = RuleStatus.ENABLED, is_special_case: bool = False, skip_condition_validation: bool = False, force_has_relation: bool = False) -> LogicRule:
-        """构建静态逻辑规则
-        
-        Args:
-            condition: 条件表达式
-            effect_expr: 影响表达式
-            status: 规则状态
-            is_special_case: 是否是特殊情况（XOR或F码 empty/not empty）
-            skip_condition_validation: 是否跳过对condition部分的验证
-            force_has_relation: 是否强制标记为包含关系操作符
-            
-        Returns:
-            LogicRule: 创建的逻辑规则
-        """
-        # 检查condition和effect_expr表达式中是否包含关系操作符
-        has_relation_operator = "→" in condition or ":" in condition or "→" in effect_expr or ":" in effect_expr or force_has_relation
-        
-        # 记录日志
-        self.logger.debug(f"构建静态规则 - condition: {condition}, effect_expr: {effect_expr}")
-        self.logger.debug(f"是否包含关系操作符: {has_relation_operator}, force_has_relation: {force_has_relation}")
-        
-        # 检查完整表达式是否需要拆分
-        # 如果condition中没有关系操作符，但效果表达式为空，检查完整表达式是否包含关系操作符
-        if not ("→" in condition or ":" in condition) and not effect_expr and not force_has_relation:
-            tokens = condition.split()
-            
-            # 查找关系操作符位置
-            relation_index = -1
-            for i, token in enumerate(tokens):
-                if token in ["→", ":"]:
-                    relation_index = i
-                    break
-                    
-            # 如果找到关系操作符，拆分表达式
-            if relation_index != -1 and relation_index < len(tokens) - 1:
-                relation = tokens[relation_index]
-                left_part = " ".join(tokens[:relation_index])
-                right_part = " ".join(tokens[relation_index+1:])
-                
-                # 重置condition和effect_expr
-                condition = left_part
-                effect_expr = right_part
-                is_special_case = False
-                skip_condition_validation = True  # 跳过对左侧部分的单独验证
-                has_relation_operator = True  # 设置关系操作符标志
-                
-                # 记录日志
-                self.logger.info(f"检测到完整表达式中的关系操作符，已拆分为：condition={condition}, relation={relation}, effect_expr={effect_expr}")
-        
-        # 如果包含关系操作符，则不是特殊情况
-        if has_relation_operator:
-            is_special_case = False
-            
-        # 验证条件表达式（除非明确指示跳过验证）
-        if not skip_condition_validation:
-            valid, message = self._validate_static_expression(condition)
-            if not valid:
-                raise ValueError(f"条件表达式无效: {message}")
-        
-        # 解析影响表达式
-        relation = ""
-        action = effect_expr
-        
-        # 只有在非特殊情况下才解析影响表达式
-        if not is_special_case:
-            if effect_expr.strip():
-                # 如果effect_expr不为空，检查是否包含关系操作符
-                if "→" in effect_expr:
-                    parts = effect_expr.split("→", 1)
-                    action = parts[1].strip()
-                    relation = "→"
-                    has_relation_operator = True  # 确保设置关系操作符标志
-                elif ":" in effect_expr:
-                    parts = effect_expr.split(":", 1)
-                    action = parts[1].strip()
-                    relation = ":"
-                    has_relation_operator = True  # 确保设置关系操作符标志
-                else:
-                    # 如果没有关系操作符，entire effect_expr就是action
-                    action = effect_expr
-                    relation = "→"  # 默认使用→
-            elif has_relation_operator:
-                # 如果condition包含关系操作符（通常不应该走到这里）
-                self.logger.warning("在condition中检测到关系操作符，但effect_expr为空，这可能是一个错误")
-                relation = "→"  # 默认使用→
-            else:
-                # 非特殊情况但没有effect_expr，默认使用→
-                relation = "→"
-        
-        # 日志记录最终的action和has_relation_operator状态
-        self.logger.debug(f"验证影响表达式: {action}, 包含关系操作符: {has_relation_operator}")
-        
-        # 验证影响表达式 - 修改此处的验证方法
-        # 如果存在关系操作符，验证右侧内容为逻辑表达式而不是列表
-        if has_relation_operator:
-            # 对于关系操作符右侧的内容，使用静态表达式验证方法，传入is_relation_right_side=True
-            valid, message = self._validate_static_expression(action, is_relation_right_side=True)
-            if not valid:
-                raise ValueError(f"影响表达式无效: {message}")
-        else:
-            # 对于不包含关系操作符的情况，使用原来的列表内容验证
-            valid, message = self._validate_code_expression(action)
-            if not valid:
-                raise ValueError(f"影响表达式无效: {message}")
-        
-        # 创建规则ID
-        rule_id = self._generate_rule_id(RuleType.STATIC)
-        
-        # 创建规则
-        rule = LogicRule(
-            rule_id=rule_id,
-            rule_type=RuleType.STATIC,
-            condition=condition,
-            action=action,
-            relation=relation,
-            status=status
-        )
-        
-        # 添加到规则字典
-        self.rules[rule_id] = rule
-        
-        # 保存规则
-        self._save_rules()
-        
-        # 通知规则创建观察者
-        for observer in self._rule_created_observers:
-            observer(rule)
-        
-        return rule
-    
-    def _expand_expression(self, expr: str, use_and: bool = False) -> str:
-        """展开表达式，将F码替换为(K1 OR K2 OR...)
-        
-        Args:
-            expr: 原始表达式
-            use_and: 是否使用AND连接符
-            
-        Returns:
-            str: 展开后的表达式
-        """
-        # 查找所有F码
-        f_codes = re.findall(r'F\d+', expr)
-        
-        # 替换表达式
-        for f_code in f_codes:
-            feature = self.config_processor.get_feature(f_code)
-            if feature:
-                k_codes = feature.get_k_codes()
-                if k_codes:
-                    operator = " AND " if use_and else " OR "
-                    replacement = "(" + operator.join(k_codes) + ")"
-                    expr = expr.replace(f_code, replacement)
-                    
-        return expr
-    
-    def _validate_dynamic_expression(self, expr: str) -> Tuple[bool, str]:
-        """验证动态表达式
-        
-        Args:
-            expr: 动态表达式
-            
-        Returns:
-            Tuple[bool, str]: (是否有效, 错误消息)
-        """
-        return ExpressionValidator.validate_dynamic_expression(expr, self.config_processor)
-    
-    def _validate_static_expression(self, expr: str, is_relation_right_side: bool = False) -> Tuple[bool, str]:
-        """验证静态表达式
-        
-        Args:
-            expr: 静态表达式
-            is_relation_right_side: 是否是关系操作符右侧的表达式
-            
-        Returns:
-            Tuple[bool, str]: (是否有效, 错误消息)
-        """
-        return ExpressionValidator.validate_static_expression(expr, self.config_processor, is_relation_right_side)
-    
-    def _validate_code_expression(self, expr: str) -> Tuple[bool, str]:
-        """验证代码表达式
-        
-        Args:
-            expr: 代码表达式
-            
-        Returns:
-            Tuple[bool, str]: (是否有效, 错误消息)
-        """
-        return ExpressionValidator.validate_list_content(expr, True)
-    
-    def _generate_rule_id(self, rule_type: RuleType) -> str:
+    def _generate_rule_id(self) -> str:
         """生成规则ID
         
-        Args:
-            rule_type: 规则类型
-            
         Returns:
             str: 规则ID
         """
-        # 获取该类型的规则数
-        prefix = "LS" if rule_type == RuleType.STATIC else "LD"
-        count = len([r for r in self.rules.values() if r.rule_type == rule_type]) + 1
+        # 获取现有BL规则的数量
+        count = len([r for r in self.rules.values()]) + 1
         
-        # 生成ID (LSxx 或 LDxx)
-        rule_id = f"{prefix}{count:02d}"
+        # 生成ID (BLxx)
+        rule_id = f"BL{count:02d}"
         
         # 确保ID唯一
         while rule_id in self.rules:
             count += 1
-            rule_id = f"{prefix}{count:02d}"
+            rule_id = f"BL{count:02d}"
             
         return rule_id
     
@@ -417,9 +131,6 @@ class LogicBuilder(Observable):
             bool: 是否成功删除
         """
         if rule_id in self.rules:
-            # 获取规则类型
-            rule_type = self.rules[rule_id].rule_type.value
-            
             # 删除规则
             del self.rules[rule_id]
             
@@ -427,9 +138,8 @@ class LogicBuilder(Observable):
             self._save_rules()
             
             # 通知规则删除观察者
-            if rule_type:
-                for observer in self._rule_deleted_observers:
-                    observer(rule_id, rule_type)
+            for observer in self._rule_deleted_observers:
+                observer(rule_id)
             
             return True
         
@@ -448,7 +158,7 @@ class LogicBuilder(Observable):
             for rule in self.rules.values():
                 rule_dict = rule.to_dict()
                 rules_data.append(rule_dict)
-                self.logger.debug(f"已导出规则: ID={rule.rule_id}, 类型={rule.rule_type.value}")
+                self.logger.debug(f"已导出规则: ID={rule.rule_id}")
             
             # 标记规则已导出
             self.rules_exported = True
@@ -471,19 +181,6 @@ class LogicBuilder(Observable):
         except Exception as e:
             self.logger.error(f"导出规则数据失败: {str(e)}", exc_info=True)
             raise
-    
-    def _extract_codes(self, expression: str) -> List[str]:
-        """提取表达式中的F码和K码
-        
-        Args:
-            expression: 表达式
-            
-        Returns:
-            List[str]: 提取的代码列表
-        """
-        # 查找所有F码和K码
-        codes = re.findall(r'[FK]\d+', expression)
-        return codes
     
     def import_rules(self, file_path: str):
         """导入规则
@@ -509,7 +206,10 @@ class LogicBuilder(Observable):
                 try:
                     # 获取规则ID
                     rule_id = rule_data.get('logic_id', '')
-                    if rule_id.startswith('BL'):
+                    if not rule_id.startswith('BL'):
+                        # 如果不是BL开头，生成新的BL规则ID
+                        rule_id = self._generate_rule_id()
+                    else:
                         try:
                             rule_number = int(rule_id[2:])
                             max_rule_number = max(max_rule_number, rule_number)
@@ -519,11 +219,11 @@ class LogicBuilder(Observable):
                     # 创建规则对象
                     rule = LogicRule(
                         rule_id=rule_id,
-                        rule_type=RuleType.STATIC,
+                        rule_type=RuleType.STATIC,  # 保留但不使用
                         condition=rule_data.get('selection_expression', ''),
                         action=rule_data.get('impact_expression', ''),
                         relation=rule_data.get('logic_relation', '→'),
-                        status=RuleStatus.ENABLED  # 默认启用状态
+                        status=RuleStatus(rule_data.get('status', 'enabled'))
                     )
                     
                     # 添加到规则字典
@@ -563,7 +263,7 @@ class LogicBuilder(Observable):
         """
         # 如果规则ID已存在，生成新的ID
         if rule.rule_id in self.rules:
-            rule.rule_id = self._generate_rule_id(rule.rule_type)
+            rule.rule_id = self._generate_rule_id()
             
         # 添加到规则字典
         self.rules[rule.rule_id] = rule
@@ -596,7 +296,8 @@ class LogicBuilder(Observable):
                     },
                     "selection_expression": rule.condition,
                     "logic_relation": rule.relation,
-                    "impact_expression": rule.action
+                    "impact_expression": rule.action,
+                    "status": rule.status.value
                 }
                 rules_data.append(rule_dict)
             
@@ -676,7 +377,6 @@ class LogicBuilder(Observable):
         """通知观察者"""
         super().notify_observers(data)
     
-    # 添加规则创建观察者方法
     def add_rule_created_observer(self, observer):
         """添加规则创建观察者
         
@@ -686,12 +386,11 @@ class LogicBuilder(Observable):
         if observer not in self._rule_created_observers:
             self._rule_created_observers.append(observer)
     
-    # 添加规则删除观察者方法
     def add_rule_deleted_observer(self, observer):
         """添加规则删除观察者
         
         Args:
-            observer: 观察者回调函数，接收rule_id和rule_type参数
+            observer: 观察者回调函数，接收rule_id参数
         """
         if observer not in self._rule_deleted_observers:
             self._rule_deleted_observers.append(observer)

@@ -8,12 +8,13 @@
         "text": "",
         "images": {}
       },
-      "selection_expression": "K03_02_02",
+      "selection_expression": "K02_02_01",
       "logic_relation": "→",
-      "impact_expression": "PL-Sitze03-1161296"
+      "impact_expression": "PL-Sitze02-1161313",
+      "status": "enabled"
     }
   ],
-  "saved_at": "2025-04-28T11:32:23.994789",
+  "saved_at": "2025-04-28T13:21:46.923272",
   "exported": false,
-  "timestamp": "20250428_113223"
+  "timestamp": "20250428_132146"
 }

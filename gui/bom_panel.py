@@ -120,7 +120,11 @@ class BomPanel(ttk.Frame):
         
         # 配置样式
         style = ttk.Style()
-        style.configure("Treeview", rowheight=100)  # 设置足够的行高以容纳两行文本
+        style.configure(
+            "Main.Treeview",
+            font=("Microsoft YaHei", 16),  # 设置基本字体大小为16
+            rowheight=100  # 设置足够的行高以容纳多行文本
+        )
         
         # 添加垂直滚动条
         vsb = ttk.Scrollbar(
@@ -225,7 +229,7 @@ class BomPanel(ttk.Frame):
             # 配置标签样式
             self.tree.tag_configure("level_1", font=("Microsoft YaHei", 18, "bold"))
             self.tree.tag_configure("level_node", font=("Microsoft YaHei", 16, "bold"))
-            self.tree.tag_configure("material", font=("Microsoft YaHei", 14))
+            self.tree.tag_configure("material", font=("Microsoft YaHei", 16))
             
             # 设置行高
             style = ttk.Style()

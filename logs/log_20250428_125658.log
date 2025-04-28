@@ -1,0 +1,110 @@
+2025-04-28 12:56:58,580 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250428_125658.log
+2025-04-28 12:56:58,821 [INFO] __main__ - 正在启动程序...
+2025-04-28 12:56:58,822 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-28 12:56:58,822 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-28 12:56:58,822 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-28 12:56:58,844 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-28 12:56:59,649 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-28 12:56:59,674 [INFO] __main__ - 语言选择结果: zh
+2025-04-28 12:56:59,674 [INFO] __main__ - 正在创建主题选择对话框...
+2025-04-28 12:56:59,675 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-04-28 12:56:59,682 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-04-28 12:57:00,402 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-04-28 12:57:00,413 [INFO] __main__ - 主题选择结果: light
+2025-04-28 12:57:00,433 [INFO] __main__ - 正在配置主窗口...
+2025-04-28 12:57:00,605 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-28 12:57:00,605 [INFO] core.logic_builder - 已加载 3 条规则
+2025-04-28 12:57:00,641 [DEBUG] gui.logic_panel - 从LogicBuilder获取到 3 条规则
+2025-04-28 12:57:00,641 [DEBUG] gui.logic_panel - 添加规则ID: 1 到已使用集合
+2025-04-28 12:57:00,641 [DEBUG] gui.logic_panel - 添加规则ID: 2 到已使用集合
+2025-04-28 12:57:00,641 [DEBUG] gui.logic_panel - 添加规则ID: 3 到已使用集合
+2025-04-28 12:57:00,642 [INFO] gui.logic_panel - 成功加载 3 条规则到逻辑编辑面板
+2025-04-28 12:57:00,653 [INFO] __main__ - MainWindow实例创建完成
+2025-04-28 12:57:00,947 [INFO] __main__ - 开始mainloop()...
+2025-04-28 12:57:03,251 [INFO] core.config_processor - 找到工作表: ['TD', '0.模板&Vorlage', '1.Fahrgestell', '2.Fahrzeug allgemein', '3.Beschriftung&Kennzeichnung', '4. Anbauten&Fahrgestellarbeiten', '5. Fahrer_Mannschaftsraum', '6.Koffer', '7.Lichtmast', '8.Pumpenanlage', '9.Seilwinde&Generator', '10.Halterungen']
+2025-04-28 12:57:03,252 [DEBUG] core.config_processor - 跳过工作表: TD
+2025-04-28 12:57:03,252 [DEBUG] core.config_processor - 跳过工作表: 0.模板&Vorlage
+2025-04-28 12:57:03,253 [INFO] core.config_processor - 处理工作表: 1.Fahrgestell -> 模块: 1.Fahrgestell
+2025-04-28 12:57:03,270 [INFO] core.config_processor - 处理工作表: 2.Fahrzeug allgemein -> 模块: 2.Fahrzeug allgemein
+2025-04-28 12:57:03,287 [INFO] core.config_processor - 处理工作表: 3.Beschriftung&Kennzeichnung -> 模块: 3.Beschriftung&Kennzeichnung
+2025-04-28 12:57:03,303 [INFO] core.config_processor - 处理工作表: 4. Anbauten&Fahrgestellarbeiten -> 模块: 4.Anbauten&Fahrgestellarbeiten
+2025-04-28 12:57:03,319 [INFO] core.config_processor - 处理工作表: 5. Fahrer_Mannschaftsraum -> 模块: 5.Fahrer_Mannschaftsraum
+2025-04-28 12:57:03,340 [INFO] core.config_processor - 处理工作表: 6.Koffer -> 模块: 6.Koffer
+2025-04-28 12:57:03,358 [INFO] core.config_processor - 处理工作表: 7.Lichtmast -> 模块: 7.Lichtmast
+2025-04-28 12:57:03,372 [INFO] core.config_processor - 处理工作表: 8.Pumpenanlage -> 模块: 8.Pumpenanlage
+2025-04-28 12:57:03,387 [INFO] core.config_processor - 处理工作表: 9.Seilwinde&Generator -> 模块: 9.Seilwinde&Generator
+2025-04-28 12:57:03,403 [INFO] core.config_processor - 处理工作表: 10.Halterungen -> 模块: 10.Halterungen
+2025-04-28 12:57:03,424 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-28 12:57:03,428 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-28 12:57:03,428 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/配置选项_Konfigurationsoptions.xlsm
+2025-04-28 12:57:04,604 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-28 12:57:04,604 [INFO] core.bom_processor - 已清空现有数据
+2025-04-28 12:57:04,604 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-04-28 12:57:04,608 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['Max-Gruppe']
+2025-04-28 12:57:04,609 [INFO] core.bom_processor - 正在读取 Max-Gruppe 工作表...
+2025-04-28 12:57:04,617 [INFO] core.bom_processor - 成功读取工作表，共 154 行数据
+2025-04-28 12:57:04,617 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-04-28 12:57:04,619 [INFO] core.bom_processor - 过滤空层级后剩余 153 行数据
+2025-04-28 12:57:04,619 [INFO] core.bom_processor - 
+开始处理数据...
+2025-04-28 12:57:04,622 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-04-28 12:57:04,623 [INFO] core.bom_processor - 第 1 级节点数量: 1
+2025-04-28 12:57:04,623 [INFO] core.bom_processor - 第 2 级节点数量: 133
+2025-04-28 12:57:04,623 [INFO] core.bom_processor - 第 3 级节点数量: 19
+2025-04-28 12:57:04,623 [INFO] core.bom_processor - BOM文件导入成功，共处理 153 个项目
+2025-04-28 12:57:04,623 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-28 12:57:04,623 [INFO] gui.bom_panel - 开始刷新树状图
+2025-04-28 12:57:04,624 [INFO] gui.bom_panel - 树状图刷新完成
+2025-04-28 12:57:04,626 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-28 12:57:04,626 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-28 12:57:06,927 [INFO] core.logic_builder - 规则数据已成功清空
+2025-04-28 12:57:06,927 [INFO] gui.logic_panel - 收到规则变更事件: type=cleared, rule_id=None
+2025-04-28 12:57:09,599 [INFO] gui.logic_library_window - 已加载 0 条 BOM 逻辑关系规则
+2025-04-28 12:57:14,923 [INFO] core.logic_builder - 开始导入规则文件: C:/Users/mengy/Desktop/123123.json
+2025-04-28 12:57:14,924 [INFO] core.logic_builder - 已清空现有规则
+2025-04-28 12:57:14,924 [DEBUG] core.logic_builder - 成功导入规则: ID=BL01
+2025-04-28 12:57:14,925 [DEBUG] core.logic_builder - 成功导入规则: ID=BL02
+2025-04-28 12:57:14,925 [DEBUG] core.logic_builder - 成功导入规则: ID=BL03
+2025-04-28 12:57:14,938 [INFO] core.logic_builder - 规则数据已保存到临时文件，共 3 条规则
+2025-04-28 12:57:14,939 [INFO] gui.logic_panel - 收到规则变更事件: type=imported, rule_id=None
+2025-04-28 12:57:14,939 [DEBUG] gui.logic_panel - 从LogicBuilder获取到 3 条规则
+2025-04-28 12:57:14,939 [DEBUG] gui.logic_panel - 添加规则ID: 1 到已使用集合
+2025-04-28 12:57:14,939 [DEBUG] gui.logic_panel - 添加规则ID: 2 到已使用集合
+2025-04-28 12:57:14,939 [DEBUG] gui.logic_panel - 添加规则ID: 3 到已使用集合
+2025-04-28 12:57:14,939 [INFO] gui.logic_panel - 成功加载 3 条规则到逻辑编辑面板
+2025-04-28 12:57:14,939 [INFO] core.logic_builder - 规则导入完成，成功导入 3 条规则
+2025-04-28 12:57:14,940 [DEBUG] gui.logic_panel - 从LogicBuilder获取到 3 条规则
+2025-04-28 12:57:14,940 [DEBUG] gui.logic_panel - 添加规则ID: 1 到已使用集合
+2025-04-28 12:57:14,940 [DEBUG] gui.logic_panel - 添加规则ID: 2 到已使用集合
+2025-04-28 12:57:14,940 [DEBUG] gui.logic_panel - 添加规则ID: 3 到已使用集合
+2025-04-28 12:57:14,940 [INFO] gui.logic_panel - 成功加载 3 条规则到逻辑编辑面板
+2025-04-28 12:57:49,841 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I0BA
+2025-04-28 12:57:49,842 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K04_02_02 600 l
+2025-04-28 12:57:49,842 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K04_02_02
+2025-04-28 12:57:49,842 [INFO] gui.config_panel - ConfigPanel: 准备插入K码: K04_02_02
+2025-04-28 12:57:49,842 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-28 12:57:49,842 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-28 12:57:49,842 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-28 12:57:49,842 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K04_02_02
+2025-04-28 12:57:49,842 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K04_02_02, 当前表达式: K04_02_02 
+2025-04-28 12:57:49,842 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K04_02_02
+2025-04-28 12:57:50,633 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K04_02_02  → 
+2025-04-28 12:57:52,071 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I028
+2025-04-28 12:57:52,072 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1161297 - PA-Sitz Std. mechanisch / BA-seat mechanically
+Z-Cab NG Zweiflaschengerät / Z-Cab NG twin-bottle device
+2025-04-28 12:57:52,073 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1161297
+2025-04-28 12:57:52,073 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Sitze02
+2025-04-28 12:57:52,074 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Sitze02-1161297
+2025-04-28 12:57:52,075 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-28 12:57:52,076 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-28 12:57:52,076 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-28 12:57:52,077 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Sitze02-1161297
+2025-04-28 12:57:52,079 [DEBUG] gui.logic_panel - 验证BOM码: PL-Sitze02-1161297
+2025-04-28 12:57:52,080 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-Sitze02-1161297, 当前表达式: K04_02_02  → PL-Sitze02-1161297 
+2025-04-28 12:57:52,081 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Sitze02-1161297
+2025-04-28 12:57:52,081 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Sitze02-1161297
+2025-04-28 12:57:53,142 [INFO] core.logic_builder - 规则数据已保存到临时文件，共 4 条规则
+2025-04-28 12:57:53,146 [INFO] core.logic_builder - 规则数据已保存到临时文件，共 4 条规则
+2025-04-28 12:57:53,146 [INFO] core.logic_builder - 规则数据已保存到文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-04-28 12:57:53,146 [INFO] gui.logic_panel - 已保存新的BOM逻辑关系规则: ID=BL04, 选择项=K04_02_02, 影响项=PL-Sitze02-1161297, 状态=enabled

@@ -338,26 +338,25 @@ class ConfigPanel(ttk.Frame):
             
     def refresh_texts(self):
         """刷新所有文本"""
-        # 更新标题
-        self.title_label.configure(text=language_manager.get_text("config_panel_title"))
-        
-        # 更新工具栏标题和按钮
-        self.toolbar_frame.configure(text=language_manager.get_text("tools"))
-        self.import_btn.configure(text=language_manager.get_text("import_config"))
-        self.refresh_btn.configure(text=language_manager.get_text("refresh"))
-        
-        # 更新树状视图框架标题
-        self.tree_frame.configure(text=language_manager.get_text("config_tree"))
-        
-        # 更新树状视图列标题
-        self.tree.heading("rule_id", text=language_manager.get_text("rule_id"))
-        self.tree.heading("condition", text=language_manager.get_text("edit_rule_condition"))
-        self.tree.heading("effect", text=language_manager.get_text("edit_rule_effect"))
-        self.tree.heading("status", text=language_manager.get_text("edit_rule_status"))
-        
-        # 更新右键菜单文本
-        if hasattr(self, 'context_menu'):
-            self.context_menu.entryconfigure(0, label=language_manager.get_text("copy_code"))
-        
-        # 强制更新显示
-        self.update_idletasks() 
+        try:
+            # 更新标题
+            self.title_label.configure(text=language_manager.get_text("config_panel_title"))
+            
+            # 更新工具栏标题
+            self.toolbar_frame.configure(text=language_manager.get_text("tools"))
+            
+            # 更新按钮文本
+            self.import_btn.configure(text=language_manager.get_text("import_config"))
+            self.refresh_btn.configure(text=language_manager.get_text("refresh"))
+            
+            # 更新配置树标题
+            self.tree_frame.configure(text=language_manager.get_text("config_tree"))
+            
+            # 调用父类的刷新方法
+            try:
+                super().refresh_texts()
+            except Exception as e:
+                self.logger.debug(f"父类刷新文本失败（可以忽略）: {str(e)}")
+                
+        except Exception as e:
+            self.logger.error(f"刷新文本失败: {str(e)}", exc_info=True) 

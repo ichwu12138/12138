@@ -367,7 +367,7 @@ class MainWindow:
                     # 设置规则已加载标志
                     self.rules_loaded = True
                     
-                    # 强制刷新逻辑面板
+                    # 强制刷新逻辑面板和逻辑关系库
                     if hasattr(self, 'logic_panel'):
                         self.logic_panel._load_existing_rules()
                     
@@ -616,13 +616,19 @@ class MainWindow:
                                 language_manager.get_text("confirm"),
                                 language_manager.get_text("load_last_rules_confirm")
                             ):
-                                # 加载规则
-                                self.logic_builder.load_from_temp_file()
                                 # 设置规则已加载标志
                                 self.rules_loaded = True
+                                self.logger.info("用户确认加载规则，设置规则已加载标志为True")
+                                
+                                # 加载规则
+                                self.logic_builder.load_from_temp_file()
+                                
                                 # 强制刷新逻辑面板
                                 if hasattr(self, 'logic_panel'):
+                                    self.logger.info("开始刷新逻辑面板显示")
                                     self.logic_panel._load_existing_rules()
+                                    self.logger.info("逻辑面板显示刷新完成")
+                                
                                 # 显示成功消息
                                 messagebox.showinfo(
                                     language_manager.get_text("success"),
@@ -633,6 +639,7 @@ class MainWindow:
                                 self.logic_builder.clear_rules()
                                 # 重置规则已加载标志
                                 self.rules_loaded = False
+                                self.logger.info("用户取消加载规则，设置规则已加载标志为False")
                                 messagebox.showinfo(
                                     language_manager.get_text("info"),
                                     language_manager.get_text("rules_deleted")
@@ -643,7 +650,7 @@ class MainWindow:
                         language_manager.get_text("error"),
                         language_manager.get_text("temp_rules_load_error")
                     )
-                
+                    
         except Exception as e:
             self.logger.error(f"加载上次配置时出错: {str(e)}")
             messagebox.showerror(
