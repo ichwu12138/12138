@@ -21,17 +21,23 @@ class ExpressionValidator:
         """初始化验证器
         
         Args:
-            config_processor: 配置处理器实例，用于验证K码
+            config_processor: 配置处理器实例，用于验证特征值
             bom_processor: BOM处理器实例，用于验证BOM码
         """
         self.config_processor = config_processor
         self.bom_processor = bom_processor
     
     def is_k_code(self, token: str) -> bool:
-        """检查是否为K码"""
+        """检查是否为特征值（原K码）"""
         if self.config_processor:
             return self.config_processor.is_valid_k_code(token)
-        return bool(re.match(r'^K\d+(?:_\d+)*$', token))
+        return bool(re.match(r'^K-\d{3}-\d{6}$', token))  # 新的特征值格式
+    
+    def is_f_code(self, token: str) -> bool:
+        """检查是否为特征码（原F码）"""
+        if self.config_processor:
+            return self.config_processor.is_valid_f_code(token)
+        return bool(re.match(r'^HBG_\d+_\d+$', token))  # 新的特征码格式
     
     def is_bom_code(self, token: str) -> bool:
         """检查是否为BOM码"""

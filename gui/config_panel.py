@@ -216,7 +216,7 @@ class ConfigPanel(ttk.Frame):
                     tags=("module",)
                 )
                 
-                # 添加F码节点
+                # 添加特征码节点
                 for f_code in f_codes:
                     f_node = self.tree.insert(
                         module_node,
@@ -225,7 +225,7 @@ class ConfigPanel(ttk.Frame):
                         tags=("f_code",)
                     )
                     
-                    # 添加K码节点
+                    # 添加特征值节点
                     for k_code in self.config_processor.get_k_codes(f_code):
                         self.tree.insert(
                             f_node,
@@ -259,8 +259,8 @@ class ConfigPanel(ttk.Frame):
             text = self.tree.item(item, "text")
             code = text.split()[0]
             
-            # 如果是F码或K码，添加复制选项
-            if code.startswith("F") or code.startswith("K"):
+            # 如果是特征码或特征值，添加复制选项
+            if code.startswith("HBG_") or code.startswith("K-"):
                 menu.add_command(
                     label=language_manager.get_text("copy_code"),
                     command=lambda: self.insert_code(code)
@@ -292,16 +292,16 @@ class ConfigPanel(ttk.Frame):
             text = self.tree.item(item, "text")
             self.logger.debug(f"ConfigPanel: 选中项文本: {text}")
             
-            # 提取K码
+            # 提取特征值
             code = text.split()[0]
             self.logger.debug(f"ConfigPanel: 提取的代码: {code}")
             
-            # 如果是K码，发送到逻辑编辑区
-            if code.startswith("K"):
-                self.logger.info(f"ConfigPanel: 准备插入K码: {code}")
+            # 如果是特征值，发送到逻辑编辑区
+            if code.startswith("K-"):
+                self.logger.info(f"ConfigPanel: 准备插入特征值: {code}")
                 self.insert_code(code)
             else:
-                self.logger.debug(f"ConfigPanel: 忽略非K码: {code}")
+                self.logger.debug(f"ConfigPanel: 忽略非特征值: {code}")
                 
         except Exception as e:
             self.logger.error(f"ConfigPanel: 双击处理出错: {str(e)}", exc_info=True)

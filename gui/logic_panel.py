@@ -784,7 +784,7 @@ class LogicPanel(ttk.Frame):
                 # 检查前面的token是否合法
                 if last_token in ["AND", "OR", "NOT", "(", "→"]:
                     return False, "error_invalid_before_implication"
-                # 检查前面是否只有K码
+                # 检查前面是否只有特征值
                 if any(self.validator.is_bom_code(token) for token in current_tokens):
                     return False, "error_bom_before_implication"
             
@@ -825,6 +825,13 @@ class LogicPanel(ttk.Frame):
                     self.logger.debug(f"错误：BOM码前面的token无效: {last_token}")
                     return False, "error_invalid_before_bom"
                 
+            # 检查特征值的使用
+            if self.validator.is_k_code(next_token):
+                if "→" in current_tokens:
+                    return False, "error_k_after_implication"
+                if last_token not in ["(", "AND", "OR", "NOT"]:
+                    return False, "error_invalid_before_k"
+                
             # 检查括号规则
             if next_token == "(":
                 # 检查连续的左括号
@@ -851,13 +858,6 @@ class LogicPanel(ttk.Frame):
             if next_token in ["AND", "OR"]:
                 if last_token in ["AND", "OR", "NOT", "(", "→"]:
                     return False, "error_invalid_before_operator"
-                
-            # 检查K码规则
-            if self.validator.is_k_code(next_token):
-                if "→" in current_tokens:
-                    return False, "error_k_after_implication"
-                if last_token not in ["(", "AND", "OR", "NOT"]:
-                    return False, "error_invalid_before_k"
                 
             return True, ""
             

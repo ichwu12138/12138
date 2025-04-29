@@ -17,8 +17,8 @@ class ConfigProcessor:
         self.logger = Logger.get_logger(__name__)
         
         # 存储模块数据
-        self.modules: Dict[str, List[str]] = {}  # 模块名到F码列表的映射
-        self.f_k_mapping: Dict[str, List[str]] = {}  # F码到K码列表的映射
+        self.modules: Dict[str, List[str]] = {}  # 模块名到特征码列表的映射
+        self.f_k_mapping: Dict[str, List[str]] = {}  # 特征码到特征值列表的映射
         self.code_names: Dict[str, str] = {}  # 代码到名称的映射
         
     def import_excel(self, file_path: str) -> None:
@@ -74,11 +74,11 @@ class ConfigProcessor:
         try:
             # 检查并重命名列
             expected_columns = [
-                "选项ID/OptionsID(K-nummer)", 
-                "特征/Merkmale (F-nummer)", 
+                "特征值/Merkmalwert", 
+                "特征/Merkmale", 
                 "默认值/Standardwert", 
                 "多选/Mehrfachauswahl", 
-                "可选项/wählbare Option",
+                "特征值名称/Merkmalwertname",
                 "说明/Anmerkung"
             ]
             
@@ -90,13 +90,13 @@ class ConfigProcessor:
             
             # 重命名列
             column_mapping = {
-                "选项ID/OptionsID(K-nummer)": "k_code",
-                "特征/Merkmale (F-nummer)": "f_code",
-                "可选项/wählbare Option": "name"
+                "特征值/Merkmalwert": "k_code",
+                "特征/Merkmale": "f_code",
+                "特征值名称/Merkmalwertname": "name"
             }
             df = df.rename(columns=column_mapping)
             
-            # 初始化模块的F码列表
+            # 初始化模块的特征码列表
             self.modules[module_id] = []
             
             # 处理每一行数据
@@ -104,18 +104,18 @@ class ConfigProcessor:
                 if pd.isna(row['k_code']) or pd.isna(row['f_code']) or pd.isna(row['name']):
                     continue
                 
-                # 提取F码和K码
-                f_code_match = re.search(r'F\d+', str(row['f_code']))
-                k_code = str(row['k_code']).strip()  # 直接使用选项ID列的值作为K码
+                # 提取特征码和特征值
+                f_code_match = re.search(r'HBG_\d+_\d+', str(row['f_code']))
+                k_code = str(row['k_code']).strip()  # 特征值格式为 K-xxx-xxxxxx
                 
                 if f_code_match and k_code:
                     f_code = f_code_match.group()
                     
-                    # 添加到模块的F码列表
+                    # 添加到模块的特征码列表
                     if f_code not in self.modules[module_id]:
                         self.modules[module_id].append(f_code)
                     
-                    # 添加F码和K码的映射关系
+                    # 添加特征码和特征值的映射关系
                     if f_code not in self.f_k_mapping:
                         self.f_k_mapping[f_code] = []
                     if k_code not in self.f_k_mapping[f_code]:
@@ -135,18 +135,18 @@ class ConfigProcessor:
         """获取所有模块数据
         
         Returns:
-            Dict[str, List[str]]: 模块名到F码列表的映射
+            Dict[str, List[str]]: 模块名到特征码列表的映射
         """
         return self.modules
     
     def get_k_codes(self, f_code: str) -> List[str]:
-        """获取F码对应的K码列表
+        """获取特征码对应的特征值列表
         
         Args:
-            f_code: F码
+            f_code: 特征码
             
         Returns:
-            List[str]: K码列表
+            List[str]: 特征值列表
         """
         return self.f_k_mapping.get(f_code, [])
     
@@ -154,7 +154,7 @@ class ConfigProcessor:
         """获取代码对应的名称
         
         Args:
-            code: F码或K码
+            code: 特征码或特征值
             
         Returns:
             str: 代码名称
@@ -162,11 +162,11 @@ class ConfigProcessor:
         return self.code_names.get(code, code)
     
     def is_valid_k_code_for_f_code(self, f_code: str, k_code: str) -> bool:
-        """验证K码是否属于F码
+        """验证特征值是否属于特征码
         
         Args:
-            f_code: F码
-            k_code: K码
+            f_code: 特征码
+            k_code: 特征值
             
         Returns:
             bool: 是否有效
@@ -180,10 +180,10 @@ class ConfigProcessor:
         self.code_names.clear()
     
     def get_all_k_codes(self) -> List[str]:
-        """获取所有有效的K码
+        """获取所有有效的特征值
         
         Returns:
-            List[str]: K码列表
+            List[str]: 特征值列表
         """
         k_codes = []
         for f_codes in self.f_k_mapping.values():
@@ -191,12 +191,12 @@ class ConfigProcessor:
         return list(set(k_codes))  # 去重
     
     def is_valid_k_code(self, code: str) -> bool:
-        """检查是否为有效的K码
+        """检查是否为有效的特征值
         
         Args:
             code: 要检查的代码
             
         Returns:
-            bool: 是否为有效的K码
+            bool: 是否为有效的特征值
         """
         return code in self.get_all_k_codes() 

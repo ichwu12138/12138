@@ -1,33 +1,20 @@
 {
   "rules": [
     {
-      "logic_id": "BL02",
+      "logic_id": "BL01",
       "tags": "",
       "tech_doc_path": "",
       "comment": {
         "text": "",
         "images": {}
       },
-      "selection_expression": "K03_03_02",
+      "selection_expression": "K-200-000000  AND K-200-000329",
       "logic_relation": "→",
-      "impact_expression": "PL-Sitze04-1161296",
-      "status": "enabled"
-    },
-    {
-      "logic_id": "BL05",
-      "tags": "",
-      "tech_doc_path": "",
-      "comment": {
-        "text": "",
-        "images": {}
-      },
-      "selection_expression": "K03_04_02",
-      "logic_relation": "→",
-      "impact_expression": "PL-Sitze04-1161313",
+      "impact_expression": "PL-GrundKabine-10019231",
       "status": "enabled"
     }
   ],
-  "saved_at": "2025-04-28T13:27:47.756237",
+  "saved_at": "2025-04-29T08:38:32.934081",
   "exported": false,
-  "timestamp": "20250428_132747"
+  "timestamp": "20250429_083832"
 }

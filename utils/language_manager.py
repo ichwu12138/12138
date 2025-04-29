@@ -185,7 +185,12 @@ class LanguageManager:
             "temp_rules_load_error": "加载临时保存的BOM逻辑关系失败",
             "temp_rules_save_success": "BOM逻辑关系已临时保存",
             "temp_rules_save_error": "临时保存BOM逻辑关系失败",
-            "confirm_delete_rule": "确定要删除这条规则吗？"
+            "confirm_delete_rule": "确定要删除这条规则吗？",
+            "feature_value": "特征值",
+            "feature_code": "特征",
+            "feature_value_name": "特征值名称",
+            "feature_code_format": "特征码格式：HBG_xxx_xxxxx",
+            "feature_value_format": "特征值格式：K-xxx-xxxxxx"
         })
         
         # 英文翻译
@@ -353,7 +358,12 @@ class LanguageManager:
             "temp_rules_load_error": "Failed to load temporarily saved BOM logic rules",
             "temp_rules_save_success": "BOM logic rules temporarily saved",
             "temp_rules_save_error": "Failed to temporarily save BOM logic rules",
-            "confirm_delete_rule": "Are you sure you want to delete this rule?"
+            "confirm_delete_rule": "Are you sure you want to delete this rule?",
+            "feature_value": "Feature Value",
+            "feature_code": "Feature",
+            "feature_value_name": "Feature Value Name",
+            "feature_code_format": "Feature Code Format: HBG_xxx_xxxxx",
+            "feature_value_format": "Feature Value Format: K-xxx-xxxxxx"
         })
         
         # 德文翻译
@@ -521,7 +531,12 @@ class LanguageManager:
             "temp_rules_load_error": "Fehler beim Laden der temporär gespeicherten BOM-Logikregeln",
             "temp_rules_save_success": "BOM-Logikregeln temporär gespeichert",
             "temp_rules_save_error": "Fehler beim temporären Speichern der BOM-Logikregeln",
-            "confirm_delete_rule": "Möchten Sie diese Regel wirklich löschen?"
+            "confirm_delete_rule": "Möchten Sie diese Regel wirklich löschen?",
+            "feature_value": "Merkmalwert",
+            "feature_code": "Merkmale",
+            "feature_value_name": "Merkmalwertname",
+            "feature_code_format": "Merkmalcode Format: HBG_xxx_xxxxx",
+            "feature_value_format": "Merkmalwert Format: K-xxx-xxxxxx"
         })
         
     def add_callback(self, callback):

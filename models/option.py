@@ -7,7 +7,7 @@ if TYPE_CHECKING:
 @dataclass
 class Option:
     """选项模型类"""
-    k_code: str               # 选项码 Kxx
+    k_code: str               # 特征值 K-xxx-xxxxxx
     name: str                 # 选项名称
     value: str               # 可选值
     description: str = ""    # 说明
