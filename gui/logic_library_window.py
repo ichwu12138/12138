@@ -29,6 +29,9 @@ class LogicLibraryWindow(tk.Toplevel):
         # 获取日志记录器
         self.logger = Logger.get_logger(__name__)
         
+        # 添加规则缓存
+        self.cached_rules = []
+        
         # 设置窗口属性
         self.title(language_manager.get_text("logic_library"))
         self.minsize(1024, 768)
@@ -358,18 +361,110 @@ class LogicLibraryWindow(tk.Toplevel):
         
     def _on_search_changed(self, *args):
         """搜索内容变化事件处理"""
-        search_text = self.search_var.get().lower()
+        search_text = self.search_var.get().strip()
         
-        # 遍历所有规则
-        for item in self.tree.get_children():
-            values = self.tree.item(item)["values"]
-            # 检查规则ID、条件和影响是否包含搜索文本
-            if (search_text in str(values[0]).lower() or
-                search_text in str(values[1]).lower() or
-                search_text in str(values[2]).lower()):
-                self.tree.reattach(item, "", "end")  # 显示匹配的项
-            else:
-                self.tree.detach(item)  # 隐藏不匹配的项
+        try:
+            # 清空当前显示
+            for item in self.tree.get_children():
+                self.tree.delete(item)
+            
+            # 如果搜索框为空，显示缓存的所有规则
+            if not search_text:
+                self._show_cached_rules()
+                return
+            
+            # 使用缓存的规则进行搜索，避免重复加载
+            matched_rules = 0
+            search_upper = search_text.upper()
+            
+            for rule in self.cached_rules:
+                show_rule = False
+                
+                # 1. K码搜索（严格顺序匹配）
+                if search_upper == 'K' or search_upper.startswith('K-'):
+                    if rule.condition.upper().startswith(search_upper):
+                        show_rule = True
+                
+                # 2. 数字搜索
+                elif search_text.isdigit():
+                    # 2.1 影响项表达式（严格顺序匹配最后一个-后的数字）
+                    impact_parts = rule.action.split('-')
+                    if impact_parts and impact_parts[-1].startswith(search_text):
+                        show_rule = True
+                    # 2.2 标签中的数字（如果标签包含数字，也进行搜索）
+                    elif hasattr(rule, 'tags') and rule.tags:
+                        if any(tag.strip().startswith(search_text) for tag in str(rule.tags).split(',')):
+                            show_rule = True
+                
+                # 3. 标签搜索（严格顺序匹配）
+                elif hasattr(rule, 'tags') and rule.tags:
+                    if any(tag.strip().startswith(search_text) for tag in str(rule.tags).split(',')):
+                        show_rule = True
+                
+                # 4. 通用搜索（严格顺序匹配）
+                else:
+                    if (rule.rule_id.upper().startswith(search_upper) or
+                        rule.condition.upper().startswith(search_upper) or
+                        rule.action.startswith(search_text) or
+                        (hasattr(rule, 'tags') and rule.tags and 
+                         any(tag.strip().startswith(search_text) for tag in str(rule.tags).split(',')))):
+                        show_rule = True
+                
+                # 如果规则匹配，显示它
+                if show_rule:
+                    effect_text = f"→ {rule.action}"
+                    self.tree.insert(
+                        "",
+                        "end",
+                        iid=rule.rule_id,
+                        values=(
+                            rule.rule_id,
+                            rule.condition,
+                            effect_text,
+                            language_manager.get_text(rule.status.value),
+                            rule.tags if hasattr(rule, 'tags') else "",
+                            os.path.basename(rule.tech_doc_path) if hasattr(rule, 'tech_doc_path') and rule.tech_doc_path else ""
+                        )
+                    )
+                    matched_rules += 1
+            
+            self.logger.info(f"搜索 '{search_text}' 完成：显示 {matched_rules}/{len(self.cached_rules)} 条规则")
+            
+        except Exception as e:
+            self.logger.error(f"搜索失败: {str(e)}")
+            # 发生错误时显示所有缓存的规则
+            self._show_cached_rules()
+            
+    def _show_cached_rules(self):
+        """显示所有缓存的规则"""
+        try:
+            # 清空当前显示
+            for item in self.tree.get_children():
+                self.tree.delete(item)
+                
+            # 显示所有缓存的规则
+            for rule in self.cached_rules:
+                effect_text = f"→ {rule.action}"
+                self.tree.insert(
+                    "",
+                    "end",
+                    iid=rule.rule_id,
+                    values=(
+                        rule.rule_id,
+                        rule.condition,
+                        effect_text,
+                        language_manager.get_text(rule.status.value),
+                        rule.tags if hasattr(rule, 'tags') else "",
+                        os.path.basename(rule.tech_doc_path) if hasattr(rule, 'tech_doc_path') and rule.tech_doc_path else ""
+                    )
+                )
+                
+            self.logger.info(f"已显示所有规则（共 {len(self.cached_rules)} 条）")
+            
+        except Exception as e:
+            self.logger.error(f"显示缓存规则失败: {str(e)}")
+            # 如果显示缓存失败，尝试重新加载
+            self._load_rules()
         
     def _on_double_click(self, event):
         """双击事件处理"""
@@ -421,7 +516,7 @@ class LogicLibraryWindow(tk.Toplevel):
             ).pack(pady=10)
             
             # 获取当前标签值（确保是字符串）
-            current_tags = rule.tags if rule.tags else ""
+            current_tags = str(rule.tags) if hasattr(rule, 'tags') and rule.tags is not None else ""
             tags_var = tk.StringVar(value=current_tags)
             
             entry = ttk.Entry(
@@ -465,7 +560,7 @@ class LogicLibraryWindow(tk.Toplevel):
     def _save_tags(self, dialog, item, rule, tags):
         """保存标签"""
         try:
-            # 更新规则的标签
+            # 直接使用用户输入的标签值，不做任何处理
             rule.tags = tags
             
             # 更新树状视图显示
@@ -473,11 +568,15 @@ class LogicLibraryWindow(tk.Toplevel):
             values[4] = tags
             self.tree.item(item, values=values)
             
-            # 保存更改
+            # 强制保存到临时文件
             self.logic_builder._save_rules()
+            self.logger.info(f"已保存标签到临时文件: {rule.rule_id} -> {tags}")
             
-            # 标记规则未导出
-            self.logic_builder.rules_exported = False
+            # 更新缓存中的规则
+            for cached_rule in self.cached_rules:
+                if cached_rule.rule_id == rule.rule_id:
+                    cached_rule.tags = tags
+                    break
             
             # 通知规则变更
             self.logic_builder.notify_rule_change("modified", item, rule)
@@ -486,7 +585,7 @@ class LogicLibraryWindow(tk.Toplevel):
             dialog.destroy()
             
         except Exception as e:
-            self.logger.error(f"保存标签失败: {str(e)}", exc_info=True)
+            self.logger.error(f"保存标签失败: {str(e)}")
             messagebox.showerror(
                 language_manager.get_text("error"),
                 str(e)
@@ -532,8 +631,6 @@ class LogicLibraryWindow(tk.Toplevel):
 
             # 保存当前窗口状态
             current_state = self.state()
-            
-            # 暂时取消置顶状态（如果有）
             if current_state == 'zoomed':
                 self.state('normal')
             
@@ -558,14 +655,18 @@ class LogicLibraryWindow(tk.Toplevel):
                     
                     # 更新树状视图显示
                     values = list(self.tree.item(item)["values"])
-                    values[5] = os.path.basename(file_path)  # 只显示文件名
+                    values[5] = os.path.basename(file_path)
                     self.tree.item(item, values=values)
                     
-                    # 保存更改
+                    # 强制保存到临时文件
                     self.logic_builder._save_rules()
+                    self.logger.info(f"已保存技术文档到临时文件: {rule.rule_id} -> {file_path}")
                     
-                    # 标记规则未导出
-                    self.logic_builder.rules_exported = False
+                    # 更新缓存中的规则
+                    for cached_rule in self.cached_rules:
+                        if cached_rule.rule_id == rule.rule_id:
+                            cached_rule.tech_doc_path = file_path
+                            break
                     
                     # 通知规则变更
                     self.logic_builder.notify_rule_change("modified", item, rule)
@@ -578,7 +679,7 @@ class LogicLibraryWindow(tk.Toplevel):
                     )
                     
                 except Exception as e:
-                    self.logger.error(f"保存技术文档路径失败: {str(e)}", exc_info=True)
+                    self.logger.error(f"保存技术文档路径失败: {str(e)}")
                     messagebox.showerror(
                         language_manager.get_text("error"),
                         str(e),
@@ -586,7 +687,7 @@ class LogicLibraryWindow(tk.Toplevel):
                     )
                 
         except Exception as e:
-            self.logger.error(f"导入技术文档失败: {str(e)}", exc_info=True)
+            self.logger.error(f"导入技术文档失败: {str(e)}")
             messagebox.showerror(
                 language_manager.get_text("error"),
                 str(e),
@@ -599,33 +700,38 @@ class LogicLibraryWindow(tk.Toplevel):
             # 清空现有数据
             for item in self.tree.get_children():
                 self.tree.delete(item)
-                
-            # 加载所有规则
-            for rule in self.logic_builder.get_rules():
-                effect_text = f"→ {rule.action}"
-                try:
-                    self.tree.insert(
-                        "",
-                        "end",
-                        iid=rule.rule_id,
-                        values=(
-                            rule.rule_id,
-                            rule.condition,
-                            effect_text,
-                            language_manager.get_text(rule.status.value),
-                            rule.tags,
-                            os.path.basename(rule.tech_doc_path) if rule.tech_doc_path else ""
-                        )
-                    )
-                except Exception as e:
-                    self.logger.error(f"插入规则到树状视图失败: {str(e)}, 规则ID: {rule.rule_id}")
-                    continue
-                
-            self.logger.info(f"已加载 {len(self.tree.get_children())} 条 BOM 逻辑关系规则")
-                
-        except Exception as e:
-            self.logger.error(f"加载规则数据失败: {str(e)}", exc_info=True)
             
+            # 强制从文件重新加载规则到 LogicBuilder
+            self.logic_builder.load_from_temp_file()
+            
+            # 更新规则缓存
+            self.cached_rules = list(self.logic_builder.get_rules())
+            
+            # 加载所有规则
+            rules_loaded = 0
+            for rule in self.cached_rules:
+                effect_text = f"→ {rule.action}"
+                
+                self.tree.insert(
+                    "",
+                    "end",
+                    iid=rule.rule_id,
+                    values=(
+                        rule.rule_id,
+                        rule.condition,
+                        effect_text,
+                        language_manager.get_text(rule.status.value),
+                        rule.tags if hasattr(rule, 'tags') else "",
+                        os.path.basename(rule.tech_doc_path) if hasattr(rule, 'tech_doc_path') and rule.tech_doc_path else ""
+                    )
+                )
+                rules_loaded += 1
+            
+            self.logger.info(f"已加载 {rules_loaded} 条规则")
+            
+        except Exception as e:
+            self.logger.error(f"加载规则数据失败: {str(e)}")
+
     def _on_rule_change(self, change_type, rule_id=None, rule=None):
         """规则变更事件处理"""
         try:

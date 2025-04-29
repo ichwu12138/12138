@@ -18,7 +18,7 @@ class LogicRule:
     action: str                      # 影响项表达式
     relation: str                    # 逻辑关系
     status: RuleStatus = RuleStatus.ENABLED
-    tags: List[str] = None           # 标签列表
+    tags: str = ""                   # 标签字符串
     tech_doc_path: str = ""          # 技术文档路径
     created_at: datetime = field(default_factory=datetime.now)
     modified_at: datetime = field(default_factory=datetime.now)
@@ -26,7 +26,11 @@ class LogicRule:
 
     def __post_init__(self):
         """初始化后的处理"""
-        self.tags = self.tags or []
+        # 确保 tags 是字符串类型
+        if self.tags is None:
+            self.tags = ""
+        elif not isinstance(self.tags, str):
+            self.tags = str(self.tags)
     
     @property
     def condition_expr(self) -> str:
@@ -45,7 +49,7 @@ class LogicRule:
         self.status = new_status
         self.modified_at = datetime.now()
     
-    def update_tags(self, new_tags: List[str]):
+    def update_tags(self, new_tags: str):
         """更新标签"""
         self.tags = new_tags
     
@@ -58,7 +62,7 @@ class LogicRule:
         # 基本字段
         result = {
             "logic_id": self.rule_id,
-            "tags": ",".join(self.tags) if self.tags else "",
+            "tags": self.tags,  # 直接使用标签字符串
             "tech_doc_path": self.tech_doc_path,
             "selection_expression": self.condition,
             "logic_relation": self.relation,
@@ -77,14 +81,10 @@ class LogicRule:
             LogicRule: 规则实例
         """
         try:
-            # 处理tags字段
+            # 处理tags字段 - 保持原始字符串格式
             tags = data.get('tags', '')
-            if isinstance(tags, str):
-                tags = tags.split(',') if tags else []
-            elif isinstance(tags, list):
-                tags = tags
-            else:
-                tags = []
+            if not isinstance(tags, str):
+                tags = str(tags) if tags is not None else ""
             
             # 处理技术文档路径
             tech_doc_path = data.get('tech_doc_path', '')

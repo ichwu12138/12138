@@ -2,19 +2,27 @@
   "rules": [
     {
       "logic_id": "BL01",
-      "tags": "1",
-      "tech_doc_path": "",
-      "selection_expression": "K-200-000300  AND K-200-000301",
-      "logic_relation": "→",
-      "impact_expression": "PL-Sitze03-11612962"
-    },
-    {
-      "logic_id": "BL02",
-      "tags": "",
+      "tags": "12",
       "tech_doc_path": "",
       "selection_expression": "K-200-000344",
       "logic_relation": "→",
-      "impact_expression": "PL-Sitze04-1161296"
+      "impact_expression": "PL-Sitze03-1123244"
+    },
+    {
+      "logic_id": "BL02",
+      "tags": "底盘,1",
+      "tech_doc_path": "",
+      "selection_expression": "K-200-000011",
+      "logic_relation": "→",
+      "impact_expression": "PL-Sitze03-1161297"
+    },
+    {
+      "logic_id": "BL03",
+      "tags": "你好",
+      "tech_doc_path": "",
+      "selection_expression": "K-200-000169",
+      "logic_relation": "→",
+      "impact_expression": "PL-Sitze03-1161313"
     }
   ],
   "exported": false
