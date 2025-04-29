@@ -11,7 +11,7 @@ from datetime import datetime
 from typing import Dict, List, Any, Optional, Tuple, Set
 import uuid
 
-from models.logic_rule import LogicRule, RuleType, RuleStatus
+from models.logic_rule import LogicRule, RuleStatus
 from core.config_processor import ConfigProcessor
 from utils.config_manager import config_manager, DATA_DIR
 from utils.observer import Observable

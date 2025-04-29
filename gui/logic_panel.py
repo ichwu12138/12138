@@ -14,7 +14,7 @@ from utils.language_manager import language_manager
 from utils.logger import Logger
 from core.logic_builder import LogicBuilder
 from utils.validator import ExpressionValidator
-from models.logic_rule import RuleStatus, RuleType, LogicRule
+from models.logic_rule import RuleStatus, LogicRule
 from gui.logic_rule_editor import LogicRuleEditor
 
 class LogicPanel(ttk.Frame):

@@ -8,7 +8,7 @@ from tkinter import messagebox
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 
-from models.logic_rule import RuleStatus, RuleType
+from models.logic_rule import RuleStatus
 from utils.language_manager import language_manager
 from utils.logger import Logger
 from utils.validator import ExpressionValidator

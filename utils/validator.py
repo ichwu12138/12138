@@ -28,16 +28,10 @@ class ExpressionValidator:
         self.bom_processor = bom_processor
     
     def is_k_code(self, token: str) -> bool:
-        """检查是否为特征值（原K码）"""
+        """检查是否为特征值（K码）"""
         if self.config_processor:
             return self.config_processor.is_valid_k_code(token)
-        return bool(re.match(r'^K-\d{3}-\d{6}$', token))  # 新的特征值格式
-    
-    def is_f_code(self, token: str) -> bool:
-        """检查是否为特征码（原F码）"""
-        if self.config_processor:
-            return self.config_processor.is_valid_f_code(token)
-        return bool(re.match(r'^HBG_\d+_\d+$', token))  # 新的特征码格式
+        return bool(re.match(r'^K-\d{3}-\d{6}$', token))
     
     def is_bom_code(self, token: str) -> bool:
         """检查是否为BOM码"""
@@ -169,73 +163,3 @@ class ExpressionValidator:
             return False, f"影响项表达式错误: {message}"
             
         return True, ""
-    
-    def validate_next_token(self, current_expr: str, next_token: str) -> Tuple[bool, str]:
-        """验证下一个要插入的token是否合法
-        
-        Args:
-            current_expr: 当前表达式
-            next_token: 下一个要插入的token
-            
-        Returns:
-            Tuple[bool, str]: (是否可以插入, 错误消息)
-        """
-        # 如果是第一个token
-        if not current_expr:
-            # 第一个token必须是左括号、NOT或K码
-            if next_token == "(" or next_token == "NOT" or self.is_k_code(next_token):
-                return True, ""
-            return False, "表达式必须以左括号、NOT或K码开始"
-            
-        # 分割当前表达式
-        current_tokens = [t for t in current_expr.split() if t]
-        if not current_tokens:
-            return self.validate_next_token("", next_token)
-            
-        last_token = current_tokens[-1]
-        has_relation = "→" in current_tokens
-        
-        # 根据上一个token判断下一个token是否合法
-        if last_token in ["AND", "OR"]:
-            # 操作符后面只能跟左括号、NOT或变量
-            if next_token in ["(", "NOT"] or (has_relation and self.is_bom_code(next_token)) or (not has_relation and self.is_k_code(next_token)):
-                return True, ""
-            return False, "操作符后面只能跟左括号、NOT或变量"
-            
-        elif last_token == "NOT":
-            # NOT后面只能跟左括号或变量
-            if next_token == "(" or (has_relation and self.is_bom_code(next_token)) or (not has_relation and self.is_k_code(next_token)):
-                return True, ""
-            return False, "NOT后面只能跟左括号或变量"
-            
-        elif last_token == "(":
-            # 左括号后面只能跟左括号、NOT或变量
-            if next_token in ["(", "NOT"] or (has_relation and self.is_bom_code(next_token)) or (not has_relation and self.is_k_code(next_token)):
-                return True, ""
-            return False, "左括号后面只能跟左括号、NOT或变量"
-            
-        elif last_token == ")":
-            # 右括号后面只能跟右括号、AND、OR或→
-            if next_token in [")", "AND", "OR"] or (not has_relation and next_token == "→"):
-                return True, ""
-            return False, "右括号后面只能跟右括号、AND、OR或→"
-            
-        elif self.is_k_code(last_token):
-            # K码后面只能跟右括号、AND、OR或→
-            if next_token in [")", "AND", "OR"] or (not has_relation and next_token == "→"):
-                return True, ""
-            return False, "K码后面只能跟右括号、AND、OR或→"
-            
-        elif last_token == "→":
-            # →后面只能跟左括号、NOT或BOM码
-            if next_token in ["(", "NOT"] or self.is_bom_code(next_token):
-                return True, ""
-            return False, "→后面只能跟左括号、NOT或BOM码"
-            
-        elif self.is_bom_code(last_token):
-            # BOM码后面只能跟右括号、AND或OR
-            if next_token in [")", "AND", "OR"]:
-                return True, ""
-            return False, "BOM码后面只能跟右括号、AND或OR"
-            
-        return False, "无效的表达式状态"

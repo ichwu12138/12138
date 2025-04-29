@@ -2,12 +2,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import List, Optional, Dict, Any
 from datetime import datetime
-from utils.config_manager import RULE_TYPE_CONFIG, RULE_STATUS_CONFIG
-
-class RuleType(Enum):
-    """规则类型"""
-    STATIC = RULE_TYPE_CONFIG["static"]
-    DYNAMIC = RULE_TYPE_CONFIG["dynamic"]
+from utils.config_manager import RULE_STATUS_CONFIG
 
 class RuleStatus(Enum):
     """规则状态"""
@@ -19,7 +14,6 @@ class RuleStatus(Enum):
 class LogicRule:
     """逻辑规则模型类"""
     rule_id: str                      # 逻辑ID Lxx
-    rule_type: RuleType              # 规则类型
     condition: str                   # 选择项表达式
     action: str                      # 影响项表达式
     relation: str                    # 逻辑关系
@@ -29,7 +23,6 @@ class LogicRule:
     created_at: datetime = field(default_factory=datetime.now)
     modified_at: datetime = field(default_factory=datetime.now)
     is_editable: bool = True
-    _effect_expr: str = None  # 添加 _effect_expr 参数，默认为 None
 
     def __post_init__(self):
         """初始化后的处理"""
@@ -43,14 +36,9 @@ class LogicRule:
     @property
     def effect_expr(self) -> str:
         """影响项表达式属性"""
-        if self.rule_type == RuleType.STATIC and self.relation in ["→", ":"]:
+        if self.relation in ["→", ":"]:
             return f"{self.relation} {self.action}"
         return self.action
-    
-    @effect_expr.setter
-    def effect_expr(self, value):
-        """设置影响项表达式"""
-        self._effect_expr = value
     
     def update_status(self, new_status: RuleStatus) -> None:
         """更新规则状态"""
@@ -116,7 +104,6 @@ class LogicRule:
             # 创建规则实例
             return cls(
                 rule_id=rule_id,
-                rule_type=RuleType.STATIC,  # 默认为静态规则
                 condition=condition,
                 action=action,
                 relation=relation,

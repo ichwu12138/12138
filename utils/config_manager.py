@@ -22,12 +22,6 @@ CONFIG_FILE = os.path.join(DATA_DIR, "app_config.json")
 # 创建数据目录（如果不存在）
 os.makedirs(DATA_DIR, exist_ok=True)
 
-# 规则类型配置
-RULE_TYPE_CONFIG = {
-    "static": "static",
-    "dynamic": "dynamic"
-}
-
 # 规则状态配置
 RULE_STATUS_CONFIG = {
     "enabled": "enabled",
@@ -39,8 +33,18 @@ RULE_STATUS_CONFIG = {
 LOGIC_OPERATOR_CONFIG = {
     "and": "AND",
     "or": "OR",
-    "not": "NOT",
-    "xor": "XOR"
+    "not": "NOT"
+}
+
+# 关系符号配置
+RELATION_SYMBOL_CONFIG = {
+    "implication": "→"
+}
+
+# 括号配置 
+BRACKET_CONFIG = {
+    "left": "(",
+    "right": ")"
 }
 
 # 条件类型配置
@@ -57,26 +61,12 @@ ACTION_TYPE_CONFIG = {
     "info": "info"
 }
 
-# 关系符号配置
-RELATION_SYMBOL_CONFIG = {
-    "implication": "→",
-    "prerequisite": ":"
-}
-
 # 操作符配置
 OPERATOR_CONFIG = {
     "equals": "==",
     "not_equals": "!=",
     "empty": "empty",
     "not_empty": "not empty"
-}
-
-# 括号配置 
-BRACKET_CONFIG = {
-    "left": "(",
-    "right": ")",
-    "left_square": "[",
-    "right_square": "]"
 }
 
 # 条件类型规则配置
@@ -227,17 +217,6 @@ class ConfigManager:
         if section in ui_config and key in ui_config[section]:
             return ui_config[section][key]
         return default
-    
-    def get_rule_type(self, key: str) -> str:
-        """获取规则类型
-        
-        Args:
-            key: 规则类型键
-            
-        Returns:
-            str: 规则类型值
-        """
-        return RULE_TYPE_CONFIG.get(key, key)
     
     def get_rule_status(self, key: str) -> str:
         """获取规则状态
