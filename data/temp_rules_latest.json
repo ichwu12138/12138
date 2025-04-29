@@ -3,18 +3,10 @@
     {
       "logic_id": "BL01",
       "tags": "1",
-      "tech_doc_path": "C:/Users/mengy/Desktop/1.docx",
-      "selection_expression": "K-200-000300",
+      "tech_doc_path": "",
+      "selection_expression": "K-200-000300  AND K-200-000301",
       "logic_relation": "→",
-      "impact_expression": "PL-Sitze01-1123244"
-    },
-    {
-      "logic_id": "BL02",
-      "tags": "2",
-      "tech_doc_path": "C:/Users/mengy/Desktop/2.docx",
-      "selection_expression": "K-200-000009",
-      "logic_relation": "→",
-      "impact_expression": "PL-Sitze01-1161310"
+      "impact_expression": "PL-Sitze03-11612962"
     }
   ],
   "exported": false

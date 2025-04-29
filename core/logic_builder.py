@@ -163,13 +163,14 @@ class LogicBuilder(Observable):
             # 标记规则已导出
             self.rules_exported = True
             
-            # 保存导出状态
-            self._save_rules()
-            
+            # 创建导出数据
             export_data = {
                 'rules': rules_data,
                 'exported_at': datetime.now().isoformat()
             }
+            
+            # 清空临时文件
+            self.clear_rules()
             
             self.logger.info(f"规则导出完成，共导出 {len(rules_data)} 条规则")
             

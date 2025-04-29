@@ -1,0 +1,162 @@
+2025-04-29 11:13:48,892 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250429_111348.log
+2025-04-29 11:13:49,132 [INFO] __main__ - 正在启动程序...
+2025-04-29 11:13:49,132 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-29 11:13:49,132 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-29 11:13:49,132 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-29 11:13:49,155 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-29 11:13:50,317 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-29 11:13:50,339 [INFO] __main__ - 语言选择结果: zh
+2025-04-29 11:13:50,339 [INFO] __main__ - 正在创建主题选择对话框...
+2025-04-29 11:13:50,339 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-04-29 11:13:50,344 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-04-29 11:13:51,789 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-04-29 11:13:51,807 [INFO] __main__ - 主题选择结果: light
+2025-04-29 11:13:51,810 [INFO] __main__ - 正在配置主窗口...
+2025-04-29 11:13:51,924 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-29 11:13:51,926 [INFO] core.logic_builder - 已加载 2 条规则
+2025-04-29 11:13:51,992 [INFO] gui.logic_panel - 规则未加载状态，等待用户确认后再加载规则
+2025-04-29 11:13:52,007 [INFO] __main__ - MainWindow实例创建完成
+2025-04-29 11:13:52,301 [INFO] __main__ - 开始mainloop()...
+2025-04-29 11:13:53,800 [INFO] core.config_processor - 找到工作表: ['1.Kabine']
+2025-04-29 11:13:53,801 [INFO] core.config_processor - 处理工作表: 1.Kabine -> 模块: 1.Kabine
+2025-04-29 11:13:53,822 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/Kabinemekrmal(Test).xlsx
+2025-04-29 11:13:53,825 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/Kabinemekrmal(Test).xlsx
+2025-04-29 11:13:53,825 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/Kabinemekrmal(Test).xlsx
+2025-04-29 11:13:54,941 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-29 11:13:54,941 [INFO] core.bom_processor - 已清空现有数据
+2025-04-29 11:13:54,941 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-04-29 11:13:54,947 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['Max-Gruppe']
+2025-04-29 11:13:54,948 [INFO] core.bom_processor - 正在读取 Max-Gruppe 工作表...
+2025-04-29 11:13:54,959 [INFO] core.bom_processor - 成功读取工作表，共 154 行数据
+2025-04-29 11:13:54,959 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-04-29 11:13:54,960 [INFO] core.bom_processor - 过滤空层级后剩余 153 行数据
+2025-04-29 11:13:54,961 [INFO] core.bom_processor - 
+开始处理数据...
+2025-04-29 11:13:54,964 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-04-29 11:13:54,965 [INFO] core.bom_processor - 第 1 级节点数量: 1
+2025-04-29 11:13:54,965 [INFO] core.bom_processor - 第 2 级节点数量: 133
+2025-04-29 11:13:54,965 [INFO] core.bom_processor - 第 3 级节点数量: 19
+2025-04-29 11:13:54,965 [INFO] core.bom_processor - BOM文件导入成功，共处理 153 个项目
+2025-04-29 11:13:54,966 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-29 11:13:54,966 [INFO] gui.bom_panel - 开始刷新树状图
+2025-04-29 11:13:54,967 [INFO] gui.bom_panel - 树状图刷新完成
+2025-04-29 11:13:54,968 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-29 11:13:54,968 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-29 11:13:56,408 [INFO] core.logic_builder - 规则数据已成功清空
+2025-04-29 11:13:56,409 [INFO] gui.logic_panel - 收到规则变更事件: type=cleared, rule_id=None
+2025-04-29 11:13:56,409 [INFO] gui.logic_panel - 已清空所有规则，重置规则已加载标志
+2025-04-29 11:13:56,409 [INFO] gui.main_window_tk - 用户取消加载规则，设置规则已加载标志为False
+2025-04-29 11:14:08,303 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I011
+2025-04-29 11:14:08,304 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000300 Ziegler Standardsitze
+2025-04-29 11:14:08,304 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000300
+2025-04-29 11:14:08,305 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000300
+2025-04-29 11:14:08,305 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-29 11:14:08,306 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-29 11:14:08,306 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-29 11:14:08,307 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000300
+2025-04-29 11:14:08,307 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000300, 当前表达式: K-200-000300 
+2025-04-29 11:14:08,308 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000300
+2025-04-29 11:14:09,087 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K-200-000300  → 
+2025-04-29 11:14:11,753 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I027
+2025-04-29 11:14:11,754 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1161296 - PA-Sitz Std. mechanisch / BA-seat mechanically
+Z-Cab NG Einflaschengerät / Z-Cab NG single-bottle device
+2025-04-29 11:14:11,754 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1161296
+2025-04-29 11:14:11,755 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Sitze02
+2025-04-29 11:14:11,755 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Sitze02-1161296
+2025-04-29 11:14:11,755 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-29 11:14:11,756 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-29 11:14:11,756 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-29 11:14:11,756 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Sitze02-1161296
+2025-04-29 11:14:11,757 [DEBUG] gui.logic_panel - 验证BOM码: PL-Sitze02-1161296
+2025-04-29 11:14:11,757 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-Sitze02-1161296, 当前表达式: K-200-000300  → PL-Sitze02-1161296 
+2025-04-29 11:14:11,758 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Sitze02-1161296
+2025-04-29 11:14:11,758 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Sitze02-1161296
+2025-04-29 11:14:12,178 [DEBUG] core.logic_builder - 规则数据已保存到临时文件
+2025-04-29 11:14:12,179 [INFO] gui.logic_panel - 收到规则变更事件: type=added, rule_id=BL01
+2025-04-29 11:14:12,180 [INFO] gui.logic_panel - 已添加新规则: BL01
+2025-04-29 11:14:12,180 [ERROR] gui.logic_panel - 保存规则时出错: Item BL01 already exists
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_panel.py", line 715, in _save_rule
+    self.tree.insert(
+    ~~~~~~~~~~~~~~~~^
+        "",
+        ^^^
+    ...<2 lines>...
+        values=(rule_id, condition, f"→ {effect}", status_text)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Python\Lib\tkinter\ttk.py", line 1346, in insert
+    res = self.tk.call(self._w, "insert", parent, index,
+        "-id", iid, *opts)
+_tkinter.TclError: Item BL01 already exists
+2025-04-29 11:14:15,960 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I011
+2025-04-29 11:14:15,961 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000300 Ziegler Standardsitze
+2025-04-29 11:14:15,961 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000300
+2025-04-29 11:14:15,962 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000300
+2025-04-29 11:14:15,962 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-29 11:14:15,962 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-29 11:14:15,963 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-29 11:14:15,963 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000300
+2025-04-29 11:14:17,076 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000300
+2025-04-29 11:14:19,192 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I012
+2025-04-29 11:14:19,193 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000301 Bostrom Integra Sitze
+2025-04-29 11:14:19,194 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000301
+2025-04-29 11:14:19,195 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000301
+2025-04-29 11:14:19,196 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-29 11:14:19,197 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-29 11:14:19,198 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-29 11:14:19,199 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000301
+2025-04-29 11:14:19,200 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000301, 当前表达式: K-200-000301 
+2025-04-29 11:14:19,200 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000301
+2025-04-29 11:14:19,927 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K-200-000301  → 
+2025-04-29 11:14:20,498 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I029
+2025-04-29 11:14:20,499 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1161313 - PA-Sitz f.Straffer li.kpl.mech / BA-seat f. tensioner le. cpl. mech.
+Z-Cab NG Einflaschengerät / Z-Cab NG single-bottle device
+2025-04-29 11:14:20,499 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1161313
+2025-04-29 11:14:20,499 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Sitze02
+2025-04-29 11:14:20,500 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Sitze02-1161313
+2025-04-29 11:14:20,500 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-29 11:14:20,501 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-29 11:14:20,502 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-29 11:14:20,502 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Sitze02-1161313
+2025-04-29 11:14:20,503 [DEBUG] gui.logic_panel - 验证BOM码: PL-Sitze02-1161313
+2025-04-29 11:14:20,504 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-Sitze02-1161313, 当前表达式: K-200-000301  → PL-Sitze02-1161313 
+2025-04-29 11:14:20,505 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Sitze02-1161313
+2025-04-29 11:14:20,505 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Sitze02-1161313
+2025-04-29 11:14:21,329 [DEBUG] core.logic_builder - 规则数据已保存到临时文件
+2025-04-29 11:14:21,330 [INFO] gui.logic_panel - 收到规则变更事件: type=added, rule_id=BL02
+2025-04-29 11:14:21,330 [INFO] gui.logic_panel - 已添加新规则: BL02
+2025-04-29 11:14:21,331 [ERROR] gui.logic_panel - 保存规则时出错: Item BL02 already exists
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\logic_panel.py", line 715, in _save_rule
+    self.tree.insert(
+    ~~~~~~~~~~~~~~~~^
+        "",
+        ^^^
+    ...<2 lines>...
+        values=(rule_id, condition, f"→ {effect}", status_text)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Python\Lib\tkinter\ttk.py", line 1346, in insert
+    res = self.tk.call(self._w, "insert", parent, index,
+        "-id", iid, *opts)
+_tkinter.TclError: Item BL02 already exists
+2025-04-29 11:14:26,076 [INFO] gui.logic_library_window - 已加载 2 条 BOM 逻辑关系规则
+2025-04-29 11:14:28,988 [DEBUG] core.logic_builder - 规则数据已保存到临时文件
+2025-04-29 11:14:28,989 [INFO] gui.logic_panel - 收到规则变更事件: type=modified, rule_id=BL01
+2025-04-29 11:14:28,989 [INFO] gui.logic_panel - 已更新规则: BL01
+2025-04-29 11:14:28,990 [INFO] gui.logic_library_window - 收到规则变更事件: type=modified, rule_id=BL01
+2025-04-29 11:14:28,990 [INFO] gui.logic_library_window - 已更新规则: BL01
+2025-04-29 11:14:30,682 [DEBUG] core.logic_builder - 规则数据已保存到临时文件
+2025-04-29 11:14:30,683 [INFO] gui.logic_panel - 收到规则变更事件: type=modified, rule_id=BL02
+2025-04-29 11:14:30,684 [INFO] gui.logic_panel - 已更新规则: BL02
+2025-04-29 11:14:30,684 [INFO] gui.logic_library_window - 收到规则变更事件: type=modified, rule_id=BL02
+2025-04-29 11:14:30,685 [INFO] gui.logic_library_window - 已更新规则: BL02
+2025-04-29 11:14:34,747 [DEBUG] core.logic_builder - 规则数据已保存到临时文件
+2025-04-29 11:14:34,747 [INFO] gui.logic_panel - 收到规则变更事件: type=modified, rule_id=BL01
+2025-04-29 11:14:34,747 [INFO] gui.logic_panel - 已更新规则: BL01
+2025-04-29 11:14:34,747 [INFO] gui.logic_library_window - 收到规则变更事件: type=modified, rule_id=BL01
+2025-04-29 11:14:34,747 [INFO] gui.logic_library_window - 已更新规则: BL01

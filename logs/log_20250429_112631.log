@@ -1,0 +1,102 @@
+2025-04-29 11:26:31,164 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250429_112631.log
+2025-04-29 11:26:31,411 [INFO] __main__ - 正在启动程序...
+2025-04-29 11:26:31,411 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-04-29 11:26:31,411 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-29 11:26:31,411 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-04-29 11:26:31,434 [INFO] __main__ - 正在创建语言选择对话框...
+2025-04-29 11:26:34,157 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-04-29 11:26:34,178 [INFO] __main__ - 语言选择结果: zh
+2025-04-29 11:26:34,178 [INFO] __main__ - 正在创建主题选择对话框...
+2025-04-29 11:26:34,178 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-04-29 11:26:34,184 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-04-29 11:26:35,252 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-04-29 11:26:35,272 [INFO] __main__ - 主题选择结果: light
+2025-04-29 11:26:35,275 [INFO] __main__ - 正在配置主窗口...
+2025-04-29 11:26:35,417 [INFO] __main__ - 开始创建MainWindow实例...
+2025-04-29 11:26:35,417 [INFO] core.logic_builder - 已加载 0 条规则
+2025-04-29 11:26:35,476 [INFO] gui.logic_panel - 规则未加载状态，等待用户确认后再加载规则
+2025-04-29 11:26:35,489 [INFO] __main__ - MainWindow实例创建完成
+2025-04-29 11:26:35,812 [INFO] __main__ - 开始mainloop()...
+2025-04-29 11:26:37,303 [INFO] core.config_processor - 找到工作表: ['1.Kabine']
+2025-04-29 11:26:37,303 [INFO] core.config_processor - 处理工作表: 1.Kabine -> 模块: 1.Kabine
+2025-04-29 11:26:37,326 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/Kabinemekrmal(Test).xlsx
+2025-04-29 11:26:37,328 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/Kabinemekrmal(Test).xlsx
+2025-04-29 11:26:37,329 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/Kabinemekrmal(Test).xlsx
+2025-04-29 11:26:38,308 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-29 11:26:38,308 [INFO] core.bom_processor - 已清空现有数据
+2025-04-29 11:26:38,308 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-04-29 11:26:38,313 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['Max-Gruppe']
+2025-04-29 11:26:38,313 [INFO] core.bom_processor - 正在读取 Max-Gruppe 工作表...
+2025-04-29 11:26:38,324 [INFO] core.bom_processor - 成功读取工作表，共 154 行数据
+2025-04-29 11:26:38,324 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-04-29 11:26:38,325 [INFO] core.bom_processor - 过滤空层级后剩余 153 行数据
+2025-04-29 11:26:38,326 [INFO] core.bom_processor - 
+开始处理数据...
+2025-04-29 11:26:38,329 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-04-29 11:26:38,330 [INFO] core.bom_processor - 第 1 级节点数量: 1
+2025-04-29 11:26:38,330 [INFO] core.bom_processor - 第 2 级节点数量: 133
+2025-04-29 11:26:38,330 [INFO] core.bom_processor - 第 3 级节点数量: 19
+2025-04-29 11:26:38,330 [INFO] core.bom_processor - BOM文件导入成功，共处理 153 个项目
+2025-04-29 11:26:38,331 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-29 11:26:38,331 [INFO] gui.bom_panel - 开始刷新树状图
+2025-04-29 11:26:38,332 [INFO] gui.bom_panel - 树状图刷新完成
+2025-04-29 11:26:38,333 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-29 11:26:38,334 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/Bom.xlsx
+2025-04-29 11:26:41,808 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I011
+2025-04-29 11:26:41,809 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000300 Ziegler Standardsitze
+2025-04-29 11:26:41,809 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000300
+2025-04-29 11:26:41,809 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000300
+2025-04-29 11:26:41,809 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-29 11:26:41,809 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-29 11:26:41,809 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-29 11:26:41,809 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000300
+2025-04-29 11:26:41,810 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000300, 当前表达式: K-200-000300 
+2025-04-29 11:26:41,810 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000300
+2025-04-29 11:26:42,666 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: AND, 当前表达式: K-200-000300  AND 
+2025-04-29 11:26:44,435 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I012
+2025-04-29 11:26:44,436 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000301 Bostrom Integra Sitze
+2025-04-29 11:26:44,437 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000301
+2025-04-29 11:26:44,437 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000301
+2025-04-29 11:26:44,438 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-04-29 11:26:44,438 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-04-29 11:26:44,439 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-04-29 11:26:44,439 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000301
+2025-04-29 11:26:44,440 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000301, 当前表达式: K-200-000300  AND K-200-000301 
+2025-04-29 11:26:44,441 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000301
+2025-04-29 11:26:45,185 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K-200-000300  AND K-200-000301  → 
+2025-04-29 11:26:46,126 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I037
+2025-04-29 11:26:46,127 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: [2] PL-Sitze03
+2025-04-29 11:26:46,985 [DEBUG] gui.bom_panel - BomPanel: 双击选中项 ID: I039
+2025-04-29 11:26:46,986 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1161296 - PA-Sitz Std. mechanisch / BA-seat mechanically
+Z-Cab NG Einflaschengerät / Z-Cab NG single-bottle device
+2025-04-29 11:26:46,987 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1161296
+2025-04-29 11:26:46,987 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Sitze03
+2025-04-29 11:26:46,988 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Sitze03-1161296
+2025-04-29 11:26:46,988 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-04-29 11:26:46,989 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-04-29 11:26:46,989 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-04-29 11:26:46,990 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Sitze03-1161296
+2025-04-29 11:26:46,990 [DEBUG] gui.logic_panel - 验证BOM码: PL-Sitze03-1161296
+2025-04-29 11:26:46,991 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-Sitze03-1161296, 当前表达式: K-200-000300  AND K-200-000301  → PL-Sitze03-1161296 
+2025-04-29 11:26:46,992 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Sitze03-1161296
+2025-04-29 11:26:46,993 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Sitze03-1161296
+2025-04-29 11:26:48,042 [DEBUG] core.logic_builder - 规则数据已保存到临时文件
+2025-04-29 11:26:48,043 [INFO] gui.logic_panel - 收到规则变更事件: type=added, rule_id=BL01
+2025-04-29 11:26:48,043 [INFO] gui.logic_panel - 已添加新规则: BL01
+2025-04-29 11:26:51,676 [INFO] gui.logic_library_window - 已加载 1 条 BOM 逻辑关系规则
+2025-04-29 11:26:54,071 [DEBUG] core.logic_builder - 规则数据已保存到临时文件
+2025-04-29 11:26:54,071 [INFO] gui.logic_panel - 收到规则变更事件: type=modified, rule_id=BL01
+2025-04-29 11:26:54,072 [INFO] gui.logic_panel - 已更新规则: BL01
+2025-04-29 11:26:54,072 [INFO] gui.logic_library_window - 收到规则变更事件: type=modified, rule_id=BL01
+2025-04-29 11:26:54,072 [INFO] gui.logic_library_window - 已更新规则: BL01
+2025-04-29 11:26:57,611 [DEBUG] core.logic_builder - 规则数据已保存到临时文件
+2025-04-29 11:26:57,612 [INFO] gui.logic_panel - 收到规则变更事件: type=modified, rule_id=BL01
+2025-04-29 11:26:57,612 [INFO] gui.logic_panel - 已更新规则: BL01
+2025-04-29 11:26:57,612 [INFO] gui.logic_library_window - 收到规则变更事件: type=modified, rule_id=BL01
+2025-04-29 11:26:57,612 [INFO] gui.logic_library_window - 已更新规则: BL01
+2025-04-29 11:26:57,612 [INFO] gui.logic_library_window - 已编辑规则: BL01
+2025-04-29 11:27:04,142 [DEBUG] core.logic_builder - 规则数据已保存到临时文件
+2025-04-29 11:27:04,142 [INFO] gui.logic_panel - 收到规则变更事件: type=modified, rule_id=BL01
+2025-04-29 11:27:04,143 [INFO] gui.logic_panel - 已更新规则: BL01
+2025-04-29 11:27:05,769 [INFO] gui.logic_library_window - 已加载 1 条 BOM 逻辑关系规则

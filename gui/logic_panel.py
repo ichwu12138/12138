@@ -711,25 +711,8 @@ class LogicPanel(ttk.Frame):
             # 添加到逻辑构建器
             self.logic_builder.add_rule(rule)
             
-            # 添加到树状视图
-            self.tree.insert(
-                "",
-                "end",
-                iid=rule_id,
-                values=(rule_id, condition, f"→ {effect}", status_text)
-            )
-            
-            # 保存到临时文件
-            self.logic_builder.save_to_temp_file()
-            
-            # 记录日志
-            self.logger.info(f"已保存新的BOM逻辑关系规则: ID={rule_id}, 选择项={condition}, 影响项={effect}, 状态={status}")
-            
             # 清空表达式
             self.expr_text.delete("1.0", "end")
-            
-            # 通知规则变更
-            self.logic_builder.notify_rule_change("added", rule_id, rule)
             
             # 显示成功消息
             messagebox.showinfo(
