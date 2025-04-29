@@ -136,13 +136,8 @@ class LogicRuleEditor(tk.Toplevel):
             font=("Microsoft YaHei", 18)
         )
         
-        # 根据规则类型显示不同的内容
-        if self.rule.rule_type == RuleType.DYNAMIC:
-            self.effect_text.insert(tk.END, self.rule.action)
-        else:
-            # 对于静态规则，显示完整的影响表达式
-            self.effect_text.insert(tk.END, self.rule.action)
-            
+        # 显示规则的action
+        self.effect_text.insert(tk.END, self.rule.action)
         self.effect_text.pack(fill=BOTH, expand=YES)
         
         # 滚动条

@@ -7,6 +7,14 @@
       "selection_expression": "K-200-000300  AND K-200-000301",
       "logic_relation": "→",
       "impact_expression": "PL-Sitze03-11612962"
+    },
+    {
+      "logic_id": "BL02",
+      "tags": "",
+      "tech_doc_path": "",
+      "selection_expression": "K-200-000344",
+      "logic_relation": "→",
+      "impact_expression": "PL-Sitze04-1161296"
     }
   ],
   "exported": false

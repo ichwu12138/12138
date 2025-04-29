@@ -217,7 +217,6 @@ class LogicBuilder(Observable):
                     # 创建规则对象
                     rule = LogicRule(
                         rule_id=rule_id,
-                        rule_type=RuleType.STATIC,  # 保留但不使用
                         condition=rule_data.get('selection_expression', ''),
                         action=rule_data.get('impact_expression', ''),
                         relation=rule_data.get('logic_relation', '→'),

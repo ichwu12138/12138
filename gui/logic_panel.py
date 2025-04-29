@@ -458,7 +458,6 @@ class LogicPanel(ttk.Frame):
         # 创建规则对象
         rule = LogicRule(
             rule_id=rule_id,
-            rule_type=RuleType.STATIC,
             condition=condition,
             action=effect,
             relation="→",
@@ -652,80 +651,59 @@ class LogicPanel(ttk.Frame):
     def _save_rule(self):
         """保存规则"""
         try:
-            # 获取当前表达式
-            expr = self.expr_text.get("1.0", "end-1c").strip()
+            # 获取表达式文本
+            expr = self.expr_text.get("1.0", tk.END).strip()
             if not expr:
-                messagebox.showerror(
-                    language_manager.get_text("error"),
-                    language_manager.get_text("error_empty_expression")
-                )
+                from utils.message_utils_tk import show_error
+                show_error("empty_expression")
                 return
-                
+            
             # 验证表达式
-            if "→" not in expr:
-                messagebox.showerror(
-                    language_manager.get_text("error"),
-                    language_manager.get_text("error_missing_implication")
-                )
+            valid, message = ExpressionValidator.validate_relation_expression(
+                expr,
+                self.validator.config_processor if self.validator else None
+            )
+            if not valid:
+                from utils.message_utils_tk import show_error
+                show_error("expression_validation_error", error=message)
                 return
-                
+            
             # 分割表达式
             parts = expr.split("→")
             if len(parts) != 2:
-                messagebox.showerror(
-                    language_manager.get_text("error"),
-                    language_manager.get_text("error_invalid_expression_format")
-                )
+                from utils.message_utils_tk import show_error
+                show_error("missing_implication")
                 return
-                
+            
             condition = parts[0].strip()
             effect = parts[1].strip()
             
-            # 获取下一个可用的规则ID
-            rule_number = self._get_next_rule_id()
-            rule_id = f"BL{rule_number:02d}"
+            # 获取规则ID
+            rule_id = f"BL{self._get_next_rule_id():02d}"
             
-            # 检查规则ID是否已存在
-            if rule_id in self.tree.get_children():
-                # 如果存在，继续寻找下一个可用ID
-                while f"BL{rule_number:02d}" in self.tree.get_children():
-                    rule_number += 1
-                rule_id = f"BL{rule_number:02d}"
-            
-            self.used_rule_ids.add(rule_number)
-            
-            # 获取当前状态
-            status = self.status_var.get()
-            status_text = language_manager.get_text(status)
-            
-            # 创建新规则
+            # 创建规则对象
             rule = LogicRule(
                 rule_id=rule_id,
-                rule_type=RuleType.STATIC,
                 condition=condition,
                 action=effect,
                 relation="→",
-                status=RuleStatus(status)
+                status=RuleStatus(self.status_var.get())
             )
             
-            # 添加到逻辑构建器
+            # 添加规则
             self.logic_builder.add_rule(rule)
             
             # 清空表达式
-            self.expr_text.delete("1.0", "end")
+            self._clear_expr()
             
             # 显示成功消息
-            messagebox.showinfo(
-                language_manager.get_text("success"),
-                language_manager.get_text("rule_saved_successfully")
-            )
+            from utils.message_utils_tk import show_info
+            show_info("rule_saved_successfully")
             
         except Exception as e:
             self.logger.error(f"保存规则时出错: {str(e)}", exc_info=True)
-            messagebox.showerror(
-                language_manager.get_text("error"),
-                language_manager.get_text("error_saving_rule")
-            )
+            from utils.message_utils_tk import show_error
+            show_error("save_rule_error", error=str(e))
         
     def _update_expression_state(self, text: str = None):
         """更新表达式状态
