@@ -684,6 +684,14 @@ class LogicPanel(ttk.Frame):
             # 获取下一个可用的规则ID
             rule_number = self._get_next_rule_id()
             rule_id = f"BL{rule_number:02d}"
+            
+            # 检查规则ID是否已存在
+            if rule_id in self.tree.get_children():
+                # 如果存在，继续寻找下一个可用ID
+                while f"BL{rule_number:02d}" in self.tree.get_children():
+                    rule_number += 1
+                rule_id = f"BL{rule_number:02d}"
+            
             self.used_rule_ids.add(rule_number)
             
             # 获取当前状态
@@ -968,9 +976,6 @@ class LogicPanel(ttk.Frame):
                         self.tree.item(item, values=values)
                         break
         
-        # 调用父类的刷新方法
-        super().refresh_texts()
-        
     def _get_next_rule_id(self) -> int:
         """获取下一个可用的规则ID编号"""
         # 从1开始查找第一个未使用的ID
@@ -1023,7 +1028,7 @@ class LogicPanel(ttk.Frame):
                     effect_text = f"→ {rule.action}"
                     status_text = language_manager.get_text(rule.status.value)
                     
-                    # 插入到树形视图
+                    # 插入到树形视图（只显示必要的列）
                     self.tree.insert(
                         "",
                         "end",

@@ -732,9 +732,6 @@ class MainWindow:
                 with open(file_path, 'w', encoding='utf-8') as f:
                     json.dump(rules_data, f, ensure_ascii=False, indent=2)
                 
-                # 清空临时规则
-                self.logic_builder.clear_rules()
-                
                 # 显示成功消息
                 messagebox.showinfo(
                     language_manager.get_text("success"),

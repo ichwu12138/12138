@@ -29,18 +29,10 @@ class LogicRule:
     created_at: datetime = field(default_factory=datetime.now)
     modified_at: datetime = field(default_factory=datetime.now)
     is_editable: bool = True
-    comment: Dict[str, Any] = field(
-        default_factory=lambda: {'text': '', 'images': {}}
-    )
     _effect_expr: str = None  # 添加 _effect_expr 参数，默认为 None
 
     def __post_init__(self):
         """初始化后的处理"""
-        # 确保comment是正确的格式
-        if not isinstance(self.comment, dict):
-            self.comment = {'text': str(self.comment), 'images': {}}
-        elif 'images' not in self.comment:
-            self.comment['images'] = {}
         self.tags = self.tags or []
     
     @property
@@ -75,32 +67,15 @@ class LogicRule:
     
     def to_dict(self) -> dict:
         """转换为字典格式"""
-        # 确保comment是字典格式
-        if not isinstance(self.comment, dict):
-            self.comment = {'text': str(self.comment), 'images': {}}
-        
         # 基本字段
         result = {
             "logic_id": self.rule_id,
-            "tags": ",".join(self.tags),
+            "tags": ",".join(self.tags) if self.tags else "",
             "tech_doc_path": self.tech_doc_path,
-            "comment": self.comment  # 包含 text 和 images
+            "selection_expression": self.condition,
+            "logic_relation": self.relation,
+            "impact_expression": self.action
         }
-        
-        # 根据规则类型添加不同的字段
-        if self.rule_type == RuleType.STATIC:
-            result.update({
-                "selection_expression": self.condition,
-                "logic_relation": self.relation,
-                "impact_expression": self.action
-            })
-        else:  # 动态规则
-            result.update({
-                "selection_expression": self.condition,
-                "logic_relation": self.relation,
-                "impact_expression": self.action
-            })
-        
         return result
 
     @classmethod
@@ -115,11 +90,16 @@ class LogicRule:
         """
         try:
             # 处理tags字段
-            tags = data.get('tags', [])
+            tags = data.get('tags', '')
             if isinstance(tags, str):
                 tags = tags.split(',') if tags else []
-            elif not isinstance(tags, list):
+            elif isinstance(tags, list):
+                tags = tags
+            else:
                 tags = []
+            
+            # 处理技术文档路径
+            tech_doc_path = data.get('tech_doc_path', '')
             
             # 处理旧格式数据
             if 'selection_expression' in data:
@@ -136,12 +116,13 @@ class LogicRule:
             # 创建规则实例
             return cls(
                 rule_id=rule_id,
-                rule_type=RuleType(data.get('rule_type', 'static')),
+                rule_type=RuleType.STATIC,  # 默认为静态规则
                 condition=condition,
                 action=action,
                 relation=relation,
-                status=RuleStatus(data.get('status', 'enabled')),
-                tags=tags
+                status=RuleStatus.ENABLED,  # 默认为启用状态
+                tags=tags,
+                tech_doc_path=tech_doc_path
             )
             
         except Exception as e:

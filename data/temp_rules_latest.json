@@ -2,19 +2,20 @@
   "rules": [
     {
       "logic_id": "BL01",
-      "tags": "",
-      "tech_doc_path": "",
-      "comment": {
-        "text": "",
-        "images": {}
-      },
-      "selection_expression": "K-200-000000  AND K-200-000329",
+      "tags": "1",
+      "tech_doc_path": "C:/Users/mengy/Desktop/1.docx",
+      "selection_expression": "K-200-000300",
       "logic_relation": "→",
-      "impact_expression": "PL-GrundKabine-10019231",
-      "status": "enabled"
+      "impact_expression": "PL-Sitze01-1123244"
+    },
+    {
+      "logic_id": "BL02",
+      "tags": "2",
+      "tech_doc_path": "C:/Users/mengy/Desktop/2.docx",
+      "selection_expression": "K-200-000009",
+      "logic_relation": "→",
+      "impact_expression": "PL-Sitze01-1161310"
     }
   ],
-  "saved_at": "2025-04-29T08:38:32.934081",
-  "exported": false,
-  "timestamp": "20250429_083832"
+  "exported": false
 }

@@ -4,9 +4,10 @@
 该模块提供了一个独立窗口来展示所有保存的 BOM 逻辑关系规则。
 """
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import ttk, messagebox, filedialog
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
+import os
 
 from utils.language_manager import language_manager
 from utils.logger import Logger
@@ -127,7 +128,7 @@ class LogicLibraryWindow(tk.Toplevel):
         frame.pack(fill=BOTH, expand=YES)
         
         # 创建树状视图
-        columns = ("rule_id", "condition", "effect", "status")
+        columns = ("rule_id", "condition", "effect", "status", "tags", "tech_doc")
         self.tree = ttk.Treeview(
             frame,
             columns=columns,
@@ -141,12 +142,16 @@ class LogicLibraryWindow(tk.Toplevel):
         self.tree.heading("condition", text=language_manager.get_text("edit_rule_condition"), anchor=CENTER)
         self.tree.heading("effect", text=language_manager.get_text("edit_rule_effect"), anchor=CENTER)
         self.tree.heading("status", text=language_manager.get_text("edit_rule_status"), anchor=CENTER)
+        self.tree.heading("tags", text=language_manager.get_text("rule_tags"), anchor=CENTER)
+        self.tree.heading("tech_doc", text=language_manager.get_text("tech_doc"), anchor=CENTER)
         
         # 设置列宽
         self.tree.column("rule_id", width=100, anchor=CENTER)
-        self.tree.column("condition", width=400, anchor=CENTER)
-        self.tree.column("effect", width=400, anchor=CENTER)
+        self.tree.column("condition", width=300, anchor=CENTER)
+        self.tree.column("effect", width=300, anchor=CENTER)
         self.tree.column("status", width=100, anchor=CENTER)
+        self.tree.column("tags", width=150, anchor=CENTER)
+        self.tree.column("tech_doc", width=150, anchor=CENTER)
         
         # 配置大字体样式
         style = ttk.Style()
@@ -184,6 +189,10 @@ class LogicLibraryWindow(tk.Toplevel):
         self.context_menu.add_command(
             label=language_manager.get_text("edit"),
             command=self._edit_selected_rule
+        )
+        self.context_menu.add_command(
+            label=language_manager.get_text("import_tech_doc"),
+            command=self._import_tech_doc
         )
         self.context_menu.add_command(
             label=language_manager.get_text("delete"),
@@ -231,12 +240,17 @@ class LogicLibraryWindow(tk.Toplevel):
             if not rule:
                 return
                 
+            # 保存当前的标签和技术文档值
+            current_values = self.tree.item(item)["values"]
+            current_tags = current_values[4] if len(current_values) > 4 else ""
+            current_tech_doc = current_values[5] if len(current_values) > 5 else ""
+                
             # 创建编辑对话框
             dialog = LogicRuleEditor(self, rule, self.logic_builder)
             result = dialog.show()
             
             if result:
-                # 更新树形视图中的显示
+                # 更新树形视图中的显示，保留标签和技术文档
                 effect_text = f"→ {result['effect']}"
                 self.tree.item(
                     item,
@@ -244,14 +258,17 @@ class LogicLibraryWindow(tk.Toplevel):
                         rule.rule_id,
                         result["condition"],
                         effect_text,
-                        language_manager.get_text(result["status"].value)
+                        language_manager.get_text(result["status"].value),
+                        current_tags,  # 保持原有标签
+                        current_tech_doc  # 保持原有技术文档
                     )
                 )
                 
-                # 更新逻辑构建器中的规则
+                # 更新逻辑构建器中的规则，但不更改标签和技术文档
                 rule.condition = result["condition"]
                 rule.action = result["effect"]
                 rule.status = result["status"]
+                # 不更新 rule.tags 和 rule.tech_doc_path
                 self.logic_builder._save_rules()  # 保存更改
                 
                 # 通知规则变更
@@ -356,8 +373,226 @@ class LogicLibraryWindow(tk.Toplevel):
         
     def _on_double_click(self, event):
         """双击事件处理"""
-        self._edit_selected_rule()
-        
+        try:
+            # 获取点击的列
+            column = self.tree.identify_column(event.x)
+            item = self.tree.identify_row(event.y)
+            
+            if not item:
+                return
+                
+            # 获取规则
+            rule = self.logic_builder.get_rule_by_id(item)
+            if not rule:
+                return
+            
+            # 根据列执行不同的操作
+            if column == "#5":  # 标签列
+                self._edit_tags(item, rule)
+            elif column == "#6":  # 技术文档列
+                self._edit_tech_doc(item, rule)
+            else:  # 其他列
+                self._edit_selected_rule()
+                
+        except Exception as e:
+            self.logger.error(f"处理双击事件失败: {str(e)}", exc_info=True)
+
+    def _edit_tags(self, item, rule):
+        """编辑标签"""
+        try:
+            # 创建对话框
+            dialog = tk.Toplevel(self)
+            dialog.title(language_manager.get_text("edit_tags"))
+            dialog.geometry("400x200")
+            dialog.transient(self)  # 设置为主窗口的临时窗口
+            dialog.grab_set()  # 设置为模态对话框
+            
+            # 居中显示
+            dialog.geometry("+%d+%d" % (
+                self.winfo_rootx() + self.winfo_width()//2 - 200,
+                self.winfo_rooty() + self.winfo_height()//2 - 100
+            ))
+            
+            # 创建标签输入框
+            ttk.Label(
+                dialog,
+                text=language_manager.get_text("input_tags"),
+                font=("Microsoft YaHei", 12)
+            ).pack(pady=10)
+            
+            # 获取当前标签值（确保是字符串）
+            current_tags = rule.tags if rule.tags else ""
+            tags_var = tk.StringVar(value=current_tags)
+            
+            entry = ttk.Entry(
+                dialog,
+                textvariable=tags_var,
+                font=("Microsoft YaHei", 12),
+                width=40
+            )
+            entry.pack(pady=10, padx=20)
+            
+            # 创建按钮框架
+            btn_frame = ttk.Frame(dialog)
+            btn_frame.pack(pady=20)
+            
+            # 确认按钮
+            ttk.Button(
+                btn_frame,
+                text=language_manager.get_text("confirm"),
+                command=lambda: self._save_tags(dialog, item, rule, tags_var.get()),
+                style="Large.TButton"
+            ).pack(side=LEFT, padx=10)
+            
+            # 取消按钮
+            ttk.Button(
+                btn_frame,
+                text=language_manager.get_text("cancel"),
+                command=dialog.destroy,
+                style="Large.TButton"
+            ).pack(side=LEFT, padx=10)
+            
+            # 设置焦点到输入框
+            entry.focus_set()
+            
+        except Exception as e:
+            self.logger.error(f"创建标签编辑对话框失败: {str(e)}", exc_info=True)
+            messagebox.showerror(
+                language_manager.get_text("error"),
+                str(e)
+            )
+
+    def _save_tags(self, dialog, item, rule, tags):
+        """保存标签"""
+        try:
+            # 更新规则的标签
+            rule.tags = tags
+            
+            # 更新树状视图显示
+            values = list(self.tree.item(item)["values"])
+            values[4] = tags
+            self.tree.item(item, values=values)
+            
+            # 保存更改
+            self.logic_builder._save_rules()
+            
+            # 标记规则未导出
+            self.logic_builder.rules_exported = False
+            
+            # 通知规则变更
+            self.logic_builder.notify_rule_change("modified", item, rule)
+            
+            # 关闭对话框
+            dialog.destroy()
+            
+        except Exception as e:
+            self.logger.error(f"保存标签失败: {str(e)}", exc_info=True)
+            messagebox.showerror(
+                language_manager.get_text("error"),
+                str(e)
+            )
+
+    def _edit_tech_doc(self, item, rule):
+        """编辑技术文档"""
+        try:
+            # 如果已经有技术文档，则打开它
+            if rule.tech_doc_path and os.path.exists(rule.tech_doc_path):
+                try:
+                    os.startfile(rule.tech_doc_path)  # Windows系统
+                except Exception as e:
+                    self.logger.error(f"打开技术文档失败: {str(e)}", exc_info=True)
+                    messagebox.showerror(
+                        language_manager.get_text("error"),
+                        language_manager.get_text("open_tech_doc_error"),
+                        parent=self
+                    )
+            else:
+                # 如果没有技术文档，则添加新文档
+                self._import_tech_doc(item, rule)
+        except Exception as e:
+            self.logger.error(f"编辑技术文档失败: {str(e)}", exc_info=True)
+            messagebox.showerror(
+                language_manager.get_text("error"),
+                str(e),
+                parent=self
+            )
+
+    def _import_tech_doc(self, item=None, rule=None):
+        """导入技术文档"""
+        try:
+            # 如果没有提供item和rule，则获取当前选中项
+            if item is None or rule is None:
+                selection = self.tree.selection()
+                if not selection:
+                    return
+                item = selection[0]
+                rule = self.logic_builder.get_rule_by_id(item)
+                if not rule:
+                    return
+
+            # 保存当前窗口状态
+            current_state = self.state()
+            
+            # 暂时取消置顶状态（如果有）
+            if current_state == 'zoomed':
+                self.state('normal')
+            
+            # 打开文件选择对话框
+            file_path = filedialog.askopenfilename(
+                title=language_manager.get_text("select_tech_doc"),
+                filetypes=[
+                    (language_manager.get_text("word_files"), "*.doc *.docx"),
+                    (language_manager.get_text("all_files"), "*.*")
+                ],
+                parent=self
+            )
+            
+            # 恢复窗口状态
+            if current_state == 'zoomed':
+                self.state('zoomed')
+            
+            if file_path:
+                try:
+                    # 更新规则的技术文档路径
+                    rule.tech_doc_path = file_path
+                    
+                    # 更新树状视图显示
+                    values = list(self.tree.item(item)["values"])
+                    values[5] = os.path.basename(file_path)  # 只显示文件名
+                    self.tree.item(item, values=values)
+                    
+                    # 保存更改
+                    self.logic_builder._save_rules()
+                    
+                    # 标记规则未导出
+                    self.logic_builder.rules_exported = False
+                    
+                    # 通知规则变更
+                    self.logic_builder.notify_rule_change("modified", item, rule)
+                    
+                    # 显示成功消息
+                    messagebox.showinfo(
+                        language_manager.get_text("success"),
+                        language_manager.get_text("tech_doc_added_success"),
+                        parent=self
+                    )
+                    
+                except Exception as e:
+                    self.logger.error(f"保存技术文档路径失败: {str(e)}", exc_info=True)
+                    messagebox.showerror(
+                        language_manager.get_text("error"),
+                        str(e),
+                        parent=self
+                    )
+                
+        except Exception as e:
+            self.logger.error(f"导入技术文档失败: {str(e)}", exc_info=True)
+            messagebox.showerror(
+                language_manager.get_text("error"),
+                str(e),
+                parent=self
+            )
+
     def _load_rules(self):
         """加载规则数据"""
         try:
@@ -377,7 +612,9 @@ class LogicLibraryWindow(tk.Toplevel):
                             rule.rule_id,
                             rule.condition,
                             effect_text,
-                            language_manager.get_text(rule.status.value)
+                            language_manager.get_text(rule.status.value),
+                            rule.tags,
+                            os.path.basename(rule.tech_doc_path) if rule.tech_doc_path else ""
                         )
                     )
                 except Exception as e:
@@ -414,14 +651,25 @@ class LogicLibraryWindow(tk.Toplevel):
                     effect_text = f"→ {rule.action}"
                     try:
                         if rule.rule_id in self.tree.get_children():
-                            # 更新现有规则
+                            # 获取当前的标签和技术文档值
+                            current_values = self.tree.item(rule.rule_id)["values"]
+                            current_tags = current_values[4] if len(current_values) > 4 else ""
+                            current_tech_doc = current_values[5] if len(current_values) > 5 else ""
+                            
+                            # 如果规则对象中有标签和技术文档，则使用规则对象中的值
+                            tags = rule.tags if hasattr(rule, 'tags') and rule.tags else current_tags
+                            tech_doc = os.path.basename(rule.tech_doc_path) if hasattr(rule, 'tech_doc_path') and rule.tech_doc_path else current_tech_doc
+                            
+                            # 更新现有规则，保留标签和技术文档
                             self.tree.item(
                                 rule.rule_id,
                                 values=(
                                     rule.rule_id,
                                     rule.condition,
                                     effect_text,
-                                    language_manager.get_text(rule.status.value)
+                                    language_manager.get_text(rule.status.value),
+                                    tags,
+                                    tech_doc
                                 )
                             )
                             self.logger.info(f"已更新规则: {rule.rule_id}")
@@ -435,7 +683,9 @@ class LogicLibraryWindow(tk.Toplevel):
                                     rule.rule_id,
                                     rule.condition,
                                     effect_text,
-                                    language_manager.get_text(rule.status.value)
+                                    language_manager.get_text(rule.status.value),
+                                    ",".join(rule.tags) if rule.tags else "",
+                                    os.path.basename(rule.tech_doc_path) if rule.tech_doc_path else ""
                                 )
                             )
                             self.logger.info(f"已添加新规则: {rule.rule_id}")
@@ -455,6 +705,8 @@ class LogicLibraryWindow(tk.Toplevel):
         self.tree.heading("condition", text=language_manager.get_text("edit_rule_condition"))
         self.tree.heading("effect", text=language_manager.get_text("edit_rule_effect"))
         self.tree.heading("status", text=language_manager.get_text("edit_rule_status"))
+        self.tree.heading("tags", text=language_manager.get_text("rule_tags"))
+        self.tree.heading("tech_doc", text=language_manager.get_text("tech_doc"))
         
         # 更新框架标题
         for child in self.winfo_children():
@@ -466,7 +718,8 @@ class LogicLibraryWindow(tk.Toplevel):
         
         # 更新菜单文本
         self.context_menu.entryconfigure(0, label=language_manager.get_text("edit"))
-        self.context_menu.entryconfigure(1, label=language_manager.get_text("delete"))
+        self.context_menu.entryconfigure(1, label=language_manager.get_text("import_tech_doc"))
+        self.context_menu.entryconfigure(2, label=language_manager.get_text("delete"))
         self.context_menu.entryconfigure(3, label=language_manager.get_text("status"))
         
         # 更新状态子菜单

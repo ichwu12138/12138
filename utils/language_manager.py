@@ -190,7 +190,16 @@ class LanguageManager:
             "feature_code": "特征",
             "feature_value_name": "特征值名称",
             "feature_code_format": "特征码格式：HBG_xxx_xxxxx",
-            "feature_value_format": "特征值格式：K-xxx-xxxxxx"
+            "feature_value_format": "特征值格式：K-xxx-xxxxxx",
+            "rule_tags": "标签",
+            "tech_doc": "技术文档",
+            "edit_tags": "编辑标签",
+            "input_tags": "请输入标签（多个标签用逗号分隔）",
+            "select_tech_doc": "选择技术文档",
+            "word_files": "Word文档",
+            "tech_doc_added_success": "技术文档添加成功",
+            "import_tech_doc": "导入技术文档",
+            "open_tech_doc_error": "打开技术文档失败，请确认文件存在且可以访问"
         })
         
         # 英文翻译
@@ -363,7 +372,16 @@ class LanguageManager:
             "feature_code": "Feature",
             "feature_value_name": "Feature Value Name",
             "feature_code_format": "Feature Code Format: HBG_xxx_xxxxx",
-            "feature_value_format": "Feature Value Format: K-xxx-xxxxxx"
+            "feature_value_format": "Feature Value Format: K-xxx-xxxxxx",
+            "rule_tags": "Tags",
+            "tech_doc": "Technical Doc",
+            "edit_tags": "Edit Tags",
+            "input_tags": "Enter tags (separate multiple tags with commas)",
+            "select_tech_doc": "Select Technical Document",
+            "word_files": "Word Documents",
+            "tech_doc_added_success": "Technical document added successfully",
+            "import_tech_doc": "Import Technical Doc",
+            "open_tech_doc_error": "Failed to open technical document, please make sure the file exists and is accessible"
         })
         
         # 德文翻译
@@ -536,7 +554,16 @@ class LanguageManager:
             "feature_code": "Merkmale",
             "feature_value_name": "Merkmalwertname",
             "feature_code_format": "Merkmalcode Format: HBG_xxx_xxxxx",
-            "feature_value_format": "Merkmalwert Format: K-xxx-xxxxxx"
+            "feature_value_format": "Merkmalwert Format: K-xxx-xxxxxx",
+            "rule_tags": "Tags",
+            "tech_doc": "Technische Dok",
+            "edit_tags": "Tags bearbeiten",
+            "input_tags": "Tags eingeben (mehrere Tags durch Kommas trennen)",
+            "select_tech_doc": "Technische Dokumentation auswählen",
+            "word_files": "Word-Dokumente",
+            "tech_doc_added_success": "Technische Dokumentation erfolgreich hinzugefügt",
+            "import_tech_doc": "Technische Dokumentation importieren",
+            "open_tech_doc_error": "Fehler beim Öffnen der technischen Dokumentation. Stellen Sie sicher, dass die Datei existiert und zugänglich ist"
         })
         
     def add_callback(self, callback):
