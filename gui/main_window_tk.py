@@ -14,9 +14,11 @@ import os
 from utils.config_manager import config_manager
 from utils.language_manager import language_manager
 from utils.logger import Logger
+from utils.validator import ExpressionValidator
 from core.logic_builder import LogicBuilder, RULES_DATA_FILE
 from core.config_processor import ConfigProcessor
 from core.bom_processor import BomProcessor
+from models.logic_rule import LogicRule, RuleStatus
 from gui.logic_panel import LogicPanel
 from gui.config_panel import ConfigPanel
 from gui.bom_panel import BomPanel
@@ -361,11 +363,84 @@ class MainWindow:
             
             if file_path:
                 try:
+                    # 读取JSON文件
+                    with open(file_path, 'r', encoding='utf-8') as f:
+                        import_data = json.load(f)
+                    
+                    # 验证规则数据格式
+                    if not isinstance(import_data, dict) or "rules" not in import_data:
+                        raise ValueError("无效的规则文件格式，缺少rules字段")
+                    
+                    rules = import_data["rules"]
+                    if not isinstance(rules, list):
+                        raise ValueError("无效的规则文件格式，rules必须是列表")
+                    
+                    # 验证每条规则
+                    for rule in rules:
+                        if not isinstance(rule, dict):
+                            raise ValueError("规则格式错误")
+                        
+                        # 检查必需字段
+                        required_fields = ["logic_id", "selection_expression", "logic_relation", "impact_expression", "status"]
+                        missing_fields = [field for field in required_fields if field not in rule]
+                        if missing_fields:
+                            raise ValueError(f"规则缺少必需字段: {', '.join(missing_fields)}")
+                        
+                        # 验证状态值
+                        if rule["status"] not in ["enabled", "testing", "disabled"]:
+                            raise ValueError(f"规则 {rule['logic_id']} 的状态值无效: {rule['status']}")
+                        
+                        # 检查是否是微调逻辑
+                        is_tuning = ExpressionValidator.is_tuning_logic(rule["impact_expression"])
+                        
+                        # 验证规则ID格式
+                        logic_id = rule["logic_id"]
+                        if is_tuning and not logic_id.startswith("TL"):
+                            raise ValueError(f"微调逻辑规则的ID必须以TL开头: {logic_id}")
+                        if not is_tuning and not logic_id.startswith("BL"):
+                            raise ValueError(f"BOM逻辑规则的ID必须以BL开头: {logic_id}")
+                        
+                        # 验证条件表达式
+                        valid, message = ExpressionValidator.validate_logic_expression(
+                            rule["selection_expression"],
+                            self.config_processor,
+                            is_effect_side=False
+                        )
+                        if not valid:
+                            raise ValueError(f"规则 {logic_id} 的条件表达式无效: {message}")
+                        
+                        # 验证影响表达式
+                        if is_tuning:
+                            # 验证微调逻辑
+                            valid, message = ExpressionValidator.validate_tuning_logic(rule["impact_expression"])
+                            if not valid:
+                                raise ValueError(f"规则 {logic_id} 的微调逻辑无效: {message}")
+                        else:
+                            # 验证BOM逻辑
+                            valid, message = ExpressionValidator.validate_logic_expression(
+                                rule["impact_expression"],
+                                self.config_processor,
+                                is_effect_side=True
+                            )
+                            if not valid:
+                                raise ValueError(f"规则 {logic_id} 的影响表达式无效: {message}")
+                    
                     # 导入规则
                     self.logic_builder.import_rules(file_path)
                     
                     # 设置规则已加载标志
                     self.rules_loaded = True
+                    
+                    # 统计规则信息
+                    total_rules = len(rules)
+                    tuning_rules = sum(1 for r in rules if ExpressionValidator.is_tuning_logic(r["impact_expression"]))
+                    enabled_rules = sum(1 for r in rules if r["status"] == "enabled")
+                    testing_rules = sum(1 for r in rules if r["status"] == "testing")
+                    disabled_rules = sum(1 for r in rules if r["status"] == "disabled")
+                    self.logger.info(
+                        f"成功导入 {total_rules} 条规则（BOM逻辑: {total_rules - tuning_rules}，微调逻辑: {tuning_rules}）\n"
+                        f"规则状态统计：启用 {enabled_rules}，测试 {testing_rules}，禁用 {disabled_rules}"
+                    )
                     
                     # 强制刷新逻辑面板和逻辑关系库
                     if hasattr(self, 'logic_panel'):
@@ -377,6 +452,18 @@ class MainWindow:
                         language_manager.get_text("import_rules_success")
                     )
                     
+                except json.JSONDecodeError:
+                    self.logger.error("JSON文件格式错误")
+                    messagebox.showerror(
+                        language_manager.get_text("error"),
+                        language_manager.get_text("import_rules_error") + "\n\nJSON文件格式错误"
+                    )
+                except ValueError as e:
+                    self.logger.error(f"规则验证失败: {str(e)}")
+                    messagebox.showerror(
+                        language_manager.get_text("error"),
+                        language_manager.get_text("import_rules_error") + f"\n\n{str(e)}"
+                    )
                 except Exception as e:
                     self.logger.error(f"导入BOM逻辑关系失败: {str(e)}", exc_info=True)
                     messagebox.showerror(
@@ -725,17 +812,48 @@ class MainWindow:
             )
             
             if file_path:
-                # 导出规则
-                rules_data = self.logic_builder.export_rules()
+                # 获取规则数据
+                rules = self.logic_builder.get_rules()
+                
+                # 转换为导出格式（按指定顺序）
+                export_data = {
+                    "rules": [
+                        {
+                            "logic_id": rule.rule_id,
+                            "status": rule.status.value,
+                            "selection_expression": rule.condition,
+                            "logic_relation": rule.relation,
+                            "impact_expression": rule.action,
+                            "tags": rule.tags,
+                            "tech_doc_path": rule.tech_doc_path
+                        }
+                        for rule in rules
+                    ],
+                    "exported": True
+                }
                 
                 # 保存到文件
                 with open(file_path, 'w', encoding='utf-8') as f:
-                    json.dump(rules_data, f, ensure_ascii=False, indent=2)
+                    json.dump(export_data, f, ensure_ascii=False, indent=2)
+                
+                # 统计规则信息
+                total_rules = len(rules)
+                tuning_rules = sum(1 for r in rules if ExpressionValidator.is_tuning_logic(r.action))
+                enabled_rules = sum(1 for r in rules if r.status == RuleStatus.ENABLED)
+                testing_rules = sum(1 for r in rules if r.status == RuleStatus.TESTING)
+                disabled_rules = sum(1 for r in rules if r.status == RuleStatus.DISABLED)
+                self.logger.info(
+                    f"成功导出 {total_rules} 条规则（BOM逻辑: {total_rules - tuning_rules}，微调逻辑: {tuning_rules}）\n"
+                    f"规则状态统计：启用 {enabled_rules}，测试 {testing_rules}，禁用 {disabled_rules}"
+                )
+                
+                # 清空临时文件
+                self.logic_builder.clear_rules()
                 
                 # 显示成功消息
                 messagebox.showinfo(
                     language_manager.get_text("success"),
-                    language_manager.get_text("export_rules_success")
+                    language_manager.get_text("export_and_clear_success")
                 )
                 
         except Exception as e:

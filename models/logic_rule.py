@@ -81,25 +81,27 @@ class LogicRule:
             LogicRule: 规则实例
         """
         try:
-            # 处理tags字段 - 保持原始字符串格式
+            # 获取基本字段
+            rule_id = data.get('logic_id', '')
+            
+            # 获取状态 - 从字符串转换为枚举
+            status_str = data.get('status', 'enabled')
+            try:
+                status = RuleStatus(status_str)
+            except ValueError:
+                status = RuleStatus.ENABLED  # 默认为启用状态
+            
+            # 获取表达式相关字段
+            condition = data.get('selection_expression', '')
+            relation = data.get('logic_relation', '→')
+            action = data.get('impact_expression', '')
+            
+            # 获取可选字段
             tags = data.get('tags', '')
             if not isinstance(tags, str):
                 tags = str(tags) if tags is not None else ""
             
-            # 处理技术文档路径
             tech_doc_path = data.get('tech_doc_path', '')
-            
-            # 处理旧格式数据
-            if 'selection_expression' in data:
-                condition = data.get('selection_expression', '')
-                action = data.get('impact_expression', '')
-                relation = data.get('logic_relation', '→')
-                rule_id = data.get('logic_id', '')
-            else:
-                condition = data.get('condition', '')
-                action = data.get('action', '')
-                relation = data.get('relation', '→')
-                rule_id = data.get('rule_id', '')
             
             # 创建规则实例
             return cls(
@@ -107,7 +109,7 @@ class LogicRule:
                 condition=condition,
                 action=action,
                 relation=relation,
-                status=RuleStatus.ENABLED,  # 默认为启用状态
+                status=status,
                 tags=tags,
                 tech_doc_path=tech_doc_path
             )

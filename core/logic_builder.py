@@ -196,23 +196,51 @@ class LogicBuilder(Observable):
             self.rules.clear()
             self.logger.info("已清空现有规则")
             
+            # 初始化BL和TL规则的最大编号
+            max_bl_number = 0
+            max_tl_number = 0
+            
             # 解析数据并创建规则
             imported_count = 0
-            max_rule_number = 0
             
             for rule_data in data.get('rules', []):
                 try:
-                    # 获取规则ID
+                    # 获取规则ID和表达式
                     rule_id = rule_data.get('logic_id', '')
-                    if not rule_id.startswith('BL'):
-                        # 如果不是BL开头，生成新的BL规则ID
-                        rule_id = self._generate_rule_id()
+                    impact_expression = rule_data.get('impact_expression', '')
+                    
+                    # 检查是否是微调逻辑
+                    is_tuning = ExpressionValidator.is_tuning_logic(impact_expression)
+                    
+                    # 处理规则ID
+                    if rule_id:
+                        # 如果已有ID，检查格式是否匹配规则类型
+                        if is_tuning and not rule_id.startswith('TL'):
+                            # 微调逻辑但ID不是TL开头，生成新的TL ID
+                            max_tl_number += 1
+                            rule_id = f"TL{max_tl_number:02d}"
+                        elif not is_tuning and not rule_id.startswith('BL'):
+                            # BOM逻辑但ID不是BL开头，生成新的BL ID
+                            max_bl_number += 1
+                            rule_id = f"BL{max_bl_number:02d}"
+                        else:
+                            # ID格式正确，更新对应的最大编号
+                            try:
+                                number = int(rule_id[2:])
+                                if rule_id.startswith('BL'):
+                                    max_bl_number = max(max_bl_number, number)
+                                else:  # TL
+                                    max_tl_number = max(max_tl_number, number)
+                            except (ValueError, IndexError):
+                                self.logger.warning(f"无法解析规则ID: {rule_id}")
                     else:
-                        try:
-                            rule_number = int(rule_id[2:])
-                            max_rule_number = max(max_rule_number, rule_number)
-                        except (ValueError, IndexError):
-                            self.logger.warning(f"无法解析规则ID: {rule_id}")
+                        # 没有ID，根据规则类型生成新ID
+                        if is_tuning:
+                            max_tl_number += 1
+                            rule_id = f"TL{max_tl_number:02d}"
+                        else:
+                            max_bl_number += 1
+                            rule_id = f"BL{max_bl_number:02d}"
                     
                     # 创建规则对象
                     rule = LogicRule(
@@ -220,21 +248,20 @@ class LogicBuilder(Observable):
                         condition=rule_data.get('selection_expression', ''),
                         action=rule_data.get('impact_expression', ''),
                         relation=rule_data.get('logic_relation', '→'),
-                        status=RuleStatus(rule_data.get('status', 'enabled'))
+                        status=RuleStatus(rule_data.get('status', 'enabled')),
+                        tags=rule_data.get('tags', ''),
+                        tech_doc_path=rule_data.get('tech_doc_path', '')
                     )
                     
                     # 添加到规则字典
                     self.rules[rule_id] = rule
                     imported_count += 1
                     
-                    self.logger.debug(f"成功导入规则: ID={rule_id}")
+                    self.logger.debug(f"成功导入规则: ID={rule_id}, 类型={'微调逻辑' if is_tuning else 'BOM逻辑'}")
                     
                 except Exception as e:
                     self.logger.error(f"导入规则失败: {str(e)}", exc_info=True)
                     continue
-            
-            # 更新规则计数器
-            self.rule_counter = max_rule_number + 1
             
             # 设置导出状态为False
             self.rules_exported = False
@@ -246,7 +273,10 @@ class LogicBuilder(Observable):
             self.notify_observers()
             self.notify_rule_change("imported")
             
-            self.logger.info(f"规则导入完成，成功导入 {imported_count} 条规则")
+            # 记录导入统计信息
+            bl_rules = sum(1 for r in self.rules.values() if r.rule_id.startswith('BL'))
+            tl_rules = sum(1 for r in self.rules.values() if r.rule_id.startswith('TL'))
+            self.logger.info(f"规则导入完成，成功导入 {imported_count} 条规则（BOM逻辑: {bl_rules}，微调逻辑: {tl_rules}）")
             
         except Exception as e:
             self.logger.error(f"导入规则数据失败: {str(e)}", exc_info=True)
@@ -277,20 +307,35 @@ class LogicBuilder(Observable):
     def _save_rules(self):
         """保存规则数据"""
         try:
+            # 创建规则数据
+            rules_data = []
+            for rule in self.rules.values():
+                # 按照指定顺序创建规则字典
+                rule_dict = {
+                    "logic_id": rule.rule_id,
+                    "status": rule.status.value,  # 使用枚举值的字符串表示
+                    "selection_expression": rule.condition,
+                    "logic_relation": rule.relation,
+                    "impact_expression": rule.action,
+                    "tags": rule.tags,
+                    "tech_doc_path": rule.tech_doc_path
+                }
+                rules_data.append(rule_dict)
+            
+            # 创建完整的数据结构
+            data = {
+                "rules": rules_data,
+                "exported": self.rules_exported
+            }
+            
             # 确保目录存在
             os.makedirs(os.path.dirname(RULES_DATA_FILE), exist_ok=True)
             
-            # 准备数据
-            data = {
-                'rules': [rule.to_dict() for rule in self.rules.values()],
-                'exported': self.rules_exported  # 保存导出状态
-            }
-            
             # 保存到文件
             with open(RULES_DATA_FILE, 'w', encoding='utf-8') as f:
-                json.dump(data, f, ensure_ascii=False, indent=2)
+                json.dump(data, f, indent=2, ensure_ascii=False)
                 
-            self.logger.debug("规则数据已保存到临时文件")
+            self.logger.info(f"已保存 {len(rules_data)} 条规则到临时文件")
             
         except Exception as e:
             self.logger.error(f"保存规则数据失败: {str(e)}", exc_info=True)

@@ -775,36 +775,40 @@ class LogicPanel(ttk.Frame):
                 show_error("missing_implication")
                 return
             
-            condition = parts[0].strip()
-            effect = parts[1].strip()
+            selection_expression = parts[0].strip()
+            impact_expression = parts[1].strip()
             
-            # 检查是否包含微调逻辑关键字
-            is_tuning_logic = any(keyword in effect.upper() for keyword in 
-                                ["ON", "ADD", "FROM", "DELETE", "CHANGE QUANTITY", "CHANGE PRICE"])
+            # 检查是否是微调逻辑
+            is_tuning = ExpressionValidator.is_tuning_logic(impact_expression)
             
             # 获取规则ID
-            rule_id_num = self._get_next_rule_id(is_tuning_logic)
-            if is_tuning_logic:
-                rule_id = f"TL{rule_id_num:02d}"
+            rule_id_num = self._get_next_rule_id(is_tuning)
+            if is_tuning:
+                logic_id = f"TL{rule_id_num:02d}"
                 self.used_tl_rule_ids.add(rule_id_num)
-                self.logger.info(f"创建新的微调逻辑规则ID: {rule_id}")
+                self.logger.info(f"创建新的微调逻辑规则ID: {logic_id}")
             else:
-                rule_id = f"BL{rule_id_num:02d}"
+                logic_id = f"BL{rule_id_num:02d}"
                 self.used_bl_rule_ids.add(rule_id_num)
-                self.logger.info(f"创建新的BOM逻辑规则ID: {rule_id}")
+                self.logger.info(f"创建新的BOM逻辑规则ID: {logic_id}")
+            
+            # 获取规则状态
+            status = RuleStatus(self.status_var.get())  # 将字符串转换为枚举值
             
             # 创建规则对象
             rule = LogicRule(
-                rule_id=rule_id,
-                condition=condition,
-                action=effect,
+                rule_id=logic_id,
+                condition=selection_expression,
+                action=impact_expression,
                 relation="→",
-                status=RuleStatus(self.status_var.get())
+                status=status,
+                tags="",
+                tech_doc_path=""
             )
             
             # 添加规则
             self.logic_builder.add_rule(rule)
-            self.logger.info(f"成功保存规则: {rule_id}, 条件: {condition}, 影响: {effect}")
+            self.logger.info(f"成功保存规则: {logic_id}, 条件: {selection_expression}, 影响: {impact_expression}, 状态: {status}")
             
             # 清空表达式
             self._clear_expr()

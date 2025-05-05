@@ -213,6 +213,7 @@ class LanguageManager:
             "error_incomplete_from_delete": "请输入完整的FROM DELETE值",
             "error_incomplete_change_quantity": "请输入完整的CHANGE QUANTITY值",
             "error_invalid_price_format": "价格必须以+或-开头，后跟数字",
+            "export_and_clear_success": "规则已成功导出，暂存数据已删除",
         })
         
         # 英文翻译
@@ -408,6 +409,7 @@ class LanguageManager:
             "error_incomplete_from_delete": "Please enter complete FROM DELETE values",
             "error_incomplete_change_quantity": "Please enter complete CHANGE QUANTITY values",
             "error_invalid_price_format": "Price must start with + or - followed by numbers",
+            "export_and_clear_success": "Rules exported successfully, temporary data has been cleared",
         })
         
         # 德文翻译
@@ -603,6 +605,7 @@ class LanguageManager:
             "error_incomplete_from_delete": "Bitte geben Sie vollständige FROM DELETE Werte ein",
             "error_incomplete_change_quantity": "Bitte geben Sie vollständige CHANGE QUANTITY Werte ein",
             "error_invalid_price_format": "Der Preis muss mit + oder - beginnen, gefolgt von Zahlen",
+            "export_and_clear_success": "Regeln erfolgreich exportiert, temporäre Daten wurden gelöscht",
         })
         
     def add_callback(self, callback):
