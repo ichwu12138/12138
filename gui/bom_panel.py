@@ -123,7 +123,7 @@ class BomPanel(ttk.Frame):
         style.configure(
             "Main.Treeview",
             font=("Microsoft YaHei", 11),  # 调整字体大小
-            rowheight=40  # 调整行高
+            rowheight=60  # 增加行高以适应三行显示
         )
         
         # 添加垂直滚动条
@@ -147,9 +147,8 @@ class BomPanel(ttk.Frame):
         # 绑定事件
         self.tree.bind("<Double-1>", self._on_double_click)
         self.tree.bind("<Button-1>", self._on_single_click)
-        self.tree.bind("<Button-3>", self._on_right_click)
         
-        # 配置标签样式
+        # 配置标签样式 - 层级节点加粗，物料节点不加粗
         self.tree.tag_configure("level_1", font=("Microsoft YaHei", 12, "bold"))
         self.tree.tag_configure("level_node", font=("Microsoft YaHei", 11, "bold"))
         self.tree.tag_configure("material", font=("Microsoft YaHei", 11))
@@ -187,44 +186,29 @@ class BomPanel(ttk.Frame):
                         parent = level_last_nodes[parent_level]
                         break
                 
-                if level == 1:
-                    # 创建一级节点
-                    display_text = f"[{level}] {placeholder} {baugruppe}\n{name}"
-                    if long_text:
-                        display_text += f"\n{long_text}"
-                    
-                    node = self.tree.insert(
+                # 检查是否需要创建层级+占位符节点
+                level_key = (parent, level, placeholder)
+                if level_key not in level_placeholder_nodes:
+                    # 创建新的层级+占位符节点
+                    level_node = self.tree.insert(
                         parent,
                         "end",
-                        text=display_text,
-                        tags=("level_1",)
+                        text=f"[{level}] {placeholder}",
+                        tags=("level_node",)
                     )
-                    level_last_nodes[level] = node
-                else:
-                    # 检查是否需要创建层级+占位符节点
-                    level_key = (parent, level, placeholder)
-                    if level_key not in level_placeholder_nodes:
-                        # 创建新的层级+占位符节点
-                        level_node = self.tree.insert(
-                            parent,
-                            "end",
-                            text=f"[{level}] {placeholder}",
-                            tags=("level_node",)
-                        )
-                        level_placeholder_nodes[level_key] = level_node
-                    
-                    # 在层级+占位符节点下创建物料节点
-                    material_text = f"{baugruppe} - {name}"
-                    if long_text:
-                        material_text += f"\n{long_text}"
-                    
-                    node = self.tree.insert(
-                        level_placeholder_nodes[level_key],
-                        "end",
-                        text=material_text,
-                        tags=("material",)
-                    )
-                    level_last_nodes[level] = level_placeholder_nodes[level_key]
+                    level_placeholder_nodes[level_key] = level_node
+                
+                # 在层级+占位符节点下创建物料节点
+                display_text = f"{baugruppe}\n{name}\n{long_text if long_text else ''}"
+                node = self.tree.insert(
+                    level_placeholder_nodes[level_key],
+                    "end",
+                    text=display_text,
+                    tags=("material",)
+                )
+                
+                # 更新层级跟踪
+                level_last_nodes[level] = level_placeholder_nodes[level_key]
                 
                 # 清除所有更高层级的最后节点记录
                 higher_levels = [l for l in level_last_nodes.keys() if l > level]
@@ -232,36 +216,71 @@ class BomPanel(ttk.Frame):
                     level_last_nodes.pop(l)
             
             self.logger.info("树状图刷新完成")
-                        
+            
         except Exception as e:
-            self.logger.error(f"刷新树状图时出错: {str(e)}", exc_info=True)
-            from utils.message_utils_tk import show_error
-            show_error("refresh_tree_error", error=str(e))
+            self.logger.error(f"刷新树状图失败: {str(e)}", exc_info=True)
+            messagebox.showerror(
+                language_manager.get_text("error"),
+                language_manager.get_text("refresh_tree_error")
+            )
             
-    def _on_right_click(self, event):
-        """右键事件处理"""
-        # 获取点击位置的项
-        item = self.tree.identify_row(event.y)
+    def _on_single_click(self, event):
+        """处理单击事件"""
+        # 获取点击的项目
+        item = self.tree.identify("item", event.x, event.y)
         if item:
-            # 选中该项
+            # 选中项目
             self.tree.selection_set(item)
+            # 如果项是关闭的，则打开它
+            if not self.tree.item(item, "open"):
+                self.tree.item(item, open=True)
+            # 如果项是打开的，则关闭它
+            else:
+                self.tree.item(item, open=False)
             
-            # 创建右键菜单
-            menu = tk.Menu(self, tearoff=0)
-            menu.configure(font=("Microsoft YaHei", 16))  # 使用统一的菜单字体大小
-            
+    def _on_double_click(self, event):
+        """处理双击事件"""
+        try:
+            # 获取选中的项
+            item = self.tree.identify("item", event.x, event.y)
+            if not item:
+                return
+                
             # 获取项的文本
             text = self.tree.item(item, "text")
+            self.logger.debug(f"BomPanel: 选中项文本: {text}")
             
-            # 添加菜单项
-            menu.add_command(
-                label=language_manager.get_text("copy_item"),
-                command=lambda: self._copy_item(text)
-            )
+            # 如果是层级节点（以[开头），不处理
+            if text.startswith("["):
+                return
                 
-            # 显示菜单
-            menu.post(event.x_root, event.y_root)
+            # 提取Baugruppe码 - 从第一行获取
+            baugruppe = text.split("\n")[0].strip()
+            self.logger.debug(f"BomPanel: 提取到Baugruppe: {baugruppe}")
             
+            # 获取层级节点的文本
+            level_node = self.tree.parent(item)
+            if level_node:
+                level_text = self.tree.item(level_node, "text")
+                if level_text.startswith("["):  # 是层级节点
+                    # 提取占位符 - 格式为 "[层级] 占位符"
+                    placeholder = level_text.split(" ", 1)[1].strip()
+                    self.logger.debug(f"BomPanel: 提取到占位符: {placeholder}")
+                    # 构建完整的BOM码
+                    bom_code = f"{placeholder}-{baugruppe}"
+                    self.logger.debug(f"BomPanel: 构建的BOM码: {bom_code}")
+                    # 插入BOM码
+                    self.insert_code(bom_code)
+                    self.logger.info(f"BomPanel: 成功插入BOM码: {bom_code}")
+                    return
+            
+            # 如果没有找到层级节点，直接使用Baugruppe
+            self.insert_code(baugruppe)
+            self.logger.info(f"BomPanel: 成功插入Baugruppe: {baugruppe}")
+                
+        except Exception as e:
+            self.logger.error(f"BomPanel: 双击处理出错: {str(e)}", exc_info=True)
+
     def _import_bom(self, file_path=None):
         """导入BOM文件
         
@@ -315,186 +334,31 @@ class BomPanel(ttk.Frame):
                 language_manager.get_text("bom_import_error")
             )
             
-    def _on_single_click(self, event):
-        """单击事件处理"""
-        # 获取点击位置的项
-        item = self.tree.identify_row(event.y)
-        if item:
-            # 如果项是关闭的，则打开它
-            if not self.tree.item(item, "open"):
-                self.tree.item(item, open=True)
-            # 如果项是打开的，则关闭它
-            else:
-                self.tree.item(item, open=False)
-
-    def _on_double_click(self, event):
-        """双击事件处理"""
-        try:
-            # 获取选中的项
-            item = self.tree.selection()[0]
-            self.logger.debug(f"BomPanel: 双击选中项 ID: {item}")
-            
-            # 获取项的文本
-            text = self.tree.item(item, "text")
-            self.logger.debug(f"BomPanel: 选中项文本: {text}")
-            
-            # 如果是层级节点（以[开头），不处理
-            if text.startswith("["):
-                return
-                
-            # 提取Baugruppe码 - 格式为 "Baugruppe - 描述"
-            baugruppe = text.split(" - ")[0].strip()
-            self.logger.debug(f"BomPanel: 提取到Baugruppe: {baugruppe}")
-            
-            # 获取层级节点的文本
-            level_node = self.tree.parent(item)
-            if level_node:
-                level_text = self.tree.item(level_node, "text")
-                if level_text.startswith("["):  # 是层级节点
-                    # 提取占位符 - 格式为 "[层级] 占位符"
-                    placeholder = level_text.split(" ", 1)[1].strip()
-                    self.logger.debug(f"BomPanel: 提取到占位符: {placeholder}")
-                    # 构建完整的BOM码
-                    bom_code = f"{placeholder}-{baugruppe}"
-                    self.logger.debug(f"BomPanel: 构建的BOM码: {bom_code}")
-                    # 插入BOM码
-                    self.insert_code(bom_code)
-                    self.logger.info(f"BomPanel: 成功插入BOM码: {bom_code}")
-                    return
-            
-            # 如果没有找到层级节点，直接使用Baugruppe
-            self.insert_code(baugruppe)
-            self.logger.info(f"BomPanel: 成功插入Baugruppe: {baugruppe}")
-                
-        except Exception as e:
-            self.logger.error(f"BomPanel: 双击处理出错: {str(e)}", exc_info=True)
-
-    def _copy_item(self, text: str):
-        """复制项目文本到剪贴板
-        
-        Args:
-            text: 要复制的文本
-        """
-        self.clipboard_clear()
-        self.clipboard_append(text)
-            
-    def _on_mouse_motion(self, event):
-        """处理鼠标移动事件"""
-        # 获取鼠标下的项
-        item = self.tree.identify_row(event.y)
-        
-        # 如果鼠标不在任何项上，隐藏工具提示
-        if not item:
-            self._hide_tooltip()
-            return
-            
-        # 获取项的long_text
-        values = self.tree.item(item)["values"]
-        long_text = values[0] if values else ""
-        
-        # 如果没有long_text，隐藏工具提示
-        if not long_text:
-            self._hide_tooltip()
-            return
-            
-        # 显示工具提示
-        self._show_tooltip(event.x_root, event.y_root, long_text)
-        
-    def _show_tooltip(self, x, y, text):
-        """显示工具提示
-        
-        Args:
-            x: 屏幕X坐标
-            y: 屏幕Y坐标
-            text: 显示文本
-        """
-        # 如果工具提示窗口不存在，创建它
-        if not self.tooltip:
-            self.tooltip = tk.Toplevel(self)
-            self.tooltip.wm_overrideredirect(True)  # 无边框窗口
-            
-            # 创建标签
-            self.tooltip_label = ttk.Label(
-                self.tooltip,
-                text="",
-                style="Tooltip.TLabel",
-                padding=(8, 8),  # 适当的内边距
-                justify="left",  # 文本左对齐
-                anchor="w",      # 文本左对齐（west）
-                wraplength=600   # 适当的文本换行宽度
-            )
-            self.tooltip_label.pack(fill=BOTH, expand=YES)
-            
-            # 创建工具提示样式
-            style = ttk.Style()
-            style.configure(
-                "Tooltip.TLabel",
-                font=("Microsoft YaHei", 24, "bold"),  # 调整为与 Treeview 相近的字体大小
-                background="#FFFFCC",
-                foreground="black"
-            )
-        
-        # 更新文本并显示
-        self.tooltip_label.configure(text=text)
-        self.tooltip.deiconify()  # 确保窗口显示
-        
-        # 更新窗口以获取实际尺寸
-        self.tooltip.update_idletasks()
-        
-        # 设置最小和最大尺寸
-        min_width = 300   # 适当减小最小宽度
-        max_width = 600   # 适当减小最大宽度
-        min_height = 100  # 适当减小最小高度
-        
-        # 获取文本的像素宽度和高度
-        text_width = self.tooltip_label.winfo_reqwidth()
-        text_height = self.tooltip_label.winfo_reqheight()
-        
-        # 计算合适的窗口尺寸
-        width = max(min_width, min(text_width + 16, max_width))
-        height = max(min_height, text_height + 16)
-        
-        # 应用新的尺寸
-        self.tooltip.geometry(f"{width}x{height}")
-        
-        # 调整位置（在鼠标右侧显示）
-        screen_width = self.tooltip.winfo_screenwidth()
-        screen_height = self.tooltip.winfo_screenheight()
-        
-        # 计算位置（在鼠标右侧15像素处）
-        tooltip_x = min(x + 15, screen_width - width)
-        tooltip_y = min(y - height//2, screen_height - height)  # 垂直居中于鼠标位置
-        
-        # 确保工具提示不会超出屏幕边界
-        if tooltip_y < 0:
-            tooltip_y = 0
-        if tooltip_x < 0:
-            tooltip_x = 0
-            
-        self.tooltip.wm_geometry(f"+{tooltip_x}+{tooltip_y}")
-        self.tooltip.lift()  # 保持在最上层
-        
-    def _hide_tooltip(self):
-        """隐藏工具提示"""
-        if self.tooltip:
-            self.tooltip.withdraw()
-            
     def refresh_texts(self):
-        """刷新所有文本"""
+        """刷新界面文本"""
         # 更新标题
-        self.title_label.configure(text=language_manager.get_text("bom_panel_title"))
+        self.title_label.configure(
+            text=language_manager.get_text("bom_panel_title")
+        )
         
-        # 更新工具栏标题和按钮
-        self.toolbar_frame.configure(text=language_manager.get_text("tools"))
-        self.import_btn.configure(text=language_manager.get_text("import_bom"))
-        self.refresh_btn.configure(text=language_manager.get_text("refresh"))
+        # 更新工具栏框架标题
+        self.toolbar_frame.configure(
+            text=language_manager.get_text("tools")
+        )
+        
+        # 更新按钮文本
+        self.import_btn.configure(
+            text=language_manager.get_text("import_bom")
+        )
+        self.refresh_btn.configure(
+            text=language_manager.get_text("refresh")
+        )
         
         # 更新树状视图框架标题
-        self.tree_frame.configure(text=language_manager.get_text("bom_tree"))
+        self.tree_frame.configure(
+            text=language_manager.get_text("bom_tree")
+        )
         
-        # 强制更新显示
-        self.update_idletasks() 
-
     def insert_code(self, code: str):
         """插入代码到逻辑编辑区
         

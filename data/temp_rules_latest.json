@@ -2,27 +2,27 @@
   "rules": [
     {
       "logic_id": "BL01",
-      "tags": "12",
+      "tags": "",
       "tech_doc_path": "",
-      "selection_expression": "K-200-000344",
+      "selection_expression": "K-200-000000",
       "logic_relation": "→",
-      "impact_expression": "PL-Sitze03-1123244"
+      "impact_expression": "PL-Sitze01-1123244"
     },
     {
-      "logic_id": "BL02",
-      "tags": "底盘,1",
+      "logic_id": "TL01",
+      "tags": "",
       "tech_doc_path": "",
-      "selection_expression": "K-200-000011",
+      "selection_expression": "K-200-000301",
       "logic_relation": "→",
-      "impact_expression": "PL-Sitze03-1161297"
+      "impact_expression": "CHANGE PRICE +5000"
     },
     {
-      "logic_id": "BL03",
-      "tags": "你好",
+      "logic_id": "TL02",
+      "tags": "",
       "tech_doc_path": "",
-      "selection_expression": "K-200-000169",
+      "selection_expression": "K-200-000300",
       "logic_relation": "→",
-      "impact_expression": "PL-Sitze03-1161313"
+      "impact_expression": "ON 2131 ADD 21312"
     }
   ],
   "exported": false

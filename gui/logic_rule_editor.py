@@ -220,7 +220,6 @@ class LogicRuleEditor(tk.Toplevel):
             if not effect:
                 raise ValueError(language_manager.get_text("effect_required"))
             
-            # 验证表达式
             # 验证选择项表达式
             valid, message = ExpressionValidator.validate_logic_expression(
                 condition,
@@ -230,14 +229,21 @@ class LogicRuleEditor(tk.Toplevel):
             if not valid:
                 raise ValueError(f"{language_manager.get_text('condition_error')}: {message}")
             
-            # 验证影响项表达式
-            valid, message = ExpressionValidator.validate_logic_expression(
-                effect,
-                self.logic_builder.config_processor if self.logic_builder else None,
-                is_effect_side=True
-            )
-            if not valid:
-                raise ValueError(f"{language_manager.get_text('effect_error')}: {message}")
+            # 检查是否包含微调逻辑
+            if ExpressionValidator.is_tuning_logic(effect):
+                # 验证微调逻辑表达式
+                valid, message = ExpressionValidator.validate_tuning_logic(effect)
+                if not valid:
+                    raise ValueError(f"{language_manager.get_text('effect_error')}: {message}")
+            else:
+                # 验证BOM逻辑表达式
+                valid, message = ExpressionValidator.validate_logic_expression(
+                    effect,
+                    self.logic_builder.config_processor if self.logic_builder else None,
+                    is_effect_side=True
+                )
+                if not valid:
+                    raise ValueError(f"{language_manager.get_text('effect_error')}: {message}")
             
             # 更新规则
             self.rule.condition = condition

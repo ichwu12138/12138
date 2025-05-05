@@ -165,6 +165,14 @@ class ConfigPanel(ttk.Frame):
         tree_frame = ttk.Frame(parent)
         tree_frame.pack(fill=BOTH, expand=YES, padx=4, pady=4)
         
+        # 配置样式
+        style = ttk.Style()
+        style.configure(
+            "Main.Treeview",
+            font=("Microsoft YaHei", 11),  # 调整字体大小
+            rowheight=60  # 调整行高以适应三行显示
+        )
+        
         # 创建树状视图
         self.tree = ttk.Treeview(
             tree_frame,
@@ -174,18 +182,15 @@ class ConfigPanel(ttk.Frame):
         )
         self.tree.pack(side=LEFT, fill=BOTH, expand=YES)
         
-        # 配置样式
-        style = ttk.Style()
-        style.configure(
-            "Main.Treeview",
-            font=("Microsoft YaHei", 11),  # 调整字体大小
-            rowheight=30  # 调整行高
-        )
+        # 配置标签样式
+        self.tree.tag_configure("module", font=("Microsoft YaHei", 11, "bold"))
+        self.tree.tag_configure("f_code", font=("Microsoft YaHei", 11))
+        self.tree.tag_configure("k_code", font=("Microsoft YaHei", 11))
         
         # 添加垂直滚动条
         vsb = ttk.Scrollbar(
             tree_frame,
-            orient="vertical",
+            orient=VERTICAL,
             command=self.tree.yview
         )
         vsb.pack(side=RIGHT, fill=Y)
@@ -194,16 +199,15 @@ class ConfigPanel(ttk.Frame):
         # 添加水平滚动条
         hsb = ttk.Scrollbar(
             parent,
-            orient="horizontal",
+            orient=HORIZONTAL,
             command=self.tree.xview
         )
         hsb.pack(fill=X, pady=(0, 5))
         self.tree.configure(xscrollcommand=hsb.set)
         
-        # 绑定事件
+        # 绑定事件 - 只保留必要的点击事件
         self.tree.bind("<Double-1>", self._on_double_click)
         self.tree.bind("<Button-1>", self._on_single_click)
-        self.tree.bind("<Button-3>", self._on_right_click)
         
     def _refresh_tree(self):
         """刷新树状视图"""
@@ -242,10 +246,10 @@ class ConfigPanel(ttk.Frame):
                             tags=("k_code",)
                         )
             
-            # 配置标签样式 - 全部使用黑色
-            self.tree.tag_configure("module", font=("Microsoft YaHei", 18, "bold"))
-            self.tree.tag_configure("f_code", font=("Microsoft YaHei", 16))
-            self.tree.tag_configure("k_code", font=("Microsoft YaHei", 16))
+            # 配置标签样式
+            self.tree.tag_configure("module", font=("Microsoft YaHei", 11, "bold"))  # 调整字体大小
+            self.tree.tag_configure("f_code", font=("Microsoft YaHei", 11))  # 调整字体大小
+            self.tree.tag_configure("k_code", font=("Microsoft YaHei", 11))  # 调整字体大小
                         
         except Exception as e:
             from utils.message_utils_tk import show_error
@@ -359,12 +363,6 @@ class ConfigPanel(ttk.Frame):
             
             # 更新配置树标题
             self.tree_frame.configure(text=language_manager.get_text("config_tree"))
-            
-            # 调用父类的刷新方法
-            try:
-                super().refresh_texts()
-            except Exception as e:
-                self.logger.debug(f"父类刷新文本失败（可以忽略）: {str(e)}")
                 
         except Exception as e:
             self.logger.error(f"刷新文本失败: {str(e)}", exc_info=True) 

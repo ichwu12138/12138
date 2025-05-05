@@ -158,7 +158,7 @@ class LanguageManager:
             "error_invalid_before_not": "NOT前面不能是变量或右括号",
             "error_implication_at_start": "表达式不能以蕴含符号(→)开始",
             "error_empty_expression": "表达式不能为空",
-            "error_missing_implication": "表达式必须包含蕴含符号(→)",
+            "error_missing_implication": "请先输入基本逻辑表达式，包含→符号",
             "error_invalid_expression_format": "表达式格式无效",
             "error_saving_rule": "保存规则时出错",
             "rule_saved_successfully": "规则保存成功",
@@ -199,7 +199,20 @@ class LanguageManager:
             "word_files": "Word文档",
             "tech_doc_added_success": "技术文档添加成功",
             "import_tech_doc": "导入技术文档",
-            "open_tech_doc_error": "打开技术文档失败，请确认文件存在且可以访问"
+            "open_tech_doc_error": "打开技术文档失败，请确认文件存在且可以访问",
+            "adjust_logic": "微调逻辑",
+            "on": "当",
+            "add": "添加",
+            "from": "从",
+            "change_quantity_of": "修改数量从",
+            "to": "到",
+            "change_price": "修改价格",
+            "insert": "插入",
+            "error_multiple_tuning_logic": "一个表达式只能包含一个微调逻辑",
+            "error_incomplete_on_add": "请输入完整的ON ADD值",
+            "error_incomplete_from_delete": "请输入完整的FROM DELETE值",
+            "error_incomplete_change_quantity": "请输入完整的CHANGE QUANTITY值",
+            "error_invalid_price_format": "价格必须以+或-开头，后跟数字",
         })
         
         # 英文翻译
@@ -340,7 +353,7 @@ class LanguageManager:
             "error_invalid_before_not": "NOT cannot be preceded by a variable or right parenthesis",
             "error_implication_at_start": "Expression cannot start with implication operator (→)",
             "error_empty_expression": "Expression cannot be empty",
-            "error_missing_implication": "Expression must contain implication operator (→)",
+            "error_missing_implication": "Please enter a basic logic expression with → symbol first",
             "error_invalid_expression_format": "Invalid expression format",
             "error_saving_rule": "Error saving rule",
             "rule_saved_successfully": "Rule saved successfully",
@@ -381,7 +394,20 @@ class LanguageManager:
             "word_files": "Word Documents",
             "tech_doc_added_success": "Technical document added successfully",
             "import_tech_doc": "Import Technical Doc",
-            "open_tech_doc_error": "Failed to open technical document, please make sure the file exists and is accessible"
+            "open_tech_doc_error": "Failed to open technical document, please make sure the file exists and is accessible",
+            "adjust_logic": "Adjust Logic",
+            "on": "On",
+            "add": "add",
+            "from": "From",
+            "change_quantity_of": "Change quantity of",
+            "to": "to",
+            "change_price": "Change price",
+            "insert": "Insert",
+            "error_multiple_tuning_logic": "An expression can only contain one tuning logic",
+            "error_incomplete_on_add": "Please enter complete ON ADD values",
+            "error_incomplete_from_delete": "Please enter complete FROM DELETE values",
+            "error_incomplete_change_quantity": "Please enter complete CHANGE QUANTITY values",
+            "error_invalid_price_format": "Price must start with + or - followed by numbers",
         })
         
         # 德文翻译
@@ -522,7 +548,7 @@ class LanguageManager:
             "error_invalid_before_not": "Vor NOT darf keine Variable oder rechte Klammer stehen",
             "error_implication_at_start": "Der Ausdruck darf nicht mit dem Implikationsoperator (→) beginnen",
             "error_empty_expression": "Ausdruck darf nicht leer sein",
-            "error_missing_implication": "Ausdruck muss Implikationsoperator (→) enthalten",
+            "error_missing_implication": "Bitte geben Sie zuerst einen logischen Grundausdruck mit → Symbol ein",
             "error_invalid_expression_format": "Ungültiges Ausdrucksformat",
             "error_saving_rule": "Fehler beim Speichern der Regel",
             "rule_saved_successfully": "Regel erfolgreich gespeichert",
@@ -563,7 +589,20 @@ class LanguageManager:
             "word_files": "Word-Dokumente",
             "tech_doc_added_success": "Technische Dokumentation erfolgreich hinzugefügt",
             "import_tech_doc": "Technische Dokumentation importieren",
-            "open_tech_doc_error": "Fehler beim Öffnen der technischen Dokumentation. Stellen Sie sicher, dass die Datei existiert und zugänglich ist"
+            "open_tech_doc_error": "Fehler beim Öffnen der technischen Dokumentation. Stellen Sie sicher, dass die Datei existiert und zugänglich ist",
+            "adjust_logic": "Logik anpassen",
+            "on": "Bei",
+            "add": "hinzufügen",
+            "from": "Von",
+            "change_quantity_of": "Menge ändern von",
+            "to": "zu",
+            "change_price": "Preis ändern",
+            "insert": "Einfügen",
+            "error_multiple_tuning_logic": "Ein Ausdruck kann nur eine Abstimmungslogik enthalten",
+            "error_incomplete_on_add": "Bitte geben Sie vollständige ON ADD Werte ein",
+            "error_incomplete_from_delete": "Bitte geben Sie vollständige FROM DELETE Werte ein",
+            "error_incomplete_change_quantity": "Bitte geben Sie vollständige CHANGE QUANTITY Werte ein",
+            "error_invalid_price_format": "Der Preis muss mit + oder - beginnen, gefolgt von Zahlen",
         })
         
     def add_callback(self, callback):

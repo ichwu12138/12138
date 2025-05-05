@@ -9,6 +9,7 @@ import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from tkinter import filedialog, messagebox
 from typing import List, Tuple, Set
+import re
 
 from utils.language_manager import language_manager
 from utils.logger import Logger
@@ -47,8 +48,10 @@ class LogicPanel(ttk.Frame):
         self.error_text = tk.StringVar()
         
         # 初始化规则计数器和已使用的ID集合
-        self.rule_counter = 1
-        self.used_rule_ids: Set[int] = set()
+        self.bl_rule_counter = 1
+        self.tl_rule_counter = 1
+        self.used_bl_rule_ids: Set[int] = set()
+        self.used_tl_rule_ids: Set[int] = set()
         
         # 注册语言变化的回调函数
         language_manager.add_callback(self.refresh_texts)
@@ -210,6 +213,102 @@ class LogicPanel(ttk.Frame):
         )
         self.disabled_rb.pack(side=LEFT, padx=5, pady=2)
         
+        # 创建微调逻辑关系框架
+        self.adjust_frame = ttk.LabelFrame(
+            main_frame,
+            text=language_manager.get_text("adjust_logic"),
+            style="Main.TLabelframe"
+        )
+        self.adjust_frame.pack(fill=X, pady=(0, 5))
+
+        # 创建单选按钮变量
+        self.adjust_var = tk.StringVar(value="on_add")
+
+        # 创建单选按钮和输入框容器
+        adjust_container = ttk.Frame(self.adjust_frame)
+        adjust_container.pack(fill=X, padx=5, pady=2)
+
+        # 创建左侧单选按钮框架
+        radio_frame = ttk.Frame(adjust_container)
+        radio_frame.pack(side=LEFT, fill=X, expand=YES)
+
+        # 第一行：on...add...
+        row1 = ttk.Frame(radio_frame)
+        row1.pack(fill=X, pady=2)
+        rb1 = ttk.Radiobutton(
+            row1,
+            text="ON",  # 统一使用大写
+            variable=self.adjust_var,
+            value="on_add",
+            style="Status.TRadiobutton"
+        )
+        rb1.pack(side=LEFT)
+        vcmd = (self.register(self._validate_number_input), '%P')
+        self.entry1 = ttk.Entry(row1, width=8, font=("Microsoft YaHei", 11), validate="key", validatecommand=vcmd)
+        self.entry1.pack(side=LEFT, padx=5)
+        ttk.Label(row1, text="ADD", style="Status.TLabel").pack(side=LEFT)  # 统一使用大写
+        self.entry2 = ttk.Entry(row1, width=8, font=("Microsoft YaHei", 11), validate="key", validatecommand=vcmd)
+        self.entry2.pack(side=LEFT, padx=5)
+
+        # 第二行：from...delete...
+        row2 = ttk.Frame(radio_frame)
+        row2.pack(fill=X, pady=2)
+        rb2 = ttk.Radiobutton(
+            row2,
+            text="FROM",  # 统一使用大写
+            variable=self.adjust_var,
+            value="from_delete",
+            style="Status.TRadiobutton"
+        )
+        rb2.pack(side=LEFT)
+        self.entry3 = ttk.Entry(row2, width=8, font=("Microsoft YaHei", 11), validate="key", validatecommand=vcmd)
+        self.entry3.pack(side=LEFT, padx=5)
+        ttk.Label(row2, text="DELETE", style="Status.TLabel").pack(side=LEFT)  # 统一使用大写
+        self.entry3_2 = ttk.Entry(row2, width=8, font=("Microsoft YaHei", 11), validate="key", validatecommand=vcmd)
+        self.entry3_2.pack(side=LEFT, padx=5)
+
+        # 第三行：change quantity of...to...
+        row3 = ttk.Frame(radio_frame)
+        row3.pack(fill=X, pady=2)
+        rb3 = ttk.Radiobutton(
+            row3,
+            text="CHANGE QUANTITY OF",  # 统一使用大写
+            variable=self.adjust_var,
+            value="change_quantity",
+            style="Status.TRadiobutton"
+        )
+        rb3.pack(side=LEFT)
+        self.entry4 = ttk.Entry(row3, width=8, font=("Microsoft YaHei", 11), validate="key", validatecommand=vcmd)
+        self.entry4.pack(side=LEFT, padx=5)
+        ttk.Label(row3, text="TO", style="Status.TLabel").pack(side=LEFT)  # 统一使用大写
+        self.quantity_entry = ttk.Entry(row3, width=8, font=("Microsoft YaHei", 11), validate="key", validatecommand=vcmd)
+        self.quantity_entry.pack(side=LEFT, padx=5)
+
+        # 第四行：change price...
+        row4 = ttk.Frame(radio_frame)
+        row4.pack(fill=X, pady=2)
+        rb4 = ttk.Radiobutton(
+            row4,
+            text="CHANGE PRICE",  # 统一使用大写
+            variable=self.adjust_var,
+            value="change_price",
+            style="Status.TRadiobutton"
+        )
+        rb4.pack(side=LEFT)
+        price_vcmd = (self.register(self._validate_price_input), '%P')
+        self.price_entry = ttk.Entry(row4, width=8, font=("Microsoft YaHei", 11), validate="key", validatecommand=price_vcmd)
+        self.price_entry.pack(side=LEFT, padx=5)
+
+        # 创建插入按钮
+        self.insert_btn = ttk.Button(
+            adjust_container,
+            text=language_manager.get_text("insert"),
+            command=self._insert_adjust_logic,
+            style="Main.TButton",
+            width=10
+        )
+        self.insert_btn.pack(side=RIGHT, padx=5, pady=5)
+        
         # 创建表达式框架
         self.expr_frame = ttk.LabelFrame(
             main_frame,
@@ -225,11 +324,11 @@ class LogicPanel(ttk.Frame):
         # 创建表达式文本框
         self.expr_text = tk.Text(
             expr_container,
-            height=8,  # 调整高度
+            height=4,  # 减小高度从8到4
             wrap=tk.WORD,
-            font=("Microsoft YaHei", 12)  # 调整字体大小
+            font=("Microsoft YaHei", 12)
         )
-        self.expr_text.pack(fill=BOTH, expand=YES)
+        self.expr_text.pack(fill=BOTH, expand=NO)  # 改为NO，不再自动扩展
         
         # 创建错误提示标签
         self.error_label = ttk.Label(
@@ -237,7 +336,7 @@ class LogicPanel(ttk.Frame):
             textvariable=self.error_text,
             style="Error.TLabel"
         )
-        self.error_label.pack(fill=X, pady=(5, 0))
+        self.error_label.pack(fill=X, pady=(2, 0))  # 减小上下间距
         
         # 绑定按键事件，用于实时验证
         self.expr_text.bind('<Key>', self._on_key_press)
@@ -245,7 +344,7 @@ class LogicPanel(ttk.Frame):
         
         # 创建按钮框架
         btn_frame = ttk.Frame(self.expr_frame)
-        btn_frame.pack(fill=X, padx=5, pady=5)
+        btn_frame.pack(fill=X, padx=5, pady=2)  # 减小内边距
         
         # 创建左侧按钮框架
         left_btn_frame = ttk.Frame(btn_frame)
@@ -287,7 +386,7 @@ class LogicPanel(ttk.Frame):
             text=language_manager.get_text("saved_rules"),
             style="Main.TLabelframe"
         )
-        self.saved_rules_frame.pack(fill=BOTH, expand=YES)
+        self.saved_rules_frame.pack(fill=BOTH, expand=YES, pady=(0, 5))  # 让已保存规则框架占用更多空间
         
         # 创建树形视图
         self._create_tree(self.saved_rules_frame)
@@ -527,7 +626,7 @@ class LogicPanel(ttk.Frame):
             rule_id_str = values[0]  # 格式为"BLxx"
             try:
                 rule_number = int(rule_id_str[2:])  # 提取数字部分
-                self.used_rule_ids.remove(rule_number)  # 从已使用集合中移除
+                self.used_bl_rule_ids.remove(rule_number)  # 从已使用集合中移除
             except (ValueError, IndexError):
                 self.logger.error(f"无法解析规则ID: {rule_id_str}")
         
@@ -664,6 +763,7 @@ class LogicPanel(ttk.Frame):
                 self.validator.config_processor if self.validator else None
             )
             if not valid:
+                self.logger.warning(f"表达式验证失败: {message}")
                 from utils.message_utils_tk import show_error
                 show_error("expression_validation_error", error=message)
                 return
@@ -678,8 +778,20 @@ class LogicPanel(ttk.Frame):
             condition = parts[0].strip()
             effect = parts[1].strip()
             
+            # 检查是否包含微调逻辑关键字
+            is_tuning_logic = any(keyword in effect.upper() for keyword in 
+                                ["ON", "ADD", "FROM", "DELETE", "CHANGE QUANTITY", "CHANGE PRICE"])
+            
             # 获取规则ID
-            rule_id = f"BL{self._get_next_rule_id():02d}"
+            rule_id_num = self._get_next_rule_id(is_tuning_logic)
+            if is_tuning_logic:
+                rule_id = f"TL{rule_id_num:02d}"
+                self.used_tl_rule_ids.add(rule_id_num)
+                self.logger.info(f"创建新的微调逻辑规则ID: {rule_id}")
+            else:
+                rule_id = f"BL{rule_id_num:02d}"
+                self.used_bl_rule_ids.add(rule_id_num)
+                self.logger.info(f"创建新的BOM逻辑规则ID: {rule_id}")
             
             # 创建规则对象
             rule = LogicRule(
@@ -692,6 +804,7 @@ class LogicPanel(ttk.Frame):
             
             # 添加规则
             self.logic_builder.add_rule(rule)
+            self.logger.info(f"成功保存规则: {rule_id}, 条件: {condition}, 影响: {effect}")
             
             # 清空表达式
             self._clear_expr()
@@ -937,13 +1050,29 @@ class LogicPanel(ttk.Frame):
                         self.tree.item(item, values=values)
                         break
         
-    def _get_next_rule_id(self) -> int:
-        """获取下一个可用的规则ID编号"""
-        # 从1开始查找第一个未使用的ID
-        rule_id = 1
-        while rule_id in self.used_rule_ids:
-            rule_id += 1
-        return rule_id 
+        # 只更新微调逻辑框架的标题和插入按钮文本
+        self.adjust_frame.configure(text=language_manager.get_text("adjust_logic"))
+        self.insert_btn.configure(text=language_manager.get_text("insert"))
+        
+    def _get_next_rule_id(self, is_tuning_logic: bool = False) -> int:
+        """获取下一个可用的规则ID编号
+        
+        Args:
+            is_tuning_logic: 是否是微调逻辑规则
+            
+        Returns:
+            int: 规则ID编号
+        """
+        if is_tuning_logic:
+            # 从1开始查找第一个未使用的TL规则ID
+            while self.tl_rule_counter in self.used_tl_rule_ids:
+                self.tl_rule_counter += 1
+            return self.tl_rule_counter
+        else:
+            # 从1开始查找第一个未使用的BL规则ID
+            while self.bl_rule_counter in self.used_bl_rule_ids:
+                self.bl_rule_counter += 1
+            return self.bl_rule_counter
 
     def _load_existing_rules(self):
         """加载现有规则到树状视图"""
@@ -965,7 +1094,8 @@ class LogicPanel(ttk.Frame):
                 # 清空现有数据和已使用的ID集合
                 for item in self.tree.get_children():
                     self.tree.delete(item)
-                self.used_rule_ids.clear()
+                self.used_bl_rule_ids.clear()
+                self.used_tl_rule_ids.clear()
                 return
                 
             self.logger.info("开始加载规则到已保存规则框架")
@@ -973,7 +1103,8 @@ class LogicPanel(ttk.Frame):
             # 清空现有数据和已使用的ID集合
             for item in self.tree.get_children():
                 self.tree.delete(item)
-            self.used_rule_ids.clear()
+            self.used_bl_rule_ids.clear()
+            self.used_tl_rule_ids.clear()
             
             # 加载所有规则
             rules = self.logic_builder.get_rules()
@@ -1006,7 +1137,11 @@ class LogicPanel(ttk.Frame):
                     try:
                         if rule.rule_id.startswith('BL'):
                             rule_number = int(rule.rule_id[2:])
-                            self.used_rule_ids.add(rule_number)
+                            self.used_bl_rule_ids.add(rule_number)
+                            self.logger.debug(f"添加规则ID: {rule_number} 到已使用集合")
+                        elif rule.rule_id.startswith('TL'):
+                            rule_number = int(rule.rule_id[2:])
+                            self.used_tl_rule_ids.add(rule_number)
                             self.logger.debug(f"添加规则ID: {rule_number} 到已使用集合")
                     except (ValueError, IndexError) as e:
                         self.logger.error(f"无法解析规则ID: {rule.rule_id}, 错误: {str(e)}")
@@ -1059,16 +1194,22 @@ class LogicPanel(ttk.Frame):
                     self.tree.delete(rule_id)
                     # 从已使用ID集合中移除
                     try:
-                        rule_number = int(rule_id[2:])
-                        self.used_rule_ids.remove(rule_number)
-                        self.logger.info(f"已删除规则: {rule_id}")
+                        if rule_id.startswith('BL'):
+                            rule_number = int(rule_id[2:])
+                            self.used_bl_rule_ids.remove(rule_number)
+                            self.logger.info(f"已删除规则: {rule_id}")
+                        elif rule_id.startswith('TL'):
+                            rule_number = int(rule_id[2:])
+                            self.used_tl_rule_ids.remove(rule_number)
+                            self.logger.info(f"已删除规则: {rule_id}")
                     except (ValueError, IndexError):
                         self.logger.error(f"无法解析规则ID: {rule_id}")
             elif change_type == "cleared":
                 # 清空所有规则
                 for item in self.tree.get_children():
                     self.tree.delete(item)
-                self.used_rule_ids.clear()
+                self.used_bl_rule_ids.clear()
+                self.used_tl_rule_ids.clear()
                 # 重置规则已加载标志
                 if main_window is not None:
                     main_window.rules_loaded = False
@@ -1107,9 +1248,14 @@ class LogicPanel(ttk.Frame):
                             )
                             # 更新已使用的规则ID
                             try:
-                                rule_number = int(rule.rule_id[2:])
-                                self.used_rule_ids.add(rule_number)
-                                self.logger.info(f"已添加新规则: {rule.rule_id}")
+                                if rule.rule_id.startswith('BL'):
+                                    rule_number = int(rule.rule_id[2:])
+                                    self.used_bl_rule_ids.add(rule_number)
+                                    self.logger.info(f"已添加新规则: {rule.rule_id}")
+                                elif rule.rule_id.startswith('TL'):
+                                    rule_number = int(rule.rule_id[2:])
+                                    self.used_tl_rule_ids.add(rule_number)
+                                    self.logger.info(f"已添加新规则: {rule.rule_id}")
                             except (ValueError, IndexError):
                                 self.logger.error(f"无法解析规则ID: {rule.rule_id}")
                     except Exception as e:
@@ -1117,3 +1263,134 @@ class LogicPanel(ttk.Frame):
                             
         except Exception as e:
             self.logger.error(f"处理规则变更事件失败: {str(e)}", exc_info=True) 
+
+    def _validate_number_input(self, value):
+        """验证输入是否为数字
+        
+        Args:
+            value: 输入的值
+            
+        Returns:
+            bool: 是否为有效输入
+        """
+        if value == "":
+            return True
+        return value.isdigit()
+
+    def _validate_price_input(self, value):
+        """验证价格输入
+        
+        Args:
+            value: 输入的值
+            
+        Returns:
+            bool: 是否为有效输入
+        """
+        if value == "" or value == "+" or value == "-":
+            return True
+        if value.startswith("+") or value.startswith("-"):
+            return value[1:].isdigit()
+        return False
+
+    def _insert_adjust_logic(self):
+        """插入微调逻辑"""
+        try:
+            adjust_type = self.adjust_var.get()
+            logic = None
+            
+            # 检查表达式文本框中是否有→
+            current_text = self.expr_text.get("1.0", "end-1c")
+            if "→" not in current_text:
+                self.logger.warning("尝试插入微调逻辑时未找到→符号")
+                messagebox.showerror(
+                    language_manager.get_text("error"),
+                    language_manager.get_text("error_missing_implication")
+                )
+                return
+
+            # 检查是否已经包含微调逻辑
+            if any(keyword in current_text.upper() for keyword in 
+                ["ON", "ADD", "FROM", "DELETE", "CHANGE QUANTITY", "CHANGE PRICE"]):
+                self.logger.warning("表达式已包含微调逻辑")
+                messagebox.showerror(
+                    language_manager.get_text("error"),
+                    language_manager.get_text("error_multiple_tuning_logic")
+                )
+                return
+            
+            if adjust_type == "on_add":
+                value1 = self.entry1.get().strip()
+                value2 = self.entry2.get().strip()
+                if not value1 or not value2:
+                    self.logger.warning("ON ADD值不完整")
+                    messagebox.showerror(
+                        language_manager.get_text("error"),
+                        language_manager.get_text("error_incomplete_on_add")
+                    )
+                    return
+                logic = f"ON {value1} ADD {value2}"
+                self.logger.info(f"创建ON ADD微调逻辑: {logic}")
+
+            elif adjust_type == "from_delete":
+                value1 = self.entry3.get().strip()
+                value2 = self.entry3_2.get().strip()
+                if not value1 or not value2:
+                    self.logger.warning("FROM DELETE值不完整")
+                    messagebox.showerror(
+                        language_manager.get_text("error"),
+                        language_manager.get_text("error_incomplete_from_delete")
+                    )
+                    return
+                logic = f"FROM {value1} DELETE {value2}"
+                self.logger.info(f"创建FROM DELETE微调逻辑: {logic}")
+
+            elif adjust_type == "change_quantity":
+                value1 = self.entry4.get().strip()
+                value2 = self.quantity_entry.get().strip()
+                if not value1 or not value2:
+                    self.logger.warning("CHANGE QUANTITY值不完整")
+                    messagebox.showerror(
+                        language_manager.get_text("error"),
+                        language_manager.get_text("error_incomplete_change_quantity")
+                    )
+                    return
+                logic = f"CHANGE QUANTITY OF {value1} TO {value2}"
+                self.logger.info(f"创建CHANGE QUANTITY微调逻辑: {logic}")
+
+            elif adjust_type == "change_price":
+                value = self.price_entry.get().strip()
+                if not value or not re.match(r'^[+-]\d+$', value):
+                    self.logger.warning(f"CHANGE PRICE格式错误: {value}")
+                    messagebox.showerror(
+                        language_manager.get_text("error"),
+                        language_manager.get_text("error_invalid_price_format")
+                    )
+                    return
+                logic = f"CHANGE PRICE {value}"
+                self.logger.info(f"创建CHANGE PRICE微调逻辑: {logic}")
+            
+            if logic:
+                # 在→后插入逻辑
+                text = self.expr_text.get("1.0", "end-1c")
+                parts = text.split("→")
+                if len(parts) == 2:
+                    new_text = f"{parts[0].strip()} → {parts[1].strip()} {logic}"
+                    self.expr_text.delete("1.0", "end")
+                    self.expr_text.insert("1.0", new_text)
+                    self.logger.info(f"成功插入微调逻辑到表达式: {new_text}")
+                
+                # 清空输入框
+                self.entry1.delete(0, "end")
+                self.entry2.delete(0, "end")
+                self.entry3.delete(0, "end")
+                self.entry3_2.delete(0, "end")
+                self.entry4.delete(0, "end")
+                self.quantity_entry.delete(0, "end")
+                self.price_entry.delete(0, "end")
+                
+        except Exception as e:
+            self.logger.error(f"插入微调逻辑时出错: {str(e)}", exc_info=True)
+            messagebox.showerror(
+                language_manager.get_text("error"),
+                str(e)
+            ) 

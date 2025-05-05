@@ -1,7 +1,7 @@
 """
 表达式验证器模块
 
-该模块提供了验证 BOM 逻辑关系表达式的功能。
+该模块提供了验证 BOM 逻辑关系表达式和微调逻辑关系表达式的功能。
 """
 import re
 from typing import List, Tuple, Optional
@@ -16,6 +16,10 @@ class ExpressionValidator:
     # 定义常量
     OPERATORS = {"AND", "OR", "NOT"}  # 逻辑操作符
     RELATION_OPERATOR = "→"  # 关系操作符
+    TUNING_KEYWORDS = {  # 微调逻辑关键字
+        "ON", "ADD", "FROM", "DELETE", 
+        "CHANGE QUANTITY OF", "TO", "CHANGE PRICE"
+    }
     
     def __init__(self, config_processor=None, bom_processor=None):
         """初始化验证器
@@ -38,6 +42,69 @@ class ExpressionValidator:
         if self.bom_processor:
             return self.bom_processor.is_valid_bom_code(token)
         return bool(re.match(r'^(PL-[A-Za-z0-9-]+)$', token))
+
+    @staticmethod
+    def is_tuning_logic(text: str) -> bool:
+        """检查是否包含微调逻辑关键字"""
+        upper_text = text.upper()
+        return any(keyword in upper_text for keyword in ExpressionValidator.TUNING_KEYWORDS)
+
+    @staticmethod
+    def validate_tuning_logic(expr: str) -> Tuple[bool, str]:
+        """验证微调逻辑表达式
+        
+        Args:
+            expr: 要验证的表达式
+            
+        Returns:
+            Tuple[bool, str]: (是否有效, 错误消息)
+        """
+        # 分割表达式为token
+        tokens = expr.split()
+        
+        # 检查ON ADD格式
+        if "ON" in tokens and "ADD" in tokens:
+            on_idx = tokens.index("ON")
+            add_idx = tokens.index("ADD")
+            if add_idx <= on_idx or add_idx - on_idx != 2:
+                return False, "ON ADD格式错误"
+            if not tokens[on_idx + 1].isdigit() or not tokens[add_idx + 1].isdigit():
+                return False, "ON ADD后必须是数字"
+                
+        # 检查FROM DELETE格式
+        elif "FROM" in tokens and "DELETE" in tokens:
+            from_idx = tokens.index("FROM")
+            delete_idx = tokens.index("DELETE")
+            if delete_idx <= from_idx or delete_idx - from_idx != 2:
+                return False, "FROM DELETE格式错误"
+            if not tokens[from_idx + 1].isdigit() or not tokens[delete_idx + 1].isdigit():
+                return False, "FROM DELETE后必须是数字"
+                
+        # 检查CHANGE QUANTITY OF格式
+        elif "CHANGE" in tokens and "QUANTITY" in tokens and "OF" in tokens and "TO" in tokens:
+            try:
+                of_idx = tokens.index("OF")
+                to_idx = tokens.index("TO")
+                if to_idx <= of_idx or to_idx - of_idx != 2:
+                    return False, "CHANGE QUANTITY OF TO格式错误"
+                if not tokens[of_idx + 1].isdigit() or not tokens[to_idx + 1].isdigit():
+                    return False, "CHANGE QUANTITY OF和TO后必须是数字"
+            except ValueError:
+                return False, "CHANGE QUANTITY OF TO格式错误"
+                
+        # 检查CHANGE PRICE格式
+        elif "CHANGE" in tokens and "PRICE" in tokens:
+            price_idx = tokens.index("PRICE")
+            if price_idx >= len(tokens) - 1:
+                return False, "CHANGE PRICE后必须有值"
+            price_value = tokens[price_idx + 1]
+            if not re.match(r'^[+-]\d+$', price_value):
+                return False, "CHANGE PRICE后必须是+或-开头的数字"
+                
+        else:
+            return False, "不支持的微调逻辑格式"
+            
+        return True, ""
     
     @staticmethod
     def validate_logic_expression(expr: str, config_processor=None, is_effect_side: bool = False) -> Tuple[bool, str]:
@@ -154,12 +221,20 @@ class ExpressionValidator:
         if not effect_expr:
             return False, "影响项表达式不能为空"
             
-        valid, message = ExpressionValidator.validate_logic_expression(
-            effect_expr,
-            config_processor,
-            is_effect_side=True
-        )
-        if not valid:
-            return False, f"影响项表达式错误: {message}"
+        # 检查是否包含微调逻辑关键字
+        if ExpressionValidator.is_tuning_logic(effect_expr):
+            # 验证微调逻辑表达式
+            valid, message = ExpressionValidator.validate_tuning_logic(effect_expr)
+            if not valid:
+                return False, f"微调逻辑表达式错误: {message}"
+        else:
+            # 验证BOM逻辑表达式
+            valid, message = ExpressionValidator.validate_logic_expression(
+                effect_expr,
+                config_processor,
+                is_effect_side=True
+            )
+            if not valid:
+                return False, f"影响项表达式错误: {message}"
             
         return True, ""
