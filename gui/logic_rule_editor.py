@@ -62,51 +62,51 @@ class LogicRuleEditor(tk.Toplevel):
         # 创建大字体标签框架样式
         style.configure(
             "Large.TLabelframe",
-            font=("Microsoft YaHei", 18)
+            font=("Microsoft YaHei", 12)
         )
         style.configure(
             "Large.TLabelframe.Label",
-            font=("Microsoft YaHei", 18)
+            font=("Microsoft YaHei", 12)
         )
         
         # 创建大字体单选按钮样式
         style.configure(
             "Large.TRadiobutton",
-            font=("Microsoft YaHei", 18)
+            font=("Microsoft YaHei", 11)
         )
         
         # 创建大字体按钮样式
         style.configure(
             "Large.TButton",
-            font=("Microsoft YaHei", 18)
+            font=("Microsoft YaHei", 11)
         )
         
         # 创建大字体成功按钮样式
         style.configure(
             "Large.success.TButton",
-            font=("Microsoft YaHei", 18)
+            font=("Microsoft YaHei", 11)
         )
         
     def _create_widgets(self):
         """创建对话框组件"""
         # 创建主布局框架
-        main_frame = ttk.Frame(self, padding=10)
+        main_frame = ttk.Frame(self, padding=8)
         main_frame.pack(fill=BOTH, expand=YES)
         
         # 选择项表达式
         condition_frame = ttk.LabelFrame(
             main_frame, 
             text=language_manager.get_text("edit_rule_condition"),
-            padding=5,
+            padding=4,
             style="Large.TLabelframe"
         )
-        condition_frame.pack(fill=BOTH, expand=YES, pady=5)
+        condition_frame.pack(fill=BOTH, expand=YES, pady=4)
         
         self.condition_text = tk.Text(
             condition_frame,
-            height=6,
+            height=5,
             wrap=tk.WORD,
-            font=("Microsoft YaHei", 18)
+            font=("Microsoft YaHei", 11)
         )
         self.condition_text.insert(tk.END, self.rule.condition)
         self.condition_text.pack(fill=BOTH, expand=YES)
@@ -124,16 +124,16 @@ class LogicRuleEditor(tk.Toplevel):
         effect_frame = ttk.LabelFrame(
             main_frame, 
             text=language_manager.get_text("edit_rule_effect"),
-            padding=5,
+            padding=4,
             style="Large.TLabelframe"
         )
-        effect_frame.pack(fill=BOTH, expand=YES, pady=5)
+        effect_frame.pack(fill=BOTH, expand=YES, pady=4)
         
         self.effect_text = tk.Text(
             effect_frame,
-            height=6,
+            height=5,
             wrap=tk.WORD,
-            font=("Microsoft YaHei", 18)
+            font=("Microsoft YaHei", 11)
         )
         
         # 显示规则的action
@@ -153,10 +153,10 @@ class LogicRuleEditor(tk.Toplevel):
         status_frame = ttk.LabelFrame(
             main_frame, 
             text=language_manager.get_text("edit_rule_status"),
-            padding=5,
+            padding=4,
             style="Large.TLabelframe"
         )
-        status_frame.pack(fill=X, pady=5)
+        status_frame.pack(fill=X, pady=4)
         
         # 创建状态变量
         self.status_var = tk.StringVar(value=self.rule.status.value)
@@ -179,25 +179,25 @@ class LogicRuleEditor(tk.Toplevel):
         
         # 按钮区
         btn_frame = ttk.Frame(main_frame)
-        btn_frame.pack(fill=X, pady=10)
+        btn_frame.pack(fill=X, pady=8)
         
         self.cancel_btn = ttk.Button(
             btn_frame,
             text=language_manager.get_text("cancel"),
             command=self.destroy,
-            width=15,
+            width=12,
             style="Large.TButton"
         )
-        self.cancel_btn.pack(side=RIGHT, padx=5)
+        self.cancel_btn.pack(side=RIGHT, padx=4)
         
         self.confirm_btn = ttk.Button(
             btn_frame,
             text=language_manager.get_text("confirm"),
             command=self._on_confirm,
-            width=15,
+            width=12,
             style="Large.success.TButton"
         )
-        self.confirm_btn.pack(side=RIGHT, padx=5)
+        self.confirm_btn.pack(side=RIGHT, padx=4)
         
     def _on_confirm(self):
         """确认按钮点击事件"""

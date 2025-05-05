@@ -49,81 +49,23 @@ class LanguageDialog:
         
         # 设置对话框属性
         self.window.title("语言选择 / Language Selection / Sprachauswahl")
-        self.window.minsize(400, 400)  # 调整最小尺寸
+        self.window.minsize(300, 300)  # 调整最小尺寸
         self.window.resizable(False, False)  # 禁止调整大小
         
         # 设置窗口大小
-        window_width = 400  # 调整窗口宽度
-        window_height = 400  # 调整窗口高度
+        window_width = 300  # 调整窗口宽度
+        window_height = 300  # 调整窗口高度
         
-        # 获取所有屏幕的信息
-        if self.parent:
-            # 获取父窗口所在的屏幕
-            parent_x = self.parent.winfo_x()
-            parent_y = self.parent.winfo_y()
-            parent_width = self.parent.winfo_width()
-            parent_height = self.parent.winfo_height()
-            
-            # 检查父窗口是否太小或在屏幕外
-            is_parent_invalid = (
-                parent_width <= 1 or 
-                parent_height <= 1 or 
-                parent_x <= 0 or 
-                parent_y <= 0 or
-                parent_x >= self.window.winfo_screenwidth() or
-                parent_y >= self.window.winfo_screenheight()
-            )
-            
-            if not is_parent_invalid:
-                # 如果父窗口正常，相对于父窗口居中
-                x = parent_x + (parent_width - window_width) // 2
-                y = parent_y + (parent_height - window_height) // 2
-            else:
-                # 如果父窗口无效，获取鼠标所在屏幕并在该屏幕居中
-                try:
-                    # 获取鼠标位置
-                    mouse_x = self.window.winfo_pointerx()
-                    mouse_y = self.window.winfo_pointery()
-                    
-                    # 获取鼠标所在屏幕的信息
-                    screen_width = self.window.winfo_screenwidth()
-                    screen_height = self.window.winfo_screenheight()
-                    
-                    # 计算居中位置
-                    x = (screen_width - window_width) // 2
-                    y = (screen_height - window_height) // 2
-                    
-                    # 如果系统支持，尝试获取多显示器信息
-                    try:
-                        if hasattr(self.window, 'winfo_vrootwidth'):
-                            total_width = self.window.winfo_vrootwidth()
-                            total_height = self.window.winfo_vrootheight()
-                            
-                            # 确定鼠标在哪个屏幕
-                            if mouse_x > screen_width:
-                                x += screen_width
-                    except:
-                        pass
-                        
-                except:
-                    # 如果无法获取鼠标位置，就在主屏幕居中
-                    screen_width = self.window.winfo_screenwidth()
-                    screen_height = self.window.winfo_screenheight()
-                    x = (screen_width - window_width) // 2
-                    y = (screen_height - window_height) // 2
-        else:
-            # 如果没有父窗口，在主屏幕居中
-            screen_width = self.window.winfo_screenwidth()
-            screen_height = self.window.winfo_screenheight()
-            x = (screen_width - window_width) // 2
-            y = (screen_height - window_height) // 2
+        # 获取屏幕尺寸
+        screen_width = self.window.winfo_screenwidth()
+        screen_height = self.window.winfo_screenheight()
         
-        # 确保窗口完全可见
-        x = max(0, min(x, self.window.winfo_screenwidth() - window_width))
-        y = max(0, min(y, self.window.winfo_screenheight() - window_height))
+        # 计算居中位置
+        center_x = int(screen_width/2 - window_width/2)
+        center_y = int(screen_height/2 - window_height/2)
         
-        # 设置位置和大小
-        self.window.geometry(f"{window_width}x{window_height}+{x}+{y}")
+        # 设置窗口位置和大小
+        self.window.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
         
         # 使对话框模态
         self.window.transient(self.parent)
@@ -137,36 +79,35 @@ class LanguageDialog:
         # 焦点设置
         self.window.focus_force()
         
-        # 绑定关闭事件
-        self.window.protocol("WM_DELETE_WINDOW", self._on_close)
-        
         # 创建界面组件
         self._create_widgets()
         
     def _create_widgets(self):
         """创建界面组件"""
         # 创建主布局框架
-        main_frame = ttk.Frame(self.window, padding=30)  # 调整内边距
+        main_frame = ttk.Frame(self.window, padding=20)  # 减小内边距
         main_frame.pack(fill=BOTH, expand=YES)
         
         # 创建标题标签 - 分三行显示三种语言
         title_label = ttk.Label(
             main_frame, 
-            text="请选择语言\nSelect Language\nSprache wählen",  # 三行显示
-            font=("Microsoft YaHei", 16, "bold"),  # 设置字体大小为16
-            justify="center",  # 居中对齐
-            wraplength=360  # 调整文本换行宽度
+            text="请选择语言\nSelect Language\nSprache wählen",
+            font=("Microsoft YaHei", 12, "bold"),  # 调整字体大小
+            justify="center",
+            wraplength=260  # 调整文本换行宽度
         )
-        title_label.pack(pady=(0, 20))  # 调整上下间距
+        title_label.pack(pady=(0, 15))
         
         # 获取支持的语言列表
         supported_languages = config_manager.get_app_config("supported_languages", ["zh", "en", "de"])
         
         # 创建语言按钮 - 定义统一字体大小的按钮样式
         button_style = ttk.Style()
-        button_style.configure("Language.TButton", 
-                             font=("Microsoft YaHei", 16, "bold"),  # 设置字体大小为16
-                             padding=(10, 5))  # 调整按钮内边距
+        button_style.configure(
+            "Language.TButton", 
+            font=("Microsoft YaHei", 11, "bold"),  # 调整字体大小
+            padding=(8, 4)  # 调整按钮内边距
+        )
         
         # 按钮容器
         button_frame = ttk.Frame(main_frame)
@@ -179,12 +120,11 @@ class LanguageDialog:
                     button_frame,
                     text=LANGUAGES[lang_code]["name"],
                     command=lambda code=lang_code: self._on_language_selected(code),
-                    width=20,  # 调整按钮宽度
-                    style="Language.TButton"  # 使用自定义样式
+                    width=15,  # 调整按钮宽度
+                    style="Language.TButton"
                 )
-                # 配置按钮布局
-                lang_button.pack(pady=10, ipady=5)  # 调整按钮间距和内部高度
-        
+                lang_button.pack(pady=8, ipady=4)  # 调整按钮间距和内部高度
+    
     def _on_language_selected(self, lang_code):
         """语言选择事件处理"""
         self.result = lang_code

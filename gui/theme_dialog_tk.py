@@ -27,12 +27,12 @@ class SimpleThemeDialog(tk.Toplevel):
         
         # 设置对话框属性
         self.title(language_manager.get_text("theme_dialog_title"))
-        self.minsize(400, 400)  # 调整最小尺寸
+        self.minsize(300, 300)  # 调整最小尺寸
         self.resizable(False, False)
         
         # 居中显示
-        window_width = 400  # 调整窗口宽度
-        window_height = 400  # 调整窗口高度
+        window_width = 300  # 调整窗口宽度
+        window_height = 300  # 调整窗口高度
         screen_width = parent.winfo_screenwidth()
         screen_height = parent.winfo_screenheight()
         
@@ -59,24 +59,24 @@ class SimpleThemeDialog(tk.Toplevel):
     def _create_widgets(self):
         """创建对话框控件"""
         # 创建主布局框架
-        main_frame = ttk.Frame(self, padding=30)  # 调整内边距
+        main_frame = ttk.Frame(self, padding=20)  # 调整内边距
         main_frame.pack(fill=tk.BOTH, expand=True)
         
         # 标题
         title_label = ttk.Label(
             main_frame,
             text=language_manager.get_text("theme_dialog_header"),
-            font=("Microsoft YaHei", 16, "bold"),  # 设置字体大小为16
+            font=("Microsoft YaHei", 12, "bold"),  # 调整字体大小
             justify="center"  # 居中对齐
         )
-        title_label.pack(pady=(0, 20))  # 调整上下间距
+        title_label.pack(pady=(0, 15))  # 调整上下间距
         
         # 创建按钮样式
         style = ttk.Style()
         style.configure(
             "Theme.TButton",
-            font=("Microsoft YaHei", 16, "bold"),  # 设置字体大小为16
-            padding=(10, 5),  # 调整按钮内边距
+            font=("Microsoft YaHei", 11, "bold"),  # 调整字体大小
+            padding=(8, 4),  # 调整按钮内边距
             foreground="white"  # 设置按钮文字颜色为白色
         )
         
@@ -102,20 +102,20 @@ class SimpleThemeDialog(tk.Toplevel):
             button_frame,
             text=language_manager.get_text("light_theme"),
             style="Theme.TButton",
-            width=20,  # 调整按钮宽度
+            width=15,  # 调整按钮宽度
             command=lambda: self._on_select("light")
         )
-        light_btn.pack(pady=10, ipady=10)  # 增加按钮内部高度
+        light_btn.pack(pady=8, ipady=4)  # 调整按钮间距和内部高度
         
         # 深色主题按钮
         dark_btn = ttk.Button(
             button_frame,
             text=language_manager.get_text("dark_theme"),
             style="Theme.TButton",
-            width=20,  # 调整按钮宽度
+            width=15,  # 调整按钮宽度
             command=lambda: self._on_select("dark")
         )
-        dark_btn.pack(pady=10, ipady=10)  # 增加按钮内部高度
+        dark_btn.pack(pady=8, ipady=4)  # 调整按钮间距和内部高度
         
     def _on_select(self, theme):
         """处理主题选择

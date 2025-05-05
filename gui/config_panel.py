@@ -163,7 +163,7 @@ class ConfigPanel(ttk.Frame):
         """创建树状视图"""
         # 创建树状视图框架
         tree_frame = ttk.Frame(parent)
-        tree_frame.pack(fill=BOTH, expand=YES, padx=5, pady=5)
+        tree_frame.pack(fill=BOTH, expand=YES, padx=4, pady=4)
         
         # 创建树状视图
         self.tree = ttk.Treeview(
@@ -173,6 +173,14 @@ class ConfigPanel(ttk.Frame):
             show="tree"  # 只显示树形结构，不显示列头
         )
         self.tree.pack(side=LEFT, fill=BOTH, expand=YES)
+        
+        # 配置样式
+        style = ttk.Style()
+        style.configure(
+            "Main.Treeview",
+            font=("Microsoft YaHei", 11),  # 调整字体大小
+            rowheight=30  # 调整行高
+        )
         
         # 添加垂直滚动条
         vsb = ttk.Scrollbar(

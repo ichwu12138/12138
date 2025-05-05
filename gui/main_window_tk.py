@@ -77,24 +77,24 @@ class MainWindow:
         """配置全局样式"""
         style = ttk.Style()
         
-        # 定义统一的字体大小
+        # 定义统一的字体大小 - 调整为适应1920*1080分辨率
         FONT_SIZES = {
-            "menu": 16,           # 菜单字体大小
-            "title": 20,          # 标题字体大小
-            "frame_title": 18,    # 框架标题字体大小
-            "button": 16,         # 按钮字体大小
-            "tree": 18,           # 树状图字体大小
-            "tree_title": 18,     # 树状图标题字体大小
-            "status": 14,         # 状态栏字体大小
-            "label": 16,          # 标签字体大小
-            "text": 16            # 文本字体大小
+            "menu": 12,           # 菜单字体大小
+            "title": 14,          # 标题字体大小
+            "frame_title": 12,    # 框架标题字体大小
+            "button": 11,         # 按钮字体大小
+            "tree": 12,           # 树状图字体大小
+            "tree_title": 12,     # 树状图标题字体大小
+            "status": 10,         # 状态栏字体大小
+            "label": 11,          # 标签字体大小
+            "text": 11            # 文本字体大小
         }
         
         # 定义统一的内边距
         PADDINGS = {
-            "button": (15, 10),   # 按钮内边距
-            "frame": 10,          # 框架内边距
-            "tree": 5             # 树状图内边距
+            "button": (10, 6),    # 按钮内边距
+            "frame": 8,           # 框架内边距
+            "tree": 4             # 树状图内边距
         }
         
         # 定义统一的颜色
@@ -108,41 +108,41 @@ class MainWindow:
         }
         
         # 配置菜单样式
-        self.root.option_add("*Menu.font", ("Microsoft YaHei", FONT_SIZES["menu"], "bold"))
+        self.root.option_add("*Menu.font", ("Microsoft YaHei", FONT_SIZES["menu"]))
         
         # 配置标题样式
         style.configure(
             "Title.TLabel",
             font=("Microsoft YaHei", FONT_SIZES["title"], "bold"),
-            padding=10
+            padding=8
         )
         
         # 配置框架标题样式
         style.configure(
             "FrameTitle.TLabel",
             font=("Microsoft YaHei", FONT_SIZES["frame_title"], "bold"),
-            padding=5
+            padding=4
         )
         
-        # 配置按钮样式 - 使用统一的粗体样式
+        # 配置按钮样式
         style.configure(
             "Main.TButton",
-            font=("Microsoft YaHei", FONT_SIZES["button"], "bold"),
+            font=("Microsoft YaHei", FONT_SIZES["button"]),
             padding=PADDINGS["button"]
         )
         
         # 配置成功按钮样式
         style.configure(
             "success.Main.TButton",
-            font=("Microsoft YaHei", FONT_SIZES["button"], "bold"),
+            font=("Microsoft YaHei", FONT_SIZES["button"]),
             padding=PADDINGS["button"]
         )
         
         # 配置树状视图样式
         style.configure(
             "Main.Treeview",
-            font=("Microsoft YaHei", FONT_SIZES["tree"], "bold"),
-            rowheight=50,
+            font=("Microsoft YaHei", FONT_SIZES["tree"]),
+            rowheight=30,
             padding=PADDINGS["tree"]
         )
         
@@ -150,14 +150,14 @@ class MainWindow:
         style.configure(
             "Main.Treeview.Heading",
             font=("Microsoft YaHei", FONT_SIZES["tree_title"], "bold"),
-            padding=5
+            padding=4
         )
         
         # 配置标签样式
         style.configure(
             "Main.TLabel",
-            font=("Microsoft YaHei", FONT_SIZES["label"], "bold"),
-            padding=5
+            font=("Microsoft YaHei", FONT_SIZES["label"]),
+            padding=4
         )
         
         # 配置框架样式
@@ -172,18 +172,18 @@ class MainWindow:
         style.configure(
             "Main.TLabelframe",
             padding=PADDINGS["frame"],
-            font=("Microsoft YaHei", FONT_SIZES["frame_title"], "bold")
+            font=("Microsoft YaHei", FONT_SIZES["frame_title"])
         )
         style.configure(
             "Main.TLabelframe.Label",
-            font=("Microsoft YaHei", FONT_SIZES["frame_title"], "bold")
+            font=("Microsoft YaHei", FONT_SIZES["frame_title"])
         )
         
         # 配置状态栏样式
         style.configure(
             "Status.TLabel",
-            font=("Microsoft YaHei", FONT_SIZES["status"], "bold"),
-            padding=5
+            font=("Microsoft YaHei", FONT_SIZES["status"]),
+            padding=4
         )
         
         # 配置树状图标签样式
@@ -197,12 +197,12 @@ class MainWindow:
         style.configure(
             "FCode.TLabel",
             foreground=COLORS["f_code"],
-            font=("Microsoft YaHei", FONT_SIZES["text"], "bold")
+            font=("Microsoft YaHei", FONT_SIZES["text"])
         )
         style.configure(
             "KCode.TLabel",
             foreground=COLORS["k_code"],
-            font=("Microsoft YaHei", FONT_SIZES["text"], "bold")
+            font=("Microsoft YaHei", FONT_SIZES["text"])
         )
         
         # 配置面板样式

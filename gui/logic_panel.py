@@ -225,9 +225,9 @@ class LogicPanel(ttk.Frame):
         # 创建表达式文本框
         self.expr_text = tk.Text(
             expr_container,
-            height=10,
+            height=8,  # 调整高度
             wrap=tk.WORD,
-            font=("Microsoft YaHei", 18)
+            font=("Microsoft YaHei", 12)  # 调整字体大小
         )
         self.expr_text.pack(fill=BOTH, expand=YES)
         
@@ -331,13 +331,13 @@ class LogicPanel(ttk.Frame):
         style = ttk.Style()
         style.configure(
             "Large.Treeview",
-            font=("Microsoft YaHei", 18),
-            rowheight=100  # 调整行高以适应更大的字体
+            font=("Microsoft YaHei", 12),  # 调整字体大小
+            rowheight=40  # 调整行高
         )
         style.configure(
             "Large.Treeview.Heading",
-            font=("Microsoft YaHei", 18, "bold"),
-            rowheight=100
+            font=("Microsoft YaHei", 12, "bold"),  # 调整字体大小
+            rowheight=40
         )
         
         # 创建右键菜单

@@ -93,29 +93,29 @@ class LogicLibraryWindow(tk.Toplevel):
         frame = ttk.LabelFrame(
             parent,
             text=language_manager.get_text("search"),
-            padding=5,
+            padding=4,
             style="Large.TLabelframe"
         )
-        frame.pack(fill=X, pady=(0, 10))
+        frame.pack(fill=X, pady=(0, 8))
         
         # 创建搜索输入框
         self.search_var = tk.StringVar()
         search_entry = ttk.Entry(
             frame,
             textvariable=self.search_var,
-            font=("Microsoft YaHei", 18)
+            font=("Microsoft YaHei", 11)
         )
-        search_entry.pack(side=LEFT, fill=X, expand=YES, padx=5)
+        search_entry.pack(side=LEFT, fill=X, expand=YES, padx=4)
         
         # 创建清除按钮
         clear_btn = ttk.Button(
             frame,
             text=language_manager.get_text("clear"),
             command=self._clear_search,
-            width=10,
+            width=8,
             style="Large.TButton"
         )
-        clear_btn.pack(side=LEFT, padx=5)
+        clear_btn.pack(side=LEFT, padx=4)
         
         # 绑定搜索事件
         self.search_var.trace_add("write", self._on_search_changed)
@@ -149,24 +149,24 @@ class LogicLibraryWindow(tk.Toplevel):
         self.tree.heading("tech_doc", text=language_manager.get_text("tech_doc"), anchor=CENTER)
         
         # 设置列宽
-        self.tree.column("rule_id", width=100, anchor=CENTER)
-        self.tree.column("condition", width=300, anchor=CENTER)
-        self.tree.column("effect", width=300, anchor=CENTER)
-        self.tree.column("status", width=100, anchor=CENTER)
-        self.tree.column("tags", width=150, anchor=CENTER)
-        self.tree.column("tech_doc", width=150, anchor=CENTER)
+        self.tree.column("rule_id", width=80, anchor=CENTER)
+        self.tree.column("condition", width=250, anchor=CENTER)
+        self.tree.column("effect", width=250, anchor=CENTER)
+        self.tree.column("status", width=80, anchor=CENTER)
+        self.tree.column("tags", width=120, anchor=CENTER)
+        self.tree.column("tech_doc", width=120, anchor=CENTER)
         
         # 配置大字体样式
         style = ttk.Style()
         style.configure(
             "Large.Treeview",
-            font=("Microsoft YaHei", 18),
-            rowheight=36
+            font=("Microsoft YaHei", 11),
+            rowheight=30
         )
         style.configure(
             "Large.Treeview.Heading",
-            font=("Microsoft YaHei", 18, "bold"),
-            rowheight=36
+            font=("Microsoft YaHei", 11, "bold"),
+            rowheight=30
         )
         
         # 添加滚动条

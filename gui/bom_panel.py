@@ -122,8 +122,8 @@ class BomPanel(ttk.Frame):
         style = ttk.Style()
         style.configure(
             "Main.Treeview",
-            font=("Microsoft YaHei", 16),  # 设置基本字体大小为16
-            rowheight=100  # 设置足够的行高以容纳多行文本
+            font=("Microsoft YaHei", 11),  # 调整字体大小
+            rowheight=40  # 调整行高
         )
         
         # 添加垂直滚动条
@@ -148,6 +148,11 @@ class BomPanel(ttk.Frame):
         self.tree.bind("<Double-1>", self._on_double_click)
         self.tree.bind("<Button-1>", self._on_single_click)
         self.tree.bind("<Button-3>", self._on_right_click)
+        
+        # 配置标签样式
+        self.tree.tag_configure("level_1", font=("Microsoft YaHei", 12, "bold"))
+        self.tree.tag_configure("level_node", font=("Microsoft YaHei", 11, "bold"))
+        self.tree.tag_configure("material", font=("Microsoft YaHei", 11))
         
     def _refresh_tree(self):
         """刷新树状视图"""
@@ -225,15 +230,6 @@ class BomPanel(ttk.Frame):
                 higher_levels = [l for l in level_last_nodes.keys() if l > level]
                 for l in higher_levels:
                     level_last_nodes.pop(l)
-            
-            # 配置标签样式
-            self.tree.tag_configure("level_1", font=("Microsoft YaHei", 18, "bold"))
-            self.tree.tag_configure("level_node", font=("Microsoft YaHei", 16, "bold"))
-            self.tree.tag_configure("material", font=("Microsoft YaHei", 16))
-            
-            # 设置行高
-            style = ttk.Style()
-            style.configure("Main.Treeview", rowheight=100)
             
             self.logger.info("树状图刷新完成")
                         
