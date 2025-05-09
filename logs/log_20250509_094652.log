@@ -1,0 +1,114 @@
+2025-05-09 09:46:52,902 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250509_094652.log
+2025-05-09 09:46:53,158 [INFO] __main__ - 正在启动程序...
+2025-05-09 09:46:53,158 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-05-09 09:46:53,158 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-09 09:46:53,158 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-09 09:46:53,178 [INFO] __main__ - 正在创建语言选择对话框...
+2025-05-09 09:46:54,731 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-05-09 09:46:54,757 [INFO] __main__ - 语言选择结果: zh
+2025-05-09 09:46:54,757 [INFO] __main__ - 正在创建主题选择对话框...
+2025-05-09 09:46:54,758 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-05-09 09:46:54,766 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-05-09 09:46:55,973 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-05-09 09:46:56,001 [INFO] __main__ - 主题选择结果: light
+2025-05-09 09:46:56,008 [INFO] __main__ - 正在配置主窗口...
+2025-05-09 09:46:56,085 [INFO] __main__ - 开始创建MainWindow实例...
+2025-05-09 09:46:56,086 [INFO] core.logic_builder - 已加载 5 条规则
+2025-05-09 09:46:56,231 [INFO] gui.logic_panel - 规则未加载状态，等待用户确认后再加载规则
+2025-05-09 09:46:56,246 [INFO] __main__ - MainWindow实例创建完成
+2025-05-09 09:46:56,427 [INFO] __main__ - 开始mainloop()...
+2025-05-09 09:46:58,462 [INFO] core.config_processor - 找到工作表: ['1.Kabine']
+2025-05-09 09:46:58,462 [INFO] core.config_processor - 处理工作表: 1.Kabine -> 模块: 1.Kabine
+2025-05-09 09:46:58,484 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/Kabinemekrmal(Test).xlsx
+2025-05-09 09:46:58,487 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/Kabinemekrmal(Test).xlsx
+2025-05-09 09:46:58,487 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/Kabinemekrmal(Test).xlsx
+2025-05-09 09:46:59,846 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/Bom.xlsx
+2025-05-09 09:46:59,846 [INFO] core.bom_processor - 已清空现有数据
+2025-05-09 09:46:59,847 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-05-09 09:46:59,850 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['Max-Gruppe']
+2025-05-09 09:46:59,850 [INFO] core.bom_processor - 正在读取 Max-Gruppe 工作表...
+2025-05-09 09:46:59,859 [INFO] core.bom_processor - 成功读取工作表，共 154 行数据
+2025-05-09 09:46:59,860 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-05-09 09:46:59,861 [INFO] core.bom_processor - 过滤空层级后剩余 153 行数据
+2025-05-09 09:46:59,862 [INFO] core.bom_processor - 
+开始处理数据...
+2025-05-09 09:46:59,865 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-05-09 09:46:59,865 [INFO] core.bom_processor - 第 1 级节点数量: 1
+2025-05-09 09:46:59,866 [INFO] core.bom_processor - 第 2 级节点数量: 133
+2025-05-09 09:46:59,866 [INFO] core.bom_processor - 第 3 级节点数量: 19
+2025-05-09 09:46:59,866 [INFO] core.bom_processor - BOM文件导入成功，共处理 153 个项目
+2025-05-09 09:46:59,866 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/Bom.xlsx
+2025-05-09 09:46:59,867 [INFO] gui.bom_panel - 开始刷新树状图
+2025-05-09 09:46:59,867 [INFO] gui.bom_panel - 树状图刷新完成
+2025-05-09 09:46:59,869 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/Bom.xlsx
+2025-05-09 09:46:59,869 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/Bom.xlsx
+2025-05-09 09:47:00,915 [INFO] gui.main_window_tk - 用户确认加载规则，设置规则已加载标志为True
+2025-05-09 09:47:00,916 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-09 09:47:00,916 [INFO] gui.logic_panel - 收到规则变更事件: type=imported, rule_id=None
+2025-05-09 09:47:00,917 [INFO] gui.logic_panel - 规则已加载状态，开始更新已保存规则框架
+2025-05-09 09:47:00,917 [INFO] gui.logic_panel - 开始加载规则到已保存规则框架
+2025-05-09 09:47:00,917 [DEBUG] gui.logic_panel - 从LogicBuilder获取到 5 条规则
+2025-05-09 09:47:00,917 [DEBUG] gui.logic_panel - 添加规则ID: 1 到已使用集合
+2025-05-09 09:47:00,917 [DEBUG] gui.logic_panel - 添加规则ID: 1 到已使用集合
+2025-05-09 09:47:00,918 [DEBUG] gui.logic_panel - 添加规则ID: 2 到已使用集合
+2025-05-09 09:47:00,918 [DEBUG] gui.logic_panel - 添加规则ID: 2 到已使用集合
+2025-05-09 09:47:00,918 [DEBUG] gui.logic_panel - 添加规则ID: 3 到已使用集合
+2025-05-09 09:47:00,919 [INFO] gui.logic_panel - 成功加载 5 条规则到已保存规则框架
+2025-05-09 09:47:00,919 [INFO] core.logic_builder - 从临时文件加载规则完成
+2025-05-09 09:47:00,919 [INFO] gui.main_window_tk - 开始刷新逻辑面板显示
+2025-05-09 09:47:00,919 [INFO] gui.logic_panel - 开始加载规则到已保存规则框架
+2025-05-09 09:47:00,919 [DEBUG] gui.logic_panel - 从LogicBuilder获取到 5 条规则
+2025-05-09 09:47:00,920 [DEBUG] gui.logic_panel - 添加规则ID: 1 到已使用集合
+2025-05-09 09:47:00,920 [DEBUG] gui.logic_panel - 添加规则ID: 1 到已使用集合
+2025-05-09 09:47:00,920 [DEBUG] gui.logic_panel - 添加规则ID: 2 到已使用集合
+2025-05-09 09:47:00,920 [DEBUG] gui.logic_panel - 添加规则ID: 2 到已使用集合
+2025-05-09 09:47:00,920 [DEBUG] gui.logic_panel - 添加规则ID: 3 到已使用集合
+2025-05-09 09:47:00,920 [INFO] gui.logic_panel - 成功加载 5 条规则到已保存规则框架
+2025-05-09 09:47:00,921 [INFO] gui.main_window_tk - 逻辑面板显示刷新完成
+2025-05-09 09:47:05,889 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I003
+2025-05-09 09:47:05,889 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000000 Fzg: 9 Plätze
+2025-05-09 09:47:05,890 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000000
+2025-05-09 09:47:05,890 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000000
+2025-05-09 09:47:05,891 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-05-09 09:47:05,891 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-05-09 09:47:05,891 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-05-09 09:47:05,891 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000000
+2025-05-09 09:47:05,891 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000000, 当前表达式: K-200-000000 
+2025-05-09 09:47:05,892 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000000
+2025-05-09 09:47:07,551 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K-200-000000  → 
+2025-05-09 09:47:09,701 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 10019232
+Modulkabine Standard MAN Euro 6 18T
+Modul cabin standard MAN Euro 6 18T
+Z-Cab NG Alpas 3 RAL 3020
+Z-Cab NG Alpas 3 RAL 3020
+2025-05-09 09:47:09,702 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 10019232
+2025-05-09 09:47:09,703 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-GrundKabine
+2025-05-09 09:47:09,703 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-GrundKabine-10019232
+2025-05-09 09:47:09,704 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-05-09 09:47:09,705 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-05-09 09:47:09,705 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-05-09 09:47:09,706 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-GrundKabine-10019232
+2025-05-09 09:47:09,707 [DEBUG] gui.logic_panel - 验证BOM码: PL-GrundKabine-10019232
+2025-05-09 09:47:09,708 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-GrundKabine-10019232, 当前表达式: K-200-000000  → PL-GrundKabine-10019232 
+2025-05-09 09:47:09,708 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-GrundKabine-10019232
+2025-05-09 09:47:09,709 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-GrundKabine-10019232
+2025-05-09 09:47:15,995 [INFO] gui.logic_panel - 创建新的BOM逻辑规则ID: BL03
+2025-05-09 09:47:15,996 [INFO] core.logic_builder - 已保存 6 条规则到临时文件
+2025-05-09 09:47:15,997 [INFO] gui.logic_panel - 收到规则变更事件: type=added, rule_id=BL03
+2025-05-09 09:47:15,998 [INFO] gui.logic_panel - 已添加新规则: BL03
+2025-05-09 09:47:15,998 [INFO] gui.logic_panel - 成功保存规则: BL03, 条件: K-200-000000, 影响: PL-GrundKabine-10019232, 状态: RuleStatus.ENABLED
+2025-05-09 09:47:23,657 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-09 09:47:23,670 [INFO] gui.logic_panel - 收到规则变更事件: type=imported, rule_id=None
+2025-05-09 09:47:23,670 [INFO] gui.logic_panel - 规则已加载状态，开始更新已保存规则框架
+2025-05-09 09:47:23,671 [INFO] gui.logic_panel - 开始加载规则到已保存规则框架
+2025-05-09 09:47:23,671 [DEBUG] gui.logic_panel - 从LogicBuilder获取到 6 条规则
+2025-05-09 09:47:23,672 [DEBUG] gui.logic_panel - 添加规则ID: 1 到已使用集合
+2025-05-09 09:47:23,672 [DEBUG] gui.logic_panel - 添加规则ID: 1 到已使用集合
+2025-05-09 09:47:23,672 [DEBUG] gui.logic_panel - 添加规则ID: 2 到已使用集合
+2025-05-09 09:47:23,672 [DEBUG] gui.logic_panel - 添加规则ID: 2 到已使用集合
+2025-05-09 09:47:23,673 [DEBUG] gui.logic_panel - 添加规则ID: 3 到已使用集合
+2025-05-09 09:47:23,673 [DEBUG] gui.logic_panel - 添加规则ID: 3 到已使用集合
+2025-05-09 09:47:23,673 [INFO] gui.logic_panel - 成功加载 6 条规则到已保存规则框架
+2025-05-09 09:47:23,674 [INFO] core.logic_builder - 从临时文件加载规则完成
+2025-05-09 09:47:23,674 [INFO] gui.logic_library_window - 已加载 6 条规则

@@ -62,11 +62,14 @@ class LogicRule:
         # 基本字段
         result = {
             "logic_id": self.rule_id,
-            "tags": self.tags,  # 直接使用标签字符串
-            "tech_doc_path": self.tech_doc_path,
+            "status": self.status.value,  # 添加status字段
             "selection_expression": self.condition,
             "logic_relation": self.relation,
-            "impact_expression": self.action
+            "impact_expression": self.action,
+            "tags": self.tags,  # 直接使用标签字符串
+            "tech_doc_path": self.tech_doc_path,
+            # 'created_at': self.created_at.isoformat(), # 可选，如果需要导出
+            # 'modified_at': self.modified_at.isoformat() # 可选，如果需要导出
         }
         return result
 
