@@ -326,7 +326,7 @@ class LogicBuilder(Observable):
             # 记录导入统计信息
             BL_rules_count = sum(1 for r in self.rules.values() if r.rule_id.startswith('BL'))
             TL_rules_count = sum(1 for r in self.rules.values() if r.rule_id.startswith('TL'))
-            self.logger.info(f"规则导入完成，成功导入 {imported_count} 条规则（BOM逻辑: {bl_rules_count}，微调逻辑: {tl_rules_count}）")
+            self.logger.info(f"规则导入完成，成功导入 {imported_count} 条规则（BOM逻辑: {BL_rules_count}，微调逻辑: {TL_rules_count}）")
             
         except Exception as e:
             self.logger.error(f"导入规则数据失败: {str(e)}", exc_info=True)

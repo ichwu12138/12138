@@ -8,12 +8,14 @@ from tkinter import ttk, messagebox, filedialog
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 import os
+import re
 
 from utils.language_manager import language_manager
 from utils.logger import Logger
 from core.logic_builder import LogicBuilder
 from models.logic_rule import RuleStatus
 from gui.logic_rule_editor import LogicRuleEditor
+from core.expression_validator import ExpressionValidator
 
 class LogicLibraryWindow(tk.Toplevel):
     """逻辑关系库窗口类"""
@@ -82,44 +84,227 @@ class LogicLibraryWindow(tk.Toplevel):
         main_frame = ttk.Frame(self, padding=10)
         main_frame.pack(fill=BOTH, expand=YES)
         
-        # 创建搜索框架
-        self._create_search_frame(main_frame)
+        # 创建筛选和搜索框架
+        self._create_filter_and_search_frame(main_frame)
         
         # 创建规则列表框架
         self._create_rules_frame(main_frame)
         
-    def _create_search_frame(self, parent):
-        """创建搜索框架"""
-        frame = ttk.LabelFrame(
+    def _create_filter_and_search_frame(self, parent):
+        """创建筛选和搜索框架"""
+        # 最外层的框架
+        outer_frame = ttk.LabelFrame(
             parent,
-            text=language_manager.get_text("search"),
-            padding=4,
+            text=language_manager.get_text("search_and_filter"),
+            padding=10,
             style="Large.TLabelframe"
         )
-        frame.pack(fill=X, pady=(0, 8))
-        
-        # 创建搜索输入框
-        self.search_var = tk.StringVar()
-        search_entry = ttk.Entry(
-            frame,
-            textvariable=self.search_var,
-            font=("Microsoft YaHei", 11)
+        outer_frame.pack(fill=X, pady=(0, 10))
+
+        # 第一行：逻辑类型筛选 和 逻辑状态筛选
+        filter_row_frame = ttk.Frame(outer_frame)
+        filter_row_frame.pack(fill=X, pady=5)
+
+        # 逻辑关系类型筛选框架
+        type_filter_frame = ttk.LabelFrame(
+            filter_row_frame,
+            text=language_manager.get_text("logic_type_filter"),
+            padding=5,
+            style="Large.TLabelframe"
         )
-        search_entry.pack(side=LEFT, fill=X, expand=YES, padx=4)
+        type_filter_frame.pack(side=LEFT, padx=(0, 10), fill=X, expand=True)
+
+        self.rule_type_var = tk.StringVar(value="all")
+        ttk.Radiobutton(type_filter_frame, text=language_manager.get_text("all_logics"), variable=self.rule_type_var, value="all", command=self._apply_filters_and_search, style="Large.TRadiobutton").pack(side=LEFT, padx=5)
+        ttk.Radiobutton(type_filter_frame, text=language_manager.get_text("bom_logic"), variable=self.rule_type_var, value="BL", command=self._apply_filters_and_search, style="Large.TRadiobutton").pack(side=LEFT, padx=5)
+        ttk.Radiobutton(type_filter_frame, text=language_manager.get_text("tuning_logic"), variable=self.rule_type_var, value="TL", command=self._apply_filters_and_search, style="Large.TRadiobutton").pack(side=LEFT, padx=5)
+
+        # 逻辑状态筛选框架
+        status_filter_frame = ttk.LabelFrame(
+            filter_row_frame,
+            text=language_manager.get_text("logic_status_filter"),
+            padding=5,
+            style="Large.TLabelframe"
+        )
+        status_filter_frame.pack(side=LEFT, fill=X, expand=True)
+
+        self.rule_status_var = tk.StringVar(value="all")
+        ttk.Radiobutton(status_filter_frame, text=language_manager.get_text("all_statuses"), variable=self.rule_status_var, value="all", command=self._apply_filters_and_search, style="Large.TRadiobutton").pack(side=LEFT, padx=5)
+        ttk.Radiobutton(status_filter_frame, text=language_manager.get_text("enabled"), variable=self.rule_status_var, value=RuleStatus.ENABLED.value, command=self._apply_filters_and_search, style="Large.TRadiobutton").pack(side=LEFT, padx=5)
+        ttk.Radiobutton(status_filter_frame, text=language_manager.get_text("disabled"), variable=self.rule_status_var, value=RuleStatus.DISABLED.value, command=self._apply_filters_and_search, style="Large.TRadiobutton").pack(side=LEFT, padx=5)
+        ttk.Radiobutton(status_filter_frame, text=language_manager.get_text("testing"), variable=self.rule_status_var, value=RuleStatus.TESTING.value, command=self._apply_filters_and_search, style="Large.TRadiobutton").pack(side=LEFT, padx=5)
+
+        # 第二行：内容搜索框
+        search_inputs_frame = ttk.Frame(outer_frame)
+        search_inputs_frame.pack(fill=X, pady=5)
+
+        # 选择项表达式搜索
+        condition_search_frame = ttk.Frame(search_inputs_frame)
+        condition_search_frame.pack(fill=X, pady=2)
+        ttk.Label(condition_search_frame, text=language_manager.get_text("search_condition") + ":", style="Large.TLabel").pack(side=LEFT, padx=(0,5))
+        self.condition_search_var = tk.StringVar()
+        condition_entry = ttk.Entry(condition_search_frame, textvariable=self.condition_search_var, font=("Microsoft YaHei", 11), width=40)
+        condition_entry.pack(side=LEFT, fill=X, expand=True)
+        self.condition_search_var.trace_add("write", lambda *args: self._delayed_search())
+
+        # 影响项表达式搜索
+        effect_search_frame = ttk.Frame(search_inputs_frame)
+        effect_search_frame.pack(fill=X, pady=2)
+        ttk.Label(effect_search_frame, text=language_manager.get_text("search_effect") + ":", style="Large.TLabel").pack(side=LEFT, padx=(0,5))
+        self.effect_search_var = tk.StringVar()
+        effect_entry = ttk.Entry(effect_search_frame, textvariable=self.effect_search_var, font=("Microsoft YaHei", 11), width=40)
+        effect_entry.pack(side=LEFT, fill=X, expand=True)
+        self.effect_search_var.trace_add("write", lambda *args: self._delayed_search())
+
+        # 标签搜索
+        tags_search_frame = ttk.Frame(search_inputs_frame)
+        tags_search_frame.pack(fill=X, pady=2)
+        ttk.Label(tags_search_frame, text=language_manager.get_text("search_tags") + ":", style="Large.TLabel").pack(side=LEFT, padx=(0,5))
+        self.tags_search_var = tk.StringVar()
+        tags_entry = ttk.Entry(tags_search_frame, textvariable=self.tags_search_var, font=("Microsoft YaHei", 11), width=40)
+        tags_entry.pack(side=LEFT, fill=X, expand=True)
+        self.tags_search_var.trace_add("write", lambda *args: self._delayed_search())
         
-        # 创建清除按钮
-        clear_btn = ttk.Button(
-            frame,
-            text=language_manager.get_text("clear"),
-            command=self._clear_search,
-            width=8,
+        # 清除所有筛选和搜索按钮
+        clear_all_filters_button = ttk.Button(
+            outer_frame, 
+            text=language_manager.get_text("clear_all_filters"),
+            command=self._clear_all_filters_and_search,
             style="Large.TButton"
         )
-        clear_btn.pack(side=LEFT, padx=4)
+        clear_all_filters_button.pack(pady=5)
+
+    def _delayed_search(self):
+        """延迟搜索以避免过于频繁的更新"""
+        if hasattr(self, '_search_after_id'):
+            self.after_cancel(self._search_after_id)
+        self._search_after_id = self.after(300, self._apply_filters_and_search) # 300ms延迟
+
+    def _clear_all_filters_and_search(self):
+        """清除所有筛选条件和搜索框内容"""
+        self.rule_type_var.set("all")
+        self.rule_status_var.set("all")
+        self.condition_search_var.set("")
+        self.effect_search_var.set("")
+        self.tags_search_var.set("")
+        # _apply_filters_and_search 会被Radiobutton的command自动触发，或者手动调用一次
+        self._apply_filters_and_search()
+
+    def _apply_filters_and_search(self):
+        """应用所有筛选和搜索条件来更新规则列表的显示"""
+        # 清空当前显示
+        for item in self.tree.get_children():
+            self.tree.delete(item)
+
+        selected_type = self.rule_type_var.get()
+        selected_status_val = self.rule_status_var.get()
         
-        # 绑定搜索事件
-        self.search_var.trace_add("write", self._on_search_changed)
+        search_condition_term = self.condition_search_var.get().strip().upper() # K码不区分大小写
+        search_effect_term = self.effect_search_var.get().strip().upper()    # 影响项搜索也不区分大小写
+        search_tags_input = self.tags_search_var.get().strip().upper()      # 标签搜索不区分大小写
+
+        # 解析用户输入的多个标签 (OR逻辑)
+        search_tags_list = [tag.strip() for tag in search_tags_input.split(',') if tag.strip()] if search_tags_input else []
+
+        matched_rules = 0
+        for rule in self.cached_rules: # self.cached_rules 应在 _load_rules 中填充
+            # 类型筛选
+            if selected_type != "all":
+                if not rule.rule_id.startswith(selected_type):
+                    continue
+            
+            # 状态筛选
+            if selected_status_val != "all":
+                if rule.status.value != selected_status_val:
+                    continue
+            
+            # 1. 选择项表达式搜索 (K码, 从左到右逐字符匹配, 忽略大小写)
+            if search_condition_term:
+                # K码通常在条件表达式中以空格分隔或被括号包围
+                # 我们需要检查条件表达式中的每个部分是否以搜索词开头
+                condition_parts = rule.condition.upper().split() # 按空格分割，并转换为大写
+                found_condition_match = False
+                for part in condition_parts:
+                    # 移除可能的括号，然后检查是否以搜索词开头
+                    cleaned_part = part.strip("()")
+                    if cleaned_part.startswith(search_condition_term):
+                        found_condition_match = True
+                        break
+                if not found_condition_match:
+                    # 如果按空格分割没有找到，再尝试直接在整个条件字符串中查找
+                    # 这可以匹配类似 K-200-000 (部分) 的情况
+                    if search_condition_term not in rule.condition.upper():
+                        continue
+            
+            # 2. 影响项表达式搜索
+            if search_effect_term: # search_effect_term 已经是大写了
+                found_effect_match = False
+                action_upper = rule.action.upper()
+
+                if search_effect_term.isdigit(): # 用户输入的是纯数字
+                    # 检查是否是微调逻辑
+                    is_tuning = ExpressionValidator.is_tuning_logic(rule.action) # 需要 ExpressionValidator 实例或静态方法
+                    
+                    if not is_tuning and '-' in rule.action: 
+                        # BOM替换逻辑，且包含 '-'，尝试提取最后一个 ':' 或 '-' 后面的部分
+                        last_sep_index = -1
+                        if ':' in rule.action:
+                            last_sep_index = rule.action.rfind(':')
+                        if '-' in rule.action:
+                             last_sep_index = max(last_sep_index, rule.action.rfind('-'))
+                        
+                        if last_sep_index != -1:
+                            target_bom_part = rule.action[last_sep_index + 1:]
+                            if target_bom_part.isdigit() and target_bom_part.startswith(search_effect_term):
+                                found_effect_match = True
+                        # 如果没有找到分隔符或者分隔符后的部分不是数字，或者不匹配，则下面会由 re.findall 处理（如果适用）
+                    
+                    if not found_effect_match: # 对于微调逻辑，或者BOM逻辑没有通过上述特定提取匹配成功的情况
+                        action_numbers = re.findall(r'\d+', rule.action) # 提取action中的所有数字序列
+                        for num_seq in action_numbers:
+                            if num_seq.startswith(search_effect_term):
+                                found_effect_match = True
+                                break
+                else: # 用户输入的不是纯数字 (例如 "PL-", "ON", "ADD")，则进行文本包含匹配
+                    if search_effect_term in action_upper:
+                        found_effect_match = True
+                
+                if not found_effect_match:
+                    continue
+
+            # 3. 标签搜索 (OR逻辑, 部分匹配单个标签, 忽略大小写)
+            if search_tags_list: # 如果用户输入了标签进行搜索
+                rule_tags_upper = str(rule.tags).upper() if hasattr(rule, 'tags') and rule.tags else ""
+                found_tag_match = False
+                # 只要规则的标签中包含用户输入的任一标签即可
+                for search_tag_item in search_tags_list:
+                    # 检查规则的标签字符串中是否包含当前搜索的标签项
+                    # 这意味着如果规则标签是 "TagA, TagB"，搜索 "TagA" 或 "TagB" 或 "Tag" 都能匹配
+                    if search_tag_item in rule_tags_upper: 
+                        found_tag_match = True
+                        break
+                if not found_tag_match:
+                    continue
+            
+            # 如果所有条件都满足
+            effect_text = f"→ {rule.action}"
+            self.tree.insert(
+                "",
+                "end",
+                iid=rule.rule_id,
+                values=(
+                    rule.rule_id,
+                    rule.condition,
+                    effect_text,
+                    language_manager.get_text(rule.status.value),
+                    rule.tags if hasattr(rule, 'tags') else "",
+                    os.path.basename(rule.tech_doc_path) if hasattr(rule, 'tech_doc_path') and rule.tech_doc_path else ""
+                )
+            )
+            matched_rules += 1
         
+        self.logger.info(f"筛选和搜索完成：显示 {matched_rules}/{len(self.cached_rules)} 条规则")
+
     def _create_rules_frame(self, parent):
         """创建规则列表框架"""
         frame = ttk.LabelFrame(
@@ -357,109 +542,24 @@ class LogicLibraryWindow(tk.Toplevel):
         
     def _clear_search(self):
         """清空搜索"""
-        self.search_var.set("")
+        self.condition_search_var.set("")
+        self.effect_search_var.set("")
+        self.tags_search_var.set("")
+        self._apply_filters_and_search()
         
     def _on_search_changed(self, *args):
         """搜索内容变化事件处理"""
-        search_text = self.search_var.get().strip()
+        self._delayed_search()
         
-        try:
-            # 清空当前显示
-            for item in self.tree.get_children():
-                self.tree.delete(item)
-            
-            # 如果搜索框为空，显示缓存的所有规则
-            if not search_text:
-                self._show_cached_rules()
-                return
-            
-            # 使用缓存的规则进行搜索，避免重复加载
-            matched_rules = 0
-            search_upper = search_text.upper()
-            
-            for rule in self.cached_rules:
-                show_rule = False
-                
-                # 1. K码搜索（严格顺序匹配）
-                if search_upper == 'K' or search_upper.startswith('K-'):
-                    if rule.condition.upper().startswith(search_upper):
-                        show_rule = True
-                
-                # 2. 数字搜索
-                elif search_text.isdigit():
-                    # 2.1 影响项表达式（严格顺序匹配最后一个-后的数字）
-                    impact_parts = rule.action.split('-')
-                    if impact_parts and impact_parts[-1].startswith(search_text):
-                        show_rule = True
-                    # 2.2 标签中的数字（如果标签包含数字，也进行搜索）
-                    elif hasattr(rule, 'tags') and rule.tags:
-                        if any(tag.strip().startswith(search_text) for tag in str(rule.tags).split(',')):
-                            show_rule = True
-                
-                # 3. 标签搜索（严格顺序匹配）
-                elif hasattr(rule, 'tags') and rule.tags:
-                    if any(tag.strip().startswith(search_text) for tag in str(rule.tags).split(',')):
-                        show_rule = True
-                
-                # 4. 通用搜索（严格顺序匹配）
-                else:
-                    if (rule.rule_id.upper().startswith(search_upper) or
-                        rule.condition.upper().startswith(search_upper) or
-                        rule.action.startswith(search_text) or
-                        (hasattr(rule, 'tags') and rule.tags and 
-                         any(tag.strip().startswith(search_text) for tag in str(rule.tags).split(',')))):
-                        show_rule = True
-                
-                # 如果规则匹配，显示它
-                if show_rule:
-                    effect_text = f"→ {rule.action}"
-                    self.tree.insert(
-                        "",
-                        "end",
-                        iid=rule.rule_id,
-                        values=(
-                            rule.rule_id,
-                            rule.condition,
-                            effect_text,
-                            language_manager.get_text(rule.status.value),
-                            rule.tags if hasattr(rule, 'tags') else "",
-                            os.path.basename(rule.tech_doc_path) if hasattr(rule, 'tech_doc_path') and rule.tech_doc_path else ""
-                        )
-                    )
-                    matched_rules += 1
-            
-            self.logger.info(f"搜索 '{search_text}' 完成：显示 {matched_rules}/{len(self.cached_rules)} 条规则")
-            
-        except Exception as e:
-            self.logger.error(f"搜索失败: {str(e)}")
-            # 发生错误时显示所有缓存的规则
-            self._show_cached_rules()
-            
     def _show_cached_rules(self):
         """显示所有缓存的规则"""
         try:
-            # 清空当前显示
-            for item in self.tree.get_children():
-                self.tree.delete(item)
-                
-            # 显示所有缓存的规则
-            for rule in self.cached_rules:
-                effect_text = f"→ {rule.action}"
-                self.tree.insert(
-                    "",
-                    "end",
-                    iid=rule.rule_id,
-                    values=(
-                        rule.rule_id,
-                        rule.condition,
-                        effect_text,
-                        language_manager.get_text(rule.status.value),
-                        rule.tags if hasattr(rule, 'tags') else "",
-                        os.path.basename(rule.tech_doc_path) if hasattr(rule, 'tech_doc_path') and rule.tech_doc_path else ""
-                    )
-                )
-                
-            self.logger.info(f"已显示所有规则（共 {len(self.cached_rules)} 条）")
+            self.rule_type_var.set("all")
+            self.rule_status_var.set("all")
+            self.condition_search_var.set("")
+            self.effect_search_var.set("")
+            self.tags_search_var.set("")
+            self._apply_filters_and_search()
             
         except Exception as e:
             self.logger.error(f"显示缓存规则失败: {str(e)}")

@@ -214,6 +214,17 @@ class LanguageManager:
             "error_incomplete_change_quantity": "请输入完整的CHANGE QUANTITY值",
             "error_invalid_price_format": "价格必须以+或-开头，后跟数字",
             "export_and_clear_success": "规则已成功导出，暂存数据已删除",
+            "search_and_filter": "搜索与筛选",
+            "logic_type_filter": "逻辑类型",
+            "all_logics": "所有逻辑",
+            "bom_logic": "BOM逻辑",
+            "tuning_logic": "微调逻辑",
+            "logic_status_filter": "逻辑状态",
+            "all_statuses": "所有状态",
+            "search_condition": "搜索条件",
+            "search_effect": "搜索影响",
+            "search_tags": "搜索标签",
+            "clear_all_filters": "清除所有筛选",
         })
         
         # 英文翻译
@@ -410,6 +421,17 @@ class LanguageManager:
             "error_incomplete_change_quantity": "Please enter complete CHANGE QUANTITY values",
             "error_invalid_price_format": "Price must start with + or - followed by numbers",
             "export_and_clear_success": "Rules exported successfully, temporary data has been cleared",
+            "search_and_filter": "Search and Filter",
+            "logic_type_filter": "Logic Type",
+            "all_logics": "All Logics",
+            "bom_logic": "BOM Logic",
+            "tuning_logic": "Tuning Logic",
+            "logic_status_filter": "Logic Status",
+            "all_statuses": "All Statuses",
+            "search_condition": "Search Condition",
+            "search_effect": "Search Effect",
+            "search_tags": "Search Tags",
+            "clear_all_filters": "Clear All Filters",
         })
         
         # 德文翻译
@@ -606,6 +628,17 @@ class LanguageManager:
             "error_incomplete_change_quantity": "Bitte geben Sie vollständige CHANGE QUANTITY Werte ein",
             "error_invalid_price_format": "Der Preis muss mit + oder - beginnen, gefolgt von Zahlen",
             "export_and_clear_success": "Regeln erfolgreich exportiert, temporäre Daten wurden gelöscht",
+            "search_and_filter": "Suchen und Filtern",
+            "logic_type_filter": "Logiktyp",
+            "all_logics": "Alle Logiken",
+            "bom_logic": "BOM-Logik",
+            "tuning_logic": "Anpassungslogik",
+            "logic_status_filter": "Logikstatus",
+            "all_statuses": "Alle Status",
+            "search_condition": "Bedingung suchen",
+            "search_effect": "Wirkung suchen",
+            "search_tags": "Tags suchen",
+            "clear_all_filters": "Alle Filter löschen",
         })
         
     def add_callback(self, callback):

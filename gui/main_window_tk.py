@@ -712,52 +712,60 @@ class MainWindow:
                 json.dump(config, f, indent=4, ensure_ascii=False)
             
             # 检查是否有未导出的逻辑关系
-            if os.path.exists(RULES_DATA_FILE):
-                try:
-                    with open(RULES_DATA_FILE, 'r', encoding='utf-8') as f:
-                        rules_data = json.load(f)
-                        if not rules_data.get('exported', True) and rules_data.get('rules', []):
-                            if messagebox.askyesno(
-                                language_manager.get_text("confirm"),
-                                language_manager.get_text("load_last_rules_confirm")
-                            ):
-                                # 设置规则已加载标志
-                                self.rules_loaded = True
-                                self.logger.info("用户确认加载规则，设置规则已加载标志为True")
-                                
-                                # 加载规则
-                                self.logic_builder.load_from_temp_file()
-                                
-                                # 强制刷新逻辑面板
-                                if hasattr(self, 'logic_panel'):
-                                    self.logger.info("开始刷新逻辑面板显示")
-                                    self.logic_panel._load_existing_rules()
-                                    self.logger.info("逻辑面板显示刷新完成")
-                                
-                                # 显示成功消息
-                                messagebox.showinfo(
-                                    language_manager.get_text("success"),
-                                    language_manager.get_text("temp_rules_loaded")
-                                )
-                            else:
-                                # 删除规则
-                                self.logic_builder.clear_rules()
-                                # 重置规则已加载标志
-                                self.rules_loaded = False
-                                self.logger.info("用户取消加载规则，设置规则已加载标志为False")
-                                messagebox.showinfo(
-                                    language_manager.get_text("info"),
-                                    language_manager.get_text("rules_deleted")
-                                )
-                except Exception as e:
-                    self.logger.error(f"加载临时规则文件失败: {str(e)}")
-                    messagebox.showerror(
-                        language_manager.get_text("error"),
-                        language_manager.get_text("temp_rules_load_error")
-                    )
+            # 首先，让 LogicBuilder尝试从临时文件加载数据到内存，这会更新其内部的 rules_exported 状态
+            self.logic_builder.load_from_temp_file() # RULES_DATA_FILE is the default
+
+            # 现在基于 LogicBuilder 的状态来判断
+            # has_unsaved_rules() 会检查 len(self.rules) > 0 and not self.rules_exported
+            if self.logic_builder.has_unsaved_rules():
+                self.logger.info("检测到LogicBuilder中存在未导出的规则。")
+                if messagebox.askyesno(
+                    language_manager.get_text("confirm"),
+                    language_manager.get_text("load_last_rules_confirm")
+                ):
+                    # 规则已经在上面的 load_from_temp_file() 中加载到 logic_builder 了
+                    # 我们需要设置 MainWindow 的 rules_loaded 标志，并刷新UI
+                    self.rules_loaded = True
+                    self.logger.info("用户确认加载未导出的规则。MainWindow.rules_loaded 设置为 True。")
                     
+                    # 强制刷新逻辑面板以显示加载的规则
+                    if hasattr(self, 'logic_panel'):
+                        self.logger.info("开始刷新逻辑面板显示已加载的临时规则")
+                        self.logic_panel._load_existing_rules() # 此方法应从 logic_builder 获取规则
+                        self.logger.info("逻辑面板显示刷新完成")
+                    
+                    messagebox.showinfo(
+                        language_manager.get_text("success"),
+                        language_manager.get_text("temp_rules_loaded")
+                    )
+                else:
+                    # 用户选择不加载，则清空 LogicBuilder 中的规则和临时文件
+                    self.logger.info("用户拒绝加载未导出的规则。将清空规则。")
+                    self.logic_builder.clear_rules() # 这会清空内存和临时文件
+                    self.rules_loaded = False # 确保 MainWindow 的状态也同步
+                    messagebox.showinfo(
+                        language_manager.get_text("info"),
+                        language_manager.get_text("rules_deleted")
+                    )
+            else:
+                # 如果 logic_builder.has_unsaved_rules() 为 False，意味着：
+                # 1. 临时文件不存在
+                # 2. 临时文件存在但 exported 为 True
+                # 3. 临时文件存在，exported 为 False，但规则列表为空
+                # 在这些情况下，我们不需要询问，并且 rules_loaded 应为 False (除非后续有导入操作)
+                self.rules_loaded = False # 确保在没有加载未保存规则时，此标志为False
+                self.logger.info("未检测到需要提示加载的未导出规则 (可能文件不存在, 或已导出, 或无规则)。MainWindow.rules_loaded 设置为 False。")
+
+        except FileNotFoundError:
+            self.logger.warning(f"app_config.json 未找到，跳过加载上次配置的步骤。")    
+        except json.JSONDecodeError as e:
+            self.logger.error(f"解析JSON文件 (app_config.json 或 temp_rules_latest.json) 失败: {str(e)}")
+            messagebox.showerror(
+                language_manager.get_text("error"),
+                f"{language_manager.get_text('temp_rules_load_error')}\n{str(e)}"
+            )
         except Exception as e:
-            self.logger.error(f"加载上次配置时出错: {str(e)}")
+            self.logger.error(f"加载上次配置时发生未知错误: {str(e)}", exc_info=True)
             messagebox.showerror(
                 language_manager.get_text("error"),
                 str(e)

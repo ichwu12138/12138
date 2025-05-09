@@ -1,0 +1,46 @@
+2025-05-09 11:20:17,203 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250509_112017.log
+2025-05-09 11:20:17,443 [INFO] __main__ - 正在启动程序...
+2025-05-09 11:20:17,443 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-05-09 11:20:17,443 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-09 11:20:17,443 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-09 11:20:17,465 [INFO] __main__ - 正在创建语言选择对话框...
+2025-05-09 11:20:18,630 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-05-09 11:20:18,656 [INFO] __main__ - 语言选择结果: zh
+2025-05-09 11:20:18,656 [INFO] __main__ - 正在创建主题选择对话框...
+2025-05-09 11:20:18,656 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-05-09 11:20:18,662 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-05-09 11:20:19,207 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-05-09 11:20:19,229 [INFO] __main__ - 主题选择结果: light
+2025-05-09 11:20:19,240 [INFO] __main__ - 正在配置主窗口...
+2025-05-09 11:20:19,336 [INFO] __main__ - 开始创建MainWindow实例...
+2025-05-09 11:20:19,337 [INFO] core.logic_builder - 从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json 加载时检测到新版规则文件格式 (BL_rules/TL_rules)。
+2025-05-09 11:20:19,337 [INFO] core.logic_builder - 已加载 3 条规则从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-09 11:20:19,384 [INFO] gui.logic_panel - 规则未加载状态，等待用户确认后再加载规则
+2025-05-09 11:20:19,390 [INFO] __main__ - MainWindow实例创建完成
+2025-05-09 11:20:19,573 [INFO] __main__ - 开始mainloop()...
+2025-05-09 11:20:21,618 [INFO] core.config_processor - 找到工作表: ['1.Kabine']
+2025-05-09 11:20:21,619 [INFO] core.config_processor - 处理工作表: 1.Kabine -> 模块: 1.Kabine
+2025-05-09 11:20:21,639 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/Kabinemekrmal(Test).xlsx
+2025-05-09 11:20:21,642 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/Kabinemekrmal(Test).xlsx
+2025-05-09 11:20:21,642 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/Kabinemekrmal(Test).xlsx
+2025-05-09 11:20:22,624 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/Bom.xlsx
+2025-05-09 11:20:22,624 [INFO] core.bom_processor - 已清空现有数据
+2025-05-09 11:20:22,624 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-05-09 11:20:22,629 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['Max-Gruppe']
+2025-05-09 11:20:22,629 [INFO] core.bom_processor - 正在读取 Max-Gruppe 工作表...
+2025-05-09 11:20:22,642 [INFO] core.bom_processor - 成功读取工作表，共 154 行数据
+2025-05-09 11:20:22,643 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-05-09 11:20:22,644 [INFO] core.bom_processor - 过滤空层级后剩余 153 行数据
+2025-05-09 11:20:22,644 [INFO] core.bom_processor - 
+开始处理数据...
+2025-05-09 11:20:22,648 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-05-09 11:20:22,649 [INFO] core.bom_processor - 第 1 级节点数量: 1
+2025-05-09 11:20:22,649 [INFO] core.bom_processor - 第 2 级节点数量: 133
+2025-05-09 11:20:22,649 [INFO] core.bom_processor - 第 3 级节点数量: 19
+2025-05-09 11:20:22,650 [INFO] core.bom_processor - BOM文件导入成功，共处理 153 个项目
+2025-05-09 11:20:22,650 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/Bom.xlsx
+2025-05-09 11:20:22,650 [INFO] gui.bom_panel - 开始刷新树状图
+2025-05-09 11:20:22,651 [INFO] gui.bom_panel - 树状图刷新完成
+2025-05-09 11:20:22,652 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/Bom.xlsx
+2025-05-09 11:20:22,652 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/Bom.xlsx
