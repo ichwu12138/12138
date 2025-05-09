@@ -15,7 +15,7 @@ from utils.logger import Logger
 from core.logic_builder import LogicBuilder
 from models.logic_rule import RuleStatus
 from gui.logic_rule_editor import LogicRuleEditor
-from core.expression_validator import ExpressionValidator
+from utils.validator import ExpressionValidator
 
 class LogicLibraryWindow(tk.Toplevel):
     """逻辑关系库窗口类"""
@@ -242,25 +242,28 @@ class LogicLibraryWindow(tk.Toplevel):
                 action_upper = rule.action.upper()
 
                 if search_effect_term.isdigit(): # 用户输入的是纯数字
-                    # 检查是否是微调逻辑
-                    is_tuning = ExpressionValidator.is_tuning_logic(rule.action) # 需要 ExpressionValidator 实例或静态方法
+                    is_tuning = ExpressionValidator.is_tuning_logic(rule.action)
                     
-                    if not is_tuning and '-' in rule.action: 
-                        # BOM替换逻辑，且包含 '-'，尝试提取最后一个 ':' 或 '-' 后面的部分
+                    if not is_tuning: 
+                        # BOM替换逻辑: 只关注最后一个分隔符后的数字
                         last_sep_index = -1
-                        if ':' in rule.action:
-                            last_sep_index = rule.action.rfind(':')
-                        if '-' in rule.action:
-                             last_sep_index = max(last_sep_index, rule.action.rfind('-'))
+                        # Prefer colon if it exists, as it might be more specific in some PLM systems, then fallback to hyphen.
+                        temp_action = rule.action # Use original case for rfind if separators are case-sensitive, though unlikely.
+                        if ':' in temp_action:
+                            last_sep_index = temp_action.rfind(':')
+                        if '-' in temp_action:
+                             last_sep_index = max(last_sep_index, temp_action.rfind('-'))
                         
                         if last_sep_index != -1:
-                            target_bom_part = rule.action[last_sep_index + 1:]
+                            target_bom_part = temp_action[last_sep_index + 1:]
                             if target_bom_part.isdigit() and target_bom_part.startswith(search_effect_term):
                                 found_effect_match = True
-                        # 如果没有找到分隔符或者分隔符后的部分不是数字，或者不匹配，则下面会由 re.findall 处理（如果适用）
-                    
-                    if not found_effect_match: # 对于微调逻辑，或者BOM逻辑没有通过上述特定提取匹配成功的情况
-                        action_numbers = re.findall(r'\d+', rule.action) # 提取action中的所有数字序列
+                        # 如果不是微调逻辑，并且通过上述特定提取没有匹配，则对于纯数字搜索，不再进行后续的 re.findall
+                        # 即：对于 BOM 替换逻辑的纯数字搜索，必须精确匹配最后一个 `-` 或 `:` 后的数字部分的开头
+
+                    else: # 是微调逻辑 (is_tuning is True)
+                        # 对于微调逻辑，从整个action中提取所有数字序列进行匹配
+                        action_numbers = re.findall(r'\d+', rule.action)
                         for num_seq in action_numbers:
                             if num_seq.startswith(search_effect_term):
                                 found_effect_match = True

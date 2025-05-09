@@ -107,3 +107,28 @@
 2025-05-09 11:28:25,565 [INFO] gui.logic_library_window - 收到规则变更事件: type=modified, rule_id=BL01
 2025-05-09 11:28:25,565 [INFO] gui.logic_library_window - 已更新规则: BL01
 2025-05-09 11:28:25,565 [INFO] gui.logic_library_window - 已编辑规则: BL01
+2025-05-09 11:28:50,013 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-09 11:28:50,013 [INFO] core.logic_builder - 加载时检测到新版大写键名规则文件格式 (BL_rules/TL_rules) 从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json。
+2025-05-09 11:28:50,013 [INFO] gui.logic_panel - 收到规则变更事件: type=imported, rule_id=None
+2025-05-09 11:28:50,014 [INFO] gui.logic_panel - 规则已加载状态，开始更新已保存规则框架
+2025-05-09 11:28:50,014 [INFO] gui.logic_panel - 开始加载规则到已保存规则框架
+2025-05-09 11:28:50,014 [DEBUG] gui.logic_panel - 从LogicBuilder获取到 3 条规则
+2025-05-09 11:28:50,014 [DEBUG] gui.logic_panel - 添加规则ID: 1 到已使用集合
+2025-05-09 11:28:50,015 [DEBUG] gui.logic_panel - 添加规则ID: 2 到已使用集合
+2025-05-09 11:28:50,015 [DEBUG] gui.logic_panel - 添加规则ID: 1 到已使用集合
+2025-05-09 11:28:50,015 [INFO] gui.logic_panel - 成功加载 3 条规则到已保存规则框架
+2025-05-09 11:28:50,015 [INFO] core.logic_builder - 从临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 3 条规则完成。导出状态: False
+2025-05-09 11:28:50,015 [INFO] gui.logic_library_window - 已加载 3 条规则
+2025-05-09 11:28:53,645 [INFO] gui.logic_library_window - 筛选和搜索完成：显示 2/3 条规则
+2025-05-09 11:28:55,073 [INFO] gui.logic_library_window - 筛选和搜索完成：显示 1/3 条规则
+2025-05-09 11:28:56,009 [INFO] gui.logic_library_window - 筛选和搜索完成：显示 1/3 条规则
+2025-05-09 11:28:56,499 [INFO] gui.logic_library_window - 筛选和搜索完成：显示 1/3 条规则
+2025-05-09 11:28:58,342 [INFO] gui.logic_library_window - 筛选和搜索完成：显示 1/3 条规则
+2025-05-09 11:29:00,946 [INFO] gui.logic_library_window - 筛选和搜索完成：显示 2/3 条规则
+2025-05-09 11:29:01,255 [INFO] gui.logic_library_window - 筛选和搜索完成：显示 3/3 条规则
+2025-05-09 11:29:04,593 [INFO] gui.logic_library_window - 筛选和搜索完成：显示 1/3 条规则
+2025-05-09 11:29:05,248 [INFO] gui.logic_library_window - 筛选和搜索完成：显示 1/3 条规则
+2025-05-09 11:29:06,171 [INFO] gui.logic_library_window - 筛选和搜索完成：显示 1/3 条规则
+2025-05-09 11:29:06,692 [INFO] gui.logic_library_window - 筛选和搜索完成：显示 3/3 条规则
+2025-05-09 11:29:07,561 [INFO] gui.logic_library_window - 筛选和搜索完成：显示 1/3 条规则
+2025-05-09 11:29:08,455 [INFO] gui.logic_library_window - 筛选和搜索完成：显示 3/3 条规则
