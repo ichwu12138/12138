@@ -225,6 +225,9 @@ class LanguageManager:
             "search_effect": "搜索影响",
             "search_tags": "搜索标签",
             "clear_all_filters": "清除所有筛选",
+            "search_bom_code": "搜索BOM码",
+            "search_feature_or_k": "搜索特征码(HBG码)或特征值(K码)",
+            "code_not_found": "未找到匹配的特征码或特征值",
         })
         
         # 英文翻译
@@ -432,6 +435,9 @@ class LanguageManager:
             "search_effect": "Search Effect",
             "search_tags": "Search Tags",
             "clear_all_filters": "Clear All Filters",
+            "search_bom_code": "Search BOM Code",
+            "search_feature_or_k": "Search Feature Code (HBG-number) or Feature Value (K-number)",
+            "code_not_found": "No matching feature code or value found",
         })
         
         # 德文翻译
@@ -639,6 +645,9 @@ class LanguageManager:
             "search_effect": "Wirkung suchen",
             "search_tags": "Tags suchen",
             "clear_all_filters": "Alle Filter löschen",
+            "search_bom_code": "BOM-Code suchen",
+            "search_feature_or_k": "Merkmalcode (HBG-Nr.) oder Merkmalwert (K-Nr.) suchen",
+            "code_not_found": "Kein passender Merkmalcode oder Merkmalwert gefunden",
         })
         
     def add_callback(self, callback):

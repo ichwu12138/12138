@@ -1,34 +1,5 @@
 {
-  "BL_rules": [
-    {
-      "logic_id": "BL01",
-      "status": "enabled",
-      "selection_expression": "K-200-000000",
-      "logic_relation": "→",
-      "impact_expression": "PL-Sitze01-1161296",
-      "tags": "2",
-      "tech_doc_path": ""
-    },
-    {
-      "logic_id": "BL02",
-      "status": "enabled",
-      "selection_expression": "K-200-000001",
-      "logic_relation": "→",
-      "impact_expression": "PL-GrundKabine-10019231",
-      "tags": "",
-      "tech_doc_path": ""
-    }
-  ],
-  "TL_rules": [
-    {
-      "logic_id": "TL01",
-      "status": "disabled",
-      "selection_expression": "K-200-000329",
-      "logic_relation": "→",
-      "impact_expression": "ON 231 ADD 21312",
-      "tags": "1,2,3,4",
-      "tech_doc_path": "C:/Users/mengy/Desktop/2.docx"
-    }
-  ],
+  "BL_rules": [],
+  "TL_rules": [],
   "exported": false
 }

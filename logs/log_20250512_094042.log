@@ -1,0 +1,101 @@
+2025-05-12 09:40:42,523 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250512_094042.log
+2025-05-12 09:40:42,767 [INFO] __main__ - 正在启动程序...
+2025-05-12 09:40:42,768 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-05-12 09:40:42,768 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-12 09:40:42,768 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-12 09:40:42,795 [INFO] __main__ - 正在创建语言选择对话框...
+2025-05-12 09:40:43,966 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-05-12 09:40:43,988 [INFO] __main__ - 语言选择结果: zh
+2025-05-12 09:40:43,989 [INFO] __main__ - 正在创建主题选择对话框...
+2025-05-12 09:40:43,989 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-05-12 09:40:44,008 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-05-12 09:40:44,574 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-05-12 09:40:44,595 [INFO] __main__ - 主题选择结果: light
+2025-05-12 09:40:44,603 [INFO] __main__ - 正在配置主窗口...
+2025-05-12 09:40:44,683 [INFO] __main__ - 开始创建MainWindow实例...
+2025-05-12 09:40:44,684 [INFO] core.logic_builder - 从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json 加载时检测到新版规则文件格式 (BL_rules/TL_rules)。
+2025-05-12 09:40:44,684 [INFO] core.logic_builder - 已加载 4 条规则从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-12 09:40:44,853 [INFO] gui.logic_panel - 规则未加载状态，等待用户确认后再加载规则
+2025-05-12 09:40:44,867 [INFO] __main__ - MainWindow实例创建完成
+2025-05-12 09:40:45,053 [INFO] __main__ - 开始mainloop()...
+2025-05-12 09:40:47,117 [INFO] core.config_processor - 找到工作表: ['1.Kabine']
+2025-05-12 09:40:47,118 [INFO] core.config_processor - 处理工作表: 1.Kabine -> 模块: 1.Kabine
+2025-05-12 09:40:47,140 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/Desktop/Kabinemekrmal(Test).xlsx
+2025-05-12 09:40:47,142 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/Kabinemekrmal(Test).xlsx
+2025-05-12 09:40:47,142 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/Desktop/Kabinemekrmal(Test).xlsx
+2025-05-12 09:40:49,256 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/Desktop/Bom.xlsx
+2025-05-12 09:40:49,256 [INFO] core.bom_processor - 已清空现有数据
+2025-05-12 09:40:49,257 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-05-12 09:40:49,260 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['Max-Gruppe']
+2025-05-12 09:40:49,260 [INFO] core.bom_processor - 正在读取 Max-Gruppe 工作表...
+2025-05-12 09:40:49,269 [INFO] core.bom_processor - 成功读取工作表，共 154 行数据
+2025-05-12 09:40:49,270 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-05-12 09:40:49,270 [INFO] core.bom_processor - 过滤空层级后剩余 153 行数据
+2025-05-12 09:40:49,271 [INFO] core.bom_processor - 
+开始处理数据...
+2025-05-12 09:40:49,274 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-05-12 09:40:49,274 [INFO] core.bom_processor - 第 1 级节点数量: 1
+2025-05-12 09:40:49,275 [INFO] core.bom_processor - 第 2 级节点数量: 133
+2025-05-12 09:40:49,275 [INFO] core.bom_processor - 第 3 级节点数量: 19
+2025-05-12 09:40:49,275 [INFO] core.bom_processor - BOM文件导入成功，共处理 153 个项目
+2025-05-12 09:40:49,275 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/Desktop/Bom.xlsx
+2025-05-12 09:40:49,275 [INFO] gui.bom_panel - 开始刷新树状图
+2025-05-12 09:40:49,276 [INFO] gui.bom_panel - 树状图刷新完成
+2025-05-12 09:40:49,278 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/Bom.xlsx
+2025-05-12 09:40:49,278 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/Desktop/Bom.xlsx
+2025-05-12 09:40:49,819 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-12 09:40:49,820 [INFO] core.logic_builder - 加载时检测到新版大写键名规则文件格式 (BL_rules/TL_rules) 从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json。
+2025-05-12 09:40:49,820 [INFO] gui.logic_panel - 收到规则变更事件: type=imported, rule_id=None
+2025-05-12 09:40:49,821 [INFO] gui.logic_panel - 规则未加载状态，等待用户确认
+2025-05-12 09:40:49,821 [INFO] core.logic_builder - 从临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 4 条规则完成。导出状态: False
+2025-05-12 09:40:49,821 [INFO] gui.main_window_tk - 检测到LogicBuilder中存在未导出的规则。
+2025-05-12 09:40:50,387 [INFO] gui.main_window_tk - 用户确认加载未导出的规则。MainWindow.rules_loaded 设置为 True。
+2025-05-12 09:40:50,387 [INFO] gui.main_window_tk - 开始刷新逻辑面板显示已加载的临时规则
+2025-05-12 09:40:50,388 [INFO] gui.logic_panel - 开始加载规则到已保存规则框架
+2025-05-12 09:40:50,388 [DEBUG] gui.logic_panel - 从LogicBuilder获取到 4 条规则
+2025-05-12 09:40:50,389 [DEBUG] gui.logic_panel - 添加规则ID: 1 到已使用集合
+2025-05-12 09:40:50,389 [DEBUG] gui.logic_panel - 添加规则ID: 2 到已使用集合
+2025-05-12 09:40:50,389 [DEBUG] gui.logic_panel - 添加规则ID: 3 到已使用集合
+2025-05-12 09:40:50,390 [DEBUG] gui.logic_panel - 添加规则ID: 1 到已使用集合
+2025-05-12 09:40:50,390 [INFO] gui.logic_panel - 成功加载 4 条规则到已保存规则框架
+2025-05-12 09:40:50,390 [INFO] gui.main_window_tk - 逻辑面板显示刷新完成
+2025-05-12 09:42:40,718 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-12 09:42:40,719 [INFO] core.logic_builder - 加载时检测到新版大写键名规则文件格式 (BL_rules/TL_rules) 从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json。
+2025-05-12 09:42:40,719 [INFO] gui.logic_panel - 收到规则变更事件: type=imported, rule_id=None
+2025-05-12 09:42:40,719 [INFO] gui.logic_panel - 规则已加载状态，开始更新已保存规则框架
+2025-05-12 09:42:40,720 [INFO] gui.logic_panel - 开始加载规则到已保存规则框架
+2025-05-12 09:42:40,720 [DEBUG] gui.logic_panel - 从LogicBuilder获取到 4 条规则
+2025-05-12 09:42:40,720 [DEBUG] gui.logic_panel - 添加规则ID: 1 到已使用集合
+2025-05-12 09:42:40,721 [DEBUG] gui.logic_panel - 添加规则ID: 2 到已使用集合
+2025-05-12 09:42:40,721 [DEBUG] gui.logic_panel - 添加规则ID: 3 到已使用集合
+2025-05-12 09:42:40,721 [DEBUG] gui.logic_panel - 添加规则ID: 1 到已使用集合
+2025-05-12 09:42:40,721 [INFO] gui.logic_panel - 成功加载 4 条规则到已保存规则框架
+2025-05-12 09:42:40,721 [INFO] core.logic_builder - 从临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 4 条规则完成。导出状态: False
+2025-05-12 09:42:40,722 [INFO] gui.logic_library_window - 已加载 4 条规则
+2025-05-12 09:42:45,063 [INFO] gui.language_dialog_tk - 已选择语言: de
+2025-05-12 09:42:45,095 [ERROR] gui.config_panel - 刷新文本失败: 'ConfigPanel' object has no attribute 'search_frame'
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\config_panel.py", line 478, in refresh_texts
+    self.search_frame.configure(text=language_manager.get_text("search"))
+    ^^^^^^^^^^^^^^^^^
+AttributeError: 'ConfigPanel' object has no attribute 'search_frame'. Did you mean: 'search_var'?
+2025-05-12 09:42:45,117 [ERROR] gui.config_panel - 刷新文本失败: 'ConfigPanel' object has no attribute 'search_frame'
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\config_panel.py", line 478, in refresh_texts
+    self.search_frame.configure(text=language_manager.get_text("search"))
+    ^^^^^^^^^^^^^^^^^
+AttributeError: 'ConfigPanel' object has no attribute 'search_frame'. Did you mean: 'search_var'?
+2025-05-12 09:42:48,644 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-05-12 09:42:48,670 [ERROR] gui.config_panel - 刷新文本失败: 'ConfigPanel' object has no attribute 'search_frame'
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\config_panel.py", line 478, in refresh_texts
+    self.search_frame.configure(text=language_manager.get_text("search"))
+    ^^^^^^^^^^^^^^^^^
+AttributeError: 'ConfigPanel' object has no attribute 'search_frame'. Did you mean: 'search_var'?
+2025-05-12 09:42:48,691 [ERROR] gui.config_panel - 刷新文本失败: 'ConfigPanel' object has no attribute 'search_frame'
+Traceback (most recent call last):
+  File "c:\Users\mengy\Desktop\ZK_LogicBom_Builder\gui\config_panel.py", line 478, in refresh_texts
+    self.search_frame.configure(text=language_manager.get_text("search"))
+    ^^^^^^^^^^^^^^^^^
+AttributeError: 'ConfigPanel' object has no attribute 'search_frame'. Did you mean: 'search_var'?
