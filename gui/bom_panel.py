@@ -177,18 +177,14 @@ class BomPanel(ttk.Frame):
     def _apply_search(self):
         """应用搜索条件"""
         try:
-            # 清空当前显示
-            for item in self.tree.get_children():
-                self.tree.delete(item)
-
             search_term = self.search_var.get().strip()
             
+            # 如果搜索词为空，直接返回
+            if not search_term:
+                return
+                
             # 获取BOM数据
             bom_data = self.bom_processor.get_bom_data()
-            
-            # 用于跟踪每个层级的最后一个节点
-            level_last_nodes = {}
-            level_placeholder_nodes = {}
             found_match = False
             
             # 遍历所有项目
@@ -199,59 +195,97 @@ class BomPanel(ttk.Frame):
                 name = item["name"]
                 long_text = item["long_text"]
                 
-                # 如果有搜索词，检查是否匹配
-                if search_term and not self._code_matches(search_term, baugruppe):
-                    continue
+                # 检查是否匹配
+                if self._code_matches(search_term, baugruppe):
+                    found_match = True
                     
-                found_match = True
-                
-                # 确定父节点
-                parent = ""
-                for parent_level in range(level - 1, 0, -1):
-                    if parent_level in level_last_nodes:
-                        parent = level_last_nodes[parent_level]
-                        break
-                
-                # 检查是否需要创建层级+占位符节点
-                level_key = (parent, level, placeholder)
-                if level_key not in level_placeholder_nodes:
-                    level_node = self.tree.insert(
-                        parent,
-                        "end",
-                        text=f"[{level}] {placeholder}",
-                        tags=("level_node",)
-                    )
-                    level_placeholder_nodes[level_key] = level_node
-                
-                # 在层级+占位符节点下创建物料节点
-                display_text = f"{baugruppe}\n{name}\n{long_text if long_text else ''}"
-                node = self.tree.insert(
-                    level_placeholder_nodes[level_key],
-                    "end",
-                    text=display_text,
-                    tags=("material",)
-                )
-                
-                # 更新层级跟踪
-                level_last_nodes[level] = level_placeholder_nodes[level_key]
-                
-                # 清除所有更高层级的最后节点记录
-                higher_levels = [l for l in level_last_nodes.keys() if l > level]
-                for l in higher_levels:
-                    level_last_nodes.pop(l)
+                    # 在树状图中查找或创建节点
+                    parent = ""
+                    parent_node = None
                     
-                # 展开找到的节点
-                self.tree.item(level_placeholder_nodes[level_key], open=True)
-                self.tree.see(node)
-                self.tree.selection_set(node)
+                    # 查找或创建所有父级节点
+                    for parent_level in range(1, level):
+                        # 查找当前层级的父节点
+                        parent_items = self.tree.get_children(parent_node)
+                        level_node = None
+                        
+                        # 在当前层级中查找对应的节点
+                        for p_item in parent_items:
+                            if self.tree.item(p_item)["text"].startswith(f"[{parent_level}]"):
+                                level_node = p_item
+                                break
+                        
+                        # 如果没有找到，创建新的层级节点
+                        if not level_node:
+                            # 获取该层级的占位符
+                            level_placeholder = None
+                            for bom_item in bom_data["items"]:
+                                if bom_item["level"] == parent_level:
+                                    level_placeholder = bom_item["placeholder"]
+                                    break
+                            
+                            if level_placeholder:
+                                level_node = self.tree.insert(
+                                    parent_node,
+                                    "end",
+                                    text=f"[{parent_level}] {level_placeholder}",
+                                    tags=("level_node",)
+                                )
+                        
+                        parent_node = level_node
+                    
+                    # 查找或创建当前层级节点
+                    current_level_items = self.tree.get_children(parent_node)
+                    current_level_node = None
+                    
+                    for c_item in current_level_items:
+                        if self.tree.item(c_item)["text"] == f"[{level}] {placeholder}":
+                            current_level_node = c_item
+                            break
+                    
+                    if not current_level_node:
+                        current_level_node = self.tree.insert(
+                            parent_node,
+                            "end",
+                            text=f"[{level}] {placeholder}",
+                            tags=("level_node",)
+                        )
+                    
+                    # 查找或创建物料节点
+                    material_items = self.tree.get_children(current_level_node)
+                    material_node = None
+                    display_text = f"{baugruppe}\n{name}\n{long_text if long_text else ''}"
+                    
+                    for m_item in material_items:
+                        if self.tree.item(m_item)["text"] == display_text:
+                            material_node = m_item
+                            break
+                    
+                    if not material_node:
+                        material_node = self.tree.insert(
+                            current_level_node,
+                            "end",
+                            text=display_text,
+                            tags=("material",)
+                        )
+                    
+                    # 展开所有父节点
+                    parent = current_level_node
+                    while parent:
+                        self.tree.item(parent, open=True)
+                        parent = self.tree.parent(parent)
+                    
+                    # 选中并滚动到匹配项
+                    self.tree.selection_set(material_node)
+                    self.tree.see(material_node)
             
             # 如果没有找到匹配项，显示提示信息
-            if search_term and not found_match:
+            if not found_match:
                 messagebox.showinfo(
                     language_manager.get_text("info"),
                     language_manager.get_text("code_not_found")
                 )
-            
+                
         except Exception as e:
             self.logger.error(f"应用搜索失败: {str(e)}", exc_info=True)
             messagebox.showerror(
