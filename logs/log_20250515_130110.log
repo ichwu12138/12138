@@ -1,0 +1,123 @@
+2025-05-15 13:01:10,727 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250515_130110.log
+2025-05-15 13:01:10,948 [INFO] __main__ - 正在启动程序...
+2025-05-15 13:01:10,948 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-05-15 13:01:10,949 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-15 13:01:10,949 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-15 13:01:10,972 [INFO] __main__ - 正在创建语言选择对话框...
+2025-05-15 13:01:11,987 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-05-15 13:01:12,011 [INFO] __main__ - 语言选择结果: zh
+2025-05-15 13:01:12,011 [INFO] __main__ - 正在创建主题选择对话框...
+2025-05-15 13:01:12,011 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-05-15 13:01:12,023 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-05-15 13:01:12,801 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-05-15 13:01:12,825 [INFO] __main__ - 主题选择结果: light
+2025-05-15 13:01:12,835 [INFO] __main__ - 正在配置主窗口...
+2025-05-15 13:01:12,942 [INFO] __main__ - 开始创建MainWindow实例...
+2025-05-15 13:01:12,943 [INFO] core.logic_builder - 从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json 加载时检测到新版大写键名规则文件格式 (BL_rules/TL_rules)。
+2025-05-15 13:01:12,943 [DEBUG] core.logic_builder - Rule BL02 loaded from file. Original file description: 'Wertfach unterm Sitzpolster → PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'. Regenerating description.
+2025-05-15 13:01:12,943 [DEBUG] core.logic_builder - Generated condition part for rule BL02: 'K-200-000007'
+2025-05-15 13:01:12,944 [DEBUG] core.logic_builder - Generated action part for rule BL02: 'PL--Sitze01-10019324'
+2025-05-15 13:01:12,944 [INFO] core.logic_builder - Newly generated description for BL02 (on _load_rules): 'K-200-000007 → PL--Sitze01-10019324'
+2025-05-15 13:01:12,944 [DEBUG] core.logic_builder - Rule BL01 loaded from file. Original file description: 'ohne Wertfach AND AND Sitz 2 mit Kunststoffbehälter → PL--Sitze01-PA-Sitz Std. mechanisch 2 FL-Sitzplatz 1 AND AND PL--Sitze02-PA-Sitz Std. mechanisch 2 FL-Sitzplatz 2'. Regenerating description.
+2025-05-15 13:01:12,944 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'K-200-000344 AND AND K-200-000169'
+2025-05-15 13:01:12,944 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL--Sitze01-10019320 AND AND PL--Sitze02-10019321'
+2025-05-15 13:01:12,944 [INFO] core.logic_builder - Newly generated description for BL01 (on _load_rules): 'K-200-000344 AND AND K-200-000169 → PL--Sitze01-10019320 AND AND PL--Sitze02-10019321'
+2025-05-15 13:01:12,945 [DEBUG] core.logic_builder - Rule BL03 loaded from file. Original file description: 'Sitz 1 mit Klappschütte → PL--Sitze02-Teilesatz Gerätewand-Sitzplatz 2'. Regenerating description.
+2025-05-15 13:01:12,945 [DEBUG] core.logic_builder - Generated condition part for rule BL03: 'K-200-000010'
+2025-05-15 13:01:12,945 [DEBUG] core.logic_builder - Generated action part for rule BL03: 'PL--Sitze02-10024979'
+2025-05-15 13:01:12,945 [INFO] core.logic_builder - Newly generated description for BL03 (on _load_rules): 'K-200-000010 → PL--Sitze02-10024979'
+2025-05-15 13:01:12,945 [DEBUG] core.logic_builder - Rule BL04 loaded from file. Original file description: 'Sitz 3 mit Klappschütte → PL--Sitze02-Schrank m.Rollo in MR kpl.-L= 540 B= 437 H=1450 Z-Cab NG Standard'. Regenerating description.
+2025-05-15 13:01:12,945 [DEBUG] core.logic_builder - Generated condition part for rule BL04: 'K-200-000176'
+2025-05-15 13:01:12,945 [DEBUG] core.logic_builder - Generated action part for rule BL04: 'PL--Sitze02-1149353'
+2025-05-15 13:01:12,945 [INFO] core.logic_builder - Newly generated description for BL04 (on _load_rules): 'K-200-000176 → PL--Sitze02-1149353'
+2025-05-15 13:01:12,945 [DEBUG] core.logic_builder - Rule TL01 loaded from file. Original file description: 'S. 4 ohne Ausstattung Stauraum → ON 123 ADD 123'. Regenerating description.
+2025-05-15 13:01:12,946 [DEBUG] core.logic_builder - Generated condition part for rule TL01: 'K-200-000165'
+2025-05-15 13:01:12,946 [DEBUG] core.logic_builder - Generated action part for rule TL01: 'ON 123 ADD 123'
+2025-05-15 13:01:12,946 [INFO] core.logic_builder - Newly generated description for TL01 (on _load_rules): 'K-200-000165 → ON 123 ADD 123'
+2025-05-15 13:01:12,946 [INFO] core.logic_builder - 已加载 5 条规则从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-15 13:01:12,984 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-15 13:01:12,990 [INFO] __main__ - MainWindow实例创建完成
+2025-05-15 13:01:13,181 [INFO] __main__ - 开始mainloop()...
+2025-05-15 13:01:15,379 [INFO] core.config_processor - 找到工作表: ['1.Kabine']
+2025-05-15 13:01:15,379 [INFO] core.config_processor - 处理工作表: 1.Kabine -> 模块: 1.Kabine
+2025-05-15 13:01:15,401 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-15 13:01:15,404 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-15 13:01:15,404 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-15 13:01:16,495 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-15 13:01:16,495 [INFO] core.bom_processor - 已清空现有数据
+2025-05-15 13:01:16,496 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-05-15 13:01:16,501 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['Max-Gruppe']
+2025-05-15 13:01:16,501 [INFO] core.bom_processor - 正在读取 Max-Gruppe 工作表...
+2025-05-15 13:01:16,516 [INFO] core.bom_processor - 成功读取工作表，共 244 行数据
+2025-05-15 13:01:16,517 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-05-15 13:01:16,518 [INFO] core.bom_processor - 过滤空层级后剩余 244 行数据
+2025-05-15 13:01:16,519 [INFO] core.bom_processor - 
+开始处理数据...
+2025-05-15 13:01:16,524 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-05-15 13:01:16,524 [INFO] core.bom_processor - 第 1 级节点数量: 244
+2025-05-15 13:01:16,524 [INFO] core.bom_processor - BOM文件导入成功，共处理 244 个项目
+2025-05-15 13:01:16,524 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-15 13:01:16,524 [INFO] gui.bom_panel - 开始刷新树状图
+2025-05-15 13:01:16,525 [INFO] gui.bom_panel - 树状图刷新完成
+2025-05-15 13:01:16,526 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-15 13:01:16,526 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-15 13:01:17,124 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-15 13:01:17,125 [DEBUG] core.logic_builder - Rule BL02 loaded from temp file. Original file description: 'Wertfach unterm Sitzpolster → PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'. Regenerating description.
+2025-05-15 13:01:17,125 [DEBUG] core.logic_builder - Generated condition part for rule BL02: 'Wertfach unterm Sitzpolster'
+2025-05-15 13:01:17,125 [DEBUG] core.logic_builder - Generated action part for rule BL02: 'PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'
+2025-05-15 13:01:17,125 [INFO] core.logic_builder - Newly generated description for BL02 (from temp): 'Wertfach unterm Sitzpolster → PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'
+2025-05-15 13:01:17,125 [DEBUG] core.logic_builder - Rule BL01 loaded from temp file. Original file description: 'ohne Wertfach AND AND Sitz 2 mit Kunststoffbehälter → PL--Sitze01-PA-Sitz Std. mechanisch 2 FL-Sitzplatz 1 AND AND PL--Sitze02-PA-Sitz Std. mechanisch 2 FL-Sitzplatz 2'. Regenerating description.
+2025-05-15 13:01:17,125 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'ohne Wertfach AND AND Sitz 2 mit Kunststoffbehälter'
+2025-05-15 13:01:17,126 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL--Sitze01-PA-Sitz Std. mechanisch 2 FL-Sitzplatz 1 AND AND PL--Sitze02-PA-Sitz Std. mechanisch 2 FL-Sitzplatz 2'
+2025-05-15 13:01:17,126 [INFO] core.logic_builder - Newly generated description for BL01 (from temp): 'ohne Wertfach AND AND Sitz 2 mit Kunststoffbehälter → PL--Sitze01-PA-Sitz Std. mechanisch 2 FL-Sitzplatz 1 AND AND PL--Sitze02-PA-Sitz Std. mechanisch 2 FL-Sitzplatz 2'
+2025-05-15 13:01:17,126 [DEBUG] core.logic_builder - Rule BL03 loaded from temp file. Original file description: 'Sitz 1 mit Klappschütte → PL--Sitze02-Teilesatz Gerätewand-Sitzplatz 2'. Regenerating description.
+2025-05-15 13:01:17,126 [DEBUG] core.logic_builder - Generated condition part for rule BL03: 'Sitz 1 mit Klappschütte'
+2025-05-15 13:01:17,126 [DEBUG] core.logic_builder - Generated action part for rule BL03: 'PL--Sitze02-Teilesatz Gerätewand-Sitzplatz 2'
+2025-05-15 13:01:17,126 [INFO] core.logic_builder - Newly generated description for BL03 (from temp): 'Sitz 1 mit Klappschütte → PL--Sitze02-Teilesatz Gerätewand-Sitzplatz 2'
+2025-05-15 13:01:17,126 [DEBUG] core.logic_builder - Rule BL04 loaded from temp file. Original file description: 'Sitz 3 mit Klappschütte → PL--Sitze02-Schrank m.Rollo in MR kpl.-L= 540 B= 437 H=1450 Z-Cab NG Standard'. Regenerating description.
+2025-05-15 13:01:17,127 [DEBUG] core.logic_builder - Generated condition part for rule BL04: 'Sitz 3 mit Klappschütte'
+2025-05-15 13:01:17,127 [DEBUG] core.logic_builder - Generated action part for rule BL04: 'PL--Sitze02-Schrank m.Rollo in MR kpl.-L= 540 B= 437 H=1450 Z-Cab NG Standard'
+2025-05-15 13:01:17,127 [INFO] core.logic_builder - Newly generated description for BL04 (from temp): 'Sitz 3 mit Klappschütte → PL--Sitze02-Schrank m.Rollo in MR kpl.-L= 540 B= 437 H=1450 Z-Cab NG Standard'
+2025-05-15 13:01:17,127 [DEBUG] core.logic_builder - Rule TL01 loaded from temp file. Original file description: 'S. 4 ohne Ausstattung Stauraum → ON 123 ADD 123'. Regenerating description.
+2025-05-15 13:01:17,127 [DEBUG] core.logic_builder - Generated condition part for rule TL01: 'S. 4 ohne Ausstattung Stauraum'
+2025-05-15 13:01:17,127 [DEBUG] core.logic_builder - Generated action part for rule TL01: 'ON 123 ADD 123'
+2025-05-15 13:01:17,127 [INFO] core.logic_builder - Newly generated description for TL01 (from temp): 'S. 4 ohne Ausstattung Stauraum → ON 123 ADD 123'
+2025-05-15 13:01:17,128 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='imported', RuleID='None'
+2025-05-15 13:01:17,128 [INFO] gui.logic_panel - LogicPanel _on_rule_change (imported): 收到 'imported' 通知，将重新加载所有规则到Treeview。
+2025-05-15 13:01:17,128 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-15 13:01:17,129 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'imported' 完成。
+2025-05-15 13:01:17,129 [INFO] core.logic_builder - 从临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 5 条规则完成。导出状态: False
+2025-05-15 13:01:17,129 [INFO] gui.main_window_tk - 检测到LogicBuilder中存在未导出的规则。
+2025-05-15 13:01:18,111 [INFO] gui.main_window_tk - 用户拒绝加载未导出的规则。将清空规则。
+2025-05-15 13:01:18,112 [INFO] core.logic_builder - 规则数据已成功清空，并写入空的临时文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-15 13:01:18,113 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='cleared', RuleID='None'
+2025-05-15 13:01:18,113 [INFO] gui.logic_panel - LogicPanel _on_rule_change (cleared): 收到 'cleared' 通知，清空Treeview和used_ids。
+2025-05-15 13:01:18,113 [INFO] gui.logic_panel - LogicPanel _on_rule_change (cleared): 已处理 'cleared' 通知，清空Treeview。
+2025-05-15 13:01:18,119 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'cleared' 完成。
+2025-05-15 13:01:18,119 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-15 13:01:20,839 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I011
+2025-05-15 13:01:20,840 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000300 Ziegler Standardsitze
+2025-05-15 13:01:20,841 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000300
+2025-05-15 13:01:20,841 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000300
+2025-05-15 13:01:20,842 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-05-15 13:01:20,842 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-05-15 13:01:20,843 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-05-15 13:01:20,843 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000300
+2025-05-15 13:01:20,844 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000300, 当前表达式: K-200-000300 
+2025-05-15 13:01:20,844 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000300
+2025-05-15 13:01:22,078 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K-200-000300  → 
+2025-05-15 13:01:22,887 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1161133
+Dach m.Klimaanlage Webasto
+Z-Cab NG
+2025-05-15 13:01:22,888 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1161133
+2025-05-15 13:01:22,889 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Rückwand
+2025-05-15 13:01:22,890 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码 (仅 Baugruppe): 1161133
+2025-05-15 13:01:22,890 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-05-15 13:01:22,891 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-05-15 13:01:22,891 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-05-15 13:01:22,892 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: 1161133
+2025-05-15 13:01:22,893 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: 1161133, 当前表达式: K-200-000300  → 1161133 
+2025-05-15 13:01:22,894 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: 1161133
+2025-05-15 13:01:22,894 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: 1161133
+2025-05-15 13:01:25,748 [WARNING] gui.logic_panel - 表达式验证失败: 影响项表达式错误: 影响项表达式只能使用BOM码: 1161133

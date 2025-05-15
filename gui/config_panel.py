@@ -149,7 +149,8 @@ class ConfigPanel(ttk.Frame):
             width=40
         )
         search_entry.pack(side=LEFT, fill=X, expand=True)
-        
+        search_entry.bind("<Return>", lambda event: self._apply_search()) # 绑定回车键
+
         # 添加清除按钮
         clear_button = ttk.Button(
             search_input_frame,
@@ -160,22 +161,10 @@ class ConfigPanel(ttk.Frame):
         )
         clear_button.pack(side=RIGHT, padx=5)
         
-        # 绑定搜索事件
-        self.search_var.trace_add("write", self._on_search_changed)
-
-    def _delayed_search(self):
-        """延迟搜索以避免过于频繁的更新"""
-        if hasattr(self, '_search_after_id'):
-            self.after_cancel(self._search_after_id)
-        self._search_after_id = self.after(300, self._apply_search)
-
-    def _on_search_changed(self, *args):
-        """搜索内容变化事件处理"""
-        self._delayed_search()
-
     def _clear_search(self):
-        """清空搜索"""
+        """清空搜索并重置树状图"""
         self.search_var.set("")
+        self._refresh_tree() # 清除后刷新树
 
     def _normalize_code(self, code: str) -> str:
         """标准化代码格式，移除分隔符
@@ -267,17 +256,14 @@ class ConfigPanel(ttk.Frame):
                         
                         # 在树状图中查找或创建节点
                         module_items = self.tree.get_children()
-                        module_node = None
-                        
-                        # 查找模块节点
-                        for item in module_items:
-                            if self.tree.item(item)["text"] == module_id:
-                                module_node = item
+                        current_module_node_found = False
+                        for item_in_tree in module_items:
+                            if self.tree.item(item_in_tree)["text"] == module_id:
+                                module_node = item_in_tree
+                                current_module_node_found = True
                                 break
-                        
-                        # 如果模块节点不存在，创建它
-                        if not module_node:
-                            module_node = self.tree.insert(
+                        if not current_module_node_found:
+                             module_node = self.tree.insert(
                                 "",
                                 "end",
                                 text=module_id,
@@ -301,23 +287,23 @@ class ConfigPanel(ttk.Frame):
                                 tags=("f_code",)
                             )
                         
-                        # 展开找到的节点
+                        # 展开找到的节点 (module_node 和 f_node)
                         self.tree.item(module_node, open=True)
                         self.tree.item(f_node, open=True)
                         
                         # 如果是特征码匹配，选中特征码节点
-                        if f_code_matches:
+                        if f_code_matches and not k_code_matches:
                             self.tree.selection_set(f_node)
                             self.tree.see(f_node)
                         
                         # 如果是特征值匹配，选中对应的特征值节点
-                        for k_code in k_code_matches:
-                            k_code_name = self.config_processor.get_name(k_code)
+                        for k_code_to_select in k_code_matches:
+                            k_code_name_to_select = self.config_processor.get_name(k_code_to_select)
                             # 查找或创建特征值节点
                             k_node = None
                             k_items = self.tree.get_children(f_node)
                             for item in k_items:
-                                if self.tree.item(item)["text"] == f"{k_code} {k_code_name}":
+                                if self.tree.item(item)["text"] == f"{k_code_to_select} {k_code_name_to_select}":
                                     k_node = item
                                     break
                             
@@ -325,13 +311,18 @@ class ConfigPanel(ttk.Frame):
                                 k_node = self.tree.insert(
                                     f_node,
                                     "end",
-                                    text=f"{k_code} {k_code_name}",
+                                    text=f"{k_code_to_select} {k_code_name_to_select}",
                                     tags=("k_code",)
                                 )
                             
-                            # 选中并滚动到特征值节点
+                            # 选中并滚动到特征值节点 (最后一个匹配的k_code)
                             self.tree.selection_set(k_node)
                             self.tree.see(k_node)
+                        
+                        break  # 从 for f_code in f_codes 循环中断开
+                
+                if found_match: # 检查是否应该从 for module_id... 循环中断开
+                    break
             
             # 如果没有找到匹配项，显示提示信息
             if not found_match:

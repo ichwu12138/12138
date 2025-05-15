@@ -93,7 +93,8 @@ class BomPanel(ttk.Frame):
             width=40
         )
         search_entry.pack(side=LEFT, fill=X, expand=True)
-        
+        search_entry.bind("<Return>", lambda event: self._apply_search()) # 绑定回车键
+
         # 添加清除按钮
         self.clear_button = ttk.Button(
             search_input_frame,
@@ -104,22 +105,10 @@ class BomPanel(ttk.Frame):
         )
         self.clear_button.pack(side=RIGHT, padx=5)
         
-        # 绑定搜索事件
-        self.search_var.trace_add("write", self._on_search_changed)
-
-    def _delayed_search(self):
-        """延迟搜索以避免过于频繁的更新"""
-        if hasattr(self, '_search_after_id'):
-            self.after_cancel(self._search_after_id)
-        self._search_after_id = self.after(300, self._apply_search)
-
-    def _on_search_changed(self, *args):
-        """搜索内容变化事件处理"""
-        self._delayed_search()
-
     def _clear_search(self):
-        """清空搜索"""
+        """清空搜索并重置树状图"""
         self.search_var.set("")
+        self._refresh_tree() # 清除后刷新树
 
     def _normalize_bom_code(self, code: str) -> str:
         """标准化BOM码格式，提取最后分隔符后的数字部分
@@ -278,6 +267,7 @@ class BomPanel(ttk.Frame):
                     # 选中并滚动到匹配项
                     self.tree.selection_set(material_node)
                     self.tree.see(material_node)
+                    break  #  跳出 bom_data["items"] 循环，只处理第一个匹配项
             
             # 如果没有找到匹配项，显示提示信息
             if not found_match:
