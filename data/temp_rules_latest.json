@@ -1,5 +1,16 @@
 {
-  "BL_rules": [],
+  "BL_rules": [
+    {
+      "logic_id": "BL02",
+      "status": "enabled",
+      "selection_expression": "K-200-000007",
+      "logic_relation": "→",
+      "impact_expression": "PL--Sitze01-10019324",
+      "tags": "",
+      "tech_doc_path": "",
+      "description": "Wertfach unterm Sitzpolster → PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1"
+    }
+  ],
   "TL_rules": [],
   "exported": false
 }

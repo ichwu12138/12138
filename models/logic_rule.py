@@ -3,6 +3,7 @@ from enum import Enum
 from typing import List, Optional, Dict, Any
 from datetime import datetime
 from utils.config_manager import RULE_STATUS_CONFIG
+import uuid
 
 class RuleStatus(Enum):
     """规则状态"""
@@ -23,6 +24,7 @@ class LogicRule:
     created_at: datetime = field(default_factory=datetime.now)
     modified_at: datetime = field(default_factory=datetime.now)
     is_editable: bool = True
+    description: str = ""            # 新增 description 字段
 
     def __post_init__(self):
         """初始化后的处理"""
@@ -68,6 +70,7 @@ class LogicRule:
             "impact_expression": self.action,
             "tags": self.tags,  # 直接使用标签字符串
             "tech_doc_path": self.tech_doc_path,
+            "description": self.description,  # 添加到字典
             # 'created_at': self.created_at.isoformat(), # 可选，如果需要导出
             # 'modified_at': self.modified_at.isoformat() # 可选，如果需要导出
         }
@@ -114,8 +117,12 @@ class LogicRule:
                 relation=relation,
                 status=status,
                 tags=tags,
-                tech_doc_path=tech_doc_path
+                tech_doc_path=tech_doc_path,
+                description=data.get('description', '')
             )
             
         except Exception as e:
             raise ValueError(f"创建规则实例失败: {str(e)}, 数据: {data}") 
+
+    def __repr__(self):
+        return f"<LogicRule id='{self.rule_id}' status='{self.status.value}' desc='{self.description[:20]}...'>" 

@@ -1,0 +1,180 @@
+2025-05-15 11:28:26,453 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250515_112826.log
+2025-05-15 11:28:26,699 [INFO] __main__ - 正在启动程序...
+2025-05-15 11:28:26,699 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-05-15 11:28:26,700 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-15 11:28:26,700 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-15 11:28:26,720 [INFO] __main__ - 正在创建语言选择对话框...
+2025-05-15 11:28:27,766 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-05-15 11:28:27,806 [INFO] __main__ - 语言选择结果: zh
+2025-05-15 11:28:27,807 [INFO] __main__ - 正在创建主题选择对话框...
+2025-05-15 11:28:27,807 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-05-15 11:28:27,815 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-05-15 11:28:28,331 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-05-15 11:28:28,362 [INFO] __main__ - 主题选择结果: light
+2025-05-15 11:28:28,371 [INFO] __main__ - 正在配置主窗口...
+2025-05-15 11:28:28,492 [INFO] __main__ - 开始创建MainWindow实例...
+2025-05-15 11:28:28,493 [INFO] core.logic_builder - 从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json 加载时检测到新版大写键名规则文件格式 (BL_rules/TL_rules)。
+2025-05-15 11:28:28,494 [DEBUG] core.logic_builder - Rule BL01 loaded from file. Original file description: 'ohne Wertfach → PL-Rückwand-Rückwand Sandwich kpl.-Rucksack Sitzplatz 5,6 Z-Cab NG'. Regenerating description.
+2025-05-15 11:28:28,494 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'K-200-000344'
+2025-05-15 11:28:28,494 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Rückwand-1118897'
+2025-05-15 11:28:28,495 [INFO] core.logic_builder - Newly generated description for BL01 (on _load_rules): 'K-200-000344 → PL-Rückwand-1118897'
+2025-05-15 11:28:28,495 [INFO] core.logic_builder - 已加载 1 条规则从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-15 11:28:28,561 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-15 11:28:28,571 [INFO] __main__ - MainWindow实例创建完成
+2025-05-15 11:28:28,793 [INFO] __main__ - 开始mainloop()...
+2025-05-15 11:28:30,217 [INFO] core.config_processor - 找到工作表: ['1.Kabine']
+2025-05-15 11:28:30,218 [INFO] core.config_processor - 处理工作表: 1.Kabine -> 模块: 1.Kabine
+2025-05-15 11:28:30,239 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-15 11:28:30,241 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-15 11:28:30,242 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-15 11:28:31,065 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-15 11:28:31,066 [INFO] core.bom_processor - 已清空现有数据
+2025-05-15 11:28:31,066 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-05-15 11:28:31,072 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['Max-Gruppe']
+2025-05-15 11:28:31,072 [INFO] core.bom_processor - 正在读取 Max-Gruppe 工作表...
+2025-05-15 11:28:31,088 [INFO] core.bom_processor - 成功读取工作表，共 244 行数据
+2025-05-15 11:28:31,088 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-05-15 11:28:31,089 [INFO] core.bom_processor - 过滤空层级后剩余 244 行数据
+2025-05-15 11:28:31,090 [INFO] core.bom_processor - 
+开始处理数据...
+2025-05-15 11:28:31,095 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-05-15 11:28:31,095 [INFO] core.bom_processor - 第 1 级节点数量: 244
+2025-05-15 11:28:31,096 [INFO] core.bom_processor - BOM文件导入成功，共处理 244 个项目
+2025-05-15 11:28:31,096 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-15 11:28:31,096 [INFO] gui.bom_panel - 开始刷新树状图
+2025-05-15 11:28:31,097 [INFO] gui.bom_panel - 树状图刷新完成
+2025-05-15 11:28:31,098 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-15 11:28:31,099 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-15 11:28:31,417 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-15 11:28:31,417 [DEBUG] core.logic_builder - Rule BL01 loaded from temp file. Original file description: 'ohne Wertfach → PL-Rückwand-Rückwand Sandwich kpl.-Rucksack Sitzplatz 5,6 Z-Cab NG'. Regenerating description.
+2025-05-15 11:28:31,417 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'ohne Wertfach'
+2025-05-15 11:28:31,418 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Rückwand-Rückwand Sandwich kpl.-Rucksack Sitzplatz 5,6 Z-Cab NG'
+2025-05-15 11:28:31,418 [INFO] core.logic_builder - Newly generated description for BL01 (from temp): 'ohne Wertfach → PL-Rückwand-Rückwand Sandwich kpl.-Rucksack Sitzplatz 5,6 Z-Cab NG'
+2025-05-15 11:28:31,418 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='imported', RuleID='None'
+2025-05-15 11:28:31,418 [INFO] gui.logic_panel - LogicPanel _on_rule_change (imported): 收到 'imported' 通知，将重新加载所有规则到Treeview。
+2025-05-15 11:28:31,418 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-15 11:28:31,419 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'imported' 完成。
+2025-05-15 11:28:31,419 [INFO] core.logic_builder - 从临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 1 条规则完成。导出状态: False
+2025-05-15 11:28:31,419 [INFO] gui.main_window_tk - 检测到LogicBuilder中存在未导出的规则。
+2025-05-15 11:28:32,166 [INFO] gui.main_window_tk - 用户确认加载，将再次调用 load_from_temp_file 以使用最新的Config/BOM数据生成描述。
+2025-05-15 11:28:32,167 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-15 11:28:32,168 [DEBUG] core.logic_builder - Rule BL01 loaded from temp file. Original file description: 'ohne Wertfach → PL-Rückwand-Rückwand Sandwich kpl.-Rucksack Sitzplatz 5,6 Z-Cab NG'. Regenerating description.
+2025-05-15 11:28:32,168 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'ohne Wertfach'
+2025-05-15 11:28:32,168 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Rückwand-Rückwand Sandwich kpl.-Rucksack Sitzplatz 5,6 Z-Cab NG'
+2025-05-15 11:28:32,169 [INFO] core.logic_builder - Newly generated description for BL01 (from temp): 'ohne Wertfach → PL-Rückwand-Rückwand Sandwich kpl.-Rucksack Sitzplatz 5,6 Z-Cab NG'
+2025-05-15 11:28:32,169 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='imported', RuleID='None'
+2025-05-15 11:28:32,169 [INFO] gui.logic_panel - LogicPanel _on_rule_change (imported): 收到 'imported' 通知，将重新加载所有规则到Treeview。
+2025-05-15 11:28:32,169 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-15 11:28:32,169 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'imported' 完成。
+2025-05-15 11:28:32,169 [INFO] core.logic_builder - 从临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 1 条规则完成。导出状态: False
+2025-05-15 11:28:32,170 [INFO] gui.main_window_tk - 用户确认加载未导出的规则。MainWindow.rules_loaded 设置为 True。
+2025-05-15 11:28:32,170 [INFO] gui.main_window_tk - 开始刷新逻辑面板显示已加载的临时规则
+2025-05-15 11:28:32,170 [INFO] gui.logic_panel - LogicPanel: 开始加载规则到已保存规则框架 (非层级)
+2025-05-15 11:28:32,170 [DEBUG] gui.logic_panel - LogicPanel: 从LogicBuilder获取到 1 条规则
+2025-05-15 11:28:32,175 [INFO] gui.logic_panel - LogicPanel: 成功加载 1 条规则 (非层级) 到已保存规则框架
+2025-05-15 11:28:32,175 [INFO] gui.main_window_tk - 逻辑面板显示刷新完成
+2025-05-15 11:28:34,853 [DEBUG] gui.logic_panel - LogicPanel _get_rule_id_from_selection: Item 'BL01' 是规则行，返回ID: BL01
+2025-05-15 11:28:36,870 [DEBUG] core.logic_builder - LogicBuilder update_rule_description for 'BL01': 方法入口时规则状态 = 'disabled', 描述 = 'ohne Wertfach → PL-Rückwand-Rückwand Sandwich kpl....'
+2025-05-15 11:28:36,871 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'ohne Wertfach'
+2025-05-15 11:28:36,871 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Rückwand-Rückwand Sandwich kpl.-Rucksack Sitzplatz 5,6 Z-Cab NG'
+2025-05-15 11:28:36,871 [DEBUG] core.logic_builder - LogicBuilder update_rule_description for 'BL01': 调用 _save_rules() 前，规则状态 = 'disabled', 描述是否更改 = False, 新描述 = 'ohne Wertfach → PL-Rückwand-Rückwand Sandwich kpl....'
+2025-05-15 11:28:36,872 [INFO] core.logic_builder - 已保存 1 条规则到临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json)
+2025-05-15 11:28:36,872 [INFO] core.logic_builder - LogicBuilder update_rule_description for 'BL01': 规则已保存。通知UI变更 (modified)。
+2025-05-15 11:28:36,872 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='modified', RuleID='BL01'
+2025-05-15 11:28:36,872 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: 附带的Rule对象: ID='BL01', Status='disabled', Desc='ohne Wertfach → PL-Rückwand-Rü...'
+2025-05-15 11:28:36,872 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change (modified): 开始更新规则 'BL01'. 当前传入状态: disabled
+2025-05-15 11:28:36,872 [INFO] gui.logic_panel - LogicPanel _on_rule_change (modified): 已更新Treeview中的规则行 'BL01' 的值为: Status='禁用'
+2025-05-15 11:28:36,873 [INFO] gui.logic_panel - LogicPanel _on_rule_change (modified): 已更新/确认Treeview中的描述行 'BL01_desc_sep'.
+2025-05-15 11:28:36,873 [INFO] gui.logic_panel - LogicPanel _on_rule_change (modified): 规则 'BL01' 的描述为空，已删除描述行 'BL01_desc_sep'.
+2025-05-15 11:28:36,876 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'modified' 完成。
+2025-05-15 11:28:46,724 [DEBUG] gui.logic_panel - LogicPanel _get_rule_id_from_selection: Item 'BL01' 是规则行，返回ID: BL01
+2025-05-15 11:28:48,806 [DEBUG] core.logic_builder - LogicBuilder update_rule_description for 'BL01': 方法入口时规则状态 = 'enabled', 描述 = 'ohne Wertfach → PL-Rückwand-Rückwand Sandwich kpl....'
+2025-05-15 11:28:48,807 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'ohne Wertfach'
+2025-05-15 11:28:48,807 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Rückwand-Rückwand Sandwich kpl.-Rucksack Sitzplatz 5,6 Z-Cab NG'
+2025-05-15 11:28:48,807 [DEBUG] core.logic_builder - LogicBuilder update_rule_description for 'BL01': 调用 _save_rules() 前，规则状态 = 'enabled', 描述是否更改 = False, 新描述 = 'ohne Wertfach → PL-Rückwand-Rückwand Sandwich kpl....'
+2025-05-15 11:28:48,808 [INFO] core.logic_builder - 已保存 1 条规则到临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json)
+2025-05-15 11:28:48,808 [INFO] core.logic_builder - LogicBuilder update_rule_description for 'BL01': 规则已保存。通知UI变更 (modified)。
+2025-05-15 11:28:48,808 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='modified', RuleID='BL01'
+2025-05-15 11:28:48,808 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: 附带的Rule对象: ID='BL01', Status='enabled', Desc='ohne Wertfach → PL-Rückwand-Rü...'
+2025-05-15 11:28:48,808 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change (modified): 开始更新规则 'BL01'. 当前传入状态: enabled
+2025-05-15 11:28:48,808 [INFO] gui.logic_panel - LogicPanel _on_rule_change (modified): 已更新Treeview中的规则行 'BL01' 的值为: Status='启用'
+2025-05-15 11:28:48,808 [INFO] gui.logic_panel - LogicPanel _on_rule_change (modified): 为规则 'BL01' 新增了描述行 'BL01_desc_sep'.
+2025-05-15 11:28:48,810 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'modified' 完成。
+2025-05-15 11:29:11,118 [INFO] gui.logic_library_window - LogicLibrary: 已加载 1 条规则 (非层级)。
+2025-05-15 11:29:11,118 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 开始应用筛选和搜索。清空现有Treeview项。
+2025-05-15 11:29:11,118 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 从self.cached_rules (共 1 条) 开始迭代。
+2025-05-15 11:29:11,118 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL01'，状态 'enabled' (显示为 '启用').
+2025-05-15 11:29:11,118 [INFO] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 筛选和搜索完成：显示 1/1 条规则。
+2025-05-15 11:29:14,071 [DEBUG] core.logic_builder - LogicBuilder update_rule_description for 'BL01': 方法入口时规则状态 = 'disabled', 描述 = 'ohne Wertfach → PL-Rückwand-Rückwand Sandwich kpl....'
+2025-05-15 11:29:14,071 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'ohne Wertfach'
+2025-05-15 11:29:14,071 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Rückwand-Rückwand Sandwich kpl.-Rucksack Sitzplatz 5,6 Z-Cab NG'
+2025-05-15 11:29:14,072 [DEBUG] core.logic_builder - LogicBuilder update_rule_description for 'BL01': 调用 _save_rules() 前，规则状态 = 'disabled', 描述是否更改 = False, 新描述 = 'ohne Wertfach → PL-Rückwand-Rückwand Sandwich kpl....'
+2025-05-15 11:29:14,072 [INFO] core.logic_builder - 已保存 1 条规则到临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json)
+2025-05-15 11:29:14,072 [INFO] core.logic_builder - LogicBuilder update_rule_description for 'BL01': 规则已保存。通知UI变更 (modified)。
+2025-05-15 11:29:14,072 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='modified', RuleID='BL01'
+2025-05-15 11:29:14,072 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: 附带的Rule对象: ID='BL01', Status='disabled', Desc='ohne Wertfach → PL-Rückwand-Rü...'
+2025-05-15 11:29:14,073 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change (modified): 开始更新规则 'BL01'. 当前传入状态: disabled
+2025-05-15 11:29:14,073 [INFO] gui.logic_panel - LogicPanel _on_rule_change (modified): 已更新Treeview中的规则行 'BL01' 的值为: Status='禁用'
+2025-05-15 11:29:14,073 [INFO] gui.logic_panel - LogicPanel _on_rule_change (modified): 为规则 'BL01' 新增了描述行 'BL01_desc_sep'.
+2025-05-15 11:29:14,075 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'modified' 完成。
+2025-05-15 11:29:14,075 [INFO] gui.logic_library_window - LogicLibrary _on_rule_change: 收到通知: 类型='modified', RuleID='BL01'
+2025-05-15 11:29:14,075 [DEBUG] gui.logic_library_window - LogicLibrary _on_rule_change: 附带的Rule对象: ID='BL01', Status='disabled', Desc='ohne Wertfach → PL-Rückwand-Rü...'
+2025-05-15 11:29:14,075 [DEBUG] gui.logic_library_window - LogicLibrary _on_rule_change: 更新self.cached_rules前，包含 1 条规则。
+2025-05-15 11:29:14,076 [DEBUG] gui.logic_library_window - LogicLibrary _on_rule_change: 更新self.cached_rules后，包含 1 条规则。调用 _apply_filters_and_search。
+2025-05-15 11:29:14,076 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 开始应用筛选和搜索。清空现有Treeview项。
+2025-05-15 11:29:14,076 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 从self.cached_rules (共 1 条) 开始迭代。
+2025-05-15 11:29:14,076 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL01'，状态 'disabled' (显示为 '禁用').
+2025-05-15 11:29:14,076 [INFO] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 筛选和搜索完成：显示 1/1 条规则。
+2025-05-15 11:29:14,076 [INFO] gui.logic_library_window - LogicLibrary _on_rule_change: 因 'modified' (非层级)，规则列表已通过重新筛选和加载进行刷新。
+2025-05-15 11:29:14,079 [DEBUG] gui.logic_library_window - LogicLibrary _on_rule_change: Treeview update_idletasks() 已调用。
+2025-05-15 11:29:14,079 [INFO] gui.logic_library_window - LogicLibrary: 规则 BL01 编辑完成并通过LogicBuilder更新。
+2025-05-15 11:29:17,095 [DEBUG] gui.logic_panel - LogicPanel _get_rule_id_from_selection: Item 'BL01' 是规则行，返回ID: BL01
+2025-05-15 11:29:19,094 [DEBUG] core.logic_builder - LogicBuilder update_rule_description for 'BL01': 方法入口时规则状态 = 'enabled', 描述 = 'ohne Wertfach → PL-Rückwand-Rückwand Sandwich kpl....'
+2025-05-15 11:29:19,094 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'ohne Wertfach'
+2025-05-15 11:29:19,095 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Rückwand-Rückwand Sandwich kpl.-Rucksack Sitzplatz 5,6 Z-Cab NG'
+2025-05-15 11:29:19,095 [DEBUG] core.logic_builder - LogicBuilder update_rule_description for 'BL01': 调用 _save_rules() 前，规则状态 = 'enabled', 描述是否更改 = False, 新描述 = 'ohne Wertfach → PL-Rückwand-Rückwand Sandwich kpl....'
+2025-05-15 11:29:19,096 [INFO] core.logic_builder - 已保存 1 条规则到临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json)
+2025-05-15 11:29:19,096 [INFO] core.logic_builder - LogicBuilder update_rule_description for 'BL01': 规则已保存。通知UI变更 (modified)。
+2025-05-15 11:29:19,096 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='modified', RuleID='BL01'
+2025-05-15 11:29:19,096 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: 附带的Rule对象: ID='BL01', Status='enabled', Desc='ohne Wertfach → PL-Rückwand-Rü...'
+2025-05-15 11:29:19,097 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change (modified): 开始更新规则 'BL01'. 当前传入状态: enabled
+2025-05-15 11:29:19,097 [INFO] gui.logic_panel - LogicPanel _on_rule_change (modified): 已更新Treeview中的规则行 'BL01' 的值为: Status='启用'
+2025-05-15 11:29:19,097 [INFO] gui.logic_panel - LogicPanel _on_rule_change (modified): 为规则 'BL01' 新增了描述行 'BL01_desc_sep'.
+2025-05-15 11:29:19,099 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'modified' 完成。
+2025-05-15 11:29:20,860 [DEBUG] gui.logic_panel - LogicPanel _get_rule_id_from_selection: Item 'BL01' 是规则行，返回ID: BL01
+2025-05-15 11:29:21,937 [DEBUG] core.logic_builder - LogicBuilder update_rule_description for 'BL01': 方法入口时规则状态 = 'enabled', 描述 = 'ohne Wertfach → PL-Rückwand-Rückwand Sandwich kpl....'
+2025-05-15 11:29:21,938 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'ohne Wertfach'
+2025-05-15 11:29:21,938 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Rückwand-Rückwand Sandwich kpl.-Rucksack Sitzplatz 5,6 Z-Cab NG'
+2025-05-15 11:29:21,938 [DEBUG] core.logic_builder - LogicBuilder update_rule_description for 'BL01': 调用 _save_rules() 前，规则状态 = 'enabled', 描述是否更改 = False, 新描述 = 'ohne Wertfach → PL-Rückwand-Rückwand Sandwich kpl....'
+2025-05-15 11:29:21,939 [INFO] core.logic_builder - 已保存 1 条规则到临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json)
+2025-05-15 11:29:21,939 [INFO] core.logic_builder - LogicBuilder update_rule_description for 'BL01': 规则已保存。通知UI变更 (modified)。
+2025-05-15 11:29:21,939 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='modified', RuleID='BL01'
+2025-05-15 11:29:21,939 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: 附带的Rule对象: ID='BL01', Status='enabled', Desc='ohne Wertfach → PL-Rückwand-Rü...'
+2025-05-15 11:29:21,939 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change (modified): 开始更新规则 'BL01'. 当前传入状态: enabled
+2025-05-15 11:29:21,939 [INFO] gui.logic_panel - LogicPanel _on_rule_change (modified): 已更新Treeview中的规则行 'BL01' 的值为: Status='启用'
+2025-05-15 11:29:21,940 [INFO] gui.logic_panel - LogicPanel _on_rule_change (modified): 为规则 'BL01' 新增了描述行 'BL01_desc_sep'.
+2025-05-15 11:29:21,941 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'modified' 完成。
+2025-05-15 11:29:22,545 [DEBUG] gui.logic_panel - LogicPanel _get_rule_id_from_selection: Item 'BL01' 是规则行，返回ID: BL01
+2025-05-15 11:29:23,312 [DEBUG] gui.logic_panel - LogicPanel _get_rule_id_from_selection: Item 'BL01' 是规则行，返回ID: BL01
+2025-05-15 11:29:24,204 [DEBUG] core.logic_builder - LogicBuilder delete_rule: 尝试删除规则 ID: 'BL01'. 规则是否存在于 self.rules: True
+2025-05-15 11:29:24,205 [INFO] core.logic_builder - 已保存 0 条规则到临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json)
+2025-05-15 11:29:24,205 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='deleted', RuleID='BL01'
+2025-05-15 11:29:24,206 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: 附带的Rule对象: ID='BL01', Status='enabled', Desc='ohne Wertfach → PL-Rückwand-Rü...'
+2025-05-15 11:29:24,206 [INFO] gui.logic_panel - LogicPanel _on_rule_change (deleted): 开始删除规则 'BL01' 从Treeview。
+2025-05-15 11:29:24,206 [INFO] gui.logic_panel - LogicPanel _on_rule_change (deleted): 已从Treeview删除规则行 'BL01'.
+2025-05-15 11:29:24,206 [WARNING] gui.logic_panel - LogicPanel _on_rule_change (deleted): 删除时未在Treeview中找到描述行 'BL01_desc_sep'.
+2025-05-15 11:29:24,207 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'deleted' 完成。
+2025-05-15 11:29:24,207 [INFO] core.logic_builder - LogicBuilder delete_rule: 规则 'BL01' 已成功从 self.rules 移除, 保存并发送删除通知。
+2025-05-15 11:29:24,208 [INFO] gui.logic_panel - LogicPanel _delete_rule: 请求删除规则 BL01。
+2025-05-15 11:29:31,487 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I014
+2025-05-15 11:29:31,488 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000344 ohne Wertfach
+2025-05-15 11:29:31,489 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000344
+2025-05-15 11:29:31,490 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000344
+2025-05-15 11:29:31,490 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-05-15 11:29:31,491 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-05-15 11:29:31,492 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-05-15 11:29:31,492 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000344
+2025-05-15 11:29:31,493 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000344, 当前表达式: K-200-000344 
+2025-05-15 11:29:31,494 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000344
+2025-05-15 11:29:32,611 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K-200-000344  → 

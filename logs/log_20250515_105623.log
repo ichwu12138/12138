@@ -1,0 +1,108 @@
+2025-05-15 10:56:23,517 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250515_105623.log
+2025-05-15 10:56:23,738 [INFO] __main__ - 正在启动程序...
+2025-05-15 10:56:23,739 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-05-15 10:56:23,739 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-15 10:56:23,739 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-15 10:56:23,760 [INFO] __main__ - 正在创建语言选择对话框...
+2025-05-15 10:56:24,870 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-05-15 10:56:24,894 [INFO] __main__ - 语言选择结果: zh
+2025-05-15 10:56:24,894 [INFO] __main__ - 正在创建主题选择对话框...
+2025-05-15 10:56:24,894 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-05-15 10:56:24,898 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-05-15 10:56:25,392 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-05-15 10:56:25,426 [INFO] __main__ - 主题选择结果: light
+2025-05-15 10:56:25,434 [INFO] __main__ - 正在配置主窗口...
+2025-05-15 10:56:25,559 [INFO] __main__ - 开始创建MainWindow实例...
+2025-05-15 10:56:25,560 [INFO] core.logic_builder - 从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json 加载时检测到新版大写键名规则文件格式 (BL_rules/TL_rules)。
+2025-05-15 10:56:25,560 [DEBUG] core.logic_builder - Rule BL01 loaded from file. Original file description: 'Ziegler Standardsitze → PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'. Regenerating description.
+2025-05-15 10:56:25,560 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'K-200-000300'
+2025-05-15 10:56:25,560 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Rückwand-1114027'
+2025-05-15 10:56:25,560 [INFO] core.logic_builder - Newly generated description for BL01 (on _load_rules): 'K-200-000300 → PL-Rückwand-1114027'
+2025-05-15 10:56:25,560 [INFO] core.logic_builder - 已加载 1 条规则从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-15 10:56:25,611 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-15 10:56:25,624 [INFO] __main__ - MainWindow实例创建完成
+2025-05-15 10:56:25,860 [INFO] __main__ - 开始mainloop()...
+2025-05-15 10:56:27,323 [INFO] core.config_processor - 找到工作表: ['1.Kabine']
+2025-05-15 10:56:27,324 [INFO] core.config_processor - 处理工作表: 1.Kabine -> 模块: 1.Kabine
+2025-05-15 10:56:27,345 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-15 10:56:27,356 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-15 10:56:27,358 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-15 10:56:28,415 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-15 10:56:28,416 [INFO] core.bom_processor - 已清空现有数据
+2025-05-15 10:56:28,416 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-05-15 10:56:28,421 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['Max-Gruppe']
+2025-05-15 10:56:28,421 [INFO] core.bom_processor - 正在读取 Max-Gruppe 工作表...
+2025-05-15 10:56:28,437 [INFO] core.bom_processor - 成功读取工作表，共 244 行数据
+2025-05-15 10:56:28,437 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-05-15 10:56:28,438 [INFO] core.bom_processor - 过滤空层级后剩余 244 行数据
+2025-05-15 10:56:28,438 [INFO] core.bom_processor - 
+开始处理数据...
+2025-05-15 10:56:28,443 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-05-15 10:56:28,444 [INFO] core.bom_processor - 第 1 级节点数量: 244
+2025-05-15 10:56:28,444 [INFO] core.bom_processor - BOM文件导入成功，共处理 244 个项目
+2025-05-15 10:56:28,444 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-15 10:56:28,444 [INFO] gui.bom_panel - 开始刷新树状图
+2025-05-15 10:56:28,445 [INFO] gui.bom_panel - 树状图刷新完成
+2025-05-15 10:56:28,446 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-15 10:56:28,446 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-15 10:56:28,912 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-15 10:56:28,913 [DEBUG] core.logic_builder - Rule BL01 loaded from temp file. Original file description: 'Ziegler Standardsitze → PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'. Regenerating description.
+2025-05-15 10:56:28,913 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'Ziegler Standardsitze'
+2025-05-15 10:56:28,913 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'
+2025-05-15 10:56:28,913 [INFO] core.logic_builder - Newly generated description for BL01 (from temp): 'Ziegler Standardsitze → PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'
+2025-05-15 10:56:28,914 [INFO] gui.logic_panel - LogicPanel: 收到规则变更: imported, ID: None
+2025-05-15 10:56:28,914 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: No rule object provided for ID: None
+2025-05-15 10:56:28,914 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-15 10:56:28,915 [INFO] core.logic_builder - 从临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 1 条规则完成。导出状态: False
+2025-05-15 10:56:28,915 [INFO] gui.main_window_tk - 检测到LogicBuilder中存在未导出的规则。
+2025-05-15 10:56:29,483 [INFO] gui.main_window_tk - 用户确认加载，将再次调用 load_from_temp_file 以使用最新的Config/BOM数据生成描述。
+2025-05-15 10:56:29,483 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-15 10:56:29,484 [DEBUG] core.logic_builder - Rule BL01 loaded from temp file. Original file description: 'Ziegler Standardsitze → PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'. Regenerating description.
+2025-05-15 10:56:29,484 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'Ziegler Standardsitze'
+2025-05-15 10:56:29,484 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'
+2025-05-15 10:56:29,485 [INFO] core.logic_builder - Newly generated description for BL01 (from temp): 'Ziegler Standardsitze → PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'
+2025-05-15 10:56:29,485 [INFO] gui.logic_panel - LogicPanel: 收到规则变更: imported, ID: None
+2025-05-15 10:56:29,485 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: No rule object provided for ID: None
+2025-05-15 10:56:29,485 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-15 10:56:29,485 [INFO] core.logic_builder - 从临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 1 条规则完成。导出状态: False
+2025-05-15 10:56:29,485 [INFO] gui.main_window_tk - 用户确认加载未导出的规则。MainWindow.rules_loaded 设置为 True。
+2025-05-15 10:56:29,485 [INFO] gui.main_window_tk - 开始刷新逻辑面板显示已加载的临时规则
+2025-05-15 10:56:29,487 [INFO] gui.logic_panel - LogicPanel: 开始加载规则到已保存规则框架
+2025-05-15 10:56:29,487 [DEBUG] gui.logic_panel - LogicPanel: 从LogicBuilder获取到 1 条规则
+2025-05-15 10:56:29,487 [DEBUG] gui.logic_panel - LogicPanel _load_existing_rules: Processing rule ID: BL01, Full Description: 'Ziegler Standardsitze → PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'
+2025-05-15 10:56:29,487 [DEBUG] gui.logic_panel - LogicPanel _load_existing_rules: Inserted rule item BL01
+2025-05-15 10:56:29,487 [DEBUG] gui.logic_panel - LogicPanel _load_existing_rules: Inserted description item BL01_desc for rule BL01: COND='Ziegler Standardsitze', EFF='PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'
+2025-05-15 10:56:29,488 [DEBUG] gui.logic_panel - LogicPanel _load_existing_rules: Re-set item values for parent BL01 to potentially force refresh.
+2025-05-15 10:56:29,488 [INFO] gui.logic_panel - LogicPanel: 成功加载 1 条规则到已保存规则框架
+2025-05-15 10:56:29,488 [INFO] gui.main_window_tk - 逻辑面板显示刷新完成
+2025-05-15 10:56:42,144 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-15 10:56:42,145 [DEBUG] core.logic_builder - Rule BL01 loaded from temp file. Original file description: 'Ziegler Standardsitze → PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'. Regenerating description.
+2025-05-15 10:56:42,145 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'Ziegler Standardsitze'
+2025-05-15 10:56:42,145 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'
+2025-05-15 10:56:42,145 [INFO] core.logic_builder - Newly generated description for BL01 (from temp): 'Ziegler Standardsitze → PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'
+2025-05-15 10:56:42,145 [INFO] gui.logic_panel - LogicPanel: 收到规则变更: imported, ID: None
+2025-05-15 10:56:42,146 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: No rule object provided for ID: None
+2025-05-15 10:56:42,146 [INFO] gui.logic_panel - LogicPanel: 开始加载规则到已保存规则框架
+2025-05-15 10:56:42,146 [DEBUG] gui.logic_panel - LogicPanel: 从LogicBuilder获取到 1 条规则
+2025-05-15 10:56:42,146 [DEBUG] gui.logic_panel - LogicPanel _load_existing_rules: Processing rule ID: BL01, Full Description: 'Ziegler Standardsitze → PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'
+2025-05-15 10:56:42,146 [DEBUG] gui.logic_panel - LogicPanel _load_existing_rules: Inserted rule item BL01
+2025-05-15 10:56:42,146 [DEBUG] gui.logic_panel - LogicPanel _load_existing_rules: Inserted description item BL01_desc for rule BL01: COND='Ziegler Standardsitze', EFF='PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'
+2025-05-15 10:56:42,146 [DEBUG] gui.logic_panel - LogicPanel _load_existing_rules: Re-set item values for parent BL01 to potentially force refresh.
+2025-05-15 10:56:42,146 [INFO] gui.logic_panel - LogicPanel: 成功加载 1 条规则到已保存规则框架
+2025-05-15 10:56:42,147 [INFO] core.logic_builder - 从临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 1 条规则完成。导出状态: False
+2025-05-15 10:56:42,147 [DEBUG] gui.logic_library_window - LogicLibrary _load_rules: Adding split description for BL01: COND='Ziegler Standardsitze', EFF='PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'
+2025-05-15 10:56:42,147 [INFO] gui.logic_library_window - LogicLibrary: 已加载 1 条规则及其描述。
+2025-05-15 10:56:42,148 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: Adding split description for BL01: COND='Ziegler Standardsitze', EFF='PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'
+2025-05-15 10:56:42,148 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: Re-set item values for parent BL01 to potentially force refresh.
+2025-05-15 10:56:42,148 [INFO] gui.logic_library_window - 筛选和搜索完成：显示 1/1 条规则
+2025-05-15 10:56:44,332 [DEBUG] core.logic_builder - Updating description for rule BL01. Old description: 'Ziegler Standardsitze → PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'
+2025-05-15 10:56:44,332 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'Ziegler Standardsitze'
+2025-05-15 10:56:44,332 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'
+2025-05-15 10:56:44,333 [INFO] core.logic_builder - Description for rule BL01 is already up-to-date. No change made.
+2025-05-15 10:56:44,333 [INFO] gui.logic_library_window - LogicLibrary: 规则 BL01 编辑完成并通过LogicBuilder更新其描述。
+2025-05-15 10:57:59,704 [DEBUG] core.logic_builder - Updating description for rule BL01. Old description: 'Ziegler Standardsitze → PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'
+2025-05-15 10:57:59,704 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'Ziegler Standardsitze'
+2025-05-15 10:57:59,704 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Rückwand-Rückwand Sandwich-Z-Cab NG Teilesatz'
+2025-05-15 10:57:59,705 [INFO] core.logic_builder - Description for rule BL01 is already up-to-date. No change made.
+2025-05-15 10:57:59,705 [INFO] gui.logic_panel - 规则 BL01 已编辑并通过LogicBuilder更新。

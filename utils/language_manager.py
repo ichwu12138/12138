@@ -228,6 +228,10 @@ class LanguageManager:
             "search_bom_code": "搜索BOM码",
             "search_feature_or_k": "搜索特征码(HBG码)或特征值(K码)",
             "code_not_found": "未找到匹配的特征码或特征值",
+            "export_descriptions": "导出描述行",
+            "descriptions_exported_successfully": "描述行导出成功",
+            "export_descriptions_error": "导出描述行失败",
+            "description": "描述"
         })
         
         # 英文翻译
@@ -438,6 +442,10 @@ class LanguageManager:
             "search_bom_code": "Search BOM Code",
             "search_feature_or_k": "Search Feature Code (HBG-number) or Feature Value (K-number)",
             "code_not_found": "No matching feature code or value found",
+            "export_descriptions": "Export Descriptions",
+            "descriptions_exported_successfully": "Descriptions exported successfully",
+            "export_descriptions_error": "Failed to export descriptions",
+            "description": "Description"
         })
         
         # 德文翻译
@@ -648,6 +656,10 @@ class LanguageManager:
             "search_bom_code": "BOM-Code suchen",
             "search_feature_or_k": "Merkmalcode (HBG-Nr.) oder Merkmalwert (K-Nr.) suchen",
             "code_not_found": "Kein passender Merkmalcode oder Merkmalwert gefunden",
+            "export_descriptions": "Beschreibungen exportieren",
+            "descriptions_exported_successfully": "Beschreibungen erfolgreich exportiert",
+            "export_descriptions_error": "Fehler beim Exportieren der Beschreibungen",
+            "description": "Beschreibung"
         })
         
     def add_callback(self, callback):

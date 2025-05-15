@@ -49,7 +49,7 @@ class MainWindow:
         self.bom_processor = BomProcessor()
         
         # 创建逻辑构建器
-        self.logic_builder = LogicBuilder(self.config_processor)
+        self.logic_builder = LogicBuilder(self.config_processor, self.bom_processor)
         
         # 标记规则是否已加载
         self.rules_loaded = False
@@ -262,7 +262,8 @@ class MainWindow:
             self.center_panel, 
             self.logic_builder,
             config_processor=self.config_processor,
-            bom_processor=self.bom_processor
+            bom_processor=self.bom_processor,
+            main_window_ref=self  # Pass MainWindow instance
         )
         self.logic_panel.pack(fill=BOTH, expand=YES)
         
@@ -289,6 +290,8 @@ class MainWindow:
                                  command=self._import_logic_rules)
         self.file_menu.add_command(label=language_manager.get_text("export_logic_rules"), 
                                  command=self._export_logic_rules)
+        self.file_menu.add_command(label=language_manager.get_text("export_descriptions"),
+                                 command=self._export_descriptions)
         self.file_menu.add_separator()
         self.file_menu.add_command(label=language_manager.get_text("exit"), 
                                  command=self._on_closing)
@@ -606,7 +609,8 @@ class MainWindow:
         self.file_menu.entryconfigure(1, label=language_manager.get_text("import_bom"))
         self.file_menu.entryconfigure(2, label=language_manager.get_text("import_logic_rules"))
         self.file_menu.entryconfigure(3, label=language_manager.get_text("export_logic_rules"))
-        self.file_menu.entryconfigure(5, label=language_manager.get_text("exit"))
+        self.file_menu.entryconfigure(4, label=language_manager.get_text("export_descriptions"))
+        self.file_menu.entryconfigure(6, label=language_manager.get_text("exit"))
         
         # 视图菜单
         self.view_menu.entryconfigure(0, label=language_manager.get_text("logic_library"))
@@ -711,27 +715,32 @@ class MainWindow:
             with open('data/app_config.json', 'w', encoding='utf-8') as f:
                 json.dump(config, f, indent=4, ensure_ascii=False)
             
-            # 检查是否有未导出的逻辑关系
-            # 首先，让 LogicBuilder尝试从临时文件加载数据到内存，这会更新其内部的 rules_exported 状态
-            self.logic_builder.load_from_temp_file() # RULES_DATA_FILE is the default
+            # 标记配置和BOM是否已从上次记录中加载
+            config_data_loaded_from_history = config_loaded # True if config was loaded from last_config_path
+            bom_data_loaded_from_history = 'last_bom_path' in config and os.path.exists(config['last_bom_path']) # True if bom was loaded
 
-            # 现在基于 LogicBuilder 的状态来判断
-            # has_unsaved_rules() 会检查 len(self.rules) > 0 and not self.rules_exported
+            # 首先，让 LogicBuilder尝试从临时文件加载数据到内存
+            self.logic_builder.load_from_temp_file() 
+
             if self.logic_builder.has_unsaved_rules():
                 self.logger.info("检测到LogicBuilder中存在未导出的规则。")
                 if messagebox.askyesno(
                     language_manager.get_text("confirm"),
                     language_manager.get_text("load_last_rules_confirm")
                 ):
-                    # 规则已经在上面的 load_from_temp_file() 中加载到 logic_builder 了
-                    # 我们需要设置 MainWindow 的 rules_loaded 标志，并刷新UI
+                    # 如果Config和BOM数据已从历史记录加载或刚刚由用户导入，
+                    # 再次调用load_from_temp_file可以确保描述使用最新的处理器数据生成。
+                    # 这一步是关键，确保描述生成时依赖数据已就绪。
+                    self.logger.info("用户确认加载，将再次调用 load_from_temp_file 以使用最新的Config/BOM数据生成描述。")
+                    self.logic_builder.load_from_temp_file() # Re-load to use potentially updated processors
+
                     self.rules_loaded = True
                     self.logger.info("用户确认加载未导出的规则。MainWindow.rules_loaded 设置为 True。")
                     
-                    # 强制刷新逻辑面板以显示加载的规则
                     if hasattr(self, 'logic_panel'):
                         self.logger.info("开始刷新逻辑面板显示已加载的临时规则")
-                        self.logic_panel._load_existing_rules() # 此方法应从 logic_builder 获取规则
+                        self.root.update_idletasks() 
+                        self.logic_panel._load_existing_rules() 
                         self.logger.info("逻辑面板显示刷新完成")
                     
                     messagebox.showinfo(
@@ -739,22 +748,20 @@ class MainWindow:
                         language_manager.get_text("temp_rules_loaded")
                     )
                 else:
-                    # 用户选择不加载，则清空 LogicBuilder 中的规则和临时文件
                     self.logger.info("用户拒绝加载未导出的规则。将清空规则。")
-                    self.logic_builder.clear_rules() # 这会清空内存和临时文件
-                    self.rules_loaded = False # 确保 MainWindow 的状态也同步
+                    self.logic_builder.clear_rules() 
+                    self.rules_loaded = False 
+                    if hasattr(self, 'logic_panel'): # Clear panel if rules are cleared
+                        self.logic_panel._load_existing_rules() 
                     messagebox.showinfo(
                         language_manager.get_text("info"),
                         language_manager.get_text("rules_deleted")
                     )
             else:
-                # 如果 logic_builder.has_unsaved_rules() 为 False，意味着：
-                # 1. 临时文件不存在
-                # 2. 临时文件存在但 exported 为 True
-                # 3. 临时文件存在，exported 为 False，但规则列表为空
-                # 在这些情况下，我们不需要询问，并且 rules_loaded 应为 False (除非后续有导入操作)
-                self.rules_loaded = False # 确保在没有加载未保存规则时，此标志为False
-                self.logger.info("未检测到需要提示加载的未导出规则 (可能文件不存在, 或已导出, 或无规则)。MainWindow.rules_loaded 设置为 False。")
+                self.rules_loaded = False 
+                self.logger.info("未检测到需要提示加载的未导出规则。MainWindow.rules_loaded 设置为 False。")
+                if hasattr(self, 'logic_panel'): # Ensure panel is also clear
+                    self.logic_panel._load_existing_rules()
 
         except FileNotFoundError:
             self.logger.warning(f"app_config.json 未找到，跳过加载上次配置的步骤。")    
@@ -873,3 +880,45 @@ class MainWindow:
                 language_manager.get_text("error"),
                 language_manager.get_text("export_rules_error")
             )
+
+    def _export_descriptions(self):
+        """导出所有规则的描述行到Excel文件"""
+        try:
+            file_path = filedialog.asksaveasfilename(
+                title=language_manager.get_text("select_export_file"),
+                defaultextension=".xlsx",
+                filetypes=[("Excel files", "*.xlsx"), (language_manager.get_text("all_files"), "*.*")]
+            )
+            
+            if not file_path:
+                return
+
+            rules_data = self.logic_builder.get_rules_with_descriptions()
+            if not rules_data:
+                messagebox.showinfo(language_manager.get_text("info"), "没有可导出的描述行。")
+                return
+
+            # Check if pandas is available, if not, handle gracefully or use alternative like openpyxl
+            try:
+                import pandas as pd
+                df = pd.DataFrame(rules_data, columns=['rule_id', 'description'])
+                # Rename columns for Excel header to be more user-friendly if needed
+                df.rename(columns={'rule_id': language_manager.get_text("rule_id"), 
+                                   'description': language_manager.get_text("expression") + " (" + language_manager.get_text("description") + ")"}, 
+                          inplace=True)
+                df.to_excel(file_path, index=False, engine='openpyxl') # Specify engine if needed
+                messagebox.showinfo(language_manager.get_text("success"), 
+                                    language_manager.get_text("descriptions_exported_successfully"))
+            except ImportError:
+                self.logger.error("Pandas (或 openpyxl) 未安装，无法导出为Excel。请安装 pandas 和 openpyxl。")
+                messagebox.showerror(language_manager.get_text("error"), 
+                                     "导出Excel需要 pandas 和 openpyxl库。请先安装它们。") 
+            except Exception as e_export:
+                self.logger.error(f"导出描述行到Excel失败: {str(e_export)}", exc_info=True)
+                messagebox.showerror(language_manager.get_text("error"), 
+                                     f"{language_manager.get_text("export_descriptions_error")}\n{str(e_export)}")
+
+        except Exception as e:
+            self.logger.error(f"导出描述行操作失败: {str(e)}", exc_info=True)
+            messagebox.showerror(language_manager.get_text("error"), 
+                                 language_manager.get_text("export_descriptions_error"))
