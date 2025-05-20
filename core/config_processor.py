@@ -76,7 +76,6 @@ class ConfigProcessor:
             expected_columns = [
                 "特征值/Merkmalwert", 
                 "特征/Merkmale", 
-                "默认值/Standardwert", 
                 "多选/Mehrfachauswahl", 
                 "特征值名称/Merkmalwertname",
                 "说明/Anmerkung"
