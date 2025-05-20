@@ -1,0 +1,152 @@
+2025-05-19 14:11:20,062 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250519_141120.log
+2025-05-19 14:11:20,303 [INFO] __main__ - 正在启动程序...
+2025-05-19 14:11:20,303 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-05-19 14:11:20,303 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-19 14:11:20,303 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-19 14:11:20,324 [INFO] __main__ - 正在创建语言选择对话框...
+2025-05-19 14:11:21,539 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-05-19 14:11:21,567 [INFO] __main__ - 语言选择结果: zh
+2025-05-19 14:11:21,567 [INFO] __main__ - 正在创建主题选择对话框...
+2025-05-19 14:11:21,568 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-05-19 14:11:21,585 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-05-19 14:11:22,215 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-05-19 14:11:22,227 [INFO] __main__ - 主题选择结果: light
+2025-05-19 14:11:22,239 [INFO] __main__ - 正在配置主窗口...
+2025-05-19 14:11:22,351 [INFO] __main__ - 开始创建MainWindow实例...
+2025-05-19 14:11:22,352 [INFO] core.logic_builder - 从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json 加载时检测到新版大写键名规则文件格式 (BL_rules/TL_rules)。
+2025-05-19 14:11:22,352 [DEBUG] core.logic_builder - Rule BL02 loaded from file. Original file description: 'Wertfach unterm Sitzpolster → PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'. Regenerating description.
+2025-05-19 14:11:22,352 [DEBUG] core.logic_builder - Generated condition part for rule BL02: 'K-200-000007'
+2025-05-19 14:11:22,352 [DEBUG] core.logic_builder - Generated action part for rule BL02: 'PL--Sitze01-10019324'
+2025-05-19 14:11:22,353 [INFO] core.logic_builder - Newly generated description for BL02 (on _load_rules): 'K-200-000007 → PL--Sitze01-10019324'
+2025-05-19 14:11:22,353 [DEBUG] core.logic_builder - Rule BL01 loaded from file. Original file description: 'Ziegler Standardsitze AND AND Bostrom Integra Sitze → PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 6 kpl-Z-Cab NG RAL XXXX'. Regenerating description.
+2025-05-19 14:11:22,353 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'K-200-000300 AND AND K-200-000301'
+2025-05-19 14:11:22,353 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Außenkotflügel-10019837'
+2025-05-19 14:11:22,353 [INFO] core.logic_builder - Newly generated description for BL01 (on _load_rules): 'K-200-000300 AND AND K-200-000301 → PL-Außenkotflügel-10019837'
+2025-05-19 14:11:22,353 [DEBUG] core.logic_builder - Rule BL03 loaded from file. Original file description: 'S. 1 ohne Ausstattung Stauraum AND AND Wertfach unterm Sitzpolster → PL--Sitze03-Teilesatz Standardsitz-Sitzplatz 3'. Regenerating description.
+2025-05-19 14:11:22,353 [DEBUG] core.logic_builder - Generated condition part for rule BL03: 'K-200-000008 AND AND K-200-000011'
+2025-05-19 14:11:22,354 [DEBUG] core.logic_builder - Generated action part for rule BL03: 'PL--Sitze03-10019281'
+2025-05-19 14:11:22,354 [INFO] core.logic_builder - Newly generated description for BL03 (on _load_rules): 'K-200-000008 AND AND K-200-000011 → PL--Sitze03-10019281'
+2025-05-19 14:11:22,354 [DEBUG] core.logic_builder - Rule BL04 loaded from file. Original file description: 'Sitz 2 mit Kunststoffbehälter OR OR ohne Wertfach → PL--Sitze03-Teilesatz Sitzgestell-Sitzplatz 3'. Regenerating description.
+2025-05-19 14:11:22,354 [DEBUG] core.logic_builder - Generated condition part for rule BL04: 'K-200-000169 OR OR K-200-000348'
+2025-05-19 14:11:22,354 [DEBUG] core.logic_builder - Generated action part for rule BL04: 'PL--Sitze03-10019331'
+2025-05-19 14:11:22,354 [INFO] core.logic_builder - Newly generated description for BL04 (on _load_rules): 'K-200-000169 OR OR K-200-000348 → PL--Sitze03-10019331'
+2025-05-19 14:11:22,354 [DEBUG] core.logic_builder - Rule TL01 loaded from file. Original file description: 'Ziegler Standardsitze OR OR Bostrom Integra Sitze → FROM 10019834 DELETE 306952'. Regenerating description.
+2025-05-19 14:11:22,354 [DEBUG] core.logic_builder - Generated condition part for rule TL01: 'K-200-000300 OR OR K-200-000301'
+2025-05-19 14:11:22,355 [DEBUG] core.logic_builder - Generated action part for rule TL01: 'FROM 10019834 DELETE 306952'
+2025-05-19 14:11:22,355 [INFO] core.logic_builder - Newly generated description for TL01 (on _load_rules): 'K-200-000300 OR OR K-200-000301 → FROM 10019834 DELETE 306952'
+2025-05-19 14:11:22,355 [INFO] core.logic_builder - 已加载 5 条规则从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-19 14:11:22,488 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-19 14:11:22,502 [INFO] __main__ - MainWindow实例创建完成
+2025-05-19 14:11:22,672 [INFO] __main__ - 开始mainloop()...
+2025-05-19 14:11:24,271 [INFO] core.config_processor - 找到工作表: ['1.Kabine']
+2025-05-19 14:11:24,272 [INFO] core.config_processor - 处理工作表: 1.Kabine -> 模块: 1.Kabine
+2025-05-19 14:11:24,308 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-19 14:11:24,312 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-19 14:11:24,312 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-19 14:11:25,844 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-19 14:11:25,844 [INFO] core.bom_processor - 已清空现有数据
+2025-05-19 14:11:25,845 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-05-19 14:11:25,855 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['Max-Gruppe']
+2025-05-19 14:11:25,856 [INFO] core.bom_processor - 正在读取 Max-Gruppe 工作表...
+2025-05-19 14:11:25,878 [INFO] core.bom_processor - 成功读取工作表，共 244 行数据
+2025-05-19 14:11:25,878 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-05-19 14:11:25,879 [INFO] core.bom_processor - 过滤空层级后剩余 244 行数据
+2025-05-19 14:11:25,880 [INFO] core.bom_processor - 
+开始处理数据...
+2025-05-19 14:11:25,889 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-05-19 14:11:25,890 [INFO] core.bom_processor - 第 1 级节点数量: 244
+2025-05-19 14:11:25,890 [INFO] core.bom_processor - BOM文件导入成功，共处理 244 个项目
+2025-05-19 14:11:25,890 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-19 14:11:25,891 [INFO] gui.bom_panel - 开始刷新树状图
+2025-05-19 14:11:25,893 [INFO] gui.bom_panel - 树状图刷新完成
+2025-05-19 14:11:25,894 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-19 14:11:25,894 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-19 14:11:26,393 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-19 14:11:26,394 [DEBUG] core.logic_builder - Rule BL02 loaded from temp file. Original file description: 'Wertfach unterm Sitzpolster → PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'. Regenerating description.
+2025-05-19 14:11:26,394 [DEBUG] core.logic_builder - Generated condition part for rule BL02: 'Wertfach unterm Sitzpolster'
+2025-05-19 14:11:26,395 [DEBUG] core.logic_builder - Generated action part for rule BL02: 'PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'
+2025-05-19 14:11:26,395 [INFO] core.logic_builder - Newly generated description for BL02 (from temp): 'Wertfach unterm Sitzpolster → PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'
+2025-05-19 14:11:26,395 [DEBUG] core.logic_builder - Rule BL01 loaded from temp file. Original file description: 'Ziegler Standardsitze AND AND Bostrom Integra Sitze → PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 6 kpl-Z-Cab NG RAL XXXX'. Regenerating description.
+2025-05-19 14:11:26,396 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'Ziegler Standardsitze AND AND Bostrom Integra Sitze'
+2025-05-19 14:11:26,396 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 6 kpl-Z-Cab NG RAL XXXX'
+2025-05-19 14:11:26,396 [INFO] core.logic_builder - Newly generated description for BL01 (from temp): 'Ziegler Standardsitze AND AND Bostrom Integra Sitze → PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 6 kpl-Z-Cab NG RAL XXXX'
+2025-05-19 14:11:26,397 [DEBUG] core.logic_builder - Rule BL03 loaded from temp file. Original file description: 'S. 1 ohne Ausstattung Stauraum AND AND Wertfach unterm Sitzpolster → PL--Sitze03-Teilesatz Standardsitz-Sitzplatz 3'. Regenerating description.
+2025-05-19 14:11:26,397 [DEBUG] core.logic_builder - Generated condition part for rule BL03: 'S. 1 ohne Ausstattung Stauraum AND AND Wertfach unterm Sitzpolster'
+2025-05-19 14:11:26,398 [DEBUG] core.logic_builder - Generated action part for rule BL03: 'PL--Sitze03-Teilesatz Standardsitz-Sitzplatz 3'
+2025-05-19 14:11:26,398 [INFO] core.logic_builder - Newly generated description for BL03 (from temp): 'S. 1 ohne Ausstattung Stauraum AND AND Wertfach unterm Sitzpolster → PL--Sitze03-Teilesatz Standardsitz-Sitzplatz 3'
+2025-05-19 14:11:26,399 [DEBUG] core.logic_builder - Rule BL04 loaded from temp file. Original file description: 'Sitz 2 mit Kunststoffbehälter OR OR ohne Wertfach → PL--Sitze03-Teilesatz Sitzgestell-Sitzplatz 3'. Regenerating description.
+2025-05-19 14:11:26,399 [DEBUG] core.logic_builder - Generated condition part for rule BL04: 'Sitz 2 mit Kunststoffbehälter OR OR ohne Wertfach'
+2025-05-19 14:11:26,400 [DEBUG] core.logic_builder - Generated action part for rule BL04: 'PL--Sitze03-Teilesatz Sitzgestell-Sitzplatz 3'
+2025-05-19 14:11:26,400 [INFO] core.logic_builder - Newly generated description for BL04 (from temp): 'Sitz 2 mit Kunststoffbehälter OR OR ohne Wertfach → PL--Sitze03-Teilesatz Sitzgestell-Sitzplatz 3'
+2025-05-19 14:11:26,400 [DEBUG] core.logic_builder - Rule TL01 loaded from temp file. Original file description: 'Ziegler Standardsitze OR OR Bostrom Integra Sitze → FROM 10019834 DELETE 306952'. Regenerating description.
+2025-05-19 14:11:26,401 [DEBUG] core.logic_builder - Generated condition part for rule TL01: 'Ziegler Standardsitze OR OR Bostrom Integra Sitze'
+2025-05-19 14:11:26,402 [DEBUG] core.logic_builder - Generated action part for rule TL01: 'FROM 10019834 DELETE 306952'
+2025-05-19 14:11:26,402 [INFO] core.logic_builder - Newly generated description for TL01 (from temp): 'Ziegler Standardsitze OR OR Bostrom Integra Sitze → FROM 10019834 DELETE 306952'
+2025-05-19 14:11:26,402 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='imported', RuleID='None'
+2025-05-19 14:11:26,403 [INFO] gui.logic_panel - LogicPanel _on_rule_change (imported): 收到 'imported' 通知，将重新加载所有规则到Treeview。
+2025-05-19 14:11:26,403 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-19 14:11:26,406 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'imported' 完成。
+2025-05-19 14:11:26,407 [INFO] core.logic_builder - 从临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 5 条规则完成。导出状态: False
+2025-05-19 14:11:26,407 [INFO] gui.main_window_tk - 检测到LogicBuilder中存在未导出的规则。
+2025-05-19 14:11:27,034 [INFO] gui.main_window_tk - 用户确认加载，将再次调用 load_from_temp_file 以使用最新的Config/BOM数据生成描述。
+2025-05-19 14:11:27,034 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-19 14:11:27,035 [DEBUG] core.logic_builder - Rule BL02 loaded from temp file. Original file description: 'Wertfach unterm Sitzpolster → PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'. Regenerating description.
+2025-05-19 14:11:27,035 [DEBUG] core.logic_builder - Generated condition part for rule BL02: 'Wertfach unterm Sitzpolster'
+2025-05-19 14:11:27,035 [DEBUG] core.logic_builder - Generated action part for rule BL02: 'PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'
+2025-05-19 14:11:27,035 [INFO] core.logic_builder - Newly generated description for BL02 (from temp): 'Wertfach unterm Sitzpolster → PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'
+2025-05-19 14:11:27,036 [DEBUG] core.logic_builder - Rule BL01 loaded from temp file. Original file description: 'Ziegler Standardsitze AND AND Bostrom Integra Sitze → PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 6 kpl-Z-Cab NG RAL XXXX'. Regenerating description.
+2025-05-19 14:11:27,036 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'Ziegler Standardsitze AND AND Bostrom Integra Sitze'
+2025-05-19 14:11:27,036 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 6 kpl-Z-Cab NG RAL XXXX'
+2025-05-19 14:11:27,036 [INFO] core.logic_builder - Newly generated description for BL01 (from temp): 'Ziegler Standardsitze AND AND Bostrom Integra Sitze → PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 6 kpl-Z-Cab NG RAL XXXX'
+2025-05-19 14:11:27,036 [DEBUG] core.logic_builder - Rule BL03 loaded from temp file. Original file description: 'S. 1 ohne Ausstattung Stauraum AND AND Wertfach unterm Sitzpolster → PL--Sitze03-Teilesatz Standardsitz-Sitzplatz 3'. Regenerating description.
+2025-05-19 14:11:27,036 [DEBUG] core.logic_builder - Generated condition part for rule BL03: 'S. 1 ohne Ausstattung Stauraum AND AND Wertfach unterm Sitzpolster'
+2025-05-19 14:11:27,037 [DEBUG] core.logic_builder - Generated action part for rule BL03: 'PL--Sitze03-Teilesatz Standardsitz-Sitzplatz 3'
+2025-05-19 14:11:27,037 [INFO] core.logic_builder - Newly generated description for BL03 (from temp): 'S. 1 ohne Ausstattung Stauraum AND AND Wertfach unterm Sitzpolster → PL--Sitze03-Teilesatz Standardsitz-Sitzplatz 3'
+2025-05-19 14:11:27,037 [DEBUG] core.logic_builder - Rule BL04 loaded from temp file. Original file description: 'Sitz 2 mit Kunststoffbehälter OR OR ohne Wertfach → PL--Sitze03-Teilesatz Sitzgestell-Sitzplatz 3'. Regenerating description.
+2025-05-19 14:11:27,037 [DEBUG] core.logic_builder - Generated condition part for rule BL04: 'Sitz 2 mit Kunststoffbehälter OR OR ohne Wertfach'
+2025-05-19 14:11:27,037 [DEBUG] core.logic_builder - Generated action part for rule BL04: 'PL--Sitze03-Teilesatz Sitzgestell-Sitzplatz 3'
+2025-05-19 14:11:27,037 [INFO] core.logic_builder - Newly generated description for BL04 (from temp): 'Sitz 2 mit Kunststoffbehälter OR OR ohne Wertfach → PL--Sitze03-Teilesatz Sitzgestell-Sitzplatz 3'
+2025-05-19 14:11:27,037 [DEBUG] core.logic_builder - Rule TL01 loaded from temp file. Original file description: 'Ziegler Standardsitze OR OR Bostrom Integra Sitze → FROM 10019834 DELETE 306952'. Regenerating description.
+2025-05-19 14:11:27,038 [DEBUG] core.logic_builder - Generated condition part for rule TL01: 'Ziegler Standardsitze OR OR Bostrom Integra Sitze'
+2025-05-19 14:11:27,038 [DEBUG] core.logic_builder - Generated action part for rule TL01: 'FROM 10019834 DELETE 306952'
+2025-05-19 14:11:27,038 [INFO] core.logic_builder - Newly generated description for TL01 (from temp): 'Ziegler Standardsitze OR OR Bostrom Integra Sitze → FROM 10019834 DELETE 306952'
+2025-05-19 14:11:27,039 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='imported', RuleID='None'
+2025-05-19 14:11:27,039 [INFO] gui.logic_panel - LogicPanel _on_rule_change (imported): 收到 'imported' 通知，将重新加载所有规则到Treeview。
+2025-05-19 14:11:27,039 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-19 14:11:27,041 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'imported' 完成。
+2025-05-19 14:11:27,041 [INFO] core.logic_builder - 从临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 5 条规则完成。导出状态: False
+2025-05-19 14:11:27,042 [INFO] gui.main_window_tk - 用户确认加载未导出的规则。MainWindow.rules_loaded 设置为 True。
+2025-05-19 14:11:27,042 [INFO] gui.main_window_tk - 开始刷新逻辑面板显示已加载的临时规则
+2025-05-19 14:11:27,042 [INFO] gui.logic_panel - LogicPanel: 开始加载规则到已保存规则框架 (非层级)
+2025-05-19 14:11:27,042 [DEBUG] gui.logic_panel - LogicPanel: 从LogicBuilder获取到 5 条规则
+2025-05-19 14:11:27,048 [INFO] gui.logic_panel - LogicPanel: 成功加载 5 条规则 (非层级) 到已保存规则框架
+2025-05-19 14:11:27,048 [INFO] gui.main_window_tk - 逻辑面板显示刷新完成
+2025-05-19 14:11:45,431 [INFO] gui.logic_library_window - LogicLibrary: 已加载 5 条规则 (非层级)。
+2025-05-19 14:11:45,431 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 开始应用筛选和搜索。清空现有Treeview项。
+2025-05-19 14:11:45,432 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 从self.cached_rules (共 5 条) 开始迭代。
+2025-05-19 14:11:45,432 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL02'，状态 'enabled' (显示为 '启用').
+2025-05-19 14:11:45,433 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL01'，状态 'enabled' (显示为 '启用').
+2025-05-19 14:11:45,433 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL03'，状态 'enabled' (显示为 '启用').
+2025-05-19 14:11:45,433 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL04'，状态 'enabled' (显示为 '启用').
+2025-05-19 14:11:45,434 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'TL01'，状态 'enabled' (显示为 '启用').
+2025-05-19 14:11:45,434 [INFO] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 筛选和搜索完成：显示 5/5 条规则。
+2025-05-19 14:11:48,059 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 开始应用筛选和搜索。清空现有Treeview项。
+2025-05-19 14:11:48,060 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 从self.cached_rules (共 5 条) 开始迭代。
+2025-05-19 14:11:48,060 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL02'，状态 'enabled' (显示为 '启用').
+2025-05-19 14:11:48,061 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL01'，状态 'enabled' (显示为 '启用').
+2025-05-19 14:11:48,062 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL03'，状态 'enabled' (显示为 '启用').
+2025-05-19 14:11:48,062 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL04'，状态 'enabled' (显示为 '启用').
+2025-05-19 14:11:48,063 [INFO] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 筛选和搜索完成：显示 4/5 条规则。
+2025-05-19 14:11:49,094 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 开始应用筛选和搜索。清空现有Treeview项。
+2025-05-19 14:11:49,095 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 从self.cached_rules (共 5 条) 开始迭代。
+2025-05-19 14:11:49,096 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'TL01'，状态 'enabled' (显示为 '启用').
+2025-05-19 14:11:49,096 [INFO] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 筛选和搜索完成：显示 1/5 条规则。
+2025-05-19 14:11:50,433 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 开始应用筛选和搜索。清空现有Treeview项。
+2025-05-19 14:11:50,433 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 从self.cached_rules (共 5 条) 开始迭代。
+2025-05-19 14:11:50,434 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL02'，状态 'enabled' (显示为 '启用').
+2025-05-19 14:11:50,434 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL01'，状态 'enabled' (显示为 '启用').
+2025-05-19 14:11:50,435 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL03'，状态 'enabled' (显示为 '启用').
+2025-05-19 14:11:50,436 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL04'，状态 'enabled' (显示为 '启用').
+2025-05-19 14:11:50,436 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'TL01'，状态 'enabled' (显示为 '启用').
+2025-05-19 14:11:50,437 [INFO] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 筛选和搜索完成：显示 5/5 条规则。

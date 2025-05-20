@@ -214,6 +214,10 @@ class LogicBuilder(Observable):
         self.logger.debug(f"LogicBuilder delete_rule: 尝试删除规则 ID: '{rule_id}'. 规则是否存在于 self.rules: {rule_id in self.rules}")
         if rule_id in self.rules:
             deleted_rule = self.rules.pop(rule_id)
+            if not self.rules:  # 规则列表变空
+                self.rules_exported = True
+            else:  # 仍有规则
+                self.rules_exported = False
             self._save_rules() # 这会保存不包含已删除规则的列表
             self.notify_rule_change("deleted", rule_id, deleted_rule) 
             self.logger.info(f"LogicBuilder delete_rule: 规则 '{rule_id}' 已成功从 self.rules 移除, 保存并发送删除通知。")
@@ -379,6 +383,7 @@ class LogicBuilder(Observable):
         
         self.rules[rule.rule_id] = rule # 确保字典中的对象是最新的（包含描述和新修改时间）
         
+        self.rules_exported = False # 规则已更改，标记为未导出
         self._save_rules() # 保存所有规则（包括这条新规则或更新后的规则）
         
         change_type = "added" if is_new_rule else "modified"
@@ -409,10 +414,14 @@ class LogicBuilder(Observable):
                     self.logger.warning(f"规则 {rule.rule_id} 不符合BL或TL前缀，保存时归类到BL_rules。")
                     BL_rules_data.append(rule_dict)
             
+            now = datetime.now()
+            formatted_saved_at = now.strftime('%Y-%m-%dT%H:%M:%S.%f')[:22]
+
             data = {
                 "BL_rules": BL_rules_data, 
                 "TL_rules": TL_rules_data, 
-                "exported": self.rules_exported
+                "exported": self.rules_exported,
+                "saved_at": formatted_saved_at # 添加格式化的 saved_at
             }
             
             os.makedirs(os.path.dirname(RULES_DATA_FILE), exist_ok=True)
@@ -429,13 +438,17 @@ class LogicBuilder(Observable):
             # 清空内存中的规则
             self.rules.clear()
             
+            now = datetime.now()
+            formatted_saved_at = now.strftime('%Y-%m-%dT%H:%M:%S.%f')[:22]
+            formatted_timestamp = now.strftime("%Y%m%d_%H%M%S")
+
             # 创建空的规则数据结构 (新格式，大写键名)
             data = {
                 'BL_rules': [], # Uppercase key
                 'TL_rules': [], # Uppercase key
-                'saved_at': datetime.now().isoformat(),
+                'saved_at': formatted_saved_at, # 使用格式化后的时间
                 'exported': True,
-                'timestamp': datetime.now().strftime("%Y%m%d_%H%M%S")
+                'timestamp': formatted_timestamp # 使用与 saved_at 相同 now 对象生成的时间戳
             }
             
             # 确保数据目录存在

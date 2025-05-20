@@ -3,14 +3,15 @@
     {
       "logic_id": "BL02",
       "status": "enabled",
-      "selection_expression": "K-200-000007",
+      "selection_expression": "K-200-000000",
       "logic_relation": "→",
-      "impact_expression": "PL--Sitze01-10019324",
+      "impact_expression": "PL--Sitze04-10019362",
       "tags": "",
       "tech_doc_path": "",
-      "description": "Wertfach unterm Sitzpolster → PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1"
+      "description": "Fzg: 9 Plätze → PL--Sitze04-PA-Sitz Std. elektrisch 1 FL-Sitzplatz 4"
     }
   ],
   "TL_rules": [],
-  "exported": false
+  "exported": false,
+  "saved_at": "2025-05-20T08:30:50.80"
 }

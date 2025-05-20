@@ -1,0 +1,180 @@
+2025-05-20 08:29:57,419 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250520_082957.log
+2025-05-20 08:29:57,687 [INFO] __main__ - 正在启动程序...
+2025-05-20 08:29:57,687 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-05-20 08:29:57,687 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-20 08:29:57,687 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-20 08:29:57,710 [INFO] __main__ - 正在创建语言选择对话框...
+2025-05-20 08:29:59,442 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-05-20 08:29:59,463 [INFO] __main__ - 语言选择结果: zh
+2025-05-20 08:29:59,464 [INFO] __main__ - 正在创建主题选择对话框...
+2025-05-20 08:29:59,464 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-05-20 08:29:59,472 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-05-20 08:30:00,161 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-05-20 08:30:00,181 [INFO] __main__ - 主题选择结果: light
+2025-05-20 08:30:00,185 [INFO] __main__ - 正在配置主窗口...
+2025-05-20 08:30:00,303 [INFO] __main__ - 开始创建MainWindow实例...
+2025-05-20 08:30:00,305 [INFO] core.logic_builder - 从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json 加载时检测到新版大写键名规则文件格式 (BL_rules/TL_rules)。
+2025-05-20 08:30:00,305 [DEBUG] core.logic_builder - Rule BL01 loaded from file. Original file description: 'Fzg: 9 Plätze → PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 5 kpl-Z-Cab NG RAL XXXX'. Regenerating description.
+2025-05-20 08:30:00,305 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'K-200-000000'
+2025-05-20 08:30:00,305 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Außenkotflügel-10019834'
+2025-05-20 08:30:00,306 [INFO] core.logic_builder - Newly generated description for BL01 (on _load_rules): 'K-200-000000 → PL-Außenkotflügel-10019834'
+2025-05-20 08:30:00,306 [INFO] core.logic_builder - 已加载 1 条规则从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-20 08:30:00,343 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-20 08:30:00,350 [INFO] __main__ - MainWindow实例创建完成
+2025-05-20 08:30:00,518 [INFO] __main__ - 开始mainloop()...
+2025-05-20 08:30:02,124 [INFO] core.config_processor - 找到工作表: ['1.Kabine']
+2025-05-20 08:30:02,124 [INFO] core.config_processor - 处理工作表: 1.Kabine -> 模块: 1.Kabine
+2025-05-20 08:30:02,145 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-20 08:30:02,148 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-20 08:30:02,148 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-20 08:30:03,289 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-20 08:30:03,289 [INFO] core.bom_processor - 已清空现有数据
+2025-05-20 08:30:03,289 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-05-20 08:30:03,302 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['Max-Gruppe']
+2025-05-20 08:30:03,303 [INFO] core.bom_processor - 正在读取 Max-Gruppe 工作表...
+2025-05-20 08:30:03,335 [INFO] core.bom_processor - 成功读取工作表，共 244 行数据
+2025-05-20 08:30:03,335 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-05-20 08:30:03,336 [INFO] core.bom_processor - 过滤空层级后剩余 244 行数据
+2025-05-20 08:30:03,337 [INFO] core.bom_processor - 
+开始处理数据...
+2025-05-20 08:30:03,345 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-05-20 08:30:03,346 [INFO] core.bom_processor - 第 1 级节点数量: 244
+2025-05-20 08:30:03,346 [INFO] core.bom_processor - BOM文件导入成功，共处理 244 个项目
+2025-05-20 08:30:03,346 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-20 08:30:03,347 [INFO] gui.bom_panel - 开始刷新树状图
+2025-05-20 08:30:03,348 [INFO] gui.bom_panel - 树状图刷新完成
+2025-05-20 08:30:03,350 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-20 08:30:03,350 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-20 08:30:03,911 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-20 08:30:03,911 [DEBUG] core.logic_builder - Rule BL01 loaded from temp file. Original file description: 'Fzg: 9 Plätze → PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 5 kpl-Z-Cab NG RAL XXXX'. Regenerating description.
+2025-05-20 08:30:03,912 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'Fzg: 9 Plätze'
+2025-05-20 08:30:03,912 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 5 kpl-Z-Cab NG RAL XXXX'
+2025-05-20 08:30:03,912 [INFO] core.logic_builder - Newly generated description for BL01 (from temp): 'Fzg: 9 Plätze → PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 5 kpl-Z-Cab NG RAL XXXX'
+2025-05-20 08:30:03,912 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='imported', RuleID='None'
+2025-05-20 08:30:03,912 [INFO] gui.logic_panel - LogicPanel _on_rule_change (imported): 收到 'imported' 通知，将重新加载所有规则到Treeview。
+2025-05-20 08:30:03,912 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-20 08:30:03,915 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'imported' 完成。
+2025-05-20 08:30:03,916 [INFO] core.logic_builder - 从临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 1 条规则完成。导出状态: False
+2025-05-20 08:30:03,916 [INFO] gui.main_window_tk - 检测到LogicBuilder中存在未导出的规则。
+2025-05-20 08:30:04,542 [INFO] gui.main_window_tk - 用户确认加载，将再次调用 load_from_temp_file 以使用最新的Config/BOM数据生成描述。
+2025-05-20 08:30:04,542 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-20 08:30:04,543 [DEBUG] core.logic_builder - Rule BL01 loaded from temp file. Original file description: 'Fzg: 9 Plätze → PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 5 kpl-Z-Cab NG RAL XXXX'. Regenerating description.
+2025-05-20 08:30:04,543 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'Fzg: 9 Plätze'
+2025-05-20 08:30:04,544 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 5 kpl-Z-Cab NG RAL XXXX'
+2025-05-20 08:30:04,544 [INFO] core.logic_builder - Newly generated description for BL01 (from temp): 'Fzg: 9 Plätze → PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 5 kpl-Z-Cab NG RAL XXXX'
+2025-05-20 08:30:04,544 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='imported', RuleID='None'
+2025-05-20 08:30:04,545 [INFO] gui.logic_panel - LogicPanel _on_rule_change (imported): 收到 'imported' 通知，将重新加载所有规则到Treeview。
+2025-05-20 08:30:04,545 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-20 08:30:04,548 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'imported' 完成。
+2025-05-20 08:30:04,549 [INFO] core.logic_builder - 从临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 1 条规则完成。导出状态: False
+2025-05-20 08:30:04,549 [INFO] gui.main_window_tk - 用户确认加载未导出的规则。MainWindow.rules_loaded 设置为 True。
+2025-05-20 08:30:04,549 [INFO] gui.main_window_tk - 开始刷新逻辑面板显示已加载的临时规则
+2025-05-20 08:30:04,550 [INFO] gui.logic_panel - LogicPanel: 开始加载规则到已保存规则框架 (非层级)
+2025-05-20 08:30:04,550 [DEBUG] gui.logic_panel - LogicPanel: 从LogicBuilder获取到 1 条规则
+2025-05-20 08:30:04,557 [INFO] gui.logic_panel - LogicPanel: 成功加载 1 条规则 (非层级) 到已保存规则框架
+2025-05-20 08:30:04,557 [INFO] gui.main_window_tk - 逻辑面板显示刷新完成
+2025-05-20 08:30:19,828 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I003
+2025-05-20 08:30:19,829 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000000 Fzg: 9 Plätze
+2025-05-20 08:30:19,830 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000000
+2025-05-20 08:30:19,831 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000000
+2025-05-20 08:30:19,831 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-05-20 08:30:19,832 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-05-20 08:30:19,832 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-05-20 08:30:19,832 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000000
+2025-05-20 08:30:19,833 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000000, 当前表达式: K-200-000000 
+2025-05-20 08:30:19,834 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000000
+2025-05-20 08:30:21,213 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K-200-000000  → 
+2025-05-20 08:30:22,199 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 10019282
+Teilesatz Standardsitz
+Sitzplatz 4
+2025-05-20 08:30:22,200 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 10019282
+2025-05-20 08:30:22,201 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL--Sitze04
+2025-05-20 08:30:22,202 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL--Sitze04-10019282
+2025-05-20 08:30:22,202 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-05-20 08:30:22,203 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-05-20 08:30:22,203 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-05-20 08:30:22,204 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL--Sitze04-10019282
+2025-05-20 08:30:22,205 [DEBUG] gui.logic_panel - 验证BOM码: PL--Sitze04-10019282
+2025-05-20 08:30:22,205 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL--Sitze04-10019282, 当前表达式: K-200-000000  → PL--Sitze04-10019282 
+2025-05-20 08:30:22,206 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL--Sitze04-10019282
+2025-05-20 08:30:22,207 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL--Sitze04-10019282
+2025-05-20 08:30:23,077 [INFO] gui.logic_panel - 创建新的BOM逻辑规则ID: BL02
+2025-05-20 08:30:23,078 [DEBUG] core.logic_builder - Generated condition part for rule BL02: 'Fzg: 9 Plätze'
+2025-05-20 08:30:23,079 [DEBUG] core.logic_builder - Generated action part for rule BL02: 'PL--Sitze04-Teilesatz Standardsitz-Sitzplatz 4'
+2025-05-20 08:30:23,080 [INFO] core.logic_builder - 已保存 2 条规则到临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json)
+2025-05-20 08:30:23,081 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='added', RuleID='BL02'
+2025-05-20 08:30:23,081 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: 附带的Rule对象: ID='BL02', Status='enabled', Desc='Fzg: 9 Plätze → PL--Sitze04-Te...'
+2025-05-20 08:30:23,082 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change (added): 开始添加规则 'BL02'. 状态: enabled, 描述: 'Fzg: 9 Plätze → PL--Sitze04-Te...'
+2025-05-20 08:30:23,082 [INFO] gui.logic_panel - LogicPanel _on_rule_change (added): 已插入规则行 'BL02'.
+2025-05-20 08:30:23,083 [INFO] gui.logic_panel - LogicPanel _on_rule_change (added): 已为规则 'BL02' 插入描述行 'BL02_desc_sep'.
+2025-05-20 08:30:23,092 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'added' 完成。
+2025-05-20 08:30:23,092 [INFO] core.logic_builder - 已添加规则: BL02, Desc='Fzg: 9 Plätze → PL--Sitze04-Te...'
+2025-05-20 08:30:23,093 [INFO] gui.logic_panel - 成功保存规则: BL02, 条件: K-200-000000, 影响: PL--Sitze04-10019282, 状态: RuleStatus.ENABLED
+2025-05-20 08:30:36,490 [INFO] core.logic_builder - 开始导入规则文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/2.json
+2025-05-20 08:30:36,490 [INFO] core.logic_builder - 已清空现有规则
+2025-05-20 08:30:36,490 [INFO] core.logic_builder - 导入时检测到新版大写键名规则文件格式 (BL_rules/TL_rules)。
+2025-05-20 08:30:36,491 [DEBUG] core.logic_builder - Rule BL01 imported from file. Original file description: 'Fzg: 9 Plätze → PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 5 kpl-Z-Cab NG RAL XXXX'. Regenerating description.
+2025-05-20 08:30:36,491 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'Fzg: 9 Plätze'
+2025-05-20 08:30:36,491 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 5 kpl-Z-Cab NG RAL XXXX'
+2025-05-20 08:30:36,491 [INFO] core.logic_builder - Newly generated description for imported rule BL01: 'Fzg: 9 Plätze → PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 5 kpl-Z-Cab NG RAL XXXX'
+2025-05-20 08:30:36,491 [DEBUG] core.logic_builder - 成功导入规则: ID=BL01, Desc='Fzg: 9 Plätze → PL-Außenkotflügel-Außenkotflügel M...'
+2025-05-20 08:30:36,492 [INFO] core.logic_builder - 已保存 1 条规则到临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json)
+2025-05-20 08:30:36,492 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='imported', RuleID='None'
+2025-05-20 08:30:36,492 [INFO] gui.logic_panel - LogicPanel _on_rule_change (imported): 收到 'imported' 通知，将重新加载所有规则到Treeview。
+2025-05-20 08:30:36,492 [INFO] gui.logic_panel - LogicPanel: 开始加载规则到已保存规则框架 (非层级)
+2025-05-20 08:30:36,492 [DEBUG] gui.logic_panel - LogicPanel: 从LogicBuilder获取到 1 条规则
+2025-05-20 08:30:36,495 [INFO] gui.logic_panel - LogicPanel: 成功加载 1 条规则 (非层级) 到已保存规则框架
+2025-05-20 08:30:36,497 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'imported' 完成。
+2025-05-20 08:30:36,497 [INFO] core.logic_builder - 规则导入完成，成功导入 1 条规则（BOM逻辑: 1，微调逻辑: 0）
+2025-05-20 08:30:36,497 [INFO] gui.main_window_tk - 成功导入 1 条规则（BOM逻辑: 1，微调逻辑: 0）
+规则状态统计：启用 1，测试 0，禁用 0
+2025-05-20 08:30:36,497 [INFO] gui.logic_panel - LogicPanel: 开始加载规则到已保存规则框架 (非层级)
+2025-05-20 08:30:36,497 [DEBUG] gui.logic_panel - LogicPanel: 从LogicBuilder获取到 1 条规则
+2025-05-20 08:30:36,499 [INFO] gui.logic_panel - LogicPanel: 成功加载 1 条规则 (非层级) 到已保存规则框架
+2025-05-20 08:30:44,259 [INFO] core.logic_builder - 开始导出规则数据
+2025-05-20 08:30:44,260 [DEBUG] core.logic_builder - 已准备导出规则: ID=BL01, Desc='Fzg: 9 Plätze → PL-Außenkotflügel-Außenkotflügel M...'
+2025-05-20 08:30:44,261 [INFO] core.logic_builder - 规则数据已成功清空，并写入空的临时文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-20 08:30:44,261 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='cleared', RuleID='None'
+2025-05-20 08:30:44,261 [INFO] gui.logic_panel - LogicPanel _on_rule_change (cleared): 收到 'cleared' 通知，清空Treeview和used_ids。
+2025-05-20 08:30:44,261 [INFO] gui.logic_panel - LogicPanel _on_rule_change (cleared): 已处理 'cleared' 通知，清空Treeview。
+2025-05-20 08:30:44,264 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'cleared' 完成。
+2025-05-20 08:30:44,264 [INFO] core.logic_builder - 规则导出完成，共导出 1 条规则
+2025-05-20 08:30:44,265 [INFO] gui.main_window_tk - 成功导出 1 条规则到 C:/Users/mengy/OneDrive/Kabine_Test_Dokument/2.json。
+2025-05-20 08:30:48,347 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I003
+2025-05-20 08:30:48,348 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000000 Fzg: 9 Plätze
+2025-05-20 08:30:48,349 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000000
+2025-05-20 08:30:48,349 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000000
+2025-05-20 08:30:48,350 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-05-20 08:30:48,351 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-05-20 08:30:48,351 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-05-20 08:30:48,351 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000000
+2025-05-20 08:30:48,352 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000000, 当前表达式: K-200-000000 
+2025-05-20 08:30:48,352 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000000
+2025-05-20 08:30:48,986 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K-200-000000  → 
+2025-05-20 08:30:49,920 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 10019362
+PA-Sitz Std. elektrisch 1 FL
+Sitzplatz 4
+2025-05-20 08:30:49,921 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 10019362
+2025-05-20 08:30:49,922 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL--Sitze04
+2025-05-20 08:30:49,922 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL--Sitze04-10019362
+2025-05-20 08:30:49,923 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-05-20 08:30:49,924 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-05-20 08:30:49,925 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-05-20 08:30:49,925 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL--Sitze04-10019362
+2025-05-20 08:30:49,926 [DEBUG] gui.logic_panel - 验证BOM码: PL--Sitze04-10019362
+2025-05-20 08:30:49,927 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL--Sitze04-10019362, 当前表达式: K-200-000000  → PL--Sitze04-10019362 
+2025-05-20 08:30:49,928 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL--Sitze04-10019362
+2025-05-20 08:30:49,929 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL--Sitze04-10019362
+2025-05-20 08:30:50,800 [INFO] gui.logic_panel - 创建新的BOM逻辑规则ID: BL02
+2025-05-20 08:30:50,801 [DEBUG] core.logic_builder - Generated condition part for rule BL02: 'Fzg: 9 Plätze'
+2025-05-20 08:30:50,802 [DEBUG] core.logic_builder - Generated action part for rule BL02: 'PL--Sitze04-PA-Sitz Std. elektrisch 1 FL-Sitzplatz 4'
+2025-05-20 08:30:50,804 [INFO] core.logic_builder - 已保存 1 条规则到临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json)
+2025-05-20 08:30:50,805 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='added', RuleID='BL02'
+2025-05-20 08:30:50,805 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: 附带的Rule对象: ID='BL02', Status='enabled', Desc='Fzg: 9 Plätze → PL--Sitze04-PA...'
+2025-05-20 08:30:50,806 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change (added): 开始添加规则 'BL02'. 状态: enabled, 描述: 'Fzg: 9 Plätze → PL--Sitze04-PA...'
+2025-05-20 08:30:50,807 [INFO] gui.logic_panel - LogicPanel _on_rule_change (added): 已插入规则行 'BL02'.
+2025-05-20 08:30:50,807 [INFO] gui.logic_panel - LogicPanel _on_rule_change (added): 已为规则 'BL02' 插入描述行 'BL02_desc_sep'.
+2025-05-20 08:30:50,815 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'added' 完成。
+2025-05-20 08:30:50,816 [INFO] core.logic_builder - 已添加规则: BL02, Desc='Fzg: 9 Plätze → PL--Sitze04-PA...'
+2025-05-20 08:30:50,817 [INFO] gui.logic_panel - 成功保存规则: BL02, 条件: K-200-000000, 影响: PL--Sitze04-10019362, 状态: RuleStatus.ENABLED

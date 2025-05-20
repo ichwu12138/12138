@@ -1,0 +1,310 @@
+2025-05-16 09:00:30,596 [INFO] root - 程序启动，日志文件: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\logs\log_20250516_090030.log
+2025-05-16 09:00:30,826 [INFO] __main__ - 正在启动程序...
+2025-05-16 09:00:30,826 [DEBUG] __main__ - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-05-16 09:00:30,826 [DEBUG] __main__ - 当前工作目录: C:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-16 09:00:30,827 [DEBUG] __main__ - src_dir路径: c:\Users\mengy\Desktop\ZK_LogicBom_Builder
+2025-05-16 09:00:30,848 [INFO] __main__ - 正在创建语言选择对话框...
+2025-05-16 09:00:32,855 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-05-16 09:00:32,887 [INFO] __main__ - 语言选择结果: zh
+2025-05-16 09:00:32,887 [INFO] __main__ - 正在创建主题选择对话框...
+2025-05-16 09:00:32,887 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-05-16 09:00:32,891 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-05-16 09:00:33,445 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-05-16 09:00:33,482 [INFO] __main__ - 主题选择结果: light
+2025-05-16 09:00:33,497 [INFO] __main__ - 正在配置主窗口...
+2025-05-16 09:00:33,674 [INFO] __main__ - 开始创建MainWindow实例...
+2025-05-16 09:00:33,675 [INFO] core.logic_builder - 从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json 加载时检测到新版大写键名规则文件格式 (BL_rules/TL_rules)。
+2025-05-16 09:00:33,675 [DEBUG] core.logic_builder - Rule BL02 loaded from file. Original file description: 'Wertfach unterm Sitzpolster → PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'. Regenerating description.
+2025-05-16 09:00:33,676 [DEBUG] core.logic_builder - Generated condition part for rule BL02: 'K-200-000007'
+2025-05-16 09:00:33,676 [DEBUG] core.logic_builder - Generated action part for rule BL02: 'PL--Sitze01-10019324'
+2025-05-16 09:00:33,676 [INFO] core.logic_builder - Newly generated description for BL02 (on _load_rules): 'K-200-000007 → PL--Sitze01-10019324'
+2025-05-16 09:00:33,676 [INFO] core.logic_builder - 已加载 1 条规则从 C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-16 09:00:33,745 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-16 09:00:33,759 [INFO] __main__ - MainWindow实例创建完成
+2025-05-16 09:00:33,939 [INFO] __main__ - 开始mainloop()...
+2025-05-16 09:00:35,698 [INFO] core.config_processor - 找到工作表: ['1.Kabine']
+2025-05-16 09:00:35,698 [INFO] core.config_processor - 处理工作表: 1.Kabine -> 模块: 1.Kabine
+2025-05-16 09:00:35,722 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-16 09:00:35,724 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-16 09:00:35,724 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Mekrmal(Test).xlsx
+2025-05-16 09:00:36,782 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-16 09:00:36,782 [INFO] core.bom_processor - 已清空现有数据
+2025-05-16 09:00:36,782 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-05-16 09:00:36,790 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['Max-Gruppe']
+2025-05-16 09:00:36,790 [INFO] core.bom_processor - 正在读取 Max-Gruppe 工作表...
+2025-05-16 09:00:36,807 [INFO] core.bom_processor - 成功读取工作表，共 244 行数据
+2025-05-16 09:00:36,807 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-05-16 09:00:36,808 [INFO] core.bom_processor - 过滤空层级后剩余 244 行数据
+2025-05-16 09:00:36,808 [INFO] core.bom_processor - 
+开始处理数据...
+2025-05-16 09:00:36,814 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-05-16 09:00:36,814 [INFO] core.bom_processor - 第 1 级节点数量: 244
+2025-05-16 09:00:36,814 [INFO] core.bom_processor - BOM文件导入成功，共处理 244 个项目
+2025-05-16 09:00:36,815 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-16 09:00:36,815 [INFO] gui.bom_panel - 开始刷新树状图
+2025-05-16 09:00:36,816 [INFO] gui.bom_panel - 树状图刷新完成
+2025-05-16 09:00:36,817 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-16 09:00:36,818 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/mengy/OneDrive/Kabine_Test_Dokument/Kabine_Bom-MaxGruppe.xlsx
+2025-05-16 09:00:37,376 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-16 09:00:37,377 [DEBUG] core.logic_builder - Rule BL02 loaded from temp file. Original file description: 'Wertfach unterm Sitzpolster → PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'. Regenerating description.
+2025-05-16 09:00:37,377 [DEBUG] core.logic_builder - Generated condition part for rule BL02: 'Wertfach unterm Sitzpolster'
+2025-05-16 09:00:37,378 [DEBUG] core.logic_builder - Generated action part for rule BL02: 'PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'
+2025-05-16 09:00:37,378 [INFO] core.logic_builder - Newly generated description for BL02 (from temp): 'Wertfach unterm Sitzpolster → PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'
+2025-05-16 09:00:37,378 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='imported', RuleID='None'
+2025-05-16 09:00:37,378 [INFO] gui.logic_panel - LogicPanel _on_rule_change (imported): 收到 'imported' 通知，将重新加载所有规则到Treeview。
+2025-05-16 09:00:37,378 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-16 09:00:37,384 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'imported' 完成。
+2025-05-16 09:00:37,384 [INFO] core.logic_builder - 从临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 1 条规则完成。导出状态: False
+2025-05-16 09:00:37,384 [INFO] gui.main_window_tk - 检测到LogicBuilder中存在未导出的规则。
+2025-05-16 09:00:38,383 [INFO] gui.main_window_tk - 用户确认加载，将再次调用 load_from_temp_file 以使用最新的Config/BOM数据生成描述。
+2025-05-16 09:00:38,383 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-05-16 09:00:38,383 [DEBUG] core.logic_builder - Rule BL02 loaded from temp file. Original file description: 'Wertfach unterm Sitzpolster → PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'. Regenerating description.
+2025-05-16 09:00:38,384 [DEBUG] core.logic_builder - Generated condition part for rule BL02: 'Wertfach unterm Sitzpolster'
+2025-05-16 09:00:38,384 [DEBUG] core.logic_builder - Generated action part for rule BL02: 'PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'
+2025-05-16 09:00:38,384 [INFO] core.logic_builder - Newly generated description for BL02 (from temp): 'Wertfach unterm Sitzpolster → PL--Sitze01-PA-Sitz f.Straffer li.kpl.mech 1 FL-Sitzplatz 1'
+2025-05-16 09:00:38,384 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='imported', RuleID='None'
+2025-05-16 09:00:38,384 [INFO] gui.logic_panel - LogicPanel _on_rule_change (imported): 收到 'imported' 通知，将重新加载所有规则到Treeview。
+2025-05-16 09:00:38,385 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-05-16 09:00:38,388 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'imported' 完成。
+2025-05-16 09:00:38,389 [INFO] core.logic_builder - 从临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 1 条规则完成。导出状态: False
+2025-05-16 09:00:38,389 [INFO] gui.main_window_tk - 用户确认加载未导出的规则。MainWindow.rules_loaded 设置为 True。
+2025-05-16 09:00:38,389 [INFO] gui.main_window_tk - 开始刷新逻辑面板显示已加载的临时规则
+2025-05-16 09:00:38,389 [INFO] gui.logic_panel - LogicPanel: 开始加载规则到已保存规则框架 (非层级)
+2025-05-16 09:00:38,389 [DEBUG] gui.logic_panel - LogicPanel: 从LogicBuilder获取到 1 条规则
+2025-05-16 09:00:38,392 [INFO] gui.logic_panel - LogicPanel: 成功加载 1 条规则 (非层级) 到已保存规则框架
+2025-05-16 09:00:38,393 [INFO] gui.main_window_tk - 逻辑面板显示刷新完成
+2025-05-16 09:00:41,027 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I011
+2025-05-16 09:00:41,027 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000300 Ziegler Standardsitze
+2025-05-16 09:00:41,028 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000300
+2025-05-16 09:00:41,028 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000300
+2025-05-16 09:00:41,029 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-05-16 09:00:41,029 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-05-16 09:00:41,030 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-05-16 09:00:41,030 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000300
+2025-05-16 09:00:41,031 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000300, 当前表达式: K-200-000300 
+2025-05-16 09:00:41,031 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000300
+2025-05-16 09:00:41,880 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: AND, 当前表达式: K-200-000300  AND 
+2025-05-16 09:00:43,888 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I012
+2025-05-16 09:00:43,889 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000301 Bostrom Integra Sitze
+2025-05-16 09:00:43,889 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000301
+2025-05-16 09:00:43,889 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000301
+2025-05-16 09:00:43,889 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-05-16 09:00:43,889 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-05-16 09:00:43,889 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-05-16 09:00:43,889 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000301
+2025-05-16 09:00:43,890 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000301, 当前表达式: K-200-000300  AND K-200-000301 
+2025-05-16 09:00:43,890 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000301
+2025-05-16 09:00:44,710 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K-200-000300  AND K-200-000301  → 
+2025-05-16 09:00:45,281 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 10019837
+Außenkotflügel MAN 18t Euro 6 kpl
+Z-Cab NG RAL XXXX
+2025-05-16 09:00:45,281 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 10019837
+2025-05-16 09:00:45,282 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Außenkotflügel
+2025-05-16 09:00:45,283 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Außenkotflügel-10019837
+2025-05-16 09:00:45,284 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-05-16 09:00:45,284 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-05-16 09:00:45,285 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-05-16 09:00:45,285 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Außenkotflügel-10019837
+2025-05-16 09:00:45,286 [DEBUG] gui.logic_panel - 验证BOM码: PL-Außenkotflügel-10019837
+2025-05-16 09:00:45,287 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-Außenkotflügel-10019837, 当前表达式: K-200-000300  AND K-200-000301  → PL-Außenkotflügel-10019837 
+2025-05-16 09:00:45,288 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Außenkotflügel-10019837
+2025-05-16 09:00:45,288 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Außenkotflügel-10019837
+2025-05-16 09:00:46,283 [INFO] gui.logic_panel - 创建新的BOM逻辑规则ID: BL01
+2025-05-16 09:00:46,284 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'Ziegler Standardsitze AND AND Bostrom Integra Sitze'
+2025-05-16 09:00:46,285 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-Außenkotflügel-Außenkotflügel MAN 18t Euro 6 kpl-Z-Cab NG RAL XXXX'
+2025-05-16 09:00:46,286 [INFO] core.logic_builder - 已保存 2 条规则到临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json)
+2025-05-16 09:00:46,287 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='added', RuleID='BL01'
+2025-05-16 09:00:46,287 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: 附带的Rule对象: ID='BL01', Status='enabled', Desc='Ziegler Standardsitze AND AND ...'
+2025-05-16 09:00:46,288 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change (added): 开始添加规则 'BL01'. 状态: enabled, 描述: 'Ziegler Standardsitze AND AND ...'
+2025-05-16 09:00:46,288 [INFO] gui.logic_panel - LogicPanel _on_rule_change (added): 已插入规则行 'BL01'.
+2025-05-16 09:00:46,289 [INFO] gui.logic_panel - LogicPanel _on_rule_change (added): 已为规则 'BL01' 插入描述行 'BL01_desc_sep'.
+2025-05-16 09:00:46,299 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'added' 完成。
+2025-05-16 09:00:46,299 [INFO] core.logic_builder - 已添加规则: BL01, Desc='Ziegler Standardsitze AND AND ...'
+2025-05-16 09:00:46,300 [INFO] gui.logic_panel - 成功保存规则: BL01, 条件: K-200-000300  AND K-200-000301, 影响: PL-Außenkotflügel-10019837, 状态: RuleStatus.ENABLED
+2025-05-16 09:00:48,777 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I011
+2025-05-16 09:00:48,778 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000300 Ziegler Standardsitze
+2025-05-16 09:00:48,778 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000300
+2025-05-16 09:00:48,779 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000300
+2025-05-16 09:00:48,780 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-05-16 09:00:48,780 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-05-16 09:00:48,781 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-05-16 09:00:48,781 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000300
+2025-05-16 09:00:48,782 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000300, 当前表达式: K-200-000300 
+2025-05-16 09:00:48,783 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000300
+2025-05-16 09:00:50,230 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: OR, 当前表达式: K-200-000300  OR 
+2025-05-16 09:00:51,241 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I012
+2025-05-16 09:00:51,241 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000301 Bostrom Integra Sitze
+2025-05-16 09:00:51,242 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000301
+2025-05-16 09:00:51,242 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000301
+2025-05-16 09:00:51,243 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-05-16 09:00:51,243 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-05-16 09:00:51,244 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-05-16 09:00:51,244 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000301
+2025-05-16 09:00:51,245 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000301, 当前表达式: K-200-000300  OR K-200-000301 
+2025-05-16 09:00:51,245 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000301
+2025-05-16 09:00:54,583 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K-200-000300  OR K-200-000301  → 
+2025-05-16 09:01:04,936 [INFO] gui.logic_panel - 创建FROM DELETE微调逻辑: FROM 10019834 DELETE 306952
+2025-05-16 09:01:04,937 [INFO] gui.logic_panel - 成功插入微调逻辑到表达式: K-200-000300  OR K-200-000301 →  FROM 10019834 DELETE 306952
+2025-05-16 09:01:40,291 [INFO] gui.logic_library_window - LogicLibrary: 已加载 2 条规则 (非层级)。
+2025-05-16 09:01:40,291 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 开始应用筛选和搜索。清空现有Treeview项。
+2025-05-16 09:01:40,292 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 从self.cached_rules (共 2 条) 开始迭代。
+2025-05-16 09:01:40,292 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL02'，状态 'enabled' (显示为 '启用').
+2025-05-16 09:01:40,292 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL01'，状态 'enabled' (显示为 '启用').
+2025-05-16 09:01:40,292 [INFO] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 筛选和搜索完成：显示 2/2 条规则。
+2025-05-16 09:01:45,996 [INFO] gui.logic_panel - 创建新的微调逻辑规则ID: TL01
+2025-05-16 09:01:45,997 [DEBUG] core.logic_builder - Generated condition part for rule TL01: 'Ziegler Standardsitze OR OR Bostrom Integra Sitze'
+2025-05-16 09:01:45,999 [DEBUG] core.logic_builder - Generated action part for rule TL01: 'FROM 10019834 DELETE 306952'
+2025-05-16 09:01:46,001 [INFO] core.logic_builder - 已保存 3 条规则到临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json)
+2025-05-16 09:01:46,001 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='added', RuleID='TL01'
+2025-05-16 09:01:46,002 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: 附带的Rule对象: ID='TL01', Status='enabled', Desc='Ziegler Standardsitze OR OR Bo...'
+2025-05-16 09:01:46,002 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change (added): 开始添加规则 'TL01'. 状态: enabled, 描述: 'Ziegler Standardsitze OR OR Bo...'
+2025-05-16 09:01:46,003 [INFO] gui.logic_panel - LogicPanel _on_rule_change (added): 已插入规则行 'TL01'.
+2025-05-16 09:01:46,003 [INFO] gui.logic_panel - LogicPanel _on_rule_change (added): 已为规则 'TL01' 插入描述行 'TL01_desc_sep'.
+2025-05-16 09:01:46,015 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'added' 完成。
+2025-05-16 09:01:46,015 [INFO] gui.logic_library_window - LogicLibrary _on_rule_change: 收到通知: 类型='added', RuleID='TL01'
+2025-05-16 09:01:46,016 [DEBUG] gui.logic_library_window - LogicLibrary _on_rule_change: 附带的Rule对象: ID='TL01', Status='enabled', Desc='Ziegler Standardsitze OR OR Bo...'
+2025-05-16 09:01:46,016 [DEBUG] gui.logic_library_window - LogicLibrary _on_rule_change: 更新self.cached_rules前，包含 2 条规则。
+2025-05-16 09:01:46,016 [DEBUG] gui.logic_library_window - LogicLibrary _on_rule_change: 更新self.cached_rules后，包含 3 条规则。调用 _apply_filters_and_search。
+2025-05-16 09:01:46,017 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 开始应用筛选和搜索。清空现有Treeview项。
+2025-05-16 09:01:46,017 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 从self.cached_rules (共 3 条) 开始迭代。
+2025-05-16 09:01:46,018 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL02'，状态 'enabled' (显示为 '启用').
+2025-05-16 09:01:46,018 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL01'，状态 'enabled' (显示为 '启用').
+2025-05-16 09:01:46,018 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'TL01'，状态 'enabled' (显示为 '启用').
+2025-05-16 09:01:46,018 [INFO] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 筛选和搜索完成：显示 3/3 条规则。
+2025-05-16 09:01:46,018 [INFO] gui.logic_library_window - LogicLibrary _on_rule_change: 因 'added' (非层级)，规则列表已通过重新筛选和加载进行刷新。
+2025-05-16 09:01:46,019 [DEBUG] gui.logic_library_window - LogicLibrary _on_rule_change: Treeview update_idletasks() 已调用。
+2025-05-16 09:01:46,019 [INFO] core.logic_builder - 已添加规则: TL01, Desc='Ziegler Standardsitze OR OR Bo...'
+2025-05-16 09:01:46,019 [INFO] gui.logic_panel - 成功保存规则: TL01, 条件: K-200-000300  OR K-200-000301, 影响: FROM 10019834 DELETE 306952, 状态: RuleStatus.ENABLED
+2025-05-16 09:01:48,191 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I017
+2025-05-16 09:01:48,192 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000008 S. 1 ohne Ausstattung Stauraum
+2025-05-16 09:01:48,193 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000008
+2025-05-16 09:01:48,194 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000008
+2025-05-16 09:01:48,194 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-05-16 09:01:48,195 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-05-16 09:01:48,196 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-05-16 09:01:48,196 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000008
+2025-05-16 09:01:48,197 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000008, 当前表达式: K-200-000008 
+2025-05-16 09:01:48,197 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000008
+2025-05-16 09:01:50,815 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I01B
+2025-05-16 09:01:50,816 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000345 ohne Wertfach
+2025-05-16 09:01:50,816 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000345
+2025-05-16 09:01:50,817 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000345
+2025-05-16 09:01:50,817 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-05-16 09:01:50,818 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-05-16 09:01:50,819 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-05-16 09:01:50,819 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000345
+2025-05-16 09:01:51,781 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000345
+2025-05-16 09:01:52,350 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: AND, 当前表达式: K-200-000008  AND 
+2025-05-16 09:01:54,058 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I01C
+2025-05-16 09:01:54,059 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000011 Wertfach unterm Sitzpolster
+2025-05-16 09:01:54,059 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000011
+2025-05-16 09:01:54,060 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000011
+2025-05-16 09:01:54,061 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-05-16 09:01:54,061 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-05-16 09:01:54,062 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-05-16 09:01:54,062 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000011
+2025-05-16 09:01:54,063 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000011, 当前表达式: K-200-000008  AND K-200-000011 
+2025-05-16 09:01:54,064 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000011
+2025-05-16 09:01:54,856 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K-200-000008  AND K-200-000011  → 
+2025-05-16 09:01:56,747 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 10019281
+Teilesatz Standardsitz
+Sitzplatz 3
+2025-05-16 09:01:56,748 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 10019281
+2025-05-16 09:01:56,749 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL--Sitze03
+2025-05-16 09:01:56,749 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL--Sitze03-10019281
+2025-05-16 09:01:56,750 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-05-16 09:01:56,750 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-05-16 09:01:56,751 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-05-16 09:01:56,751 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL--Sitze03-10019281
+2025-05-16 09:01:56,752 [DEBUG] gui.logic_panel - 验证BOM码: PL--Sitze03-10019281
+2025-05-16 09:01:56,753 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL--Sitze03-10019281, 当前表达式: K-200-000008  AND K-200-000011  → PL--Sitze03-10019281 
+2025-05-16 09:01:56,754 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL--Sitze03-10019281
+2025-05-16 09:01:56,754 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL--Sitze03-10019281
+2025-05-16 09:01:57,703 [INFO] gui.logic_panel - 创建新的BOM逻辑规则ID: BL03
+2025-05-16 09:01:57,704 [DEBUG] core.logic_builder - Generated condition part for rule BL03: 'S. 1 ohne Ausstattung Stauraum AND AND Wertfach unterm Sitzpolster'
+2025-05-16 09:01:57,705 [DEBUG] core.logic_builder - Generated action part for rule BL03: 'PL--Sitze03-Teilesatz Standardsitz-Sitzplatz 3'
+2025-05-16 09:01:57,706 [INFO] core.logic_builder - 已保存 4 条规则到临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json)
+2025-05-16 09:01:57,706 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='added', RuleID='BL03'
+2025-05-16 09:01:57,707 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: 附带的Rule对象: ID='BL03', Status='enabled', Desc='S. 1 ohne Ausstattung Stauraum...'
+2025-05-16 09:01:57,707 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change (added): 开始添加规则 'BL03'. 状态: enabled, 描述: 'S. 1 ohne Ausstattung Stauraum...'
+2025-05-16 09:01:57,708 [INFO] gui.logic_panel - LogicPanel _on_rule_change (added): 已插入规则行 'BL03'.
+2025-05-16 09:01:57,708 [INFO] gui.logic_panel - LogicPanel _on_rule_change (added): 已为规则 'BL03' 插入描述行 'BL03_desc_sep'.
+2025-05-16 09:01:57,717 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'added' 完成。
+2025-05-16 09:01:57,717 [INFO] gui.logic_library_window - LogicLibrary _on_rule_change: 收到通知: 类型='added', RuleID='BL03'
+2025-05-16 09:01:57,717 [DEBUG] gui.logic_library_window - LogicLibrary _on_rule_change: 附带的Rule对象: ID='BL03', Status='enabled', Desc='S. 1 ohne Ausstattung Stauraum...'
+2025-05-16 09:01:57,718 [DEBUG] gui.logic_library_window - LogicLibrary _on_rule_change: 更新self.cached_rules前，包含 3 条规则。
+2025-05-16 09:01:57,718 [DEBUG] gui.logic_library_window - LogicLibrary _on_rule_change: 更新self.cached_rules后，包含 4 条规则。调用 _apply_filters_and_search。
+2025-05-16 09:01:57,718 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 开始应用筛选和搜索。清空现有Treeview项。
+2025-05-16 09:01:57,718 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 从self.cached_rules (共 4 条) 开始迭代。
+2025-05-16 09:01:57,718 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL02'，状态 'enabled' (显示为 '启用').
+2025-05-16 09:01:57,718 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL01'，状态 'enabled' (显示为 '启用').
+2025-05-16 09:01:57,719 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'TL01'，状态 'enabled' (显示为 '启用').
+2025-05-16 09:01:57,719 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL03'，状态 'enabled' (显示为 '启用').
+2025-05-16 09:01:57,719 [INFO] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 筛选和搜索完成：显示 4/4 条规则。
+2025-05-16 09:01:57,719 [INFO] gui.logic_library_window - LogicLibrary _on_rule_change: 因 'added' (非层级)，规则列表已通过重新筛选和加载进行刷新。
+2025-05-16 09:01:57,720 [DEBUG] gui.logic_library_window - LogicLibrary _on_rule_change: Treeview update_idletasks() 已调用。
+2025-05-16 09:01:57,720 [INFO] core.logic_builder - 已添加规则: BL03, Desc='S. 1 ohne Ausstattung Stauraum...'
+2025-05-16 09:01:57,720 [INFO] gui.logic_panel - 成功保存规则: BL03, 条件: K-200-000008  AND K-200-000011, 影响: PL--Sitze03-10019281, 状态: RuleStatus.ENABLED
+2025-05-16 09:01:59,790 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I01F
+2025-05-16 09:01:59,791 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000169 Sitz 2 mit Kunststoffbehälter
+2025-05-16 09:01:59,791 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000169
+2025-05-16 09:01:59,792 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000169
+2025-05-16 09:01:59,793 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-05-16 09:01:59,793 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-05-16 09:01:59,794 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-05-16 09:01:59,794 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000169
+2025-05-16 09:01:59,795 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000169, 当前表达式: K-200-000169 
+2025-05-16 09:01:59,796 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000169
+2025-05-16 09:02:01,451 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: OR, 当前表达式: K-200-000169  OR 
+2025-05-16 09:02:03,380 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I030
+2025-05-16 09:02:03,381 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000348 ohne Wertfach
+2025-05-16 09:02:03,382 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000348
+2025-05-16 09:02:03,383 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000348
+2025-05-16 09:02:03,383 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-05-16 09:02:03,384 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-05-16 09:02:03,385 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-05-16 09:02:03,385 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000348
+2025-05-16 09:02:03,387 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000348, 当前表达式: K-200-000169  OR K-200-000348 
+2025-05-16 09:02:03,387 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000348
+2025-05-16 09:02:04,614 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K-200-000169  OR K-200-000348  → 
+2025-05-16 09:02:05,695 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 10019331
+Teilesatz Sitzgestell
+Sitzplatz 3
+2025-05-16 09:02:05,696 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 10019331
+2025-05-16 09:02:05,697 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL--Sitze03
+2025-05-16 09:02:05,698 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL--Sitze03-10019331
+2025-05-16 09:02:05,699 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-05-16 09:02:05,700 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-05-16 09:02:05,700 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-05-16 09:02:05,701 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL--Sitze03-10019331
+2025-05-16 09:02:05,701 [DEBUG] gui.logic_panel - 验证BOM码: PL--Sitze03-10019331
+2025-05-16 09:02:05,703 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL--Sitze03-10019331, 当前表达式: K-200-000169  OR K-200-000348  → PL--Sitze03-10019331 
+2025-05-16 09:02:05,703 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL--Sitze03-10019331
+2025-05-16 09:02:05,703 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL--Sitze03-10019331
+2025-05-16 09:02:06,510 [INFO] gui.logic_panel - 创建新的BOM逻辑规则ID: BL04
+2025-05-16 09:02:06,511 [DEBUG] core.logic_builder - Generated condition part for rule BL04: 'Sitz 2 mit Kunststoffbehälter OR OR ohne Wertfach'
+2025-05-16 09:02:06,512 [DEBUG] core.logic_builder - Generated action part for rule BL04: 'PL--Sitze03-Teilesatz Sitzgestell-Sitzplatz 3'
+2025-05-16 09:02:06,514 [INFO] core.logic_builder - 已保存 5 条规则到临时文件 (C:\Users\mengy\Desktop\ZK_LogicBom_Builder\data\temp_rules_latest.json)
+2025-05-16 09:02:06,515 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='added', RuleID='BL04'
+2025-05-16 09:02:06,515 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: 附带的Rule对象: ID='BL04', Status='enabled', Desc='Sitz 2 mit Kunststoffbehälter ...'
+2025-05-16 09:02:06,515 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change (added): 开始添加规则 'BL04'. 状态: enabled, 描述: 'Sitz 2 mit Kunststoffbehälter ...'
+2025-05-16 09:02:06,516 [INFO] gui.logic_panel - LogicPanel _on_rule_change (added): 已插入规则行 'BL04'.
+2025-05-16 09:02:06,516 [INFO] gui.logic_panel - LogicPanel _on_rule_change (added): 已为规则 'BL04' 插入描述行 'BL04_desc_sep'.
+2025-05-16 09:02:06,521 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'added' 完成。
+2025-05-16 09:02:06,521 [INFO] gui.logic_library_window - LogicLibrary _on_rule_change: 收到通知: 类型='added', RuleID='BL04'
+2025-05-16 09:02:06,521 [DEBUG] gui.logic_library_window - LogicLibrary _on_rule_change: 附带的Rule对象: ID='BL04', Status='enabled', Desc='Sitz 2 mit Kunststoffbehälter ...'
+2025-05-16 09:02:06,521 [DEBUG] gui.logic_library_window - LogicLibrary _on_rule_change: 更新self.cached_rules前，包含 4 条规则。
+2025-05-16 09:02:06,522 [DEBUG] gui.logic_library_window - LogicLibrary _on_rule_change: 更新self.cached_rules后，包含 5 条规则。调用 _apply_filters_and_search。
+2025-05-16 09:02:06,522 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 开始应用筛选和搜索。清空现有Treeview项。
+2025-05-16 09:02:06,522 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 从self.cached_rules (共 5 条) 开始迭代。
+2025-05-16 09:02:06,522 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL02'，状态 'enabled' (显示为 '启用').
+2025-05-16 09:02:06,522 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL01'，状态 'enabled' (显示为 '启用').
+2025-05-16 09:02:06,523 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'TL01'，状态 'enabled' (显示为 '启用').
+2025-05-16 09:02:06,523 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL03'，状态 'enabled' (显示为 '启用').
+2025-05-16 09:02:06,523 [DEBUG] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 准备插入规则ID 'BL04'，状态 'enabled' (显示为 '启用').
+2025-05-16 09:02:06,524 [INFO] gui.logic_library_window - LogicLibrary _apply_filters_and_search: 筛选和搜索完成：显示 5/5 条规则。
+2025-05-16 09:02:06,524 [INFO] gui.logic_library_window - LogicLibrary _on_rule_change: 因 'added' (非层级)，规则列表已通过重新筛选和加载进行刷新。
+2025-05-16 09:02:06,524 [DEBUG] gui.logic_library_window - LogicLibrary _on_rule_change: Treeview update_idletasks() 已调用。
+2025-05-16 09:02:06,524 [INFO] core.logic_builder - 已添加规则: BL04, Desc='Sitz 2 mit Kunststoffbehälter ...'
+2025-05-16 09:02:06,525 [INFO] gui.logic_panel - 成功保存规则: BL04, 条件: K-200-000169  OR K-200-000348, 影响: PL--Sitze03-10019331, 状态: RuleStatus.ENABLED
