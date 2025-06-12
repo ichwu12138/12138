@@ -333,6 +333,21 @@ def show_error(message_key: str, **kwargs):
                     "zh": "未找到匹配项",
                     "en": "No matches found",
                     "de": "Keine Übereinstimmungen gefunden"
+                },
+                "conversion_error": {
+                    "zh": "转换时出错",
+                    "en": "Error during conversion",
+                    "de": "Fehler bei der Konvertierung"
+                },
+                "not_vertical_format": {
+                    "zh": "当前表达式不是竖式格式",
+                    "en": "Current expression is not in vertical format",
+                    "de": "Aktueller Ausdruck ist nicht im vertikalen Format"
+                },
+                "empty_expression": {
+                    "zh": "表达式不能为空",
+                    "en": "Expression cannot be empty",
+                    "de": "Ausdruck darf nicht leer sein"
                 }
             }
             

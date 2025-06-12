@@ -8,12 +8,15 @@ from tkinter import ttk, messagebox, filedialog
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 import os
+import re
+from typing import Optional
 
 from utils.language_manager import language_manager
 from utils.logger import Logger
 from core.logic_builder import LogicBuilder
 from models.logic_rule import RuleStatus
 from gui.logic_rule_editor import LogicRuleEditor
+from utils.validator import ExpressionValidator
 
 class LogicLibraryWindow(tk.Toplevel):
     """逻辑关系库窗口类"""
@@ -82,44 +85,191 @@ class LogicLibraryWindow(tk.Toplevel):
         main_frame = ttk.Frame(self, padding=10)
         main_frame.pack(fill=BOTH, expand=YES)
         
-        # 创建搜索框架
-        self._create_search_frame(main_frame)
+        # 创建筛选和搜索框架
+        self._create_filter_and_search_frame(main_frame)
         
         # 创建规则列表框架
         self._create_rules_frame(main_frame)
         
-    def _create_search_frame(self, parent):
-        """创建搜索框架"""
-        frame = ttk.LabelFrame(
+    def _create_filter_and_search_frame(self, parent):
+        """创建筛选和搜索框架"""
+        # 最外层的框架
+        outer_frame = ttk.LabelFrame(
             parent,
-            text=language_manager.get_text("search"),
-            padding=4,
+            text=language_manager.get_text("search_and_filter"),
+            padding=10,
             style="Large.TLabelframe"
         )
-        frame.pack(fill=X, pady=(0, 8))
-        
-        # 创建搜索输入框
-        self.search_var = tk.StringVar()
-        search_entry = ttk.Entry(
-            frame,
-            textvariable=self.search_var,
-            font=("Microsoft YaHei", 11)
+        outer_frame.pack(fill=X, pady=(0, 10))
+
+        # 第一行：逻辑类型筛选 和 逻辑状态筛选
+        filter_row_frame = ttk.Frame(outer_frame)
+        filter_row_frame.pack(fill=X, pady=5)
+
+        # 逻辑关系类型筛选框架
+        type_filter_frame = ttk.LabelFrame(
+            filter_row_frame,
+            text=language_manager.get_text("logic_type_filter"),
+            padding=5,
+            style="Large.TLabelframe"
         )
-        search_entry.pack(side=LEFT, fill=X, expand=YES, padx=4)
+        type_filter_frame.pack(side=LEFT, padx=(0, 10), fill=X, expand=True)
+
+        self.rule_type_var = tk.StringVar(value="all")
+        ttk.Radiobutton(type_filter_frame, text=language_manager.get_text("all_logics"), variable=self.rule_type_var, value="all", command=self._apply_filters_and_search, style="Large.TRadiobutton").pack(side=LEFT, padx=5)
+        ttk.Radiobutton(type_filter_frame, text=language_manager.get_text("bom_logic"), variable=self.rule_type_var, value="BL", command=self._apply_filters_and_search, style="Large.TRadiobutton").pack(side=LEFT, padx=5)
+        ttk.Radiobutton(type_filter_frame, text=language_manager.get_text("tuning_logic"), variable=self.rule_type_var, value="TL", command=self._apply_filters_and_search, style="Large.TRadiobutton").pack(side=LEFT, padx=5)
+
+        # 逻辑状态筛选框架
+        status_filter_frame = ttk.LabelFrame(
+            filter_row_frame,
+            text=language_manager.get_text("logic_status_filter"),
+            padding=5,
+            style="Large.TLabelframe"
+        )
+        status_filter_frame.pack(side=LEFT, fill=X, expand=True)
+
+        self.rule_status_var = tk.StringVar(value="all")
+        ttk.Radiobutton(status_filter_frame, text=language_manager.get_text("all_statuses"), variable=self.rule_status_var, value="all", command=self._apply_filters_and_search, style="Large.TRadiobutton").pack(side=LEFT, padx=5)
+        ttk.Radiobutton(status_filter_frame, text=language_manager.get_text("enabled"), variable=self.rule_status_var, value=RuleStatus.ENABLED.value, command=self._apply_filters_and_search, style="Large.TRadiobutton").pack(side=LEFT, padx=5)
+        ttk.Radiobutton(status_filter_frame, text=language_manager.get_text("disabled"), variable=self.rule_status_var, value=RuleStatus.DISABLED.value, command=self._apply_filters_and_search, style="Large.TRadiobutton").pack(side=LEFT, padx=5)
+        ttk.Radiobutton(status_filter_frame, text=language_manager.get_text("testing"), variable=self.rule_status_var, value=RuleStatus.TESTING.value, command=self._apply_filters_and_search, style="Large.TRadiobutton").pack(side=LEFT, padx=5)
+
+        # 第二行：内容搜索框
+        search_inputs_frame = ttk.Frame(outer_frame)
+        search_inputs_frame.pack(fill=X, pady=5)
+
+        # 选择项表达式搜索
+        condition_search_frame = ttk.Frame(search_inputs_frame)
+        condition_search_frame.pack(fill=X, pady=2)
+        ttk.Label(condition_search_frame, text=language_manager.get_text("search_condition") + ":", style="Large.TLabel").pack(side=LEFT, padx=(0,5))
+        self.condition_search_var = tk.StringVar()
+        condition_entry = ttk.Entry(condition_search_frame, textvariable=self.condition_search_var, font=("Microsoft YaHei", 11), width=40)
+        condition_entry.pack(side=LEFT, fill=X, expand=True)
+        self.condition_search_var.trace_add("write", lambda *args: self._delayed_search())
+
+        # 影响项表达式搜索
+        effect_search_frame = ttk.Frame(search_inputs_frame)
+        effect_search_frame.pack(fill=X, pady=2)
+        ttk.Label(effect_search_frame, text=language_manager.get_text("search_effect") + ":", style="Large.TLabel").pack(side=LEFT, padx=(0,5))
+        self.effect_search_var = tk.StringVar()
+        effect_entry = ttk.Entry(effect_search_frame, textvariable=self.effect_search_var, font=("Microsoft YaHei", 11), width=40)
+        effect_entry.pack(side=LEFT, fill=X, expand=True)
+        self.effect_search_var.trace_add("write", lambda *args: self._delayed_search())
+
+        # 标签搜索
+        tags_search_frame = ttk.Frame(search_inputs_frame)
+        tags_search_frame.pack(fill=X, pady=2)
+        ttk.Label(tags_search_frame, text=language_manager.get_text("search_tags") + ":", style="Large.TLabel").pack(side=LEFT, padx=(0,5))
+        self.tags_search_var = tk.StringVar()
+        tags_entry = ttk.Entry(tags_search_frame, textvariable=self.tags_search_var, font=("Microsoft YaHei", 11), width=40)
+        tags_entry.pack(side=LEFT, fill=X, expand=True)
+        self.tags_search_var.trace_add("write", lambda *args: self._delayed_search())
         
-        # 创建清除按钮
-        clear_btn = ttk.Button(
-            frame,
-            text=language_manager.get_text("clear"),
-            command=self._clear_search,
-            width=8,
+        # 清除所有筛选和搜索按钮
+        clear_all_filters_button = ttk.Button(
+            outer_frame, 
+            text=language_manager.get_text("clear_all_filters"),
+            command=self._clear_all_filters_and_search,
             style="Large.TButton"
         )
-        clear_btn.pack(side=LEFT, padx=4)
+        clear_all_filters_button.pack(pady=5)
+
+    def _delayed_search(self):
+        """延迟搜索以避免过于频繁的更新"""
+        if hasattr(self, '_search_after_id'):
+            self.after_cancel(self._search_after_id)
+        self._search_after_id = self.after(300, self._apply_filters_and_search) # 300ms延迟
+
+    def _clear_all_filters_and_search(self):
+        """清除所有筛选条件和搜索框内容"""
+        self.rule_type_var.set("all")
+        self.rule_status_var.set("all")
+        self.condition_search_var.set("")
+        self.effect_search_var.set("")
+        self.tags_search_var.set("")
+        # _apply_filters_and_search 会被Radiobutton的command自动触发，或者手动调用一次
+        self._apply_filters_and_search()
+
+    def _apply_filters_and_search(self):
+        """应用所有筛选和搜索条件来更新规则列表的显示 - 非层级化描述行"""
+        self.logger.debug("LogicLibrary _apply_filters_and_search: 开始应用筛选和搜索。清空现有Treeview项。")
+        for item in self.tree.get_children():
+            self.tree.delete(item)
+
+        selected_type = self.rule_type_var.get()
+        selected_status_val = self.rule_status_var.get()
+        search_condition_term = self.condition_search_var.get().strip().upper()
+        search_effect_term = self.effect_search_var.get().strip().upper()
+        search_tags_input = self.tags_search_var.get().strip().upper()
+        search_tags_list = [tag.strip() for tag in search_tags_input.split(',') if tag.strip()] if search_tags_input else []
+
+        matched_rules_count = 0
+        self.logger.debug(f"LogicLibrary _apply_filters_and_search: 从self.cached_rules (共 {len(self.cached_rules)} 条) 开始迭代。")
+        for rule in self.cached_rules:
+            if selected_type != "all" and not rule.rule_id.startswith(selected_type):
+                continue
+            if selected_status_val != "all" and rule.status.value != selected_status_val:
+                continue
+            
+            if search_condition_term:
+                condition_parts = rule.condition.upper().split()
+                found_condition_match = any(part.strip("()").startswith(search_condition_term) for part in condition_parts)
+                if not found_condition_match and search_condition_term not in rule.condition.upper():
+                    continue
+            
+            if search_effect_term:
+                action_upper = rule.action.upper()
+                found_effect_match = False
+                if search_effect_term.isdigit():
+                    if not ExpressionValidator.is_tuning_logic(rule.action):
+                        last_sep_index = max(rule.action.rfind(':'), rule.action.rfind('-'))
+                        if last_sep_index != -1:
+                            target_bom_part = rule.action[last_sep_index + 1:]
+                            if target_bom_part.isdigit() and target_bom_part.startswith(search_effect_term):
+                                found_effect_match = True
+                    else:
+                        action_numbers = re.findall(r'\d+', rule.action)
+                        if any(num_seq.startswith(search_effect_term) for num_seq in action_numbers):
+                            found_effect_match = True
+                elif search_effect_term in action_upper:
+                    found_effect_match = True
+                if not found_effect_match:
+                    continue
+
+            if search_tags_list:
+                rule_tags_upper = str(rule.tags).upper() if hasattr(rule, 'tags') and rule.tags else ""
+                if not any(search_tag_item in rule_tags_upper for search_tag_item in search_tags_list):
+                    continue
+            
+            # 插入规则行
+            status_display_text = language_manager.get_text(rule.status.value)
+            self.logger.debug(f"LogicLibrary _apply_filters_and_search: 准备插入规则ID '{rule.rule_id}'，状态 '{rule.status.value}' (显示为 '{status_display_text}').")
+            rule_values = (
+                rule.rule_id,
+                rule.condition,
+                f"→ {rule.action}",
+                status_display_text,
+                rule.tags if hasattr(rule, 'tags') else "",
+                os.path.basename(rule.tech_doc_path) if hasattr(rule, 'tech_doc_path') and rule.tech_doc_path else ""
+            )
+            self.tree.insert("", "end", iid=rule.rule_id, values=rule_values, tags=('rule_row',))
+
+            # 插入描述行 (如果存在)
+            if rule.description:
+                parts = rule.description.split('→', 1)
+                cond_desc = parts[0].strip() if parts else ""
+                eff_desc = parts[1].strip() if len(parts) > 1 else ""
+                desc_item_id = f"{rule.rule_id}_desc_sep"
+                desc_values = ("", f"  └─ {cond_desc}", eff_desc, "", "", "") 
+                self.tree.insert("", "end", iid=desc_item_id, values=desc_values, tags=('description_row_sep',))
+            
+            matched_rules_count += 1
         
-        # 绑定搜索事件
-        self.search_var.trace_add("write", self._on_search_changed)
-        
+        self.tree.tag_configure('description_row_sep', foreground='gray50')
+        self.tree.tag_configure('rule_row', background='white')
+        self.logger.info(f"LogicLibrary _apply_filters_and_search: 筛选和搜索完成：显示 {matched_rules_count}/{len(self.cached_rules)} 条规则。")
+
     def _create_rules_frame(self, parent):
         """创建规则列表框架"""
         frame = ttk.LabelFrame(
@@ -148,13 +298,13 @@ class LogicLibraryWindow(tk.Toplevel):
         self.tree.heading("tags", text=language_manager.get_text("rule_tags"), anchor=CENTER)
         self.tree.heading("tech_doc", text=language_manager.get_text("tech_doc"), anchor=CENTER)
         
-        # 设置列宽
-        self.tree.column("rule_id", width=80, anchor=CENTER)
-        self.tree.column("condition", width=250, anchor=CENTER)
-        self.tree.column("effect", width=250, anchor=CENTER)
-        self.tree.column("status", width=80, anchor=CENTER)
-        self.tree.column("tags", width=120, anchor=CENTER)
-        self.tree.column("tech_doc", width=120, anchor=CENTER)
+        # 设置列宽 (调整后)
+        self.tree.column("rule_id", width=60, anchor=CENTER, stretch=tk.NO)
+        self.tree.column("condition", width=310, anchor=W)
+        self.tree.column("effect", width=310, anchor=W)
+        self.tree.column("status", width=60, anchor=CENTER, stretch=tk.NO)
+        self.tree.column("tags", width=80, anchor=CENTER, stretch=tk.NO)
+        self.tree.column("tech_doc", width=80, anchor=CENTER, stretch=tk.NO)
         
         # 配置大字体样式
         style = ttk.Style()
@@ -231,235 +381,165 @@ class LogicLibraryWindow(tk.Toplevel):
             self.tree.selection_set(item)
             self.context_menu.post(event.x_root, event.y_root)
             
+    def _get_actual_rule_id_from_item(self, item_id: str) -> Optional[str]:
+        """从给定的Treeview item ID (可能是规则行或描述行) 获取实际的规则ID。"""
+        if not item_id or not self.tree.exists(item_id):
+            return None
+        
+        if self.tree.tag_has('description_row_sep', item_id):
+            current_index = self.tree.index(item_id)
+            if current_index > 0:
+                all_items = self.tree.get_children("")
+                if current_index < len(all_items) and current_index > 0 :
+                    potential_rule_item_id = all_items[current_index-1]
+                    if (self.tree.tag_has('rule_row', potential_rule_item_id) and
+                       potential_rule_item_id == item_id.replace("_desc_sep", "")):
+                        return potential_rule_item_id
+            base_id = item_id.rsplit('_desc_sep', 1)[0]
+            if self.tree.exists(base_id) and self.tree.tag_has('rule_row', base_id):
+                return base_id
+            return None
+        elif self.tree.tag_has('rule_row', item_id):
+            return item_id
+        return None
+
     def _edit_selected_rule(self):
-        """编辑选中的规则"""
+        """编辑选中的规则 - 支持非层级化描述行"""
         try:
-            selection = self.tree.selection()
-            if not selection:
+            selected_item_id = self.tree.focus()
+            if not selected_item_id:
+                selection = self.tree.selection()
+                if not selection: return
+                selected_item_id = selection[0]
+
+            rule_id = self._get_actual_rule_id_from_item(selected_item_id)
+            if not rule_id:
+                self.logger.warning(f"LogicLibrary: 无法从选中项 {selected_item_id} 推断规则ID进行编辑。")
                 return
-                
-            item = selection[0]
-            rule = self.logic_builder.get_rule_by_id(item)
-            if not rule:
+
+            rule_obj = self.logic_builder.get_rule_by_id(rule_id)
+            if not rule_obj:
+                self.logger.error(f"LogicLibrary: 找不到规则 {rule_id}。")
+                messagebox.showerror(language_manager.get_text("error"), f"找不到规则 {rule_id}", parent=self)
                 return
-                
-            # 保存当前的标签和技术文档值
-            current_values = self.tree.item(item)["values"]
-            current_tags = current_values[4] if len(current_values) > 4 else ""
-            current_tech_doc = current_values[5] if len(current_values) > 5 else ""
-                
-            # 创建编辑对话框
-            dialog = LogicRuleEditor(self, rule, self.logic_builder)
-            result = dialog.show()
             
-            if result:
-                # 更新树形视图中的显示，保留标签和技术文档
-                effect_text = f"→ {result['effect']}"
-                self.tree.item(
-                    item,
-                    values=(
-                        rule.rule_id,
-                        result["condition"],
-                        effect_text,
-                        language_manager.get_text(result["status"].value),
-                        current_tags,  # 保持原有标签
-                        current_tech_doc  # 保持原有技术文档
-                    )
-                )
+            # 直接将从logic_builder获取的rule_obj传递给编辑器
+            dialog = LogicRuleEditor(self, rule_obj, self.logic_builder) 
+            result = dialog.show() 
+            
+            if result: 
+                # LogicRuleEditor 的 _on_confirm 应该已经修改了传入的 rule_obj 的属性
+                # (condition, action, status)
+                # 为了保险，可以像LogicPanel那样显式地从result中设置，
+                # 但如果LogicRuleEditor正确地修改了传入的rule_obj，则这些是多余的。
+                if 'condition' in result:
+                    rule_obj.condition = result["condition"]
+                if 'effect' in result:
+                    rule_obj.action = result["effect"]
+                if 'status' in result:
+                    new_status_val = result["status"]
+                    if isinstance(new_status_val, str):
+                        try:
+                            rule_obj.status = RuleStatus(new_status_val)
+                        except ValueError:
+                            self.logger.error(f"LogicLibrary: 从编辑器接收到无效的状态字符串 '{new_status_val}' for {rule_id}.")
+                    elif isinstance(new_status_val, RuleStatus):
+                        rule_obj.status = new_status_val
+                    else:
+                        self.logger.error(f"LogicLibrary: 从编辑器接收到未知类型的状态 '{type(new_status_val)}' for {rule_id}.")
                 
-                # 更新逻辑构建器中的规则，但不更改标签和技术文档
-                rule.condition = result["condition"]
-                rule.action = result["effect"]
-                rule.status = result["status"]
-                # 不更新 rule.tags 和 rule.tech_doc_path
-                self.logic_builder._save_rules()  # 保存更改
-                
-                # 通知规则变更
-                self.logic_builder.notify_rule_change("modified", rule.rule_id, rule)
-                
-                self.logger.info(f"已编辑规则: {rule.rule_id}")
-                
+                # 调用 update_rule_description 会保存整个 rule_obj (包括修改后的status)
+                updated_rule_obj = self.logic_builder.update_rule_description(rule_obj.rule_id)
+
+                if updated_rule_obj:
+                    self.logger.info(f"LogicLibrary: 规则 {rule_obj.rule_id} 编辑完成并通过LogicBuilder更新。")
+                    # _on_rule_change 会被调用以刷新列表
+                else:
+                    self.logger.error(f"LogicLibrary: LogicBuilder 未能更新规则 {rule_obj.rule_id}。")
         except Exception as e:
             self.logger.error(f"编辑规则失败: {str(e)}", exc_info=True)
-            messagebox.showerror(
-                language_manager.get_text("error"),
-                str(e)
-            )
+            messagebox.showerror(language_manager.get_text("error"), str(e), parent=self)
             
     def _delete_selected_rule(self):
-        """删除选中的规则"""
+        """删除选中的规则 - 支持非层级化描述行"""
         try:
-            selection = self.tree.selection()
-            if not selection:
+            selected_item_id = self.tree.focus()
+            if not selected_item_id:
+                selection = self.tree.selection()
+                if not selection: return
+                selected_item_id = selection[0]
+
+            rule_id_to_delete = self._get_actual_rule_id_from_item(selected_item_id)
+            if not rule_id_to_delete:
+                self.logger.warning(f"LogicLibrary: 无法从选中项 {selected_item_id} 推断规则ID进行删除。")
+                messagebox.showwarning(language_manager.get_text("warning"), "请选择一个有效的规则进行删除。", parent=self)
                 return
                 
-            item = selection[0]
-            
-            # 确认删除
             if not messagebox.askyesno(
                 language_manager.get_text("confirm"),
-                language_manager.get_text("confirm_delete_rule")
+                language_manager.get_text("confirm_delete_rule"),
+                parent=self
             ):
                 return
                 
-            # 从逻辑构建器中删除规则
-            self.logic_builder.delete_rule(item)
-            
-            # 从树形视图中删除
-            self.tree.delete(item)
-            
-            # 通知规则变更
-            self.logic_builder.notify_rule_change("deleted", item)
-            
-            self.logger.info(f"已删除规则: {item}")
-            
+            if self.logic_builder.delete_rule(rule_id_to_delete):
+                self.logger.info(f"LogicLibrary: 请求删除规则 {rule_id_to_delete}")
+            else:
+                self.logger.error(f"LogicLibrary: LogicBuilder 未能删除规则 {rule_id_to_delete}")
+                messagebox.showerror(language_manager.get_text("error"), f"删除规则 {rule_id_to_delete} 失败。", parent=self)
+                
         except Exception as e:
             self.logger.error(f"删除规则失败: {str(e)}", exc_info=True)
-            messagebox.showerror(
-                language_manager.get_text("error"),
-                str(e)
-            )
+            messagebox.showerror(language_manager.get_text("error"), str(e), parent=self)
             
     def _change_rule_status(self, new_status: RuleStatus):
-        """更改规则状态"""
+        """更改规则状态 - 支持非层级化描述行"""
         try:
-            selection = self.tree.selection()
-            if not selection:
+            selected_item_id = self.tree.focus()
+            if not selected_item_id:
+                selection = self.tree.selection()
+                if not selection: return
+                selected_item_id = selection[0]
+
+            rule_id = self._get_actual_rule_id_from_item(selected_item_id)
+            if not rule_id:
+                self.logger.warning(f"LogicLibrary: 无法从选中项 {selected_item_id} 推断规则ID以更改状态。")
                 return
                 
-            item = selection[0]
-            rule = self.logic_builder.get_rule_by_id(item)
+            rule = self.logic_builder.get_rule_by_id(rule_id)
             if not rule:
+                self.logger.error(f"LogicLibrary: _change_rule_status 找不到规则 {rule_id}")
                 return
                 
-            # 更新规则状态
             rule.status = new_status
-            
-            # 更新树形视图显示
-            values = list(self.tree.item(item)["values"])
-            values[3] = language_manager.get_text(new_status.value)
-            self.tree.item(item, values=values)
-            
-            # 保存更改
             self.logic_builder._save_rules()
-            
-            # 通知规则变更
             self.logic_builder.notify_rule_change("modified", rule.rule_id, rule)
-            
-            self.logger.info(f"已更改规则状态: {item} -> {new_status.value}")
+            self.logger.info(f"LogicLibrary: 已更改规则状态: {rule_id} -> {new_status.value}")
             
         except Exception as e:
             self.logger.error(f"更改规则状态失败: {str(e)}", exc_info=True)
-            messagebox.showerror(
-                language_manager.get_text("error"),
-                str(e)
-            )
+            messagebox.showerror(language_manager.get_text("error"), str(e), parent=self)
         
     def _clear_search(self):
         """清空搜索"""
-        self.search_var.set("")
+        self.condition_search_var.set("")
+        self.effect_search_var.set("")
+        self.tags_search_var.set("")
+        self._apply_filters_and_search()
         
     def _on_search_changed(self, *args):
         """搜索内容变化事件处理"""
-        search_text = self.search_var.get().strip()
+        self._delayed_search()
         
-        try:
-            # 清空当前显示
-            for item in self.tree.get_children():
-                self.tree.delete(item)
-            
-            # 如果搜索框为空，显示缓存的所有规则
-            if not search_text:
-                self._show_cached_rules()
-                return
-            
-            # 使用缓存的规则进行搜索，避免重复加载
-            matched_rules = 0
-            search_upper = search_text.upper()
-            
-            for rule in self.cached_rules:
-                show_rule = False
-                
-                # 1. K码搜索（严格顺序匹配）
-                if search_upper == 'K' or search_upper.startswith('K-'):
-                    if rule.condition.upper().startswith(search_upper):
-                        show_rule = True
-                
-                # 2. 数字搜索
-                elif search_text.isdigit():
-                    # 2.1 影响项表达式（严格顺序匹配最后一个-后的数字）
-                    impact_parts = rule.action.split('-')
-                    if impact_parts and impact_parts[-1].startswith(search_text):
-                        show_rule = True
-                    # 2.2 标签中的数字（如果标签包含数字，也进行搜索）
-                    elif hasattr(rule, 'tags') and rule.tags:
-                        if any(tag.strip().startswith(search_text) for tag in str(rule.tags).split(',')):
-                            show_rule = True
-                
-                # 3. 标签搜索（严格顺序匹配）
-                elif hasattr(rule, 'tags') and rule.tags:
-                    if any(tag.strip().startswith(search_text) for tag in str(rule.tags).split(',')):
-                        show_rule = True
-                
-                # 4. 通用搜索（严格顺序匹配）
-                else:
-                    if (rule.rule_id.upper().startswith(search_upper) or
-                        rule.condition.upper().startswith(search_upper) or
-                        rule.action.startswith(search_text) or
-                        (hasattr(rule, 'tags') and rule.tags and 
-                         any(tag.strip().startswith(search_text) for tag in str(rule.tags).split(',')))):
-                        show_rule = True
-                
-                # 如果规则匹配，显示它
-                if show_rule:
-                    effect_text = f"→ {rule.action}"
-                    self.tree.insert(
-                        "",
-                        "end",
-                        iid=rule.rule_id,
-                        values=(
-                            rule.rule_id,
-                            rule.condition,
-                            effect_text,
-                            language_manager.get_text(rule.status.value),
-                            rule.tags if hasattr(rule, 'tags') else "",
-                            os.path.basename(rule.tech_doc_path) if hasattr(rule, 'tech_doc_path') and rule.tech_doc_path else ""
-                        )
-                    )
-                    matched_rules += 1
-            
-            self.logger.info(f"搜索 '{search_text}' 完成：显示 {matched_rules}/{len(self.cached_rules)} 条规则")
-            
-        except Exception as e:
-            self.logger.error(f"搜索失败: {str(e)}")
-            # 发生错误时显示所有缓存的规则
-            self._show_cached_rules()
-            
     def _show_cached_rules(self):
         """显示所有缓存的规则"""
         try:
-            # 清空当前显示
-            for item in self.tree.get_children():
-                self.tree.delete(item)
-                
-            # 显示所有缓存的规则
-            for rule in self.cached_rules:
-                effect_text = f"→ {rule.action}"
-                self.tree.insert(
-                    "",
-                    "end",
-                    iid=rule.rule_id,
-                    values=(
-                        rule.rule_id,
-                        rule.condition,
-                        effect_text,
-                        language_manager.get_text(rule.status.value),
-                        rule.tags if hasattr(rule, 'tags') else "",
-                        os.path.basename(rule.tech_doc_path) if hasattr(rule, 'tech_doc_path') and rule.tech_doc_path else ""
-                    )
-                )
-                
-            self.logger.info(f"已显示所有规则（共 {len(self.cached_rules)} 条）")
+            self.rule_type_var.set("all")
+            self.rule_status_var.set("all")
+            self.condition_search_var.set("")
+            self.effect_search_var.set("")
+            self.tags_search_var.set("")
+            self._apply_filters_and_search()
             
         except Exception as e:
             self.logger.error(f"显示缓存规则失败: {str(e)}")
@@ -695,111 +775,67 @@ class LogicLibraryWindow(tk.Toplevel):
             )
 
     def _load_rules(self):
-        """加载规则数据"""
+        """加载规则数据 - 非层级化描述行"""
         try:
-            # 清空现有数据
             for item in self.tree.get_children():
                 self.tree.delete(item)
             
-            # 强制从文件重新加载规则到 LogicBuilder
-            self.logic_builder.load_from_temp_file()
+            # self.logic_builder.load_from_temp_file() # 确保 LogicBuilder 有最新的规则，这通常在窗口打开前完成
+            self.cached_rules = list(self.logic_builder.get_rules()) 
             
-            # 更新规则缓存
-            self.cached_rules = list(self.logic_builder.get_rules())
-            
-            # 加载所有规则
-            rules_loaded = 0
+            rules_loaded_count = 0
             for rule in self.cached_rules:
-                effect_text = f"→ {rule.action}"
-                
-                self.tree.insert(
-                    "",
-                    "end",
-                    iid=rule.rule_id,
-                    values=(
-                        rule.rule_id,
-                        rule.condition,
-                        effect_text,
-                        language_manager.get_text(rule.status.value),
-                        rule.tags if hasattr(rule, 'tags') else "",
-                        os.path.basename(rule.tech_doc_path) if hasattr(rule, 'tech_doc_path') and rule.tech_doc_path else ""
-                    )
+                rule_values = (
+                    rule.rule_id,
+                    rule.condition,
+                    f"→ {rule.action}",
+                    language_manager.get_text(rule.status.value),
+                    rule.tags if hasattr(rule, 'tags') else "",
+                    os.path.basename(rule.tech_doc_path) if hasattr(rule, 'tech_doc_path') and rule.tech_doc_path else ""
                 )
-                rules_loaded += 1
+                self.tree.insert("", "end", iid=rule.rule_id, values=rule_values, tags=('rule_row',))
+                
+                if rule.description:
+                    parts = rule.description.split('→', 1)
+                    cond_desc = parts[0].strip() if parts else ""
+                    eff_desc = parts[1].strip() if len(parts) > 1 else ""
+                    desc_item_id = f"{rule.rule_id}_desc_sep"
+                    desc_values = ("", f"  └─ {cond_desc}", eff_desc, "", "", "")
+                    self.tree.insert("", "end", iid=desc_item_id, values=desc_values, tags=('description_row_sep',))
+                rules_loaded_count += 1
             
-            self.logger.info(f"已加载 {rules_loaded} 条规则")
+            self.tree.tag_configure('description_row_sep', foreground='gray50')
+            self.tree.tag_configure('rule_row', background='white')
+            self.logger.info(f"LogicLibrary: 已加载 {rules_loaded_count} 条规则 (非层级)。")
             
+            self._apply_filters_and_search() # 应用筛选和搜索
+
         except Exception as e:
-            self.logger.error(f"加载规则数据失败: {str(e)}")
+            self.logger.error(f"加载规则数据失败: {str(e)}", exc_info=True)
 
     def _on_rule_change(self, change_type, rule_id=None, rule=None):
-        """规则变更事件处理"""
+        """规则变更事件处理 - 非层级化描述行"""
         try:
-            self.logger.info(f"收到规则变更事件: type={change_type}, rule_id={rule_id}")
+            self.logger.info(f"LogicLibrary _on_rule_change: 收到通知: 类型='{change_type}', RuleID='{rule_id}'")
+            if rule:
+                self.logger.debug(f"LogicLibrary _on_rule_change: 附带的Rule对象: ID='{rule.rule_id}', Status='{rule.status.value if rule.status else 'N/A'}', Desc='{rule.description[:30]}...'")
+            elif rule_id:
+                self.logger.debug(f"LogicLibrary _on_rule_change: 仅有RuleID: {rule_id}")
+
+            self.logger.debug(f"LogicLibrary _on_rule_change: 更新self.cached_rules前，包含 {len(self.cached_rules)} 条规则。")
+            self.cached_rules = list(self.logic_builder.get_rules())
+            self.logger.debug(f"LogicLibrary _on_rule_change: 更新self.cached_rules后，包含 {len(self.cached_rules)} 条规则。调用 _apply_filters_and_search。")
             
-            if change_type == "imported":
-                # 重新加载所有规则
-                self._load_rules()
-                self.logger.info("已重新加载所有规则")
-            elif change_type == "deleted":
-                # 删除规则
-                if rule_id and rule_id in self.tree.get_children():
-                    self.tree.delete(rule_id)
-                    self.logger.info(f"已删除规则: {rule_id}")
-            elif change_type == "cleared":
-                # 清空所有规则
-                for item in self.tree.get_children():
-                    self.tree.delete(item)
-                self.logger.info("已清空所有规则")
-            elif change_type in ["added", "modified"]:
-                # 更新或添加规则
-                if rule:
-                    effect_text = f"→ {rule.action}"
-                    try:
-                        if rule.rule_id in self.tree.get_children():
-                            # 获取当前的标签和技术文档值
-                            current_values = self.tree.item(rule.rule_id)["values"]
-                            current_tags = current_values[4] if len(current_values) > 4 else ""
-                            current_tech_doc = current_values[5] if len(current_values) > 5 else ""
-                            
-                            # 如果规则对象中有标签和技术文档，则使用规则对象中的值
-                            tags = rule.tags if hasattr(rule, 'tags') and rule.tags else current_tags
-                            tech_doc = os.path.basename(rule.tech_doc_path) if hasattr(rule, 'tech_doc_path') and rule.tech_doc_path else current_tech_doc
-                            
-                            # 更新现有规则，保留标签和技术文档
-                            self.tree.item(
-                                rule.rule_id,
-                                values=(
-                                    rule.rule_id,
-                                    rule.condition,
-                                    effect_text,
-                                    language_manager.get_text(rule.status.value),
-                                    tags,
-                                    tech_doc
-                                )
-                            )
-                            self.logger.info(f"已更新规则: {rule.rule_id}")
-                        else:
-                            # 添加新规则
-                            self.tree.insert(
-                                "",
-                                "end",
-                                iid=rule.rule_id,
-                                values=(
-                                    rule.rule_id,
-                                    rule.condition,
-                                    effect_text,
-                                    language_manager.get_text(rule.status.value),
-                                    ",".join(rule.tags) if rule.tags else "",
-                                    os.path.basename(rule.tech_doc_path) if rule.tech_doc_path else ""
-                                )
-                            )
-                            self.logger.info(f"已添加新规则: {rule.rule_id}")
-                    except Exception as e:
-                        self.logger.error(f"更新/添加规则到树状视图失败: {str(e)}, 规则ID: {rule.rule_id}")
-                        
+            self._apply_filters_and_search()
+            
+            self.logger.info(f"LogicLibrary _on_rule_change: 因 '{change_type}' (非层级)，规则列表已通过重新筛选和加载进行刷新。")
+
+            self.tree.tag_configure('description_row_sep', foreground='gray50')
+            self.tree.update_idletasks()
+            self.logger.debug(f"LogicLibrary _on_rule_change: Treeview update_idletasks() 已调用。")
+
         except Exception as e:
-            self.logger.error(f"处理规则变更事件失败: {str(e)}", exc_info=True)
+            self.logger.error(f"LogicLibrary: 处理规则变更事件 (非层级) 失败: {str(e)}", exc_info=True)
             
     def refresh_texts(self):
         """刷新所有文本"""

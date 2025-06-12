@@ -1,0 +1,152 @@
+2025-06-11 14:15:18,978 [INFO] root - 程序启动，日志文件: C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\logs\log_20250611_141518.log
+2025-06-11 14:15:19,469 [INFO] __main__ - 正在启动程序...
+2025-06-11 14:15:19,469 [DEBUG] __main__ - Python版本: 3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]
+2025-06-11 14:15:19,469 [DEBUG] __main__ - 当前工作目录: C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder
+2025-06-11 14:15:19,469 [DEBUG] __main__ - src_dir路径: c:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder
+2025-06-11 14:15:19,540 [INFO] __main__ - 正在创建语言选择对话框...
+2025-06-11 14:15:22,398 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-06-11 14:15:22,411 [INFO] __main__ - 语言选择结果: zh
+2025-06-11 14:15:22,412 [INFO] __main__ - 正在创建主题选择对话框...
+2025-06-11 14:15:22,412 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-06-11 14:15:22,418 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-06-11 14:15:22,954 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-06-11 14:15:22,968 [INFO] __main__ - 主题选择结果: light
+2025-06-11 14:15:22,971 [INFO] __main__ - 正在配置主窗口...
+2025-06-11 14:15:23,094 [INFO] __main__ - 开始创建MainWindow实例...
+2025-06-11 14:15:23,098 [INFO] core.logic_builder - 从 C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\data\temp_rules_latest.json 加载时检测到新版大写键名规则文件格式 (BL_rules/TL_rules)。
+2025-06-11 14:15:23,098 [INFO] core.logic_builder - 已加载 0 条规则从 C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-06-11 14:15:23,184 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-06-11 14:15:23,195 [INFO] __main__ - MainWindow实例创建完成
+2025-06-11 14:15:23,473 [INFO] __main__ - 开始mainloop()...
+2025-06-11 14:15:24,199 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-06-11 14:15:24,199 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='imported', RuleID='None'
+2025-06-11 14:15:24,199 [INFO] gui.logic_panel - LogicPanel _on_rule_change (imported): 收到 'imported' 通知，将重新加载所有规则到Treeview。
+2025-06-11 14:15:24,199 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-06-11 14:15:24,199 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'imported' 完成。
+2025-06-11 14:15:24,199 [INFO] core.logic_builder - 从临时文件 (C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 0 条规则完成。导出状态: True
+2025-06-11 14:15:24,199 [INFO] gui.main_window_tk - 未检测到需要提示加载的未导出规则。MainWindow.rules_loaded 设置为 False。
+2025-06-11 14:15:24,199 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-06-11 14:15:57,043 [INFO] gui.bom_panel - 用户选择了新的BOM文件: C:/Users/wsh12/OneDrive - Technische Hochschule Ulm/pytest/ZK_LogicBom_Builder/Bom.xlsx
+2025-06-11 14:15:57,043 [INFO] core.bom_processor - 开始导入BOM文件: C:/Users/wsh12/OneDrive - Technische Hochschule Ulm/pytest/ZK_LogicBom_Builder/Bom.xlsx
+2025-06-11 14:15:57,043 [INFO] core.bom_processor - 已清空现有数据
+2025-06-11 14:15:57,043 [INFO] core.bom_processor - 正在读取Excel文件...
+2025-06-11 14:15:57,418 [INFO] core.bom_processor - 成功打开Excel文件，包含以下工作表: ['Max-Gruppe']
+2025-06-11 14:15:57,418 [INFO] core.bom_processor - 正在读取 Max-Gruppe 工作表...
+2025-06-11 14:15:57,454 [INFO] core.bom_processor - 成功读取工作表，共 154 行数据
+2025-06-11 14:15:57,454 [INFO] core.bom_processor - 所有必需列均存在，开始处理数据...
+2025-06-11 14:15:57,454 [INFO] core.bom_processor - 过滤空层级后剩余 153 行数据
+2025-06-11 14:15:57,471 [INFO] core.bom_processor - 
+开始处理数据...
+2025-06-11 14:15:57,476 [INFO] core.bom_processor - 
+数据处理完成，成功处理 {processed_count} 行数据
+2025-06-11 14:15:57,476 [INFO] core.bom_processor - 第 1 级节点数量: 1
+2025-06-11 14:15:57,476 [INFO] core.bom_processor - 第 2 级节点数量: 133
+2025-06-11 14:15:57,476 [INFO] core.bom_processor - 第 3 级节点数量: 19
+2025-06-11 14:15:57,476 [INFO] core.bom_processor - BOM文件导入成功，共处理 153 个项目
+2025-06-11 14:15:57,476 [INFO] gui.bom_panel - 成功导入BOM文件: C:/Users/wsh12/OneDrive - Technische Hochschule Ulm/pytest/ZK_LogicBom_Builder/Bom.xlsx
+2025-06-11 14:15:57,476 [INFO] gui.bom_panel - 开始刷新树状图
+2025-06-11 14:15:57,483 [INFO] gui.bom_panel - 树状图刷新完成
+2025-06-11 14:15:57,486 [INFO] gui.main_window_tk - 成功保存BOM文件路径到app_config.json: C:/Users/wsh12/OneDrive - Technische Hochschule Ulm/pytest/ZK_LogicBom_Builder/Bom.xlsx
+2025-06-11 14:15:57,486 [INFO] gui.bom_panel - 已保存BOM文件路径到app_config.json: C:/Users/wsh12/OneDrive - Technische Hochschule Ulm/pytest/ZK_LogicBom_Builder/Bom.xlsx
+2025-06-11 14:16:06,668 [INFO] gui.config_panel - 用户选择了新的配置文件: C:/Users/wsh12/OneDrive - Technische Hochschule Ulm/pytest/ZK_LogicBom_Builder/Kabinemekrmal(Test).xlsx
+2025-06-11 14:16:06,684 [INFO] core.config_processor - 找到工作表: ['1.Kabine']
+2025-06-11 14:16:06,684 [INFO] core.config_processor - 处理工作表: 1.Kabine -> 模块: 1.Kabine
+2025-06-11 14:16:06,728 [INFO] gui.config_panel - 成功导入配置文件: C:/Users/wsh12/OneDrive - Technische Hochschule Ulm/pytest/ZK_LogicBom_Builder/Kabinemekrmal(Test).xlsx
+2025-06-11 14:16:06,751 [INFO] gui.main_window_tk - 成功保存配置文件路径到app_config.json: C:/Users/wsh12/OneDrive - Technische Hochschule Ulm/pytest/ZK_LogicBom_Builder/Kabinemekrmal(Test).xlsx
+2025-06-11 14:16:06,751 [INFO] gui.config_panel - 已保存配置文件路径到app_config.json: C:/Users/wsh12/OneDrive - Technische Hochschule Ulm/pytest/ZK_LogicBom_Builder/Kabinemekrmal(Test).xlsx
+2025-06-11 14:16:09,446 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I010
+2025-06-11 14:16:09,446 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: HBG_200_01010 Sitzplatzvariante
+2025-06-11 14:16:09,446 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: HBG_200_01010
+2025-06-11 14:16:09,451 [DEBUG] gui.config_panel - ConfigPanel: 忽略非特征值: HBG_200_01010
+2025-06-11 14:16:10,679 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I014
+2025-06-11 14:16:10,679 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000344 ohne Wertfach
+2025-06-11 14:16:10,679 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000344
+2025-06-11 14:16:10,679 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000344
+2025-06-11 14:16:10,679 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-06-11 14:16:10,679 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-06-11 14:16:10,679 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-06-11 14:16:10,679 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000344
+2025-06-11 14:16:10,679 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000344, 当前表达式: K-200-000344 
+2025-06-11 14:16:10,679 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000344
+2025-06-11 14:16:17,420 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I01B
+2025-06-11 14:16:17,420 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000345 ohne Wertfach
+2025-06-11 14:16:17,420 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000345
+2025-06-11 14:16:17,420 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000345
+2025-06-11 14:16:17,420 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-06-11 14:16:17,420 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-06-11 14:16:17,420 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-06-11 14:16:17,420 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000345
+2025-06-11 14:16:18,425 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000345
+2025-06-11 14:16:19,617 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: AND, 当前表达式: K-200-000344  AND 
+2025-06-11 14:16:27,768 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I01C
+2025-06-11 14:16:27,768 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000011 Wertfach unterm Sitzpolster
+2025-06-11 14:16:27,768 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000011
+2025-06-11 14:16:27,768 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000011
+2025-06-11 14:16:27,771 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-06-11 14:16:27,772 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-06-11 14:16:27,772 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-06-11 14:16:27,772 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000011
+2025-06-11 14:16:27,774 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000011, 当前表达式: K-200-000344  
+AND 
+ K-200-000011 
+2025-06-11 14:16:27,774 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000011
+2025-06-11 14:19:15,041 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I01B
+2025-06-11 14:19:15,041 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000345 ohne Wertfach
+2025-06-11 14:19:15,041 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000345
+2025-06-11 14:19:15,057 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000345
+2025-06-11 14:19:15,057 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-06-11 14:19:15,057 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-06-11 14:19:15,057 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-06-11 14:19:15,057 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000345
+2025-06-11 14:19:16,423 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000345
+2025-06-11 14:19:19,251 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: AND, 当前表达式: K-200-000344  
+ AND 
+ K-200-000011
+ AND 
+2025-06-11 14:19:21,494 [DEBUG] gui.config_panel - ConfigPanel: 双击选中项 ID: I01C
+2025-06-11 14:19:21,494 [DEBUG] gui.config_panel - ConfigPanel: 选中项文本: K-200-000011 Wertfach unterm Sitzpolster
+2025-06-11 14:19:21,496 [DEBUG] gui.config_panel - ConfigPanel: 提取的代码: K-200-000011
+2025-06-11 14:19:21,496 [INFO] gui.config_panel - ConfigPanel: 准备插入特征值: K-200-000011
+2025-06-11 14:19:21,496 [DEBUG] gui.config_panel - ConfigPanel: 获取根窗口成功
+2025-06-11 14:19:21,496 [DEBUG] gui.config_panel - ConfigPanel: 获取MainWindow实例成功
+2025-06-11 14:19:21,496 [DEBUG] gui.config_panel - ConfigPanel: 找到逻辑面板
+2025-06-11 14:19:21,498 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: K-200-000011
+2025-06-11 14:19:21,498 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: K_code, 内容: K-200-000011, 当前表达式: K-200-000344  
+ AND 
+ K-200-000011
+ AND K-200-000011 
+2025-06-11 14:19:21,498 [INFO] gui.config_panel - ConfigPanel: 成功发送代码到逻辑面板: K-200-000011
+2025-06-11 14:19:30,508 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: operator, 内容: →, 当前表达式: K-200-000344  
+AND 
+K-200-000011
+AND 
+K-200-000011 
+ → 
+2025-06-11 14:19:32,746 [DEBUG] gui.bom_panel - BomPanel: 选中项文本: 1123244
+Einzelsitz Std Airbag Stra.li. / single seat std. airbag tensioner le.
+Z-Cab NG / Z-Cab NG
+2025-06-11 14:19:32,746 [DEBUG] gui.bom_panel - BomPanel: 提取到Baugruppe: 1123244
+2025-06-11 14:19:32,746 [DEBUG] gui.bom_panel - BomPanel: 提取到占位符: PL-Sitze01
+2025-06-11 14:19:32,746 [DEBUG] gui.bom_panel - BomPanel: 构建的BOM码: PL-Sitze01-1123244
+2025-06-11 14:19:32,746 [DEBUG] gui.bom_panel - BomPanel: 获取根窗口成功
+2025-06-11 14:19:32,748 [DEBUG] gui.bom_panel - BomPanel: 获取MainWindow实例成功
+2025-06-11 14:19:32,748 [DEBUG] gui.bom_panel - BomPanel: 找到逻辑面板
+2025-06-11 14:19:32,748 [DEBUG] gui.logic_panel - LogicPanel: 开始插入代码: PL-Sitze01-1123244
+2025-06-11 14:19:32,748 [DEBUG] gui.logic_panel - 验证BOM码: PL-Sitze01-1123244
+2025-06-11 14:19:32,748 [INFO] gui.logic_panel - LogicPanel: 输入历史 - 类型: BOM_code, 内容: PL-Sitze01-1123244, 当前表达式: K-200-000344  
+AND 
+K-200-000011
+AND 
+K-200-000011 
+ → PL-Sitze01-1123244 
+2025-06-11 14:19:32,748 [INFO] gui.bom_panel - BomPanel: 成功发送代码到逻辑面板: PL-Sitze01-1123244
+2025-06-11 14:19:32,748 [INFO] gui.bom_panel - BomPanel: 成功插入BOM码: PL-Sitze01-1123244
+2025-06-11 14:19:36,403 [INFO] gui.logic_panel - 成功将竖式表达式转换为横式
+2025-06-11 14:19:38,884 [INFO] utils.expression_formatter - 成功转换表达式为竖式格式 (grouped)
+2025-06-11 14:19:38,887 [INFO] gui.logic_panel - 成功将横式表达式转换为竖式 (grouped)
+2025-06-11 14:19:41,833 [INFO] gui.logic_panel - 成功将竖式表达式转换为横式
+2025-06-11 14:19:48,175 [INFO] utils.expression_formatter - 成功转换表达式为竖式格式 (grouped)
+2025-06-11 14:19:48,177 [INFO] gui.logic_panel - 成功将横式表达式转换为竖式 (grouped)
+2025-06-11 14:21:33,336 [INFO] gui.logic_panel - 成功将竖式表达式转换为横式
+2025-06-11 14:21:36,009 [INFO] utils.expression_formatter - 成功转换表达式为竖式格式 (grouped)
+2025-06-11 14:21:36,009 [INFO] gui.logic_panel - 成功将横式表达式转换为竖式 (grouped)

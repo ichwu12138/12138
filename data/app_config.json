@@ -1,7 +1,7 @@
 {
     "app_name": "ZK配置器",
     "version": "1.0.0",
-    "language": "zh",
+    "language": "de",
     "supported_languages": [
         "zh",
         "en",
@@ -59,7 +59,5 @@
         "exported": false,
         "last_export_time": null,
         "last_export_path": null
-    },
-    "last_config_path": "C:/Users/mengy/Desktop/Kabinemekrmal(Test).xlsx",
-    "last_bom_path": "C:/Users/mengy/Desktop/Bom.xlsx"
+    }
 }

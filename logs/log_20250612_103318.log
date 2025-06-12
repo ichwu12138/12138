@@ -1,0 +1,28 @@
+2025-06-12 10:33:18,993 [INFO] root - 程序启动，日志文件: C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\logs\log_20250612_103318.log
+2025-06-12 10:33:19,544 [INFO] __main__ - 正在启动程序...
+2025-06-12 10:33:19,544 [DEBUG] __main__ - Python版本: 3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]
+2025-06-12 10:33:19,544 [DEBUG] __main__ - 当前工作目录: C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder
+2025-06-12 10:33:19,544 [DEBUG] __main__ - src_dir路径: c:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder
+2025-06-12 10:33:19,654 [INFO] __main__ - 正在创建语言选择对话框...
+2025-06-12 10:33:22,123 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-06-12 10:33:22,152 [INFO] __main__ - 语言选择结果: zh
+2025-06-12 10:33:22,153 [INFO] __main__ - 正在创建主题选择对话框...
+2025-06-12 10:33:22,153 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-06-12 10:33:22,176 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-06-12 10:33:23,087 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-06-12 10:33:23,106 [INFO] __main__ - 主题选择结果: light
+2025-06-12 10:33:23,109 [INFO] __main__ - 正在配置主窗口...
+2025-06-12 10:33:23,284 [INFO] __main__ - 开始创建MainWindow实例...
+2025-06-12 10:33:23,288 [INFO] core.logic_builder - 从 C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\data\temp_rules_latest.json 加载时检测到新版大写键名规则文件格式 (BL_rules/TL_rules)。
+2025-06-12 10:33:23,288 [INFO] core.logic_builder - 已加载 0 条规则从 C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-06-12 10:33:23,415 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-06-12 10:33:23,438 [INFO] __main__ - MainWindow实例创建完成
+2025-06-12 10:33:23,676 [INFO] __main__ - 开始mainloop()...
+2025-06-12 10:33:28,122 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-06-12 10:33:28,122 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='imported', RuleID='None'
+2025-06-12 10:33:28,122 [INFO] gui.logic_panel - LogicPanel _on_rule_change (imported): 收到 'imported' 通知，将重新加载所有规则到Treeview。
+2025-06-12 10:33:28,122 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-06-12 10:33:28,122 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'imported' 完成。
+2025-06-12 10:33:28,122 [INFO] core.logic_builder - 从临时文件 (C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 0 条规则完成。导出状态: True
+2025-06-12 10:33:28,122 [INFO] gui.main_window_tk - 未检测到需要提示加载的未导出规则。MainWindow.rules_loaded 设置为 False。
+2025-06-12 10:33:28,122 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。

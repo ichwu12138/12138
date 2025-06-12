@@ -398,3 +398,36 @@ class BomProcessor:
         except Exception as e:
             self.logger.error(f"检查BOM码时出错: {str(e)}", exc_info=True)
             return False 
+
+    def get_bom_description(self, bom_code: str) -> str:
+        """根据BOM码生成描述字符串
+        
+        Args:
+            bom_code: BOM码 (格式如 "占位符-Baugruppe" 或 "Baugruppe")
+            
+        Returns:
+            str: 描述字符串 (格式如 "占位符-Objektkurztext-Langtext")，找不到则返回原BOM码
+        """
+        try:
+            # 尝试匹配所有存储的BOM项目
+            for item in self.bom_data.get("items", []):
+                if item.get("bom_code") == bom_code:
+                    placeholder = item.get("placeholder", "")
+                    name = item.get("name", "") # Objektkurztext
+                    long_text = item.get("long_text", "")
+                    
+                    desc_parts = []
+                    if placeholder:
+                        desc_parts.append(placeholder)
+                    if name:
+                        desc_parts.append(name)
+                    if long_text:
+                        desc_parts.append(long_text)
+                    
+                    return "-".join(desc_parts) if desc_parts else bom_code
+            
+            self.logger.warning(f"未找到BOM码 '{bom_code}' 对应的描述信息，将返回原BOM码。")
+            return bom_code
+        except Exception as e:
+            self.logger.error(f"为BOM码 '{bom_code}' 生成描述时出错: {str(e)}", exc_info=True)
+            return bom_code 

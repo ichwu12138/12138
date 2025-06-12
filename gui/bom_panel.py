@@ -55,16 +55,8 @@ class BomPanel(ttk.Frame):
         )
         self.title_label.pack(fill=X, pady=(0, 10))
         
-        # 创建工具栏框架
-        self.toolbar_frame = ttk.LabelFrame(
-            self,
-            text=language_manager.get_text("tools"),
-            style="Main.TLabelframe"
-        )
-        self.toolbar_frame.pack(fill=X, pady=(0, 10), padx=5)
-        
-        # 创建工具栏
-        self._create_toolbar(self.toolbar_frame)
+        # 创建搜索框架
+        self._create_search_frame()
         
         # 创建树状视图框架
         self.tree_frame = ttk.LabelFrame(
@@ -77,32 +69,220 @@ class BomPanel(ttk.Frame):
         # 创建树状视图
         self._create_tree(self.tree_frame)
         
-    def _create_toolbar(self, parent):
-        """创建工具栏"""
-        # 创建工具栏框架
-        toolbar = ttk.Frame(parent)
-        toolbar.pack(fill=X, pady=5)
-        
-        # 添加导入按钮
-        self.import_btn = ttk.Button(
-            toolbar,
-            text=language_manager.get_text("import_bom"),
-            command=self._import_bom,
-            style="Main.TButton",
-            width=20
+    def _create_search_frame(self):
+        """创建搜索框架"""
+        # 创建搜索框架
+        self.search_frame = ttk.LabelFrame(
+            self,
+            text=language_manager.get_text("search_bom_code"),
+            padding=5,
+            style="Main.TLabelframe"
         )
-        self.import_btn.pack(side=LEFT, padx=5)
+        self.search_frame.pack(fill=X, pady=(0, 10), padx=5)
+
+        # 创建搜索输入框
+        search_input_frame = ttk.Frame(self.search_frame)
+        search_input_frame.pack(fill=X, pady=2)
         
-        # 添加刷新按钮
-        self.refresh_btn = ttk.Button(
-            toolbar,
-            text=language_manager.get_text("refresh"),
-            command=self._refresh_tree,
-            style="Main.TButton",
-            width=20
+        # 搜索输入框
+        self.search_var = tk.StringVar()
+        search_entry = ttk.Entry(
+            search_input_frame,
+            textvariable=self.search_var,
+            font=("Microsoft YaHei", 11),
+            width=40
         )
-        self.refresh_btn.pack(side=LEFT, padx=5)
+        search_entry.pack(side=LEFT, fill=X, expand=True)
+        search_entry.bind("<Return>", lambda event: self._apply_search()) # 绑定回车键
+
+        # 添加清除按钮
+        self.clear_button = ttk.Button(
+            search_input_frame,
+            text=language_manager.get_text("clear"),
+            command=self._clear_search,
+            style="Main.TButton",
+            width=10
+        )
+        self.clear_button.pack(side=RIGHT, padx=5)
         
+    def _clear_search(self):
+        """清空搜索并重置树状图"""
+        self.search_var.set("")
+        self._refresh_tree() # 清除后刷新树
+
+    def _normalize_bom_code(self, code: str) -> str:
+        """标准化BOM码格式，提取最后分隔符后的数字部分
+        
+        Args:
+            code: 原始BOM码
+            
+        Returns:
+            str: 标准化后的BOM码数字部分
+        """
+        # 移除所有空白字符
+        code = code.strip()
+        
+        # 查找最后一个分隔符的位置
+        last_sep_index = -1
+        if ':' in code:
+            last_sep_index = code.rfind(':')
+        if '-' in code:
+            last_sep_index = max(last_sep_index, code.rfind('-'))
+            
+        # 如果找到分隔符，提取其后的数字部分
+        if last_sep_index != -1:
+            number_part = code[last_sep_index + 1:]
+            # 如果是纯数字，返回该部分
+            if number_part.isdigit():
+                return number_part
+        
+        # 如果没有找到分隔符或分隔符后不是数字，返回原始代码
+        return code.upper()
+
+    def _code_matches(self, search_term: str, code: str) -> bool:
+        """检查BOM码是否匹配搜索条件
+        
+        Args:
+            search_term: 搜索词
+            code: 要匹配的BOM码
+            
+        Returns:
+            bool: 是否匹配
+        """
+        if not search_term:
+            return True
+            
+        # 标准化搜索词和代码
+        normalized_search = self._normalize_bom_code(search_term)
+        normalized_code = self._normalize_bom_code(code)
+        
+        # 如果搜索词是纯数字，则只匹配最后分隔符后的数字部分
+        if normalized_search.isdigit():
+            return normalized_code.startswith(normalized_search)
+        
+        # 如果搜索词不是纯数字，则进行普通的包含匹配
+        return normalized_search in code.upper()
+
+    def _apply_search(self):
+        """应用搜索条件"""
+        try:
+            search_term = self.search_var.get().strip()
+            
+            # 如果搜索词为空，直接返回
+            if not search_term:
+                return
+                
+            # 获取BOM数据
+            bom_data = self.bom_processor.get_bom_data()
+            found_match = False
+            
+            # 遍历所有项目
+            for item in bom_data["items"]:
+                level = item["level"]
+                placeholder = item["placeholder"]
+                baugruppe = item["baugruppe"]
+                name = item["name"]
+                long_text = item["long_text"]
+                
+                # 检查是否匹配
+                if self._code_matches(search_term, baugruppe):
+                    found_match = True
+                    
+                    # 在树状图中查找或创建节点
+                    parent = ""
+                    parent_node = None
+                    
+                    # 查找或创建所有父级节点
+                    for parent_level in range(1, level):
+                        # 查找当前层级的父节点
+                        parent_items = self.tree.get_children(parent_node)
+                        level_node = None
+                        
+                        # 在当前层级中查找对应的节点
+                        for p_item in parent_items:
+                            if self.tree.item(p_item)["text"].startswith(f"[{parent_level}]"):
+                                level_node = p_item
+                                break
+                        
+                        # 如果没有找到，创建新的层级节点
+                        if not level_node:
+                            # 获取该层级的占位符
+                            level_placeholder = None
+                            for bom_item in bom_data["items"]:
+                                if bom_item["level"] == parent_level:
+                                    level_placeholder = bom_item["placeholder"]
+                                    break
+                            
+                            if level_placeholder:
+                                level_node = self.tree.insert(
+                                    parent_node,
+                                    "end",
+                                    text=f"[{parent_level}] {level_placeholder}",
+                                    tags=("level_node",)
+                                )
+                        
+                        parent_node = level_node
+                    
+                    # 查找或创建当前层级节点
+                    current_level_items = self.tree.get_children(parent_node)
+                    current_level_node = None
+                    
+                    for c_item in current_level_items:
+                        if self.tree.item(c_item)["text"] == f"[{level}] {placeholder}":
+                            current_level_node = c_item
+                            break
+                    
+                    if not current_level_node:
+                        current_level_node = self.tree.insert(
+                            parent_node,
+                            "end",
+                            text=f"[{level}] {placeholder}",
+                            tags=("level_node",)
+                        )
+                    
+                    # 查找或创建物料节点
+                    material_items = self.tree.get_children(current_level_node)
+                    material_node = None
+                    display_text = f"{baugruppe}\n{name}\n{long_text if long_text else ''}"
+                    
+                    for m_item in material_items:
+                        if self.tree.item(m_item)["text"] == display_text:
+                            material_node = m_item
+                            break
+                    
+                    if not material_node:
+                        material_node = self.tree.insert(
+                            current_level_node,
+                            "end",
+                            text=display_text,
+                            tags=("material",)
+                        )
+                    
+                    # 展开所有父节点
+                    parent = current_level_node
+                    while parent:
+                        self.tree.item(parent, open=True)
+                        parent = self.tree.parent(parent)
+                    
+                    # 选中并滚动到匹配项
+                    self.tree.selection_set(material_node)
+                    self.tree.see(material_node)
+                    break  #  跳出 bom_data["items"] 循环，只处理第一个匹配项
+            
+            # 如果没有找到匹配项，显示提示信息
+            if not found_match:
+                messagebox.showinfo(
+                    language_manager.get_text("info"),
+                    language_manager.get_text("code_not_found")
+                )
+                
+        except Exception as e:
+            self.logger.error(f"应用搜索失败: {str(e)}", exc_info=True)
+            messagebox.showerror(
+                language_manager.get_text("error"),
+                language_manager.get_text("search_error")
+            )
+
     def _create_tree(self, parent):
         """创建树状视图"""
         # 创建树状视图框架
@@ -341,17 +521,14 @@ class BomPanel(ttk.Frame):
             text=language_manager.get_text("bom_panel_title")
         )
         
-        # 更新工具栏框架标题
-        self.toolbar_frame.configure(
-            text=language_manager.get_text("tools")
+        # 更新搜索框架标题
+        self.search_frame.configure(
+            text=language_manager.get_text("search_bom_code")
         )
         
-        # 更新按钮文本
-        self.import_btn.configure(
-            text=language_manager.get_text("import_bom")
-        )
-        self.refresh_btn.configure(
-            text=language_manager.get_text("refresh")
+        # 更新清除按钮文本
+        self.clear_button.configure(
+            text=language_manager.get_text("clear")
         )
         
         # 更新树状视图框架标题

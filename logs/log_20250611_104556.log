@@ -1,0 +1,74 @@
+2025-06-11 10:45:56,430 [INFO] root - 程序启动，日志文件: C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\logs\log_20250611_104556.log
+2025-06-11 10:45:56,924 [INFO] __main__ - 正在启动程序...
+2025-06-11 10:45:56,924 [DEBUG] __main__ - Python版本: 3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]
+2025-06-11 10:45:56,925 [DEBUG] __main__ - 当前工作目录: C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder
+2025-06-11 10:45:56,925 [DEBUG] __main__ - src_dir路径: c:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder
+2025-06-11 10:45:56,991 [INFO] __main__ - 正在创建语言选择对话框...
+2025-06-11 10:45:59,785 [INFO] gui.language_dialog_tk - 已选择语言: zh
+2025-06-11 10:45:59,799 [INFO] __main__ - 语言选择结果: zh
+2025-06-11 10:45:59,799 [INFO] __main__ - 正在创建主题选择对话框...
+2025-06-11 10:45:59,799 [DEBUG] gui.theme_dialog_tk - 创建主题选择对话框
+2025-06-11 10:45:59,805 [DEBUG] gui.theme_dialog_tk - 主题选择对话框创建完成
+2025-06-11 10:46:00,344 [DEBUG] gui.theme_dialog_tk - 用户选择了light主题
+2025-06-11 10:46:00,359 [INFO] __main__ - 主题选择结果: light
+2025-06-11 10:46:00,361 [INFO] __main__ - 正在配置主窗口...
+2025-06-11 10:46:00,489 [INFO] __main__ - 开始创建MainWindow实例...
+2025-06-11 10:46:00,491 [INFO] core.logic_builder - 从 C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\data\temp_rules_latest.json 加载时检测到新版大写键名规则文件格式 (BL_rules/TL_rules)。
+2025-06-11 10:46:00,493 [DEBUG] core.logic_builder - Rule BL01 loaded from file. Original file description: 'Fzg: 8 Plätze / Actiontower S2 AND AND Fzg: 8 Plätze / Actiontower S2 → PL-GrundKabine-Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6-Z-Cab NG Alpas 3 RAL 3000
+Z-Cab NG Alpas 3 RAL 3000'. Regenerating description.
+2025-06-11 10:46:00,494 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'K-200-000001 AND AND K-200-000001'
+2025-06-11 10:46:00,494 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-GrundKabine-10019235'
+2025-06-11 10:46:00,494 [INFO] core.logic_builder - Newly generated description for BL01 (on _load_rules): 'K-200-000001 AND AND K-200-000001 → PL-GrundKabine-10019235'
+2025-06-11 10:46:00,494 [DEBUG] core.logic_builder - Rule BL02 loaded from file. Original file description: 'Ziegler Standardsitze AND AND Bostrom Integra Sitze → PL-Sitze01-PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.-Z-Cab NG Einflaschengerät / Z-Cab NG single-bottle device'. Regenerating description.
+2025-06-11 10:46:00,495 [DEBUG] core.logic_builder - Generated condition part for rule BL02: 'K-200-000300 AND AND K-200-000301'
+2025-06-11 10:46:00,496 [DEBUG] core.logic_builder - Generated action part for rule BL02: 'PL-Sitze01-1161309'
+2025-06-11 10:46:00,496 [INFO] core.logic_builder - Newly generated description for BL02 (on _load_rules): 'K-200-000300 AND AND K-200-000301 → PL-Sitze01-1161309'
+2025-06-11 10:46:00,496 [DEBUG] core.logic_builder - Rule BL03 loaded from file. Original file description: 'S. 1 ohne Ausstattung Stauraum AND AND Sitz 1 mit Klappschütte AND AND Sitz 1 mit Kunststoffbehälter OR OR Wertfach unterm Sitzpolster → PL-GrundKabine-Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6-Z-Cab NG Alpas 3 RAL 3000
+Z-Cab NG Alpas 3 RAL 3000'. Regenerating description.
+2025-06-11 10:46:00,497 [DEBUG] core.logic_builder - Generated condition part for rule BL03: 'K-200-000008 AND AND K-200-000010 AND AND K-200-000009 OR OR K-200-000011'
+2025-06-11 10:46:00,497 [DEBUG] core.logic_builder - Generated action part for rule BL03: 'PL-GrundKabine-10019235'
+2025-06-11 10:46:00,497 [INFO] core.logic_builder - Newly generated description for BL03 (on _load_rules): 'K-200-000008 AND AND K-200-000010 AND AND K-200-000009 OR OR K-200-000011 → PL-GrundKabine-10019235'
+2025-06-11 10:46:00,497 [DEBUG] core.logic_builder - Rule TL01 loaded from file. Original file description: 'Bostrom Integra Sitze → ON 21312 ADD 3131'. Regenerating description.
+2025-06-11 10:46:00,498 [DEBUG] core.logic_builder - Generated condition part for rule TL01: 'K-200-000301'
+2025-06-11 10:46:00,498 [DEBUG] core.logic_builder - Generated action part for rule TL01: 'ON 21312 ADD 3131'
+2025-06-11 10:46:00,498 [INFO] core.logic_builder - Newly generated description for TL01 (on _load_rules): 'K-200-000301 → ON 21312 ADD 3131'
+2025-06-11 10:46:00,498 [INFO] core.logic_builder - 已加载 4 条规则从 C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-06-11 10:46:00,577 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-06-11 10:46:00,585 [INFO] __main__ - MainWindow实例创建完成
+2025-06-11 10:46:00,909 [INFO] __main__ - 开始mainloop()...
+2025-06-11 10:46:06,523 [INFO] core.logic_builder - 准备从临时文件加载规则: C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-06-11 10:46:06,525 [DEBUG] core.logic_builder - Rule BL01 loaded from temp file. Original file description: 'Fzg: 8 Plätze / Actiontower S2 AND AND Fzg: 8 Plätze / Actiontower S2 → PL-GrundKabine-Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6-Z-Cab NG Alpas 3 RAL 3000
+Z-Cab NG Alpas 3 RAL 3000'. Regenerating description.
+2025-06-11 10:46:06,525 [DEBUG] core.logic_builder - Generated condition part for rule BL01: 'K-200-000001 AND AND K-200-000001'
+2025-06-11 10:46:06,526 [DEBUG] core.logic_builder - Generated action part for rule BL01: 'PL-GrundKabine-10019235'
+2025-06-11 10:46:06,526 [INFO] core.logic_builder - Newly generated description for BL01 (from temp): 'K-200-000001 AND AND K-200-000001 → PL-GrundKabine-10019235'
+2025-06-11 10:46:06,526 [DEBUG] core.logic_builder - Rule BL02 loaded from temp file. Original file description: 'Ziegler Standardsitze AND AND Bostrom Integra Sitze → PL-Sitze01-PA-Sitz f.Straffer li.kpl.el. / BA-seat f. tensioner le. cpl. el.-Z-Cab NG Einflaschengerät / Z-Cab NG single-bottle device'. Regenerating description.
+2025-06-11 10:46:06,527 [DEBUG] core.logic_builder - Generated condition part for rule BL02: 'K-200-000300 AND AND K-200-000301'
+2025-06-11 10:46:06,527 [DEBUG] core.logic_builder - Generated action part for rule BL02: 'PL-Sitze01-1161309'
+2025-06-11 10:46:06,528 [INFO] core.logic_builder - Newly generated description for BL02 (from temp): 'K-200-000300 AND AND K-200-000301 → PL-Sitze01-1161309'
+2025-06-11 10:46:06,528 [DEBUG] core.logic_builder - Rule BL03 loaded from temp file. Original file description: 'S. 1 ohne Ausstattung Stauraum AND AND Sitz 1 mit Klappschütte AND AND Sitz 1 mit Kunststoffbehälter OR OR Wertfach unterm Sitzpolster → PL-GrundKabine-Modulkabine Standard MAN Euro 6
+Modul cabin standard MAN Euro 6-Z-Cab NG Alpas 3 RAL 3000
+Z-Cab NG Alpas 3 RAL 3000'. Regenerating description.
+2025-06-11 10:46:06,528 [DEBUG] core.logic_builder - Generated condition part for rule BL03: 'K-200-000008 AND AND K-200-000010 AND AND K-200-000009 OR OR K-200-000011'
+2025-06-11 10:46:06,528 [DEBUG] core.logic_builder - Generated action part for rule BL03: 'PL-GrundKabine-10019235'
+2025-06-11 10:46:06,529 [INFO] core.logic_builder - Newly generated description for BL03 (from temp): 'K-200-000008 AND AND K-200-000010 AND AND K-200-000009 OR OR K-200-000011 → PL-GrundKabine-10019235'
+2025-06-11 10:46:06,529 [DEBUG] core.logic_builder - Rule TL01 loaded from temp file. Original file description: 'Bostrom Integra Sitze → ON 21312 ADD 3131'. Regenerating description.
+2025-06-11 10:46:06,529 [DEBUG] core.logic_builder - Generated condition part for rule TL01: 'K-200-000301'
+2025-06-11 10:46:06,529 [DEBUG] core.logic_builder - Generated action part for rule TL01: 'ON 21312 ADD 3131'
+2025-06-11 10:46:06,529 [INFO] core.logic_builder - Newly generated description for TL01 (from temp): 'K-200-000301 → ON 21312 ADD 3131'
+2025-06-11 10:46:06,530 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='imported', RuleID='None'
+2025-06-11 10:46:06,530 [INFO] gui.logic_panel - LogicPanel _on_rule_change (imported): 收到 'imported' 通知，将重新加载所有规则到Treeview。
+2025-06-11 10:46:06,530 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。
+2025-06-11 10:46:06,533 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'imported' 完成。
+2025-06-11 10:46:06,533 [INFO] core.logic_builder - 从临时文件 (C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\data\temp_rules_latest.json) 加载 4 条规则完成。导出状态: False
+2025-06-11 10:46:06,533 [INFO] gui.main_window_tk - 检测到LogicBuilder中存在未导出的规则。
+2025-06-11 10:46:07,416 [INFO] gui.main_window_tk - 用户拒绝加载未导出的规则。将清空规则。
+2025-06-11 10:46:07,417 [INFO] core.logic_builder - 规则数据已成功清空，并写入空的临时文件: C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\data\temp_rules_latest.json
+2025-06-11 10:46:07,419 [INFO] gui.logic_panel - LogicPanel _on_rule_change: 收到通知: 类型='cleared', RuleID='None'
+2025-06-11 10:46:07,419 [INFO] gui.logic_panel - LogicPanel _on_rule_change (cleared): 收到 'cleared' 通知，清空Treeview和used_ids。
+2025-06-11 10:46:07,419 [INFO] gui.logic_panel - LogicPanel _on_rule_change (cleared): 已处理 'cleared' 通知，清空Treeview。
+2025-06-11 10:46:07,423 [DEBUG] gui.logic_panel - LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 'cleared' 完成。
+2025-06-11 10:46:07,424 [INFO] gui.logic_panel - LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。

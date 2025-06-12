@@ -1,0 +1,7 @@
+2025-06-11 14:15:12,820 [INFO] root - 程序启动，日志文件: C:\Users\wsh12\OneDrive - Technische Hochschule Ulm\pytest\ZK_LogicBom_Builder\logs\log_20250611_141512.log
+2025-06-11 14:15:12,822 [INFO] utils.expression_formatter - 成功转换表达式为竖式格式 (grouped)
+2025-06-11 14:15:12,822 [INFO] utils.expression_formatter - 成功转换表达式为竖式格式 (expanded)
+2025-06-11 14:15:12,829 [INFO] utils.expression_formatter - 成功转换表达式为竖式格式 (grouped)
+2025-06-11 14:15:12,831 [INFO] utils.expression_formatter - 成功转换表达式为竖式格式 (grouped)
+2025-06-11 14:15:12,833 [INFO] utils.expression_formatter - 成功转换表达式为竖式格式 (grouped)
+2025-06-11 14:15:12,834 [INFO] utils.expression_formatter - 成功转换表达式为竖式格式 (grouped)
