@@ -8,9 +8,8 @@ from tkinter import ttk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from tkinter import filedialog, messagebox
-from typing import List, Tuple, Set, Optional
+from typing import List, Tuple, Set
 import re
-import os
 
 from utils.language_manager import language_manager
 from utils.logger import Logger
@@ -22,7 +21,7 @@ from gui.logic_rule_editor import LogicRuleEditor
 class LogicPanel(ttk.Frame):
     """逻辑编辑面板类"""
     
-    def __init__(self, parent, logic_builder: LogicBuilder, config_processor=None, bom_processor=None, main_window_ref=None):
+    def __init__(self, parent, logic_builder: LogicBuilder, config_processor=None, bom_processor=None):
         """初始化逻辑编辑面板
         
         Args:
@@ -30,13 +29,11 @@ class LogicPanel(ttk.Frame):
             logic_builder: 逻辑构建器实例
             config_processor: 配置处理器实例
             bom_processor: BOM处理器实例
-            main_window_ref: 主窗口引用
         """
         super().__init__(parent, style="Panel.TFrame")
         
         # 保存参数
         self.logic_builder = logic_builder
-        self.main_window_ref = main_window_ref # Store the reference
         
         # 获取日志记录器
         self.logger = Logger.get_logger(__name__)
@@ -423,9 +420,10 @@ class LogicPanel(ttk.Frame):
         self.tree.heading("effect", text=language_manager.get_text("edit_rule_effect"), anchor=CENTER)
         self.tree.heading("status", text=language_manager.get_text("edit_rule_status"), anchor=CENTER)
         
+        # 设置列宽度和对齐方式
         self.tree.column("rule_id", width=100, anchor=CENTER)
-        self.tree.column("condition", width=300, anchor=W)
-        self.tree.column("effect", width=300, anchor=W)
+        self.tree.column("condition", width=300, anchor=CENTER)
+        self.tree.column("effect", width=300, anchor=CENTER)
         self.tree.column("status", width=100, anchor=CENTER)
         
         # 配置大字体样式
@@ -492,127 +490,154 @@ class LogicPanel(ttk.Frame):
 
     def _change_rule_status(self, new_status: RuleStatus):
         """更改规则状态"""
-        selected_item_id = self.tree.focus()
-        if not selected_item_id:
-            selection = self.tree.selection()
-            if not selection: return
-            selected_item_id = selection[0]
-
-        rule_id = self._get_rule_id_from_selection(selected_item_id)
-
-        if not rule_id:
-            self.logger.warning(f"LogicPanel _change_rule_status: 无法从选中项 {selected_item_id} 推断规则ID。")
+        # 获取选中的项目
+        selection = self.tree.selection()
+        if not selection:
             return
             
+        item = selection[0]
+        values = self.tree.item(item)["values"]
+        if not values:
+            return
+            
+        # 更新规则状态
+        rule_id = values[0]
+        condition = values[1]
+        effect = values[2]
+        
+        # 更新树形视图显示
+        self.tree.item(
+            item,
+            values=(
+                rule_id,
+                condition,
+                effect,
+                language_manager.get_text(new_status.value)
+            )
+        )
+        
+        # 更新逻辑构建器中的规则
         rule = self.logic_builder.get_rule_by_id(rule_id)
         if rule:
             rule.status = new_status
-            self.logic_builder._save_rules()
+            self.logic_builder._save_rules()  # 保存更改
+            
+            # 通知规则变更
             self.logic_builder.notify_rule_change("modified", rule_id, rule)
-            self.logger.info(f"LogicPanel _change_rule_status: 规则 {rule_id} 状态已更改为 {new_status.value} 并已通知。")
-        else:
-            self.logger.error(f"LogicPanel _change_rule_status: 找不到规则对象 {rule_id}。")
 
     def _edit_rule(self, event):
-        """编辑规则 - 支持非层级化描述行"""
-        selected_item_id = self.tree.focus()
-        if not selected_item_id:
-            selection = self.tree.selection()
-            if not selection: return
-            selected_item_id = selection[0]
-
-        rule_id = self._get_rule_id_from_selection(selected_item_id)
-        
-        if not rule_id:
-            self.logger.warning(f"LogicPanel _edit_rule: 无法从选中项 {selected_item_id} 推断规则ID。")
+        """编辑规则"""
+        # 获取选中的项目
+        selection = self.tree.selection()
+        if not selection:
             return
-
-        rule_obj = self.logic_builder.get_rule_by_id(rule_id)
-        if not rule_obj:
-            self.logger.error(f"LogicPanel _edit_rule: 找不到规则对象 {rule_id}。")
-            messagebox.showerror(language_manager.get_text("error"), f"找不到规则 {rule_id}")
-            return
-        
-        # 直接将从logic_builder获取的rule_obj传递给编辑器
-        # 编辑器内部可以直接修改这个rule_obj的属性，包括status
-        # LogicRuleEditor的构造函数需要接受原始的rule_obj
-        dialog = LogicRuleEditor(self, rule_obj, self.logic_builder)
-        result = dialog.show() # show()方法应该在用户确认时返回包含修改后状态的字典
-        
-        if result: # result 应该包含 condition, effect, 和 status
-            # LogicRuleEditor 的 _on_confirm 应该已经修改了传入的 rule_obj 的属性
-            # 所以这里 rule_obj.condition, rule_obj.action, rule_obj.status 已经是更新后的值
             
-            # 确保从result中获取的状态被正确应用（以防万一LogicRuleEditor的实现方式）
-            # 但理想情况下，LogicRuleEditor直接修改了rule_obj，这里的赋值是多余的，但为了保险起见可以保留
-            if 'condition' in result:
-                 rule_obj.condition = result["condition"]
-            if 'effect' in result:
-                 rule_obj.action = result["effect"]
-            if 'status' in result:
-                new_status_val = result["status"]
-                if isinstance(new_status_val, str):
-                    try:
-                        rule_obj.status = RuleStatus(new_status_val) # 确保 rule_obj.status 被更新
-                    except ValueError:
-                        self.logger.error(f"LogicPanel _edit_rule: 从编辑器接收到无效的状态字符串 '{new_status_val}' for {rule_id}.")
-                elif isinstance(new_status_val, RuleStatus):
-                    rule_obj.status = new_status_val # 确保 rule_obj.status 被更新
-                else:
-                    self.logger.error(f"LogicPanel _edit_rule: 从编辑器接收到未知类型的状态 '{type(new_status_val)}' for {rule_id}.")
-
-            # 现在 rule_obj 的所有属性（包括status）都应该是最新的
-            # 调用 update_rule_description 会保存整个 rule_obj (包括修改后的status)
-            updated_rule = self.logic_builder.update_rule_description(rule_id) 
-
-            if not updated_rule:
-                 self.logger.error(f"LogicPanel _edit_rule: LogicBuilder 未能更新规则 {rule_id}。")
-            # _on_rule_change 会被调用，并使用更新后的 rule_obj (包含新状态) 刷新Treeview
+        item = selection[0]
+        values = self.tree.item(item)["values"]
+        if not values:
+            return
+            
+        # 解析当前值
+        rule_id = values[0]
+        condition = values[1]
+        effect = values[2]
+        status_text = values[3]
+        
+        # 从effect中提取实际的表达式（去掉箭头前缀）
+        if effect.startswith("→ "):
+            effect = effect[2:].strip()
+        
+        # 获取当前状态枚举值
+        current_status = None
+        for status in RuleStatus:
+            if language_manager.get_text(status.value) == status_text:
+                current_status = status
+                break
+        
+        # 创建规则对象
+        rule = LogicRule(
+            rule_id=rule_id,
+            condition=condition,
+            action=effect,
+            relation="→",
+            status=current_status or RuleStatus.ENABLED
+        )
+        
+        # 创建编辑对话框
+        dialog = LogicRuleEditor(self, rule, self.logic_builder)
+        result = dialog.show()
+        
+        if result:
+            # 更新树形视图中的显示
+            effect_text = f"→ {result['effect']}"
+            self.tree.item(
+                item,
+                values=(
+                    rule_id,
+                    result["condition"],
+                    effect_text,
+                    language_manager.get_text(result["status"].value)
+                )
+            )
+            
+            # 更新逻辑构建器中的规则
+            rule = self.logic_builder.get_rule_by_id(rule_id)
+            if rule:
+                rule.condition = result["condition"]
+                rule.action = result["effect"]
+                rule.status = result["status"]
+                self.logic_builder._save_rules()  # 保存更改
+                
+                # 通知规则变更
+                self.logic_builder.notify_rule_change("modified", rule_id, rule)
 
     def _show_rule_menu(self, event):
-        """显示规则右键菜单 - 支持非层级化描述行"""
-        item_id_under_cursor = self.tree.identify_row(event.y)
-        if not item_id_under_cursor:
-            return
-
-        rule_id_for_menu = self._get_rule_id_from_selection(item_id_under_cursor)
-
-        if rule_id_for_menu:
-            self.tree.selection_set(rule_id_for_menu) 
-            self.tree.focus_set() 
-            self.tree.focus(rule_id_for_menu) 
+        """显示规则右键菜单"""
+        # 获取点击位置的项目
+        item = self.tree.identify_row(event.y)
+        if item:
+            # 选中被点击的项目
+            self.tree.selection_set(item)
+            # 显示菜单
             self.rule_menu.post(event.x_root, event.y_root)
-        else:
-            self.logger.debug(f"LogicPanel _show_rule_menu: 未能从 {item_id_under_cursor} 找到规则行。")
-
-    def _delete_rule(self):
-        """删除规则 - 支持非层级化描述行"""
-        selected_item_id = self.tree.focus()
-        if not selected_item_id:
-            selection = self.tree.selection()
-            if not selection: return
-            selected_item_id = selection[0]
             
-        rule_id_to_delete = self._get_rule_id_from_selection(selected_item_id)
-
-        if not rule_id_to_delete:
-            self.logger.warning(f"LogicPanel _delete_rule: 无法从选中项 {selected_item_id} 推断规则ID。")
-            messagebox.showwarning(language_manager.get_text("warning"), "请选择一个有效的规则进行删除。")
+    def _delete_rule(self):
+        """删除规则"""
+        # 获取选中的项目
+        selection = self.tree.selection()
+        if not selection:
             return
-
+            
+        item = selection[0]
+        
+        # 确认删除
         if not messagebox.askyesno(
             language_manager.get_text("confirm"),
             language_manager.get_text("confirm_delete_rule")
         ):
             return
             
-        success = self.logic_builder.delete_rule(rule_id_to_delete)
+        # 从LogicBuilder中删除规则
+        self.logic_builder.delete_rule(item)
         
-        if success:
-            self.logger.info(f"LogicPanel _delete_rule: 请求删除规则 {rule_id_to_delete}。")
-        else:
-            self.logger.error(f"LogicPanel _delete_rule: LogicBuilder未能删除规则 {rule_id_to_delete}。")
-            messagebox.showerror(language_manager.get_text("error"), f"删除规则 {rule_id_to_delete} 失败。")
+        # 获取规则ID编号
+        values = self.tree.item(item)["values"]
+        if values:
+            rule_id_str = values[0]  # 格式为"BLxx"
+            try:
+                rule_number = int(rule_id_str[2:])  # 提取数字部分
+                self.used_bl_rule_ids.remove(rule_number)  # 从已使用集合中移除
+            except (ValueError, IndexError):
+                self.logger.error(f"无法解析规则ID: {rule_id_str}")
+        
+        # 从树形视图中删除
+        self.tree.delete(item)
+        
+        # 保存更改到临时文件
+        self.logic_builder.save_to_temp_file()
+        
+        # 通知规则变更
+        self.logic_builder.notify_rule_change("deleted", item)
 
     def _log_input(self, input_type: str, content: str):
         """记录输入历史
@@ -1054,249 +1079,194 @@ class LogicPanel(ttk.Frame):
             return self.bl_rule_counter
 
     def _load_existing_rules(self):
-        """加载现有规则到树状视图 - 非层级化描述行"""
+        """加载现有规则到树状视图"""
         try:
-            if not self.main_window_ref or \
-               not hasattr(self.main_window_ref, 'rules_loaded') or \
-               not self.main_window_ref.rules_loaded:
-                self.logger.info("LogicPanel: 主窗口引用无效、rules_loaded属性不存在或规则未加载，跳过加载到树。")
-                for item in self.tree.get_children():
-                    self.tree.delete(item)
+            # 检查是否是程序启动时的加载
+            main_window = None
+            # 尝试从不同路径获取main_window实例
+            if hasattr(self.master, 'main_window'):
+                main_window = self.master.main_window
+            elif hasattr(self.winfo_toplevel(), 'main_window'):
+                main_window = self.winfo_toplevel().main_window
+                
+            if main_window is None:
+                self.logger.error("无法获取main_window实例")
                 return
-
-            self.logger.info("LogicPanel: 开始加载规则到已保存规则框架 (非层级)")
-            for item in self.tree.get_children():
-                self.tree.delete(item)
-
-            self.used_bl_rule_ids.clear()
-            self.used_tl_rule_ids.clear()
-
-            rules = self.logic_builder.get_rules()
-            self.logger.debug(f"LogicPanel: 从LogicBuilder获取到 {len(rules)} 条规则")
-
-            for rule in rules:
-                try:
-                    effect_text = f"→ {rule.action}"
-                    status_text = language_manager.get_text(rule.status.value)
-                    
-                    rule_values = (rule.rule_id, rule.condition, effect_text, status_text)
-                    self.tree.insert("", "end", iid=rule.rule_id, values=rule_values, tags=('rule_row',))
-
-                    if rule.description:
-                        parts = rule.description.split('→', 1)
-                        cond_desc = parts[0].strip() if parts else ""
-                        eff_desc = parts[1].strip() if len(parts) > 1 else ""
-                        
-                        desc_item_id = f"{rule.rule_id}_desc_sep" 
-                        desc_values = ("", f"  └─ {cond_desc}", eff_desc, "") 
-                        self.tree.insert("", "end", iid=desc_item_id, values=desc_values, tags=('description_row_sep',))
-                    
-                    if rule.rule_id.startswith('BL') and rule.rule_id[2:].isdigit():
-                        self.used_bl_rule_ids.add(int(rule.rule_id[2:]))
-                    elif rule.rule_id.startswith('TL') and rule.rule_id[2:].isdigit():
-                        self.used_tl_rule_ids.add(int(rule.rule_id[2:]))
-                        
-                except Exception as e_insert:
-                    self.logger.error(f"LogicPanel: 插入规则 {rule.rule_id} (非层级) 到树状视图失败: {str(e_insert)}")
-                    continue
-            
-            self.tree.tag_configure('description_row_sep', foreground='gray50')
-            self.tree.tag_configure('rule_row', background='white') 
-            self.tree.update_idletasks()
-            self.logger.info(f"LogicPanel: 成功加载 {len(rules)} 条规则 (非层级) 到已保存规则框架")
-            
-        except Exception as e:
-            self.logger.error(f"LogicPanel: 加载现有规则 (非层级) 失败: {str(e)}", exc_info=True)
-
-    def _on_rule_change(self, change_type, rule_id=None, rule: Optional[LogicRule]=None):
-        """处理来自LogicBuilder的规则变更通知 - 非层级化显示"""
-        try:
-            self.logger.info(f"LogicPanel _on_rule_change: 收到通知: 类型='{change_type}', RuleID='{rule_id}'")
-            if rule:
-                self.logger.debug(f"LogicPanel _on_rule_change: 附带的Rule对象: ID='{rule.rule_id}', Status='{rule.status.value if rule.status else 'N/A'}', Desc='{rule.description[:30]}...'")
-            elif rule_id:
-                 self.logger.debug(f"LogicPanel _on_rule_change: 仅有RuleID: {rule_id}")
-
-            if change_type == "added" and rule:
-                rule_item_id = rule.rule_id
-                desc_item_id = f"{rule.rule_id}_desc_sep"
-                self.logger.debug(f"LogicPanel _on_rule_change (added): 开始添加规则 '{rule.rule_id}'. 状态: {rule.status.value}, 描述: '{rule.description[:30]}...'")
-
-                if self.tree.exists(rule_item_id):
-                    self.logger.warning(f"LogicPanel _on_rule_change (added): 规则行 '{rule_item_id}' 已存在，将先删除再添加。")
-                    self.tree.delete(rule_item_id)
-                    if self.tree.exists(desc_item_id):
-                        self.tree.delete(desc_item_id)
                 
-                effect_text = f"→ {rule.action}"
-                status_text = language_manager.get_text(rule.status.value)
-                tags_text = rule.tags if hasattr(rule, 'tags') else ""
-                tech_doc_text = os.path.basename(rule.tech_doc_path) if hasattr(rule, 'tech_doc_path') and rule.tech_doc_path else ""
-                
-                rule_values = (
-                    rule.rule_id,
-                    rule.condition,
-                    effect_text,
-                    status_text,
-                    tags_text,
-                    tech_doc_text
-                )
-                self.tree.insert("", "end", iid=rule_item_id, values=rule_values, tags=('rule_row',))
-                self.logger.info(f"LogicPanel _on_rule_change (added): 已插入规则行 '{rule_item_id}'.")
-
-                if rule.description:
-                    parts = rule.description.split('→', 1)
-                    cond_desc = parts[0].strip()
-                    eff_desc = parts[1].strip() if len(parts) > 1 else ""
-                    desc_values = ("", f"  └─ {cond_desc}", eff_desc, "", "", "") # Ensure 6 values
-                    
-                    rule_row_index = self.tree.index(rule_item_id)
-                    self.tree.insert("", rule_row_index + 1, iid=desc_item_id, values=desc_values, tags=('description_row_sep',))
-                    self.logger.info(f"LogicPanel _on_rule_change (added): 已为规则 '{rule.rule_id}' 插入描述行 '{desc_item_id}'.")
-
-                # 更新 used_ids 集合
-                if rule.rule_id.startswith('BL') and rule.rule_id[2:].isdigit():
-                    self.used_bl_rule_ids.add(int(rule.rule_id[2:]))
-                elif rule.rule_id.startswith('TL') and rule.rule_id[2:].isdigit():
-                    self.used_tl_rule_ids.add(int(rule.rule_id[2:]))
-
-            elif change_type == "modified" and rule:
-                rule_item_id = rule.rule_id
-                desc_item_id = f"{rule.rule_id}_desc_sep"
-                self.logger.debug(f"LogicPanel _on_rule_change (modified): 开始更新规则 '{rule_id}'. 传入状态: {rule.status.value}, 传入描述: '{rule.description[:30]}...'")
-
-                if self.tree.exists(rule_item_id):
-                    effect_text = f"→ {rule.action}"
-                    status_text = language_manager.get_text(rule.status.value)
-                    tags_text = rule.tags if hasattr(rule, 'tags') else ""
-                    tech_doc_text = os.path.basename(rule.tech_doc_path) if hasattr(rule, 'tech_doc_path') and rule.tech_doc_path else ""
-                    
-                    self.tree.item(rule_item_id, values=(
-                        rule.rule_id,
-                        rule.condition,
-                        effect_text,
-                        status_text, 
-                        tags_text,
-                        tech_doc_text
-                    ))
-                    self.logger.info(f"LogicPanel _on_rule_change (modified): 已更新Treeview中的规则行 '{rule_item_id}' 的值为: Status='{status_text}'")
-                else:
-                    self.logger.warning(f"LogicPanel _on_rule_change (modified): 未在Treeview中找到规则行 '{rule_item_id}' 进行更新。可能需要重新加载或作为新规则添加。")
-                    # 如果规则行不存在，可能意味着这是一个本应是 "added" 的情况，或者UI与数据不同步。
-                    # 为简化，这里只记录。复杂情况下可能需要调用 _load_existing_rules() 或类似 "added" 的逻辑。
-
-                # 正确处理描述行
-                if rule.description:
-                    parts = rule.description.split('→', 1)
-                    cond_desc = parts[0].strip()
-                    eff_desc = parts[1].strip() if len(parts) > 1 else ""
-                    desc_values = ("", f"  └─ {cond_desc}", eff_desc, "", "", "") # Ensure 6 values
-
-                    if self.tree.exists(desc_item_id):
-                        self.tree.item(desc_item_id, values=desc_values)
-                        self.logger.info(f"LogicPanel _on_rule_change (modified): 已更新Treeview中的描述行 '{desc_item_id}'.")
-                    else: # 规则有描述，但Treeview中没有描述行 -> 添加它
-                        if self.tree.exists(rule_item_id): # 确保父规则行存在
-                            rule_row_index = self.tree.index(rule_item_id)
-                            self.tree.insert("", rule_row_index + 1, iid=desc_item_id, values=desc_values, tags=('description_row_sep',))
-                            self.logger.info(f"LogicPanel _on_rule_change (modified): 为规则 '{rule_id}' 新增了描述行 '{desc_item_id}'.")
-                        else:
-                             self.logger.warning(f"LogicPanel _on_rule_change (modified): 规则 '{rule_id}' 的主规则行不存在于Treeview中，无法为其添加/更新描述行 '{desc_item_id}'.")
-                else: # rule.description 为空
-                    if self.tree.exists(desc_item_id):
-                        self.tree.delete(desc_item_id)
-                        self.logger.info(f"LogicPanel _on_rule_change (modified): 规则 '{rule_id}' 的描述为空，已从Treeview删除其描述行 '{desc_item_id}'.")
-                    else:
-                        self.logger.debug(f"LogicPanel _on_rule_change (modified): 规则 '{rule_id}' 的描述为空，且Treeview中也不存在描述行 '{desc_item_id}'。无需操作。")
-                        
-            elif change_type == "deleted" and rule_id:
-                self.logger.info(f"LogicPanel _on_rule_change (deleted): 开始删除规则 '{rule_id}' 从Treeview。")
-                rule_item_id_to_delete = rule_id
-                desc_item_id_to_delete = f"{rule_id}_desc_sep"
-                rule_row_deleted = False
-                desc_row_deleted = False
-
-                if self.tree.exists(rule_item_id_to_delete):
-                    self.tree.delete(rule_item_id_to_delete)
-                    rule_row_deleted = True
-                    self.logger.info(f"LogicPanel _on_rule_change (deleted): 已从Treeview删除规则行 '{rule_item_id_to_delete}'.")
-                else:
-                    self.logger.warning(f"LogicPanel _on_rule_change (deleted): 删除时未在Treeview中找到规则行 '{rule_item_id_to_delete}'.")
-
-                if self.tree.exists(desc_item_id_to_delete):
-                    self.tree.delete(desc_item_id_to_delete)
-                    desc_row_deleted = True
-                    self.logger.info(f"LogicPanel _on_rule_change (deleted): 已从Treeview删除描述行 '{desc_item_id_to_delete}'.")
-                else:
-                    self.logger.warning(f"LogicPanel _on_rule_change (deleted): 删除时未在Treeview中找到描述行 '{desc_item_id_to_delete}'.")
-                
-                if not rule_row_deleted and not desc_row_deleted:
-                    self.logger.error(f"LogicPanel _on_rule_change (deleted): 删除规则 '{rule_id}' 通知后，其规则行和描述行均未在Treeview中找到以执行删除操作。")
-                
-                # 从 used_ids 集合中移除
-                if rule_id.startswith('BL') and rule_id[2:].isdigit():
-                    self.used_bl_rule_ids.discard(int(rule_id[2:]))
-                elif rule_id.startswith('TL') and rule_id[2:].isdigit():
-                    self.used_tl_rule_ids.discard(int(rule_id[2:]))
-
-            elif change_type == "cleared":
-                self.logger.info("LogicPanel _on_rule_change (cleared): 收到 'cleared' 通知，清空Treeview和used_ids。")
+            if not main_window.rules_loaded:
+                self.logger.info("规则未加载状态，等待用户确认后再加载规则")
+                # 清空现有数据和已使用的ID集合
                 for item in self.tree.get_children():
                     self.tree.delete(item)
                 self.used_bl_rule_ids.clear()
                 self.used_tl_rule_ids.clear()
-                self.logger.info("LogicPanel _on_rule_change (cleared): 已处理 'cleared' 通知，清空Treeview。")
-
-            elif change_type == "imported":
-                self.logger.info("LogicPanel _on_rule_change (imported): 收到 'imported' 通知，将重新加载所有规则到Treeview。")
-                self._load_existing_rules() 
-            else:
-                self.logger.warning(f"LogicPanel _on_rule_change: 未知的规则变更类型: '{change_type}' 对于RuleID='{rule_id}'. 将尝试重新加载所有规则。")
-                self._load_existing_rules()
+                return
+                
+            self.logger.info("开始加载规则到已保存规则框架")
             
-            self.tree.tag_configure('description_row_sep', foreground='gray50') # 确保样式应用
-            self.tree.update_idletasks()
-            self.logger.debug(f"LogicPanel _on_rule_change: Treeview update_idletasks() 已调用，处理类型 '{change_type}' 完成。")
-
+            # 清空现有数据和已使用的ID集合
+            for item in self.tree.get_children():
+                self.tree.delete(item)
+            self.used_bl_rule_ids.clear()
+            self.used_tl_rule_ids.clear()
+            
+            # 加载所有规则
+            rules = self.logic_builder.get_rules()
+            self.logger.debug(f"从LogicBuilder获取到 {len(rules)} 条规则")
+            
+            if not rules:
+                self.logger.info("没有规则需要加载")
+                return
+                
+            for rule in rules:
+                try:
+                    # 构建显示文本
+                    effect_text = f"→ {rule.action}"
+                    status_text = language_manager.get_text(rule.status.value)
+                    
+                    # 插入到树形视图（只显示必要的列）
+                    self.tree.insert(
+                        "",
+                        "end",
+                        iid=rule.rule_id,
+                        values=(
+                            rule.rule_id,
+                            rule.condition,
+                            effect_text,
+                            status_text
+                        )
+                    )
+                    
+                    # 更新已使用的规则ID
+                    try:
+                        if rule.rule_id.startswith('BL'):
+                            rule_number = int(rule.rule_id[2:])
+                            self.used_bl_rule_ids.add(rule_number)
+                            self.logger.debug(f"添加规则ID: {rule_number} 到已使用集合")
+                        elif rule.rule_id.startswith('TL'):
+                            rule_number = int(rule.rule_id[2:])
+                            self.used_tl_rule_ids.add(rule_number)
+                            self.logger.debug(f"添加规则ID: {rule_number} 到已使用集合")
+                    except (ValueError, IndexError) as e:
+                        self.logger.error(f"无法解析规则ID: {rule.rule_id}, 错误: {str(e)}")
+                        
+                except Exception as e:
+                    self.logger.error(f"插入规则到树状视图失败: {str(e)}, 规则ID: {rule.rule_id}")
+                    continue
+                    
+            self.logger.info(f"成功加载 {len(self.tree.get_children())} 条规则到已保存规则框架")
+            
         except Exception as e:
-            self.logger.error(f"LogicPanel: 处理规则变更事件 (非层级) 失败: {str(e)}", exc_info=True)
+            self.logger.error(f"加载现有规则失败: {str(e)}", exc_info=True)
+            messagebox.showerror(
+                language_manager.get_text("error"),
+                str(e)
+            )
 
-    def _get_rule_id_from_selection(self, item_id: Optional[str] = None) -> Optional[str]:
-        """从给定的Treeview item ID (可能是规则行或描述行) 获取实际的规则ID。"""
-        current_item_id = item_id
-        if not current_item_id:
-            current_item_id = self.tree.focus()
-            if not current_item_id:
-                selected_items = self.tree.selection()
-                if not selected_items:
-                    self.logger.warning("LogicPanel _get_rule_id_from_selection: Treeview中没有选中项。")
-                    return None
-                current_item_id = selected_items[0]
-
-        if not current_item_id or not self.tree.exists(current_item_id):
-            self.logger.warning(f"LogicPanel _get_rule_id_from_selection:提供的 item_id '{current_item_id}' 无效或不存在于Treeview中。")
-            return None
-
-        tags = self.tree.item(current_item_id, "tags")
-
-        if 'rule_row' in tags:
-            self.logger.debug(f"LogicPanel _get_rule_id_from_selection: Item '{current_item_id}' 是规则行，返回ID: {current_item_id}")
-            return current_item_id
-        elif 'description_row_sep' in tags:
-            # 描述行的 iid 是 "RULEID_desc_sep"
-            # 从 "RULEID_desc_sep" 中提取 "RULEID"
-            base_id = current_item_id.rsplit('_desc_sep', 1)[0]
-            if self.tree.exists(base_id) and 'rule_row' in self.tree.item(base_id, "tags"):
-                self.logger.debug(f"LogicPanel _get_rule_id_from_selection: Item '{current_item_id}' 是描述行，提取到父规则ID: {base_id}")
-                return base_id
-            else:
-                self.logger.warning(f"LogicPanel _get_rule_id_from_selection: 描述行 '{current_item_id}' 存在，但找不到对应的规则行 '{base_id}' 或其没有 'rule_row' 标签。")
-                return None
-        else:
-            # 如果通过 tree.focus() 或 tree.selection() 选中的项没有预期的标签, 记录下来。
-            # 这可能发生在Treeview的其他部分被意外选中的情况，或者标签系统有误。
-            self.logger.warning(f"LogicPanel _get_rule_id_from_selection: Item '{current_item_id}' 的标签 '{tags}' 不是 'rule_row' 或 'description_row_sep'。无法确定规则ID。")
-            return None
+    def _on_rule_change(self, change_type, rule_id=None, rule=None):
+        """处理规则变更事件
+        
+        Args:
+            change_type: 变更类型（'imported', 'added', 'modified', 'deleted', 'cleared'）
+            rule_id: 规则ID
+            rule: 规则对象
+        """
+        try:
+            self.logger.info(f"收到规则变更事件: type={change_type}, rule_id={rule_id}")
+            
+            # 获取main_window实例
+            main_window = None
+            if hasattr(self.master, 'main_window'):
+                main_window = self.master.main_window
+            elif hasattr(self.winfo_toplevel(), 'main_window'):
+                main_window = self.winfo_toplevel().main_window
+            
+            if change_type == "imported":
+                # 检查是否有规则
+                rules = self.logic_builder.get_rules()
+                if rules:
+                    # 检查是否已经设置了rules_loaded标志
+                    if main_window is not None and main_window.rules_loaded:
+                        self.logger.info("规则已加载状态，开始更新已保存规则框架")
+                        # 重新加载所有规则
+                        self._load_existing_rules()
+                    else:
+                        self.logger.info("规则未加载状态，等待用户确认")
+            elif change_type == "deleted":
+                # 删除规则
+                if rule_id and rule_id in self.tree.get_children():
+                    self.tree.delete(rule_id)
+                    # 从已使用ID集合中移除
+                    try:
+                        if rule_id.startswith('BL'):
+                            rule_number = int(rule_id[2:])
+                            self.used_bl_rule_ids.remove(rule_number)
+                            self.logger.info(f"已删除规则: {rule_id}")
+                        elif rule_id.startswith('TL'):
+                            rule_number = int(rule_id[2:])
+                            self.used_tl_rule_ids.remove(rule_number)
+                            self.logger.info(f"已删除规则: {rule_id}")
+                    except (ValueError, IndexError):
+                        self.logger.error(f"无法解析规则ID: {rule_id}")
+            elif change_type == "cleared":
+                # 清空所有规则
+                for item in self.tree.get_children():
+                    self.tree.delete(item)
+                self.used_bl_rule_ids.clear()
+                self.used_tl_rule_ids.clear()
+                # 重置规则已加载标志
+                if main_window is not None:
+                    main_window.rules_loaded = False
+                    self.logger.info("已清空所有规则，重置规则已加载标志")
+                else:
+                    self.logger.info("已清空所有规则")
+            elif change_type in ["added", "modified"]:
+                # 更新或添加规则
+                if rule:
+                    effect_text = f"→ {rule.action}"
+                    try:
+                        if rule.rule_id in self.tree.get_children():
+                            # 更新现有规则
+                            self.tree.item(
+                                rule.rule_id,
+                                values=(
+                                    rule.rule_id,
+                                    rule.condition,
+                                    effect_text,
+                                    language_manager.get_text(rule.status.value)
+                                )
+                            )
+                            self.logger.info(f"已更新规则: {rule.rule_id}")
+                        else:
+                            # 添加新规则
+                            self.tree.insert(
+                                "",
+                                "end",
+                                iid=rule.rule_id,
+                                values=(
+                                    rule.rule_id,
+                                    rule.condition,
+                                    effect_text,
+                                    language_manager.get_text(rule.status.value)
+                                )
+                            )
+                            # 更新已使用的规则ID
+                            try:
+                                if rule.rule_id.startswith('BL'):
+                                    rule_number = int(rule.rule_id[2:])
+                                    self.used_bl_rule_ids.add(rule_number)
+                                    self.logger.info(f"已添加新规则: {rule.rule_id}")
+                                elif rule.rule_id.startswith('TL'):
+                                    rule_number = int(rule.rule_id[2:])
+                                    self.used_tl_rule_ids.add(rule_number)
+                                    self.logger.info(f"已添加新规则: {rule.rule_id}")
+                            except (ValueError, IndexError):
+                                self.logger.error(f"无法解析规则ID: {rule.rule_id}")
+                    except Exception as e:
+                        self.logger.error(f"更新/添加规则到树状视图失败: {str(e)}, 规则ID: {rule.rule_id}")
+                            
+        except Exception as e:
+            self.logger.error(f"处理规则变更事件失败: {str(e)}", exc_info=True) 
 
     def _validate_number_input(self, value):
         """验证输入是否为数字

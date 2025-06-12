@@ -111,8 +111,16 @@ class ConfigPanel(ttk.Frame):
         )
         self.title_label.pack(fill=X, pady=(0, 10))
         
-        # 创建搜索框架
-        self._create_search_frame()
+        # 创建工具栏框架
+        self.toolbar_frame = ttk.LabelFrame(
+            self,
+            text=language_manager.get_text("tools"),
+            style="Main.TLabelframe"
+        )
+        self.toolbar_frame.pack(fill=X, pady=(0, 10), padx=5)
+        
+        # 创建工具栏
+        self._create_toolbar(self.toolbar_frame)
         
         # 创建树状视图框架
         self.tree_frame = ttk.LabelFrame(
@@ -125,219 +133,32 @@ class ConfigPanel(ttk.Frame):
         # 创建树状视图
         self._create_tree(self.tree_frame)
         
-    def _create_search_frame(self):
-        """创建搜索框架"""
-        # 创建搜索框架
-        self.search_frame = ttk.LabelFrame(
-            self,
-            text=language_manager.get_text("search_feature_or_k"),
-            padding=5,
-            style="Main.TLabelframe"
-        )
-        self.search_frame.pack(fill=X, pady=(0, 10), padx=5)
-
-        # 创建搜索输入框
-        search_input_frame = ttk.Frame(self.search_frame)
-        search_input_frame.pack(fill=X, pady=2)
+    def _create_toolbar(self, parent):
+        """创建工具栏"""
+        # 创建工具栏框架
+        toolbar = ttk.Frame(parent)
+        toolbar.pack(fill=X, pady=5)
         
-        # 搜索输入框
-        self.search_var = tk.StringVar()
-        search_entry = ttk.Entry(
-            search_input_frame,
-            textvariable=self.search_var,
-            font=("Microsoft YaHei", 11),
-            width=40
-        )
-        search_entry.pack(side=LEFT, fill=X, expand=True)
-        search_entry.bind("<Return>", lambda event: self._apply_search()) # 绑定回车键
-
-        # 添加清除按钮
-        clear_button = ttk.Button(
-            search_input_frame,
-            text=language_manager.get_text("clear"),
-            command=self._clear_search,
+        # 添加导入按钮
+        self.import_btn = ttk.Button(
+            toolbar,
+            text=language_manager.get_text("import_config"),
+            command=self._import_excel,
             style="Main.TButton",
-            width=10
+            width=20
         )
-        clear_button.pack(side=RIGHT, padx=5)
+        self.import_btn.pack(side=LEFT, padx=5)
         
-    def _clear_search(self):
-        """清空搜索并重置树状图"""
-        self.search_var.set("")
-        self._refresh_tree() # 清除后刷新树
-
-    def _normalize_code(self, code: str) -> str:
-        """标准化代码格式，移除分隔符
+        # 添加刷新按钮
+        self.refresh_btn = ttk.Button(
+            toolbar,
+            text=language_manager.get_text("refresh"),
+            command=self._refresh_tree,
+            style="Main.TButton",
+            width=20
+        )
+        self.refresh_btn.pack(side=LEFT, padx=5)
         
-        Args:
-            code: 原始代码
-            
-        Returns:
-            str: 标准化后的代码
-        """
-        # 移除所有的分隔符（- 和 _）
-        normalized = code.replace("-", "").replace("_", "").upper()
-        return normalized
-
-    def _code_matches(self, search_term: str, code: str, name: str) -> bool:
-        """检查代码是否匹配搜索条件
-        
-        Args:
-            search_term: 搜索词
-            code: 要匹配的代码
-            name: 代码的名称
-            
-        Returns:
-            bool: 是否匹配
-        """
-        if not search_term:
-            return True
-            
-        # 标准化搜索词和代码
-        normalized_search = self._normalize_code(search_term)
-        normalized_code = self._normalize_code(code)
-        
-        # 如果搜索词以K开头（不区分大小写），则按K码格式处理
-        if normalized_search.startswith('K'):
-            # 如果代码是K码，则进行标准化比较
-            if code.startswith('K-'):
-                return normalized_code.startswith(normalized_search)
-            return False
-            
-        # 如果搜索词以H或HBG开头（不区分大小写），则按HBG码格式处理
-        if normalized_search.startswith('H') or normalized_search.startswith('HBG'):
-            # 如果代码是HBG码，则进行标准化比较
-            if code.startswith('HBG_'):
-                return normalized_code.startswith(normalized_search)
-            return False
-            
-        # 其他情况：搜索词可以匹配代码的任何部分或名称
-        return (normalized_search in normalized_code or 
-                normalized_search in name.upper())
-
-    def _apply_search(self):
-        """应用搜索条件"""
-        try:
-            search_term = self.search_var.get().strip()
-            
-            # 如果搜索词为空，直接返回
-            if not search_term:
-                return
-                
-            # 获取所有模块
-            modules = self.config_processor.get_modules()
-            found_match = False
-            
-            # 遍历所有节点
-            for module_id, f_codes in modules.items():
-                module_node = None
-                
-                # 检查每个特征码
-                for f_code in f_codes:
-                    f_node = None
-                    f_code_name = self.config_processor.get_name(f_code)
-                    
-                    # 检查特征码是否匹配
-                    f_code_matches = self._code_matches(search_term, f_code, f_code_name)
-                    
-                    # 获取特征值
-                    k_codes = self.config_processor.get_k_codes(f_code)
-                    k_code_matches = []
-                    
-                    # 检查特征值是否匹配
-                    for k_code in k_codes:
-                        k_code_name = self.config_processor.get_name(k_code)
-                        if self._code_matches(search_term, k_code, k_code_name):
-                            k_code_matches.append(k_code)
-                    
-                    # 如果找到匹配项
-                    if f_code_matches or k_code_matches:
-                        found_match = True
-                        
-                        # 在树状图中查找或创建节点
-                        module_items = self.tree.get_children()
-                        current_module_node_found = False
-                        for item_in_tree in module_items:
-                            if self.tree.item(item_in_tree)["text"] == module_id:
-                                module_node = item_in_tree
-                                current_module_node_found = True
-                                break
-                        if not current_module_node_found:
-                             module_node = self.tree.insert(
-                                "",
-                                "end",
-                                text=module_id,
-                                tags=("module",)
-                            )
-                        
-                        # 查找特征码节点
-                        f_node = None
-                        f_items = self.tree.get_children(module_node)
-                        for item in f_items:
-                            if self.tree.item(item)["text"] == f"{f_code} {f_code_name}":
-                                f_node = item
-                                break
-                        
-                        # 如果特征码节点不存在，创建它
-                        if not f_node:
-                            f_node = self.tree.insert(
-                                module_node,
-                                "end",
-                                text=f"{f_code} {f_code_name}",
-                                tags=("f_code",)
-                            )
-                        
-                        # 展开找到的节点 (module_node 和 f_node)
-                        self.tree.item(module_node, open=True)
-                        self.tree.item(f_node, open=True)
-                        
-                        # 如果是特征码匹配，选中特征码节点
-                        if f_code_matches and not k_code_matches:
-                            self.tree.selection_set(f_node)
-                            self.tree.see(f_node)
-                        
-                        # 如果是特征值匹配，选中对应的特征值节点
-                        for k_code_to_select in k_code_matches:
-                            k_code_name_to_select = self.config_processor.get_name(k_code_to_select)
-                            # 查找或创建特征值节点
-                            k_node = None
-                            k_items = self.tree.get_children(f_node)
-                            for item in k_items:
-                                if self.tree.item(item)["text"] == f"{k_code_to_select} {k_code_name_to_select}":
-                                    k_node = item
-                                    break
-                            
-                            if not k_node:
-                                k_node = self.tree.insert(
-                                    f_node,
-                                    "end",
-                                    text=f"{k_code_to_select} {k_code_name_to_select}",
-                                    tags=("k_code",)
-                                )
-                            
-                            # 选中并滚动到特征值节点 (最后一个匹配的k_code)
-                            self.tree.selection_set(k_node)
-                            self.tree.see(k_node)
-                        
-                        break  # 从 for f_code in f_codes 循环中断开
-                
-                if found_match: # 检查是否应该从 for module_id... 循环中断开
-                    break
-            
-            # 如果没有找到匹配项，显示提示信息
-            if not found_match:
-                messagebox.showinfo(
-                    language_manager.get_text("info"),
-                    language_manager.get_text("code_not_found")
-                )
-                
-        except Exception as e:
-            self.logger.error(f"应用搜索失败: {str(e)}", exc_info=True)
-            messagebox.showerror(
-                language_manager.get_text("error"),
-                language_manager.get_text("search_error")
-            )
-
     def _create_tree(self, parent):
         """创建树状视图"""
         # 创建树状视图框架
@@ -533,8 +354,12 @@ class ConfigPanel(ttk.Frame):
             # 更新标题
             self.title_label.configure(text=language_manager.get_text("config_panel_title"))
             
-            # 更新搜索框架标题
-            self.search_frame.configure(text=language_manager.get_text("search_feature_or_k"))
+            # 更新工具栏标题
+            self.toolbar_frame.configure(text=language_manager.get_text("tools"))
+            
+            # 更新按钮文本
+            self.import_btn.configure(text=language_manager.get_text("import_config"))
+            self.refresh_btn.configure(text=language_manager.get_text("refresh"))
             
             # 更新配置树标题
             self.tree_frame.configure(text=language_manager.get_text("config_tree"))

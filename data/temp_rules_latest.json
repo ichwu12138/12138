@@ -1,7 +1,23 @@
 {
-  "BL_rules": [],
-  "TL_rules": [],
-  "saved_at": "2025-05-20T09:26:59.40",
-  "exported": true,
-  "timestamp": "20250520_092659"
+  "rules": [
+    {
+      "logic_id": "BL01",
+      "status": "enabled",
+      "selection_expression": "K-200-000000",
+      "logic_relation": "→",
+      "impact_expression": "PL-GrundKabine-10019232",
+      "tags": "",
+      "tech_doc_path": ""
+    },
+    {
+      "logic_id": "TL01",
+      "status": "disabled",
+      "selection_expression": "K-200-000001",
+      "logic_relation": "→",
+      "impact_expression": "ON 123 ADD 1231",
+      "tags": "",
+      "tech_doc_path": ""
+    }
+  ],
+  "exported": false
 }
